@@ -1,0 +1,52 @@
+[
+    {
+        "name": "DVDs/Blu-rays",
+        "checked": false,
+        "code": "DVDs&Blu-rays"
+    },
+    {
+        "name": "Events",
+        "checked": false,
+        "code": "Events"
+    },
+    {
+        "name": "Greetings",
+        "checked": false,
+        "code": "Greetings"
+    },
+    {
+        "name": "Japanese Albums",
+        "checked": false,
+        "code": "Japanese"
+    },
+    {
+        "name": "Thai Albums",
+        "checked": false,
+        "code": "Thai"
+    },
+    {
+        "name": "Korean Albums",
+        "checked": true,
+        "code": "Korean"
+    },
+    {
+        "name": "Memberships",
+        "checked": false,
+        "code": "Memberships"
+    },
+    {
+        "name": "Promos",
+        "checked": false,
+        "code": "Promos"
+    },
+    {
+        "name": "Solo/Subunit",
+        "checked": false,
+        "code": "Solo&Subunit"
+    },
+    {
+        "name": "Stores/Merch",
+        "checked": false,
+        "code": "Stores&Merch"
+    }
+]

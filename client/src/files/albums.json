@@ -1,0 +1,3117 @@
+[
+    {
+        "name": "The Story Begins",
+        "checked": true,
+        "categories": [
+            "Korean Albums",
+            "Thai Albums"
+        ],
+        "members": [
+            "Nayeon",
+            "Jeongyeon",
+            "Momo",
+            "Sana",
+            "Jihyo",
+            "Mina",
+            "Dahyun",
+            "Chaeyoung",
+            "Tzuyu"
+        ],
+        "benefits": [
+            "Original"
+        ],
+        "display": true,
+        "code": "TSB"
+    },
+    {
+        "name": "Page Two",
+        "checked": false,
+        "categories": [
+            "Korean Albums",
+            "Thai Albums"
+        ],
+        "members": [
+            "Nayeon",
+            "Jeongyeon",
+            "Momo",
+            "Sana",
+            "Jihyo",
+            "Mina",
+            "Dahyun",
+            "Chaeyoung",
+            "Tzuyu"
+        ],
+        "benefits": [
+            "Original",
+            "Monograph"
+        ],
+        "display": true,
+        "code": "PW"
+    },
+    {
+        "name": "TWICEcoaster: Lane 1",
+        "checked": false,
+        "categories": [
+            "Korean Albums",
+            "Thai Albums"
+        ],
+        "members": [
+            "Nayeon",
+            "Jeongyeon",
+            "Momo",
+            "Sana",
+            "Jihyo",
+            "Mina",
+            "Dahyun",
+            "Chaeyoung",
+            "Tzuyu"
+        ],
+        "benefits": [
+            "POB",
+            "Original",
+            "Monograph"
+        ],
+        "display": true,
+        "code": "TCL1"
+    },
+    {
+        "name": "TWICEcoaster: Lane 1 Christmas",
+        "checked": false,
+        "categories": [
+            "Korean Albums"
+        ],
+        "members": [
+            "Nayeon",
+            "Jeongyeon",
+            "Momo",
+            "Sana",
+            "Jihyo",
+            "Mina",
+            "Dahyun",
+            "Chaeyoung",
+            "Tzuyu"
+        ],
+        "benefits": [
+            "Original"
+        ],
+        "display": true,
+        "code": "TCL1C"
+    },
+    {
+        "name": "TWICEcoaster: Lane 2",
+        "checked": false,
+        "categories": [
+            "Korean Albums",
+            "Thai Albums"
+        ],
+        "members": [
+            "Nayeon",
+            "Jeongyeon",
+            "Momo",
+            "Sana",
+            "Jihyo",
+            "Mina",
+            "Dahyun",
+            "Chaeyoung",
+            "Tzuyu"
+        ],
+        "benefits": [
+            "POB",
+            "Original"
+        ],
+        "display": true,
+        "code": "TCL2"
+    },
+    {
+        "name": "Signal",
+        "checked": false,
+        "categories": [
+            "Korean Albums",
+            "Thai Albums"
+        ],
+        "members": [
+            "Nayeon",
+            "Jeongyeon",
+            "Momo",
+            "Sana",
+            "Jihyo",
+            "Mina",
+            "Dahyun",
+            "Chaeyoung",
+            "Tzuyu"
+        ],
+        "benefits": [
+            "POB",
+            "Original",
+            "Monograph",
+            "Broadcast"
+        ],
+        "display": true,
+        "code": "Signal"
+    },
+    {
+        "name": "#TWICE",
+        "checked": false,
+        "categories": [
+            "Japanese Albums"
+        ],
+        "members": [
+            "Nayeon",
+            "Jeongyeon",
+            "Momo",
+            "Sana",
+            "Jihyo",
+            "Mina",
+            "Dahyun",
+            "Chaeyoung",
+            "Tzuyu"
+        ],
+        "benefits": [
+            "Original",
+            "Hi-Touch"
+        ],
+        "display": false,
+        "code": "#Twice"
+    },
+    {
+        "name": "One More Time",
+        "checked": false,
+        "categories": [
+            "Japanese Albums"
+        ],
+        "members": [
+            "Nayeon",
+            "Jeongyeon",
+            "Momo",
+            "Sana",
+            "Jihyo",
+            "Mina",
+            "Dahyun",
+            "Chaeyoung",
+            "Tzuyu"
+        ],
+        "benefits": [
+            "Hi-Touch",
+            "Original",
+            "JYP Shop"
+        ],
+        "display": false,
+        "code": "OMT"
+    },
+    {
+        "name": "Twicetagram",
+        "checked": false,
+        "categories": [
+            "Korean Albums",
+            "Thai Albums"
+        ],
+        "members": [
+            "Nayeon",
+            "Jeongyeon",
+            "Momo",
+            "Sana",
+            "Jihyo",
+            "Mina",
+            "Dahyun",
+            "Chaeyoung",
+            "Tzuyu"
+        ],
+        "benefits": [
+            "POB",
+            "Original",
+            "Monograph",
+            "Broadcast"
+        ],
+        "display": true,
+        "code": "Twicetagram"
+    },
+    {
+        "name": "Merry & Happy",
+        "checked": false,
+        "categories": [
+            "Korean Albums"
+        ],
+        "members": [
+            "Nayeon",
+            "Jeongyeon",
+            "Momo",
+            "Sana",
+            "Jihyo",
+            "Mina",
+            "Dahyun",
+            "Chaeyoung",
+            "Tzuyu"
+        ],
+        "benefits": [
+            "POB",
+            "Original",
+            "Monograph",
+            "Broadcast"
+        ],
+        "display": true,
+        "code": "M&H"
+    },
+    {
+        "name": "Candy Pop",
+        "checked": false,
+        "categories": [
+            "Japanese Albums"
+        ],
+        "members": [
+            "Nayeon",
+            "Jeongyeon",
+            "Momo",
+            "Sana",
+            "Jihyo",
+            "Mina",
+            "Dahyun",
+            "Chaeyoung",
+            "Tzuyu"
+        ],
+        "benefits": [
+            "Hi-Touch",
+            "Comic Book",
+            "JYP Shop"
+        ],
+        "display": false,
+        "code": "CP"
+    },
+    {
+        "name": "What Is Love ?",
+        "checked": false,
+        "categories": [
+            "Korean Albums"
+        ],
+        "members": [
+            "Nayeon",
+            "Jeongyeon",
+            "Momo",
+            "Sana",
+            "Jihyo",
+            "Mina",
+            "Dahyun",
+            "Chaeyoung",
+            "Tzuyu"
+        ],
+        "benefits": [
+            "POB",
+            "Original",
+            "Monograph"
+        ],
+        "display": true,
+        "code": "WIL"
+    },
+    {
+        "name": "Wake Me Up",
+        "checked": false,
+        "categories": [
+            "Japanese Albums"
+        ],
+        "members": [
+            "Nayeon",
+            "Jeongyeon",
+            "Momo",
+            "Sana",
+            "Jihyo",
+            "Mina",
+            "Dahyun",
+            "Chaeyoung",
+            "Tzuyu"
+        ],
+        "benefits": [
+            "Hi-Touch",
+            "Original"
+        ],
+        "display": false,
+        "code": "WMU"
+    },
+    {
+        "name": "Summer Nights",
+        "checked": false,
+        "categories": [
+            "Korean Albums"
+        ],
+        "members": [
+            "Nayeon",
+            "Jeongyeon",
+            "Momo",
+            "Sana",
+            "Jihyo",
+            "Mina",
+            "Dahyun",
+            "Chaeyoung",
+            "Tzuyu"
+        ],
+        "benefits": [
+            "POB",
+            "Original",
+            "Monograph",
+            "Broadcast"
+        ],
+        "display": true,
+        "code": "SN"
+    },
+    {
+        "name": "BDZ",
+        "checked": false,
+        "categories": [
+            "Japanese Albums"
+        ],
+        "members": [
+            "Nayeon",
+            "Jeongyeon",
+            "Momo",
+            "Sana",
+            "Jihyo",
+            "Mina",
+            "Dahyun",
+            "Chaeyoung",
+            "Tzuyu"
+        ],
+        "benefits": [
+            "Hi-Touch",
+            "Arena Tour",
+            "JYP Shop"
+        ],
+        "display": false,
+        "code": "BDZ"
+    },
+    {
+        "name": "Stay By My Side",
+        "checked": false,
+        "categories": [
+            "Japanese Albums"
+        ],
+        "members": [
+            "Nayeon",
+            "Jeongyeon",
+            "Momo",
+            "Sana",
+            "Jihyo",
+            "Mina",
+            "Dahyun",
+            "Chaeyoung",
+            "Tzuyu"
+        ],
+        "benefits": [
+            "Original"
+        ],
+        "display": false,
+        "code": "SBMS"
+    },
+    {
+        "name": "YES Or YES",
+        "checked": false,
+        "categories": [
+            "Korean Albums"
+        ],
+        "members": [
+            "Nayeon",
+            "Jeongyeon",
+            "Momo",
+            "Sana",
+            "Jihyo",
+            "Mina",
+            "Dahyun",
+            "Chaeyoung",
+            "Tzuyu"
+        ],
+        "benefits": [
+            "POB",
+            "Original",
+            "Monograph"
+        ],
+        "display": true,
+        "code": "YOY"
+    },
+    {
+        "name": "The Year Of “YES”",
+        "checked": false,
+        "categories": [
+            "Korean Albums"
+        ],
+        "members": [
+            "Nayeon",
+            "Jeongyeon",
+            "Momo",
+            "Sana",
+            "Jihyo",
+            "Mina",
+            "Dahyun",
+            "Chaeyoung",
+            "Tzuyu"
+        ],
+        "benefits": [
+            "POB",
+            "Original",
+            "Monograph"
+        ],
+        "display": true,
+        "code": "TYOY"
+    },
+    {
+        "name": "#TWICE2",
+        "checked": false,
+        "categories": [
+            "Japanese Albums"
+        ],
+        "members": [
+            "Nayeon",
+            "Jeongyeon",
+            "Momo",
+            "Sana",
+            "Jihyo",
+            "Mina",
+            "Dahyun",
+            "Chaeyoung",
+            "Tzuyu"
+        ],
+        "benefits": [
+            "Original",
+            "Hi-Touch",
+            "JYP Shop"
+        ],
+        "display": false,
+        "code": "#Twice2"
+    },
+    {
+        "name": "Fancy",
+        "checked": false,
+        "categories": [
+            "Korean Albums"
+        ],
+        "members": [
+            "Nayeon",
+            "Jeongyeon",
+            "Momo",
+            "Sana",
+            "Jihyo",
+            "Mina",
+            "Dahyun",
+            "Chaeyoung",
+            "Tzuyu"
+        ],
+        "benefits": [
+            "POB",
+            "Original",
+            "Monograph",
+            "Broadcast"
+        ],
+        "display": true,
+        "code": "Fancy"
+    },
+    {
+        "name": "Happy Happy",
+        "checked": false,
+        "categories": [
+            "Japanese Albums"
+        ],
+        "members": [
+            "Nayeon",
+            "Jeongyeon",
+            "Momo",
+            "Sana",
+            "Jihyo",
+            "Mina",
+            "Dahyun",
+            "Chaeyoung",
+            "Tzuyu"
+        ],
+        "benefits": [
+            "Hi-Touch",
+            "JYP Shop"
+        ],
+        "display": false,
+        "code": "HH"
+    },
+    {
+        "name": "Breakthrough",
+        "checked": false,
+        "categories": [
+            "Japanese Albums"
+        ],
+        "members": [
+            "Nayeon",
+            "Jeongyeon",
+            "Momo",
+            "Sana",
+            "Jihyo",
+            "Mina",
+            "Dahyun",
+            "Chaeyoung",
+            "Tzuyu"
+        ],
+        "benefits": [
+            "Hi-Touch",
+            "JYP Shop"
+        ],
+        "display": false,
+        "code": "Breakthrough"
+    },
+    {
+        "name": "Feel Special",
+        "checked": false,
+        "categories": [
+            "Korean Albums"
+        ],
+        "members": [
+            "Nayeon",
+            "Jeongyeon",
+            "Momo",
+            "Sana",
+            "Jihyo",
+            "Mina",
+            "Dahyun",
+            "Chaeyoung",
+            "Tzuyu"
+        ],
+        "benefits": [
+            "POB",
+            "Original",
+            "Monograph"
+        ],
+        "display": true,
+        "code": "FS"
+    },
+    {
+        "name": "&TWICE",
+        "checked": false,
+        "categories": [
+            "Japanese Albums"
+        ],
+        "members": [
+            "Nayeon",
+            "Jeongyeon",
+            "Momo",
+            "Sana",
+            "Jihyo",
+            "Mina",
+            "Dahyun",
+            "Chaeyoung",
+            "Tzuyu"
+        ],
+        "benefits": [
+            "Hi-Touch",
+            "JYP Shop"
+        ],
+        "display": false,
+        "code": "&Twice"
+    },
+    {
+        "name": "&TWICE Repackage",
+        "checked": false,
+        "categories": [
+            "Japanese Albums"
+        ],
+        "members": [
+            "Nayeon",
+            "Jeongyeon",
+            "Momo",
+            "Sana",
+            "Jihyo",
+            "Mina",
+            "Dahyun",
+            "Chaeyoung",
+            "Tzuyu"
+        ],
+        "benefits": [
+            "Original"
+        ],
+        "display": false,
+        "code": "&TwiceR"
+    },
+    {
+        "name": "More & More",
+        "checked": false,
+        "categories": [
+            "Korean Albums"
+        ],
+        "members": [
+            "Nayeon",
+            "Jeongyeon",
+            "Momo",
+            "Sana",
+            "Jihyo",
+            "Mina",
+            "Dahyun",
+            "Chaeyoung",
+            "Tzuyu"
+        ],
+        "benefits": [
+            "POB",
+            "Original",
+            "Monograph",
+            "Withdrama"
+        ],
+        "display": true,
+        "code": "M&M"
+    },
+    {
+        "name": "Fanfare",
+        "checked": false,
+        "categories": [
+            "Japanese Albums"
+        ],
+        "members": [
+            "Nayeon",
+            "Jeongyeon",
+            "Momo",
+            "Sana",
+            "Jihyo",
+            "Mina",
+            "Dahyun",
+            "Chaeyoung",
+            "Tzuyu"
+        ],
+        "benefits": [
+            "Hi-Touch",
+            "Tower Records",
+            "JYP Shop"
+        ],
+        "display": false,
+        "code": "Fanfare"
+    },
+    {
+        "name": "#TWICE3",
+        "checked": false,
+        "categories": [
+            "Japanese Albums"
+        ],
+        "members": [
+            "Nayeon",
+            "Jeongyeon",
+            "Momo",
+            "Sana",
+            "Jihyo",
+            "Mina",
+            "Dahyun",
+            "Chaeyoung",
+            "Tzuyu"
+        ],
+        "benefits": [
+            "Hi-Touch",
+            "Original",
+            "Tower Records",
+            "JYP Shop"
+        ],
+        "display": false,
+        "code": "#Twice3"
+    },
+    {
+        "name": "Eyes Wide Open",
+        "checked": false,
+        "categories": [
+            "Korean Albums"
+        ],
+        "members": [
+            "Nayeon",
+            "Jeongyeon",
+            "Momo",
+            "Sana",
+            "Jihyo",
+            "Mina",
+            "Dahyun",
+            "Chaeyoung",
+            "Tzuyu"
+        ],
+        "benefits": [
+            "POB",
+            "Original",
+            "Monograph",
+            "Withdrama"
+        ],
+        "display": true,
+        "code": "EWO"
+    },
+    {
+        "name": "BETTER",
+        "checked": false,
+        "categories": [
+            "Japanese Albums"
+        ],
+        "members": [
+            "Nayeon",
+            "Jeongyeon",
+            "Momo",
+            "Sana",
+            "Jihyo",
+            "Mina",
+            "Dahyun",
+            "Chaeyoung",
+            "Tzuyu"
+        ],
+        "benefits": [
+            "Hi-Touch",
+            "Tower Records",
+            "JYP Shop"
+        ],
+        "display": false,
+        "code": "BETTER"
+    },
+    {
+        "name": "Kura Kura",
+        "checked": false,
+        "categories": [
+            "Japanese Albums"
+        ],
+        "members": [
+            "Nayeon",
+            "Jeongyeon",
+            "Momo",
+            "Sana",
+            "Jihyo",
+            "Mina",
+            "Dahyun",
+            "Chaeyoung",
+            "Tzuyu"
+        ],
+        "benefits": [
+            "Hi-Touch",
+            "JYP Shop"
+        ],
+        "display": false,
+        "code": "KK"
+    },
+    {
+        "name": "Taste Of Love",
+        "checked": false,
+        "categories": [
+            "Korean Albums"
+        ],
+        "members": [
+            "Nayeon",
+            "Jeongyeon",
+            "Momo",
+            "Sana",
+            "Jihyo",
+            "Mina",
+            "Dahyun",
+            "Chaeyoung",
+            "Tzuyu"
+        ],
+        "benefits": [
+            "POB",
+            "Original",
+            "Monograph",
+            "Synnara",
+            "Interpark",
+            "Aladin",
+            "Flo",
+            "Withdrama",
+            "Film Keyring"
+        ],
+        "display": true,
+        "code": "TOL"
+    },
+    {
+        "name": "Perfect World",
+        "checked": false,
+        "categories": [
+            "Japanese Albums"
+        ],
+        "members": [
+            "Nayeon",
+            "Jeongyeon",
+            "Momo",
+            "Sana",
+            "Jihyo",
+            "Mina",
+            "Dahyun",
+            "Chaeyoung",
+            "Tzuyu"
+        ],
+        "benefits": [
+            "Hi-Touch",
+            "JYP Shop"
+        ],
+        "display": false,
+        "code": "Perfect World"
+    },
+    {
+        "name": "Formula Of Love: O+T=<3",
+        "checked": false,
+        "categories": [
+            "Korean Albums"
+        ],
+        "members": [
+            "Nayeon",
+            "Jeongyeon",
+            "Momo",
+            "Sana",
+            "Jihyo",
+            "Mina",
+            "Dahyun",
+            "Chaeyoung",
+            "Tzuyu"
+        ],
+        "benefits": [
+            "POB",
+            "Original",
+            "Monograph",
+            "Withdrama",
+            "Synnara",
+            "Aladin",
+            "Soundwave",
+            "Musicplant"
+        ],
+        "display": true,
+        "code": "FOL"
+    },
+    {
+        "name": "Doughnut",
+        "checked": false,
+        "categories": [
+            "Japanese Albums"
+        ],
+        "members": [
+            "Nayeon",
+            "Jeongyeon",
+            "Momo",
+            "Sana",
+            "Jihyo",
+            "Mina",
+            "Dahyun",
+            "Chaeyoung",
+            "Tzuyu"
+        ],
+        "benefits": [
+            "JYP Shop",
+            "Hi-Touch"
+        ],
+        "display": false,
+        "code": "Doughnut"
+    },
+    {
+        "name": "#TWICE4",
+        "checked": false,
+        "categories": [
+            "Japanese Albums"
+        ],
+        "members": [
+            "Nayeon",
+            "Jeongyeon",
+            "Momo",
+            "Sana",
+            "Jihyo",
+            "Mina",
+            "Dahyun",
+            "Chaeyoung",
+            "Tzuyu"
+        ],
+        "benefits": [
+            "JYP Shop",
+            "Hi-Touch",
+            "Original"
+        ],
+        "display": false,
+        "code": "#Twice4"
+    },
+    {
+        "name": "Celebrate",
+        "checked": false,
+        "categories": [
+            "Japanese Albums"
+        ],
+        "members": [
+            "Nayeon",
+            "Jeongyeon",
+            "Momo",
+            "Sana",
+            "Jihyo",
+            "Mina",
+            "Dahyun",
+            "Chaeyoung",
+            "Tzuyu"
+        ],
+        "benefits": [
+            "Hi-Touch",
+            "JYP Shop"
+        ],
+        "display": false,
+        "code": "Celebrate"
+    },
+    {
+        "name": "Between 1&2",
+        "checked": false,
+        "categories": [
+            "Korean Albums"
+        ],
+        "members": [
+            "Nayeon",
+            "Jeongyeon",
+            "Momo",
+            "Sana",
+            "Jihyo",
+            "Mina",
+            "Dahyun",
+            "Chaeyoung",
+            "Tzuyu"
+        ],
+        "benefits": [
+            "POB",
+            "Original",
+            "Monograph",
+            "Withmuu",
+            "Soundwave",
+            "Aladin",
+            "Musicplant",
+            "JYP Shop",
+            "Lotte Duty-Free",
+            "Target",
+            "Broadcast"
+        ],
+        "display": true,
+        "code": "B1&2"
+    },
+    {
+        "name": "READY TO BE",
+        "checked": false,
+        "categories": [
+            "Korean Albums"
+        ],
+        "members": [
+            "Nayeon",
+            "Jeongyeon",
+            "Momo",
+            "Sana",
+            "Jihyo",
+            "Mina",
+            "Dahyun",
+            "Chaeyoung",
+            "Tzuyu"
+        ],
+        "benefits": [
+            "POB",
+            "Original",
+            "Monograph",
+            "Withmuu",
+            "Blue Dream Media",
+            "JYP Shop",
+            "Musicplant",
+            "Soundwave",
+            "Target"
+        ],
+        "display": true,
+        "code": "RTB"
+    },
+    {
+        "name": "Hare Hare",
+        "checked": false,
+        "categories": [
+            "Japanese Albums"
+        ],
+        "members": [
+            "Nayeon",
+            "Jeongyeon",
+            "Momo",
+            "Sana",
+            "Jihyo",
+            "Mina",
+            "Dahyun",
+            "Chaeyoung",
+            "Tzuyu"
+        ],
+        "benefits": [
+            "Original",
+            "JYP Shop",
+            "HMV",
+            "Tower Records",
+            "POB"
+        ],
+        "display": false,
+        "code": "Hare Hare"
+    },
+    {
+        "name": "Masterpiece",
+        "checked": false,
+        "categories": [
+            "Solo/Subunit",
+            "Japanese Albums"
+        ],
+        "members": [
+            "Momo",
+            "Sana",
+            "Mina"
+        ],
+        "benefits": [
+            "Hi-Touch",
+            "Original",
+            "Withmuu",
+            "Tower Records",
+            "Showcase",
+            "JYP Shop"
+        ],
+        "display": false,
+        "code": "Masterpiece"
+    },
+    {
+        "name": "IM NAYEON",
+        "checked": false,
+        "categories": [
+            "Solo/Subunit",
+            "Korean Albums"
+        ],
+        "members": [
+            "Nayeon"
+        ],
+        "benefits": [
+            "POB",
+            "Original",
+            "JYP Shop",
+            "Withmuu",
+            "Soundwave",
+            "Broadcast",
+            "Musicplant"
+        ],
+        "display": true,
+        "code": "IN"
+    },
+    {
+        "name": "ZONE",
+        "checked": false,
+        "categories": [
+            "Solo/Subunit",
+            "Korean Albums"
+        ],
+        "members": [
+            "Jihyo"
+        ],
+        "benefits": [
+            "POB",
+            "Original",
+            "Withmuu",
+            "Aladin",
+            "JYP Shop",
+            "Yes24",
+            "Soundwave",
+            "Musicplant",
+            "Target",
+            "Blue Dream Media",
+            "Music Korea",
+            "Everline",
+            "Broadcast"
+        ],
+        "display": true,
+        "code": "ZONE"
+    },
+    {
+        "name": "Fanclub 1st Generation",
+        "checked": false,
+        "categories": [
+            "Memberships"
+        ],
+        "members": [
+            "Nayeon",
+            "Jeongyeon",
+            "Momo",
+            "Sana",
+            "Jihyo",
+            "Mina",
+            "Dahyun",
+            "Chaeyoung",
+            "Tzuyu"
+        ],
+        "benefits": [
+            "Original"
+        ],
+        "display": false,
+        "code": "F1G"
+    },
+    {
+        "name": "Fanclub 2nd Generation",
+        "checked": false,
+        "categories": [
+            "Memberships"
+        ],
+        "members": [
+            "Nayeon",
+            "Jeongyeon",
+            "Momo",
+            "Sana",
+            "Jihyo",
+            "Mina",
+            "Dahyun",
+            "Chaeyoung",
+            "Tzuyu"
+        ],
+        "benefits": [
+            "Original"
+        ],
+        "display": false,
+        "code": "F2G"
+    },
+    {
+        "name": "Fanclub 3rd Generation",
+        "checked": false,
+        "categories": [
+            "Memberships"
+        ],
+        "members": [
+            "Nayeon",
+            "Jeongyeon",
+            "Momo",
+            "Sana",
+            "Jihyo",
+            "Mina",
+            "Dahyun",
+            "Chaeyoung",
+            "Tzuyu"
+        ],
+        "benefits": [
+            "Original"
+        ],
+        "display": false,
+        "code": "F3G"
+    },
+    {
+        "name": "First Love 2018 Season's Greetings",
+        "checked": false,
+        "categories": [
+            "Greetings"
+        ],
+        "members": [
+            "Nayeon",
+            "Jeongyeon",
+            "Momo",
+            "Sana",
+            "Jihyo",
+            "Mina",
+            "Dahyun",
+            "Chaeyoung",
+            "Tzuyu"
+        ],
+        "benefits": [
+            "Original"
+        ],
+        "display": false,
+        "code": "FL2018SG"
+    },
+    {
+        "name": "The Roses 2019 Season's Greetings",
+        "checked": false,
+        "categories": [
+            "Greetings"
+        ],
+        "members": [
+            "Nayeon",
+            "Jeongyeon",
+            "Momo",
+            "Sana",
+            "Jihyo",
+            "Mina",
+            "Dahyun",
+            "Chaeyoung",
+            "Tzuyu"
+        ],
+        "benefits": [
+            "Original"
+        ],
+        "display": false,
+        "code": "TR2019SG"
+    },
+    {
+        "name": "RUN 2020 Season's Greetings",
+        "checked": false,
+        "categories": [
+            "Greetings"
+        ],
+        "members": [
+            "Nayeon",
+            "Jeongyeon",
+            "Momo",
+            "Sana",
+            "Jihyo",
+            "Mina",
+            "Dahyun",
+            "Chaeyoung",
+            "Tzuyu"
+        ],
+        "benefits": [
+            "Original"
+        ],
+        "display": false,
+        "code": "R2020SG"
+    },
+    {
+        "name": "The Moment Forever 2021 Season's Greetings",
+        "checked": false,
+        "categories": [
+            "Greetings"
+        ],
+        "members": [
+            "Nayeon",
+            "Jeongyeon",
+            "Momo",
+            "Sana",
+            "Jihyo",
+            "Mina",
+            "Dahyun",
+            "Chaeyoung",
+            "Tzuyu"
+        ],
+        "benefits": [
+            "Original",
+            "Withdrama"
+        ],
+        "display": false,
+        "code": "TMF2021SG"
+    },
+    {
+        "name": "Letters To You 2022 Season's Greetings",
+        "checked": false,
+        "categories": [
+            "Greetings"
+        ],
+        "members": [
+            "Nayeon",
+            "Momo",
+            "Sana",
+            "Jihyo",
+            "Mina",
+            "Dahyun",
+            "Chaeyoung",
+            "Tzuyu"
+        ],
+        "benefits": [
+            "Original"
+        ],
+        "display": false,
+        "code": "LTY2022SG"
+    },
+    {
+        "name": "Secret Life @House 2023 Season's Greetings",
+        "checked": false,
+        "categories": [
+            "Greetings"
+        ],
+        "members": [
+            "Nayeon",
+            "Jeongyeon",
+            "Momo",
+            "Sana",
+            "Jihyo",
+            "Mina",
+            "Dahyun",
+            "Chaeyoung",
+            "Tzuyu"
+        ],
+        "benefits": [
+            "Original",
+            "JYP Shop",
+            "Withmuu"
+        ],
+        "display": false,
+        "code": "SLH2023SG"
+    },
+    {
+        "name": "On & Off 2021 Japan Season's Greetings",
+        "checked": false,
+        "categories": [
+            "Greetings"
+        ],
+        "members": [
+            "Nayeon",
+            "Jeongyeon",
+            "Momo",
+            "Sana",
+            "Jihyo",
+            "Mina",
+            "Dahyun",
+            "Chaeyoung",
+            "Tzuyu"
+        ],
+        "benefits": [
+            "Original"
+        ],
+        "display": false,
+        "code": "O&O2021JSG"
+    },
+    {
+        "name": "Once-Way 2022 Japan Season's Greetings",
+        "checked": false,
+        "categories": [
+            "Greetings"
+        ],
+        "members": [
+            "Nayeon",
+            "Jeongyeon",
+            "Momo",
+            "Sana",
+            "Jihyo",
+            "Mina",
+            "Dahyun",
+            "Chaeyoung",
+            "Tzuyu"
+        ],
+        "benefits": [
+            "Original",
+            "HMV"
+        ],
+        "display": false,
+        "code": "OW2022JSG"
+    },
+    {
+        "name": "Secret Life @Office 2023 Japan Season's Greetings",
+        "checked": false,
+        "categories": [
+            "Greetings"
+        ],
+        "members": [
+            "Nayeon",
+            "Jeongyeon",
+            "Momo",
+            "Sana",
+            "Jihyo",
+            "Mina",
+            "Dahyun",
+            "Chaeyoung",
+            "Tzuyu"
+        ],
+        "benefits": [
+            "Original",
+            "JYP Shop"
+        ],
+        "display": false,
+        "code": "SLO2023SG"
+    },
+    {
+        "name": "Twice Super Event",
+        "checked": false,
+        "categories": [
+            "DVDs/Blu-rays"
+        ],
+        "members": [
+            "Nayeon",
+            "Jeongyeon",
+            "Momo",
+            "Sana",
+            "Jihyo",
+            "Mina",
+            "Dahyun",
+            "Chaeyoung",
+            "Tzuyu"
+        ],
+        "benefits": [
+            "Original"
+        ],
+        "display": false,
+        "code": "TSE"
+    },
+    {
+        "name": "TWICELAND -The Opening- DVD",
+        "checked": false,
+        "categories": [
+            "DVDs/Blu-rays"
+        ],
+        "members": [
+            "Nayeon",
+            "Jeongyeon",
+            "Momo",
+            "Sana",
+            "Jihyo",
+            "Mina",
+            "Dahyun",
+            "Chaeyoung",
+            "Tzuyu"
+        ],
+        "benefits": [
+            "Original"
+        ],
+        "display": false,
+        "code": "TLTODVD"
+    },
+    {
+        "name": "TWICELAND -The Opening Encore- DVD",
+        "checked": false,
+        "categories": [
+            "DVDs/Blu-rays"
+        ],
+        "members": [
+            "Nayeon",
+            "Jeongyeon",
+            "Momo",
+            "Sana",
+            "Jihyo",
+            "Mina",
+            "Dahyun",
+            "Chaeyoung",
+            "Tzuyu"
+        ],
+        "benefits": [
+            "Original"
+        ],
+        "display": false,
+        "code": "TLTOEDVD"
+    },
+    {
+        "name": "Twice Fanmeeting Once Begins DVD",
+        "checked": false,
+        "categories": [
+            "DVDs/Blu-rays"
+        ],
+        "members": [
+            "Nayeon",
+            "Jeongyeon",
+            "Momo",
+            "Sana",
+            "Jihyo",
+            "Mina",
+            "Dahyun",
+            "Chaeyoung",
+            "Tzuyu"
+        ],
+        "benefits": [
+            "Original"
+        ],
+        "display": false,
+        "code": "TFOBDVD"
+    },
+    {
+        "name": "Twice TV 2018",
+        "checked": false,
+        "categories": [
+            "DVDs/Blu-rays"
+        ],
+        "members": [
+            "Nayeon",
+            "Jeongyeon",
+            "Momo",
+            "Sana",
+            "Jihyo",
+            "Mina",
+            "Dahyun",
+            "Chaeyoung",
+            "Tzuyu"
+        ],
+        "benefits": [
+            "Original"
+        ],
+        "display": false,
+        "code": "TTV2018"
+    },
+    {
+        "name": "TWICELAND ZONE 2: Fantasy Park",
+        "checked": false,
+        "categories": [
+            "DVDs/Blu-rays"
+        ],
+        "members": [
+            "Nayeon",
+            "Jeongyeon",
+            "Momo",
+            "Sana",
+            "Jihyo",
+            "Mina",
+            "Dahyun",
+            "Chaeyoung",
+            "Tzuyu"
+        ],
+        "benefits": [
+            "Original"
+        ],
+        "display": false,
+        "code": "TLZ2FP"
+    },
+    {
+        "name": "TWICELIGHTS",
+        "checked": false,
+        "categories": [
+            "DVDs/Blu-rays"
+        ],
+        "members": [
+            "Nayeon",
+            "Jeongyeon",
+            "Momo",
+            "Sana",
+            "Jihyo",
+            "Mina",
+            "Dahyun",
+            "Chaeyoung",
+            "Tzuyu"
+        ],
+        "benefits": [
+            "Original"
+        ],
+        "display": false,
+        "code": "TWICELIGHTS"
+    },
+    {
+        "name": "TWICE 4th Tour 'Ⅲ' in Seoul DVD",
+        "checked": false,
+        "categories": [
+            "DVDs/Blu-rays"
+        ],
+        "members": [
+            "Nayeon",
+            "Jeongyeon",
+            "Momo",
+            "Sana",
+            "Jihyo",
+            "Mina",
+            "Dahyun",
+            "Chaeyoung",
+            "Tzuyu"
+        ],
+        "benefits": [
+            "Original"
+        ],
+        "display": false,
+        "code": "T4T3ISDVD"
+    },
+    {
+        "name": "Shibuya 109",
+        "checked": false,
+        "categories": [
+            "Stores/Merch"
+        ],
+        "members": [
+            "Nayeon",
+            "Jeongyeon",
+            "Momo",
+            "Sana",
+            "Jihyo",
+            "Mina",
+            "Dahyun",
+            "Chaeyoung",
+            "Tzuyu"
+        ],
+        "benefits": [
+            "Original"
+        ],
+        "display": false,
+        "code": "S109"
+    },
+    {
+        "name": "Twaii’s Shop",
+        "checked": false,
+        "categories": [
+            "Stores/Merch"
+        ],
+        "members": [
+            "Nayeon",
+            "Jeongyeon",
+            "Momo",
+            "Sana",
+            "Jihyo",
+            "Mina",
+            "Dahyun",
+            "Chaeyoung",
+            "Tzuyu"
+        ],
+        "benefits": [
+            "Original"
+        ],
+        "display": false,
+        "code": "TS"
+    },
+    {
+        "name": "Character Pop Up Store Busan",
+        "checked": false,
+        "categories": [
+            "Stores/Merch"
+        ],
+        "members": [
+            "Nayeon",
+            "Jeongyeon",
+            "Momo",
+            "Sana",
+            "Jihyo",
+            "Mina",
+            "Dahyun",
+            "Chaeyoung",
+            "Tzuyu"
+        ],
+        "benefits": [
+            "Original"
+        ],
+        "display": false,
+        "code": "CPUSB"
+    },
+    {
+        "name": "Character Pop Up Store Seoul",
+        "checked": false,
+        "categories": [
+            "Stores/Merch"
+        ],
+        "members": [
+            "Nayeon",
+            "Jeongyeon",
+            "Momo",
+            "Sana",
+            "Jihyo",
+            "Mina",
+            "Dahyun",
+            "Chaeyoung",
+            "Tzuyu"
+        ],
+        "benefits": [
+            "Original"
+        ],
+        "display": false,
+        "code": "CPUSS"
+    },
+    {
+        "name": "Twice Pop Up Store",
+        "checked": false,
+        "categories": [
+            "Stores/Merch"
+        ],
+        "members": [
+            "Nayeon",
+            "Jeongyeon",
+            "Momo",
+            "Sana",
+            "Jihyo",
+            "Mina",
+            "Dahyun",
+            "Chaeyoung",
+            "Tzuyu"
+        ],
+        "benefits": [
+            "Original"
+        ],
+        "display": false,
+        "code": "TPUS"
+    },
+    {
+        "name": "Twicetagram Pop Up Store",
+        "checked": false,
+        "categories": [
+            "Stores/Merch"
+        ],
+        "members": [
+            "Nayeon",
+            "Jeongyeon",
+            "Momo",
+            "Sana",
+            "Jihyo",
+            "Mina",
+            "Dahyun",
+            "Chaeyoung",
+            "Tzuyu"
+        ],
+        "benefits": [
+            "Original"
+        ],
+        "display": false,
+        "code": "TTPUS"
+    },
+    {
+        "name": "Merry & Happy Pop Up Store",
+        "checked": false,
+        "categories": [
+            "Stores/Merch"
+        ],
+        "members": [
+            "Nayeon",
+            "Jeongyeon",
+            "Momo",
+            "Sana",
+            "Jihyo",
+            "Mina",
+            "Dahyun",
+            "Chaeyoung",
+            "Tzuyu"
+        ],
+        "benefits": [
+            "Original"
+        ],
+        "display": false,
+        "code": "M&MPUS"
+    },
+    {
+        "name": "Summer Nights Pop Up Store",
+        "checked": false,
+        "categories": [
+            "Stores/Merch"
+        ],
+        "members": [
+            "Nayeon",
+            "Jeongyeon",
+            "Momo",
+            "Sana",
+            "Jihyo",
+            "Mina",
+            "Dahyun",
+            "Chaeyoung",
+            "Tzuyu"
+        ],
+        "benefits": [
+            "Original"
+        ],
+        "display": false,
+        "code": "SNPUS"
+    },
+    {
+        "name": "Twaii’s Shop Seoul",
+        "checked": false,
+        "categories": [
+            "Stores/Merch"
+        ],
+        "members": [
+            "Nayeon",
+            "Jeongyeon",
+            "Momo",
+            "Sana",
+            "Jihyo",
+            "Mina",
+            "Dahyun",
+            "Chaeyoung",
+            "Tzuyu"
+        ],
+        "benefits": [
+            "Original"
+        ],
+        "display": false,
+        "code": "TSS"
+    },
+    {
+        "name": "Twice University Fashion Club",
+        "checked": false,
+        "categories": [
+            "Stores/Merch"
+        ],
+        "members": [
+            "Nayeon",
+            "Jeongyeon",
+            "Momo",
+            "Sana",
+            "Jihyo",
+            "Mina",
+            "Dahyun",
+            "Chaeyoung",
+            "Tzuyu"
+        ],
+        "benefits": [
+            "Original"
+        ],
+        "display": false,
+        "code": "TUFC"
+    },
+    {
+        "name": "5th Anniversary",
+        "checked": false,
+        "categories": [
+            "Stores/Merch"
+        ],
+        "members": [
+            "Nayeon",
+            "Jeongyeon",
+            "Momo",
+            "Sana",
+            "Jihyo",
+            "Mina",
+            "Dahyun",
+            "Chaeyoung",
+            "Tzuyu"
+        ],
+        "benefits": [
+            "Original"
+        ],
+        "display": false,
+        "code": "5A"
+    },
+    {
+        "name": "Lovely Bluetooth Speaker",
+        "checked": false,
+        "categories": [
+            "Stores/Merch"
+        ],
+        "members": [
+            "Nayeon",
+            "Jeongyeon",
+            "Momo",
+            "Sana",
+            "Jihyo",
+            "Mina",
+            "Dahyun",
+            "Chaeyoung",
+            "Tzuyu"
+        ],
+        "benefits": [
+            "Original"
+        ],
+        "display": false,
+        "code": "LBS"
+    },
+    {
+        "name": "Twice Japan Debut 4th Anniversary",
+        "checked": false,
+        "categories": [
+            "Stores/Merch"
+        ],
+        "members": [
+            "Nayeon",
+            "Jeongyeon",
+            "Momo",
+            "Sana",
+            "Jihyo",
+            "Mina",
+            "Dahyun",
+            "Chaeyoung",
+            "Tzuyu"
+        ],
+        "benefits": [
+            "Original"
+        ],
+        "display": false,
+        "code": "TJD4A"
+    },
+    {
+        "name": "Happy Twice & Once Day",
+        "checked": false,
+        "categories": [
+            "Stores/Merch"
+        ],
+        "members": [
+            "Nayeon",
+            "Jeongyeon",
+            "Momo",
+            "Sana",
+            "Jihyo",
+            "Mina",
+            "Dahyun",
+            "Chaeyoung",
+            "Tzuyu"
+        ],
+        "benefits": [
+            "Original"
+        ],
+        "display": false,
+        "code": "HT&OD"
+    },
+    {
+        "name": "Superstar JYP Nation",
+        "checked": false,
+        "categories": [
+            "Promos"
+        ],
+        "members": [
+            "Nayeon",
+            "Jeongyeon",
+            "Momo",
+            "Sana",
+            "Jihyo",
+            "Mina",
+            "Dahyun",
+            "Chaeyoung",
+            "Tzuyu"
+        ],
+        "benefits": [
+            "Original"
+        ],
+        "display": false,
+        "code": "SSJYPN"
+    },
+    {
+        "name": "Strike Zone",
+        "checked": false,
+        "categories": [
+            "Promos"
+        ],
+        "members": [
+            "Nayeon",
+            "Jeongyeon",
+            "Momo",
+            "Sana",
+            "Jihyo",
+            "Mina",
+            "Dahyun",
+            "Chaeyoung",
+            "Tzuyu"
+        ],
+        "benefits": [
+            "Original"
+        ],
+        "display": false,
+        "code": "SZ"
+    },
+    {
+        "name": "Lotte Moonlight Festa T-roaming",
+        "checked": false,
+        "categories": [
+            "Promos"
+        ],
+        "members": [
+            "Nayeon",
+            "Jeongyeon",
+            "Momo",
+            "Sana",
+            "Jihyo",
+            "Mina",
+            "Dahyun",
+            "Chaeyoung",
+            "Tzuyu"
+        ],
+        "benefits": [
+            "Original"
+        ],
+        "display": false,
+        "code": "LMFTR"
+    },
+    {
+        "name": "Lotte Duty Free Star Avenue",
+        "checked": false,
+        "categories": [
+            "Promos"
+        ],
+        "members": [
+            "Nayeon",
+            "Jeongyeon",
+            "Momo",
+            "Sana",
+            "Jihyo",
+            "Mina",
+            "Dahyun",
+            "Chaeyoung",
+            "Tzuyu"
+        ],
+        "benefits": [
+            "Original"
+        ],
+        "display": false,
+        "code": "LDFSA"
+    },
+    {
+        "name": "Lotte Duty Free Ginza",
+        "checked": false,
+        "categories": [
+            "Promos"
+        ],
+        "members": [
+            "Nayeon",
+            "Jeongyeon",
+            "Momo",
+            "Sana",
+            "Jihyo",
+            "Mina",
+            "Dahyun",
+            "Chaeyoung",
+            "Tzuyu"
+        ],
+        "benefits": [
+            "Original"
+        ],
+        "display": false,
+        "code": "LDFG"
+    },
+    {
+        "name": "Skoolooks",
+        "checked": false,
+        "categories": [
+            "Promos"
+        ],
+        "members": [
+            "Nayeon",
+            "Jeongyeon",
+            "Momo",
+            "Sana",
+            "Jihyo",
+            "Mina",
+            "Dahyun",
+            "Chaeyoung",
+            "Tzuyu"
+        ],
+        "benefits": [
+            "Original"
+        ],
+        "display": false,
+        "code": "Skoolooks"
+    },
+    {
+        "name": "Nature Collection",
+        "checked": false,
+        "categories": [
+            "Promos"
+        ],
+        "members": [
+            "Nayeon",
+            "Jeongyeon",
+            "Momo",
+            "Sana",
+            "Jihyo",
+            "Mina",
+            "Dahyun",
+            "Chaeyoung",
+            "Tzuyu"
+        ],
+        "benefits": [
+            "Original"
+        ],
+        "display": false,
+        "code": "NC"
+    },
+    {
+        "name": "Pocari Sweat",
+        "checked": false,
+        "categories": [
+            "Promos"
+        ],
+        "members": [
+            "Nayeon",
+            "Jeongyeon",
+            "Momo",
+            "Sana",
+            "Jihyo",
+            "Mina",
+            "Dahyun",
+            "Chaeyoung",
+            "Tzuyu"
+        ],
+        "benefits": [
+            "Original"
+        ],
+        "display": false,
+        "code": "PS"
+    },
+    {
+        "name": "Twicezine Jeju Island Edition",
+        "checked": false,
+        "categories": [
+            "Promos"
+        ],
+        "members": [
+            "Nayeon",
+            "Jeongyeon",
+            "Momo",
+            "Sana",
+            "Jihyo",
+            "Mina",
+            "Dahyun",
+            "Chaeyoung",
+            "Tzuyu"
+        ],
+        "benefits": [
+            "Original"
+        ],
+        "display": false,
+        "code": "TZJIE"
+    },
+    {
+        "name": "Candybong Z",
+        "checked": false,
+        "categories": [
+            "Promos"
+        ],
+        "members": [
+            "Nayeon",
+            "Jeongyeon",
+            "Momo",
+            "Sana",
+            "Jihyo",
+            "Mina",
+            "Dahyun",
+            "Chaeyoung",
+            "Tzuyu"
+        ],
+        "benefits": [
+            "Original"
+        ],
+        "display": false,
+        "code": "CBZ"
+    },
+    {
+        "name": "Aube",
+        "checked": false,
+        "categories": [
+            "Promos"
+        ],
+        "members": [
+            "Nayeon",
+            "Jeongyeon",
+            "Momo",
+            "Sana",
+            "Jihyo",
+            "Mina",
+            "Dahyun",
+            "Chaeyoung",
+            "Tzuyu"
+        ],
+        "benefits": [
+            "Original"
+        ],
+        "display": false,
+        "code": "Aube"
+    },
+    {
+        "name": "Twice Bench Philippines",
+        "checked": false,
+        "categories": [
+            "Promos"
+        ],
+        "members": [
+            "Nayeon",
+            "Jeongyeon",
+            "Momo",
+            "Sana",
+            "Jihyo",
+            "Mina",
+            "Dahyun",
+            "Chaeyoung",
+            "Tzuyu"
+        ],
+        "benefits": [
+            "Original"
+        ],
+        "display": false,
+        "code": "TBP"
+    },
+    {
+        "name": "Shinhan Bank",
+        "checked": false,
+        "categories": [
+            "Promos"
+        ],
+        "members": [
+            "Nayeon",
+            "Jeongyeon",
+            "Momo",
+            "Sana",
+            "Jihyo",
+            "Mina",
+            "Dahyun",
+            "Chaeyoung",
+            "Tzuyu"
+        ],
+        "benefits": [
+            "Original"
+        ],
+        "display": false,
+        "code": "SHB"
+    },
+    {
+        "name": "D-Icon You Only Live Once",
+        "checked": false,
+        "categories": [
+            "Promos"
+        ],
+        "members": [
+            "Nayeon",
+            "Jeongyeon",
+            "Momo",
+            "Sana",
+            "Jihyo",
+            "Mina",
+            "Dahyun",
+            "Chaeyoung",
+            "Tzuyu"
+        ],
+        "benefits": [
+            "Original"
+        ],
+        "display": false,
+        "code": "DICONYOLO"
+    },
+    {
+        "name": "D-Icon You Only Live Once Japan",
+        "checked": false,
+        "categories": [
+            "Promos"
+        ],
+        "members": [
+            "Nayeon",
+            "Jeongyeon",
+            "Momo",
+            "Sana",
+            "Jihyo",
+            "Mina",
+            "Dahyun",
+            "Chaeyoung",
+            "Tzuyu"
+        ],
+        "benefits": [
+            "Original"
+        ],
+        "display": false,
+        "code": "DICONYOLOJ"
+    },
+    {
+        "name": "Yes I Am ...",
+        "checked": false,
+        "categories": [
+            "Promos"
+        ],
+        "members": [
+            "Sana",
+            "Jihyo",
+            "Mina",
+            "Dahyun",
+            "Chaeyoung",
+            "Tzuyu"
+        ],
+        "benefits": [
+            "POB",
+            "JYP Shop",
+            "Withmuu",
+            "Special",
+            "Ktown4U"
+        ],
+        "display": false,
+        "code": "YIA"
+    },
+    {
+        "name": "Apieu",
+        "checked": false,
+        "categories": [
+            "Promos"
+        ],
+        "members": [
+            "Sana",
+            "Dahyun"
+        ],
+        "benefits": [
+            "Original",
+            "NUNC",
+            "LOHBs",
+            "Lalavla"
+        ],
+        "display": false,
+        "code": "Apieu"
+    },
+    {
+        "name": "Apieu Japan",
+        "checked": false,
+        "categories": [
+            "Promos"
+        ],
+        "members": [
+            "Sana",
+            "Dahyun"
+        ],
+        "benefits": [
+            "Original",
+            "Special",
+            "Cosme Tokyo",
+            "Rakuten",
+            "Plaza",
+            "Qoo10"
+        ],
+        "display": false,
+        "code": "ApieuJ"
+    },
+    {
+        "name": "Lemona",
+        "checked": false,
+        "categories": [
+            "Promos"
+        ],
+        "members": [
+            "Nayeon",
+            "Jeongyeon",
+            "Momo",
+            "Sana",
+            "Jihyo",
+            "Mina",
+            "Dahyun",
+            "Chaeyoung",
+            "Tzuyu"
+        ],
+        "benefits": [
+            "Original"
+        ],
+        "display": false,
+        "code": "Lemona"
+    },
+    {
+        "name": "Acmé De La Vie",
+        "checked": false,
+        "categories": [
+            "Promos"
+        ],
+        "members": [
+            "Nayeon",
+            "Jeongyeon",
+            "Momo",
+            "Sana",
+            "Jihyo",
+            "Mina",
+            "Dahyun",
+            "Chaeyoung",
+            "Tzuyu"
+        ],
+        "benefits": [
+            "Original"
+        ],
+        "display": false,
+        "code": "ADLV"
+    },
+    {
+        "name": "Green Project",
+        "checked": false,
+        "categories": [
+            "Promos"
+        ],
+        "members": [
+            "Nayeon",
+            "Jeongyeon",
+            "Momo",
+            "Sana",
+            "Jihyo",
+            "Mina",
+            "Dahyun",
+            "Chaeyoung",
+            "Tzuyu"
+        ],
+        "benefits": [
+            "Original",
+            "Special"
+        ],
+        "display": false,
+        "code": "GP"
+    },
+    {
+        "name": "Wakemake",
+        "checked": false,
+        "categories": [
+            "Promos"
+        ],
+        "members": [
+            "Sana"
+        ],
+        "benefits": [
+            "Original"
+        ],
+        "display": false,
+        "code": "TSB"
+    },
+    {
+        "name": "Y Magazine",
+        "checked": false,
+        "categories": [
+            "Promos"
+        ],
+        "members": [
+            "Nayeon",
+            "Jihyo"
+        ],
+        "benefits": [
+            "Original"
+        ],
+        "display": false,
+        "code": "WM"
+    },
+    {
+        "name": "Candybong Infinity",
+        "checked": false,
+        "categories": [
+            "Promos"
+        ],
+        "members": [
+            "Nayeon",
+            "Jeongyeon",
+            "Momo",
+            "Sana",
+            "Jihyo",
+            "Mina",
+            "Dahyun",
+            "Chaeyoung",
+            "Tzuyu"
+        ],
+        "benefits": [
+            "Withmuu",
+            "JYP Shop"
+        ],
+        "display": false,
+        "code": "CBI"
+    },
+    {
+        "name": "Together 1&2",
+        "checked": false,
+        "categories": [
+            "Stores/Merch"
+        ],
+        "members": [
+            "Nayeon",
+            "Jeongyeon",
+            "Momo",
+            "Sana",
+            "Jihyo",
+            "Mina",
+            "Dahyun",
+            "Chaeyoung",
+            "Tzuyu"
+        ],
+        "benefits": [
+            "Original",
+            "JYP Shop",
+            "Kiosk"
+        ],
+        "display": false,
+        "code": "T1&2"
+    },
+    {
+        "name": "TWICELAND The Opening",
+        "checked": false,
+        "categories": [
+            "Events"
+        ],
+        "members": [
+            "Nayeon",
+            "Jeongyeon",
+            "Momo",
+            "Sana",
+            "Jihyo",
+            "Mina",
+            "Dahyun",
+            "Chaeyoung",
+            "Tzuyu"
+        ],
+        "benefits": [
+            "Original"
+        ],
+        "display": false,
+        "code": "TLTO"
+    },
+    {
+        "name": "TWICELAND The Opening Encore",
+        "checked": false,
+        "categories": [
+            "Events"
+        ],
+        "members": [
+            "Nayeon",
+            "Jeongyeon",
+            "Momo",
+            "Sana",
+            "Jihyo",
+            "Mina",
+            "Dahyun",
+            "Chaeyoung",
+            "Tzuyu"
+        ],
+        "benefits": [
+            "Original"
+        ],
+        "display": false,
+        "code": "TLTOE"
+    },
+    {
+        "name": "Once Begins Fanmeeting",
+        "checked": false,
+        "categories": [
+            "Events"
+        ],
+        "members": [
+            "Nayeon",
+            "Jeongyeon",
+            "Momo",
+            "Sana",
+            "Jihyo",
+            "Mina",
+            "Dahyun",
+            "Chaeyoung",
+            "Tzuyu"
+        ],
+        "benefits": [
+            "Original"
+        ],
+        "display": false,
+        "code": "OBF"
+    },
+    {
+        "name": "TWICELAND Zone 2: Fantasy Park Korea",
+        "checked": false,
+        "categories": [
+            "Events"
+        ],
+        "members": [
+            "Nayeon",
+            "Jeongyeon",
+            "Momo",
+            "Sana",
+            "Jihyo",
+            "Mina",
+            "Dahyun",
+            "Chaeyoung",
+            "Tzuyu"
+        ],
+        "benefits": [
+            "Original"
+        ],
+        "display": false,
+        "code": "TLZ2FPK"
+    },
+    {
+        "name": "TWICELAND Zone 2: Fantasy Park Japan",
+        "checked": false,
+        "categories": [
+            "Events"
+        ],
+        "members": [
+            "Nayeon",
+            "Jeongyeon",
+            "Momo",
+            "Sana",
+            "Jihyo",
+            "Mina",
+            "Dahyun",
+            "Chaeyoung",
+            "Tzuyu"
+        ],
+        "benefits": [
+            "Original"
+        ],
+        "display": false,
+        "code": "TLZ2FPJ"
+    },
+    {
+        "name": "Once Halloween",
+        "checked": false,
+        "categories": [
+            "Events"
+        ],
+        "members": [
+            "Nayeon",
+            "Jeongyeon",
+            "Momo",
+            "Sana",
+            "Jihyo",
+            "Mina",
+            "Dahyun",
+            "Chaeyoung",
+            "Tzuyu"
+        ],
+        "benefits": [
+            "Original"
+        ],
+        "display": false,
+        "code": "OH"
+    },
+    {
+        "name": "#Dreamday Dome Tour 2019",
+        "checked": false,
+        "categories": [
+            "Events"
+        ],
+        "members": [
+            "Nayeon",
+            "Jeongyeon",
+            "Momo",
+            "Sana",
+            "Jihyo",
+            "Mina",
+            "Dahyun",
+            "Chaeyoung",
+            "Tzuyu"
+        ],
+        "benefits": [
+            "Original"
+        ],
+        "display": false,
+        "code": "DDT2019"
+    },
+    {
+        "name": "Twicelights",
+        "checked": false,
+        "categories": [
+            "Events"
+        ],
+        "members": [
+            "Nayeon",
+            "Jeongyeon",
+            "Momo",
+            "Sana",
+            "Jihyo",
+            "Mina",
+            "Dahyun",
+            "Chaeyoung",
+            "Tzuyu"
+        ],
+        "benefits": [
+            "Original"
+        ],
+        "display": false,
+        "code": "Twicelights"
+    },
+    {
+        "name": "Twicelights Japan",
+        "checked": false,
+        "categories": [
+            "Events"
+        ],
+        "members": [
+            "Nayeon",
+            "Jeongyeon",
+            "Momo",
+            "Sana",
+            "Jihyo",
+            "Mina",
+            "Dahyun",
+            "Chaeyoung",
+            "Tzuyu"
+        ],
+        "benefits": [
+            "Original"
+        ],
+        "display": false,
+        "code": "TJ"
+    },
+    {
+        "name": "Twicelights Japan Tokyo Dome",
+        "checked": false,
+        "categories": [
+            "Events"
+        ],
+        "members": [
+            "Nayeon",
+            "Jeongyeon",
+            "Momo",
+            "Sana",
+            "Jihyo",
+            "Mina",
+            "Dahyun",
+            "Chaeyoung",
+            "Tzuyu"
+        ],
+        "benefits": [
+            "Original"
+        ],
+        "display": false,
+        "code": "TJTD"
+    },
+    {
+        "name": "Once Halloween 2",
+        "checked": false,
+        "categories": [
+            "Events"
+        ],
+        "members": [
+            "Nayeon",
+            "Jeongyeon",
+            "Momo",
+            "Sana",
+            "Jihyo",
+            "Mina",
+            "Dahyun",
+            "Chaeyoung",
+            "Tzuyu"
+        ],
+        "benefits": [
+            "Original"
+        ],
+        "display": false,
+        "code": "OH2"
+    },
+    {
+        "name": "World In A Day",
+        "checked": false,
+        "categories": [
+            "Events"
+        ],
+        "members": [
+            "Nayeon",
+            "Jeongyeon",
+            "Momo",
+            "Sana",
+            "Jihyo",
+            "Mina",
+            "Dahyun",
+            "Chaeyoung",
+            "Tzuyu"
+        ],
+        "benefits": [
+            "Original"
+        ],
+        "display": false,
+        "code": "WIAD"
+    },
+    {
+        "name": "Twice In Wonderland",
+        "checked": false,
+        "categories": [
+            "Events"
+        ],
+        "members": [
+            "Nayeon",
+            "Jeongyeon",
+            "Momo",
+            "Sana",
+            "Jihyo",
+            "Mina",
+            "Dahyun",
+            "Chaeyoung",
+            "Tzuyu"
+        ],
+        "benefits": [
+            "Original",
+            "Tower Records"
+        ],
+        "display": false,
+        "code": "TIW"
+    },
+    {
+        "name": "TWICE 4th Tour 'Ⅲ'",
+        "checked": false,
+        "categories": [
+            "Events"
+        ],
+        "members": [
+            "Nayeon",
+            "Jeongyeon",
+            "Momo",
+            "Sana",
+            "Jihyo",
+            "Mina",
+            "Dahyun",
+            "Chaeyoung",
+            "Tzuyu"
+        ],
+        "benefits": [
+            "Original"
+        ],
+        "display": false,
+        "code": "T4T3"
+    },
+    {
+        "name": "TWICE 4th Tour 'Ⅲ' Japan",
+        "checked": false,
+        "categories": [
+            "Events"
+        ],
+        "members": [
+            "Nayeon",
+            "Jeongyeon",
+            "Momo",
+            "Sana",
+            "Jihyo",
+            "Mina",
+            "Dahyun",
+            "Chaeyoung",
+            "Tzuyu"
+        ],
+        "benefits": [
+            "Original",
+            "Once Japan Mobile"
+        ],
+        "display": false,
+        "code": "T4T3J"
+    },
+    {
+        "name": "Once Upon A Time",
+        "checked": false,
+        "categories": [
+            "Stores/Merch"
+        ],
+        "members": [
+            "Nayeon",
+            "Jeongyeon",
+            "Momo",
+            "Sana",
+            "Jihyo",
+            "Mina",
+            "Dahyun",
+            "Chaeyoung",
+            "Tzuyu"
+        ],
+        "benefits": [
+            "JYP Shop"
+        ],
+        "display": false,
+        "code": "OUAT"
+    },
+    {
+        "name": "D'Festa",
+        "checked": false,
+        "categories": [
+            "Promos"
+        ],
+        "members": [
+            "Nayeon",
+            "Momo",
+            "Sana",
+            "Jihyo",
+            "Mina",
+            "Dahyun",
+            "Chaeyoung",
+            "Tzuyu"
+        ],
+        "benefits": [
+            "Original"
+        ],
+        "display": false,
+        "code": "DFesta"
+    },
+    {
+        "name": "D'Festa The Exhibition Dispatch 10th Anniversary",
+        "checked": false,
+        "categories": [
+            "Stores/Merch"
+        ],
+        "members": [
+            "Nayeon",
+            "Momo",
+            "Sana",
+            "Jihyo",
+            "Mina",
+            "Dahyun",
+            "Chaeyoung",
+            "Tzuyu"
+        ],
+        "benefits": [
+            "Original"
+        ],
+        "display": false,
+        "code": "DFestaTD10A"
+    },
+    {
+        "name": "MET",
+        "checked": false,
+        "categories": [
+            "Promos"
+        ],
+        "members": [
+            "Momo"
+        ],
+        "benefits": [
+            "Original"
+        ],
+        "display": false,
+        "code": "MET"
+    },
+    {
+        "name": "Scarlett",
+        "checked": false,
+        "categories": [
+            "Promos"
+        ],
+        "members": [
+            "Nayeon",
+            "Jeongyeon",
+            "Momo",
+            "Sana",
+            "Jihyo",
+            "Mina",
+            "Dahyun",
+            "Chaeyoung",
+            "Tzuyu"
+        ],
+        "benefits": [
+            "Original"
+        ],
+        "display": false,
+        "code": "Scarlett"
+    },
+    {
+        "name": "Healing Bird",
+        "checked": false,
+        "categories": [
+            "Promos"
+        ],
+        "members": [
+            "Nayeon"
+        ],
+        "benefits": [
+            "Original"
+        ],
+        "display": false,
+        "code": "HB"
+    },
+    {
+        "name": "Milk Touch",
+        "checked": false,
+        "categories": [
+            "Promos"
+        ],
+        "members": [
+            "Jihyo"
+        ],
+        "benefits": [
+            "Original"
+        ],
+        "display": false,
+        "code": "MT"
+    },
+    {
+        "name": "Fanclub 4th Generation",
+        "checked": false,
+        "categories": [
+            "Memberships"
+        ],
+        "members": [
+            "Nayeon",
+            "Jeongyeon",
+            "Momo",
+            "Sana",
+            "Jihyo",
+            "Mina",
+            "Dahyun",
+            "Chaeyoung",
+            "Tzuyu"
+        ],
+        "benefits": [
+            "Original"
+        ],
+        "display": false,
+        "code": "F4G"
+    },
+    {
+        "name": "TWICE 2023 Fanmeeting ONCE AGAIN",
+        "checked": false,
+        "categories": [
+            "Stores/Merch"
+        ],
+        "members": [
+            "Nayeon",
+            "Jeongyeon",
+            "Momo",
+            "Sana",
+            "Jihyo",
+            "Mina",
+            "Dahyun",
+            "Chaeyoung",
+            "Tzuyu"
+        ],
+        "benefits": [
+            "Original",
+            "JYP Shop"
+        ],
+        "display": false,
+        "code": "T2023FMOA"
+    },
+    {
+        "name": "TWICE 8th Anniversary Pop Up Store",
+        "checked": false,
+        "categories": [
+            "Stores/Merch"
+        ],
+        "members": [
+            "Nayeon",
+            "Jeongyeon",
+            "Momo",
+            "Sana",
+            "Jihyo",
+            "Mina",
+            "Dahyun",
+            "Chaeyoung",
+            "Tzuyu"
+        ],
+        "benefits": [
+            "Twice Records",
+            "Special Gift"
+        ],
+        "display": false,
+        "code": "T8APUS"
+    },
+    {
+        "name": "Los Angeles Pop Up Store",
+        "checked": false,
+        "categories": [
+            "Stores/Merch"
+        ],
+        "members": [
+            "Nayeon",
+            "Jeongyeon",
+            "Momo",
+            "Sana",
+            "Jihyo",
+            "Mina",
+            "Dahyun",
+            "Chaeyoung",
+            "Tzuyu"
+        ],
+        "benefits": [
+            "Original"
+        ],
+        "display": false,
+        "code": "LAPUS"
+    },
+    {
+        "name": "Ready To Be 5th World Tour",
+        "checked": false,
+        "categories": [
+            "Events"
+        ],
+        "members": [
+            "Nayeon",
+            "Jeongyeon",
+            "Momo",
+            "Sana",
+            "Jihyo",
+            "Mina",
+            "Dahyun",
+            "Chaeyoung",
+            "Tzuyu"
+        ],
+        "benefits": [
+            "Original",
+            "JYP Shop"
+        ],
+        "display": false,
+        "code": "RTB5WT"
+    },
+    {
+        "name": "Ready To Be 5th World Tour Japan",
+        "checked": false,
+        "categories": [
+            "Events"
+        ],
+        "members": [
+            "Nayeon",
+            "Jeongyeon",
+            "Momo",
+            "Sana",
+            "Jihyo",
+            "Mina",
+            "Dahyun",
+            "Chaeyoung",
+            "Tzuyu"
+        ],
+        "benefits": [
+            "Original",
+            "Upgrade"
+        ],
+        "display": false,
+        "code": "RTB5WTJ"
+    },
+    {
+        "name": "News Room 2024 Season's Greetings",
+        "checked": false,
+        "categories": [
+            "Greetings"
+        ],
+        "members": [
+            "Nayeon",
+            "Jeongyeon",
+            "Momo",
+            "Sana",
+            "Jihyo",
+            "Mina",
+            "Dahyun",
+            "Chaeyoung",
+            "Tzuyu"
+        ],
+        "benefits": [
+            "Original",
+            "Apple Music",
+            "Everline",
+            "JYP Shop",
+            "Ktown4U",
+            "Withmuu"
+        ],
+        "display": false,
+        "code": "NR"
+    },
+    {
+        "name": "Circuit 24 Japan Season's Greetings",
+        "checked": false,
+        "categories": [
+            "Greetings"
+        ],
+        "members": [
+            "Nayeon",
+            "Jeongyeon",
+            "Momo",
+            "Sana",
+            "Jihyo",
+            "Mina",
+            "Dahyun",
+            "Chaeyoung",
+            "Tzuyu"
+        ],
+        "benefits": [
+            "Original"
+        ],
+        "display": false,
+        "code": "C24"
+    }
+]
