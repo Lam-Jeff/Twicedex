@@ -1,4 +1,4 @@
-import { useState, useRef, useEffect } from 'react';
+import React, { useState, useRef, useEffect } from 'react';
 
 export interface IData {
     /**
@@ -96,10 +96,10 @@ export const AutoComplete = ({ data, inputRef, updateGame }: IAutoCompleteProps)
     /**
      * Handle click on the screen.
      * 
-     * @param {React.MouseEvent} e - event representing the user's click
+     * @param {MouseEvent} e - event representing the user's click
      */
-    const handleClickOutside = (e: React.MouseEvent) => {
-        if (wrapperRef.current && !wrapperRef.current.contains(e.target)) {
+    const handleClickOutside = (e: MouseEvent) => {
+        if (wrapperRef.current && !wrapperRef.current.contains(e.target as Node)) {
             setIsComponentVisible(false);
         }
     };
