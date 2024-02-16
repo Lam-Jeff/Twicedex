@@ -1,5 +1,25 @@
 [
     {
+        "id": 20,
+        "subject": "Collection",
+        "title": "Ready To Be 5th World Tour Japan: photocards have been added.",
+        "date": "16/02/2024",
+        "thumbnail": "/images/thumbnail/ready_to_be.jpg",
+        "alt": "Ready to be 5th world tour japan cards thumbnail",
+        "era": "RTB5WTJ",
+        "category": "Events"
+    },
+    {
+        "id": 19,
+        "subject": "Collection",
+        "title": "Japan Season's Greetings: Circuit 24 POB photocards have been added.",
+        "date": "16/02/2024",
+        "thumbnail": "/images/thumbnail/circuit24.jpg",
+        "alt": "seasons greetings cards thumbnail",
+        "era": "C24",
+        "category": "Greetings"
+    },
+    {
         "id": 18,
         "subject": "Collection",
         "title": "Japan Season's Greetings: Circuit 24 photocards have been added.",
