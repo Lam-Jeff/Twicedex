@@ -31,11 +31,11 @@ export const Pagination = ({ sizePage, data }: PaginationProps) => {
 
     const countThumbnailRef = useRef<number>(0)
 
-    useEffect (()=>{
+    useEffect(() => {
         countThumbnailRef.current = 0;
         setIsLoadingThumbnail(true);
-    },[currentPage])
-    
+    }, [currentPage])
+
     useEffect(() => {
         if (numberElementPerPage !== sizePage) {
             window.scrollTo({
@@ -70,13 +70,13 @@ export const Pagination = ({ sizePage, data }: PaginationProps) => {
                         key={`article_${index}`} >
                         <div className='thumbnail'
                             key={`article_thumbnail_${index}`} >
-                            <Link to={`/collection/${object.category}/${object.era}`}
+                            <Link to={object.subject === 'Collection' ? `/collection/${object.category}/${object.era}` : '/minigame'}
                                 state={{ from: pathname }}
                                 className='article__link'
                                 key={`article_link_thumbnail_${index}`}
-                                aria-label='Go to Collection page'>
+                                aria-label={`Go to ${object.subject === 'Collection' ? 'Collection' : 'Game'} page`}>
                                 <Loading isLoading={isLoadingThumbnail}
-                                    borderColor='transparent'/>
+                                    borderColor='transparent' />
                                 <img src={object.thumbnail}
                                     alt={object.alt}
                                     key={`article_thumbnail_image_${index}`}
@@ -88,17 +88,17 @@ export const Pagination = ({ sizePage, data }: PaginationProps) => {
                         </div>
                         <div className='article__content'
                             key={`article_content${index}`}>
-                            <Link to={`/collection/${object.category}/${object.era}`}
+                            <Link to={object.subject === 'Collection' ? `/collection/${object.category}/${object.era}` : '/minigame'}
                                 state={{ from: pathname }}
                                 key={`article_link_${index}`}
-                                aria-label='Go to Collection page'>
+                                aria-label={`Go to ${object.subject === 'Collection' ? 'Collection' : 'Game'} page`}>
                                 <span className='article__category'
-                                    key={`article_link_collection_${index}`}>{object.subject}</span>
+                                    key={`article_link_${index}`}>{object.subject}</span>
                             </Link>
-                            <Link to={`/collection/${object.category}/${object.era}`}
+                            <Link to={object.subject === 'Collection' ? `/collection/${object.category}/${object.era}` : '/minigame'}
                                 state={{ from: pathname }}
                                 key={`article_link_title_${index}`}
-                                aria-label='Go to Collection page'>
+                                aria-label={`Go to ${object.subject === 'Collection' ? 'Collection' : 'Game'} page`}>
                                 <h3 className='article__title'
                                     key={`article_title_${index}`}>{object.title}</h3>
                             </Link>
@@ -107,10 +107,10 @@ export const Pagination = ({ sizePage, data }: PaginationProps) => {
                                 key={`article_date_${index}`}>{object.date}</time>
                             <div className='article__button'
                                 key={`article_button_${index}`}>
-                                <Link to={`/collection/${object.category}/${object.era}`}
+                                <Link to={object.subject === 'Collection' ? `/collection/${object.category}/${object.era}` : '/minigame'}
                                     state={{ from: pathname }}
                                     className='article__link' key={`article_link_button_${index}`}
-                                    aria-label='Go to Collection page'>
+                                    aria-label={`Go to ${object.subject === 'Collection' ? 'Collection' : 'Game'} page`}>
                                     Go to {object.subject}
                                     <MdOutlineKeyboardDoubleArrowRight className='article__button__icon'
                                         key={`article_button_icon_${index}`} />
