@@ -1,7 +1,7 @@
 import { Link, useLocation } from "react-router-dom";
 
 export const About = () => {
-  const date = '21/11/2023'
+  const date = '23/09/2024'
   const location = useLocation()
   return (
     <div className="about-container">
@@ -27,7 +27,7 @@ export const About = () => {
           <div>
             <h3>Data</h3>
             <p>
-              Personal data is not requested to use this website. The data used on <Link to={{ pathname: `/collection/${location.state.category}/${location.state.era}/`, search: location.search }} aria-label='Go to Collection page'>Collection</Link> and <Link to='/minigame' aria-label='Go to Game page'>MiniGame</Link> are stored directly in your browser. This data keeps track of your card collection, your preferences and your progress in the game. Data is not shared.
+              Personal data is not requested to use this website. The data used on <Link to={{ pathname: `/collection/${location.state.category}/${location.state.era}/`, search: location.search }} aria-label='Go to Collection page'>Collection</Link> are stored directly in your browser. This data keeps track of your card collection, your preferences and your progress in the game. Data is not shared.
             </p>
           </div>
           <h3>Links to other websites</h3>
