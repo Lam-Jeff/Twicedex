@@ -15,12 +15,7 @@ export const About = () => {
           <p>
             Twicedex is a website based on the k-pop group Twice created by JYP Entertainment.<br />
             It is a fanmade website. No profit made. <br />
-            This website have two main pages: <Link to={{ pathname: `/collection/${location.state.category}/${location.state.era}/`, search: location.search }} aria-label='Go to Collection page'>Collection</Link> and <Link to='/minigame' aria-label='Go to Game page'>MiniGame</Link>.<br />
           </p>
-          <ul>
-            <li>The Collection page displays Twice photocards.</li>
-            <li>The MiniGame page is a game inspired by Framed and Heardle.</li>
-          </ul>
         </div>
       </div>
       <div className="policy-box">

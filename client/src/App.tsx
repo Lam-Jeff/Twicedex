@@ -22,7 +22,7 @@ const App: React.FunctionComponent<IApplicationProps> = () => {
           <Route path="/" >
             <Route index element={<Home />} />
           </Route>
-          <Route path="/minigame" element={<MiniGame />} />
+          {/*<Route path="/minigame" element={<MiniGame />} />*/}
           <Route path="/about" element={<About />} />
           <Route path="/collection/:categoryParam?/:eraParam?" >
             <Route index element={<Collection />} />
