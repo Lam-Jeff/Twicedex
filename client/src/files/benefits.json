@@ -203,5 +203,25 @@
         "name": "Apple Music",
         "checked": false,
         "display": false
+    },
+    {
+        "name": "KakaoTalk",
+        "checked": false,
+        "display": false
+    },
+    {
+        "name": "Premiere Event",
+        "checked": false,
+        "display": false
+    },
+    {
+        "name": "Barnes&Noble",
+        "checked": false,
+        "display": false
+    },
+    {
+        "name": "Walmart",
+        "checked": false,
+        "display": false
     }
 ]
