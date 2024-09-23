@@ -27,7 +27,7 @@ export const About = () => {
           <div>
             <h3>Data</h3>
             <p>
-              Personal data is not requested to use this website. The data used on <Link to={{ pathname: `/collection/${location.state.category}/${location.state.era}/`, search: location.search }} aria-label='Go to Collection page'>Collection</Link> are stored directly in your browser. This data keeps track of your card collection, your preferences and your progress in the game. Data is not shared.
+              Personal data is not requested to use this website. The data used on <Link to={{ pathname: `/collection/${location.state.category}/${location.state.era}/`, search: location.search }} aria-label='Go to Collection page'>Collection</Link> are stored directly in your browser. This data keeps track of your card collection. Data is not shared.
             </p>
           </div>
           <h3>Links to other websites</h3>
