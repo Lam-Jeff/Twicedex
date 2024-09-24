@@ -3040,7 +3040,7 @@
         "code": "RTB5WT"
     },
     {
-        "name": "Ready To Be 5th World Tour Japan",
+        "name": "TWICE 5th World Tour 'Ready To Be' in Japan",
         "checked": false,
         "categories": [
             "Events"
@@ -3059,7 +3059,8 @@
         "benefits": [
             "Original",
             "Upgrade",
-            "JYP Shop"
+            "JYP Shop",
+            "Once Japan Mobile"
         ],
         "display": false,
         "code": "RTB5WTJ"
@@ -3117,7 +3118,7 @@
         "code": "C24"
     },
     {
-        "name": "TWICE - 5th World Tour 'Ready To Be' in Japan",
+        "name": "TWICE 5th World Tour 'Ready To Be' in Japan DVD",
         "checked": false,
         "categories": [
             "DVDs/Blu-rays"
