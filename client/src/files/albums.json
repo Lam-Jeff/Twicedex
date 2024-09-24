@@ -3217,21 +3217,6 @@
         "code": "Ponds"
     },
     {
-        "name": "Ponds",
-        "checked": false,
-        "categories": [
-            "Promos"
-        ],
-        "members": [
-            "Dahyun"
-        ],
-        "benefits": [
-            "Original"
-        ],
-        "display": false,
-        "code": "TNC"
-    },
-    {
         "name": "JYP Japan Pop Up Store",
         "checked": false,
         "categories": [
