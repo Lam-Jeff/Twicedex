@@ -103617,11 +103617,14 @@
         "display": false
     },
     {
-        "id": 6780,
+        "id": 6781,
         "name": "Group_WY_1",
         "checked": false,
         "thumbnail": "https://ik.imagekit.io/twiceCollection/WY/img_379.jpg",
         "categories": [
+            "Korean Albums"
+        ],
+        "members": [
             "Nayeon",
             "Jeongyeon",
             "Momo",
@@ -103632,15 +103635,12 @@
             "Chaeyoung",
             "Tzuyu"
         ],
-        "members": [
-            "Nayeon"
-        ],
         "era": "With You-th",
         "benefit": "POB",
         "display": false
     },
     {
-        "id": 6781,
+        "id": 6782,
         "name": "Group_WY_2",
         "checked": false,
         "thumbnail": "https://ik.imagekit.io/twiceCollection/WY/img_380.jpg",
@@ -103663,7 +103663,7 @@
         "display": false
     },
     {
-        "id": 6782,
+        "id": 6783,
         "name": "Group_WY_3",
         "checked": false,
         "thumbnail": "https://ik.imagekit.io/twiceCollection/WY/img_381.jpg",
