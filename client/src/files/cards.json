@@ -103684,5 +103684,50 @@
         "era": "With You-th",
         "benefit": "POB",
         "display": false
+    },
+    {
+        "id": 6784,
+        "name": "Nayeon_TJ_1",
+        "checked": false,
+        "thumbnail": "https://ik.imagekit.io/twiceCollection/TJ/img_1.jpg",
+        "categories": [
+            "Promos"
+        ],
+        "members": [
+            "Nayeon"
+        ],
+        "era": "Tommy Jeans",
+        "benefit": "Original",
+        "display": false
+    },
+    {
+        "id": 6785,
+        "name": "Nayeon_TJ_2",
+        "checked": false,
+        "thumbnail": "https://ik.imagekit.io/twiceCollection/TJ/img_2.jpg",
+        "categories": [
+            "Promos"
+        ],
+        "members": [
+            "Nayeon"
+        ],
+        "era": "Tommy Jeans",
+        "benefit": "Original",
+        "display": false
+    } ,
+    {
+        "id": 6786,
+        "name": "Nayeon_TJ_3",
+        "checked": false,
+        "thumbnail": "https://ik.imagekit.io/twiceCollection/TJ/img_3.jpg",
+        "categories": [
+            "Promos"
+        ],
+        "members": [
+            "Nayeon"
+        ],
+        "era": "Tommy Jeans",
+        "benefit": "Original",
+        "display": false
     }
 ]
