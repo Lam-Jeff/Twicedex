@@ -105479,5 +105479,35 @@
         "era": "Dive",
         "benefit": "Tower Records",
         "display": false
+    },
+    {
+        "id": 6903,
+        "name": "Dahyun_ACJ_12",
+        "checked": false,
+        "thumbnail": "https://ik.imagekit.io/twiceCollection/AC_Japan/img_27.jpg",
+        "categories": [
+            "Promos"
+        ],
+        "members": [
+            "Dahyun"
+        ],
+        "era": "Apieu Japan",
+        "benefit": "Novelty Fair",
+        "display": false
+    },
+    {
+        "id": 6904,
+        "name": "Dahyun_ACJ_13",
+        "checked": false,
+        "thumbnail": "https://ik.imagekit.io/twiceCollection/AC_Japan/img_28.jpg",
+        "categories": [
+            "Promos"
+        ],
+        "members": [
+            "Dahyun"
+        ],
+        "era": "Apieu Japan",
+        "benefit": "Novelty Fair",
+        "display": false
     }
 ]
