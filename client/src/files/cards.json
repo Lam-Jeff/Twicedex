@@ -105509,5 +105509,50 @@
         "era": "Apieu Japan",
         "benefit": "Novelty Fair",
         "display": false
+    },
+    {
+        "id": 6905,
+        "name": "Nayeon_NAPUS_1",
+        "checked": false,
+        "thumbnail": "https://ik.imagekit.io/twiceCollection/Na_Pop-Up_Store/img_1.jpg",
+        "categories": [
+            "Stores/Merch"
+        ],
+        "members": [
+            "Nayeon"
+        ],
+        "era": "NA Pop Up Store",
+        "benefit": "Original",
+        "display": false
+    },
+    {
+        "id": 6906,
+        "name": "Nayeon_NAPUS_2",
+        "checked": false,
+        "thumbnail": "https://ik.imagekit.io/twiceCollection/Na_Pop-Up_Store/img_2.jpg",
+        "categories": [
+            "Stores/Merch"
+        ],
+        "members": [
+            "Nayeon"
+        ],
+        "era": "NA Pop Up Store",
+        "benefit": "Original",
+        "display": false
+    },
+    {
+        "id": 6907,
+        "name": "Nayeon_NAPUS_3",
+        "checked": false,
+        "thumbnail": "https://ik.imagekit.io/twiceCollection/Na_Pop-Up_Store/img_3.jpg",
+        "categories": [
+            "Stores/Merch"
+        ],
+        "members": [
+            "Nayeon"
+        ],
+        "era": "NA Pop Up Store",
+        "benefit": "Original",
+        "display": false
     }
 ]
