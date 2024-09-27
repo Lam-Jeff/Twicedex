@@ -228,5 +228,10 @@
         "name": "Novelty Fair",
         "checked": false,
         "display": false
+    },
+    {
+        "name": "Puzzle Event",
+        "checked": false,
+        "display": false
     }
 ]
