@@ -223,5 +223,10 @@
         "name": "Walmart",
         "checked": false,
         "display": false
+    },
+    {
+        "name": "Novelty Fair",
+        "checked": false,
+        "display": false
     }
 ]
