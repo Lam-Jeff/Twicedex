@@ -47,17 +47,6 @@ function Footer() {
                 Collection
               </Link>
             </li>
-            <li className='navigation-bar__game'>
-              <Link to="/minigame"
-                className='nav__listitem'
-                state={{
-                  ...location.state,
-                  from: location.pathname
-                }}
-                aria-label={`Go to game page`}>
-                MiniGame
-              </Link>
-            </li>
             <li className='navigation-bar__about'>
               <Link to="/about"
                 className='nav__listitem'
