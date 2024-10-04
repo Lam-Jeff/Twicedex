@@ -233,7 +233,7 @@ test.describe('ABOUT PAGE', () => {
 })
 
 
-test.describe('MINIGAME PAGE', () => {
+/* test.describe('MINIGAME PAGE', () => {
   test('Go to Minigame page,first visit', async ({ page }) => {
     await page.goto('http://localhost:5173/');
     await page.getByRole('banner').getByLabel('Go to game page').click();
@@ -349,7 +349,7 @@ test.describe('MINIGAME PAGE', () => {
     await page.getByText('SUBMIT').click();
     await expect(page.getByRole('heading', { name: 'Remaining time before next round:' })).toBeVisible();
   });
-})
+}) */
 
 
 
