@@ -47,6 +47,17 @@ function Footer() {
                 Collection
               </Link>
             </li>
+            <li className='navigation-bar__login'>
+              <Link to="./login"
+                state={{
+                  ...location.state,
+                  from: location.pathname
+                }}
+                className='nav__listitem'
+                aria-label={`Go to Login page`}>
+                Login
+              </Link>
+            </li>
             <li className='navigation-bar__about'>
               <Link to="/about"
                 className='nav__listitem'

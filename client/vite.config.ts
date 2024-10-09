@@ -21,9 +21,9 @@ export default defineConfig({
       reporter: ['text', 'json', 'html'],
       include: ['src/**/*'],
       exclude: [],
-    },
-    build: {
-      sourcemap:true
     }
   },
+  build: {
+    sourcemap:true
+  }
 })

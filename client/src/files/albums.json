@@ -2373,7 +2373,7 @@
             "Original"
         ],
         "display": false,
-        "code": "TSB"
+        "code": "WM"
     },
     {
         "name": "Y Magazine",
@@ -2389,7 +2389,7 @@
             "Original"
         ],
         "display": false,
-        "code": "WM"
+        "code": "YM"
     },
     {
         "name": "Candybong Infinity",
@@ -3419,7 +3419,9 @@
             "Broadcast",
             "Music Korea",
             "Blue Dream Media",
-            "Yes24"
+            "Yes24",
+            "JYP Shop",
+            "Withmuu"
         ],
         "display": false,
         "code": "AboutTzu"

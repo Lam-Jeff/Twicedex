@@ -15,7 +15,7 @@ import albums from './files/albums.json';
 
 export interface ICardsProps {
     /**
-     * ID of the card
+     * ID of the card.
      */
     id: number;
 
