@@ -105554,7 +105554,8 @@
         "era": "NA Pop Up Store",
         "benefit": "Original",
         "display": false
-    } ,{
+    },
+    {
         "id": 6894,
         "name": "Nayeon_NA_1",
         "checked": false,
@@ -106433,7 +106434,8 @@
         "era": "NA",
         "benefit": "Original",
         "display": false
-    }, {
+    },
+    {
         "id": 6949,
         "name": "Nayeon_NA_56",
         "checked": false,
@@ -107312,7 +107314,8 @@
         "era": "NA",
         "benefit": "JYP Shop",
         "display": false
-    } ,{
+    },
+    {
         "id": 7004,
         "name": "Nayeon_RTB5SJ_1",
         "checked": false,
@@ -107872,6 +107875,70 @@
             "Tzuyu"
         ],
         "era": "Ready To Be 5th World Tour Special Japan",
+        "benefit": "JYP Shop",
+        "display": false
+    },
+    {
+        "id": 7041,
+        "name": "Nayeon_NA_111",
+        "checked": false,
+        "thumbnail": "https://ik.imagekit.io/twiceCollection/Na/img_111.jpg",
+        "categories": [
+            "Solo/Subunit",
+            "Korean Albums"
+        ],
+        "members": [
+            "Nayeon"
+        ],
+        "era": "NA",
+        "benefit": "JYP Shop",
+        "display": false
+    },
+    {
+        "id": 7042,
+        "name": "Nayeon_NA_112",
+        "checked": false,
+        "thumbnail": "https://ik.imagekit.io/twiceCollection/Na/img_112.jpg",
+        "categories": [
+            "Solo/Subunit",
+            "Korean Albums"
+        ],
+        "members": [
+            "Nayeon"
+        ],
+        "era": "NA",
+        "benefit": "JYP Shop",
+        "display": false
+    },
+    {
+        "id": 7043,
+        "name": "Nayeon_NA_113",
+        "checked": false,
+        "thumbnail": "https://ik.imagekit.io/twiceCollection/Na/img_113.jpg",
+        "categories": [
+            "Solo/Subunit",
+            "Korean Albums"
+        ],
+        "members": [
+            "Nayeon"
+        ],
+        "era": "NA",
+        "benefit": "JYP Shop",
+        "display": false
+    },
+    {
+        "id": 7044,
+        "name": "Nayeon_NA_114",
+        "checked": false,
+        "thumbnail": "https://ik.imagekit.io/twiceCollection/Na/img_114.jpg",
+        "categories": [
+            "Solo/Subunit",
+            "Korean Albums"
+        ],
+        "members": [
+            "Nayeon"
+        ],
+        "era": "NA",
         "benefit": "JYP Shop",
         "display": false
     }
