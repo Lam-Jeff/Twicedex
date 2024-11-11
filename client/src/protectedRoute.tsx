@@ -11,6 +11,6 @@ type IProtectedRouteProps = {
 export const ProtectedRoute = ({ children }: IProtectedRouteProps) => {
     const { loading } = useContext(AuthContext);
 
-    if (loading) <Loading isLoading={loading} borderColor='rgb(243, 244, 245)' />;
+    if (loading) return <Loading isLoading={loading} borderColor='rgb(243, 244, 245)' />;
     else return children;
 }
