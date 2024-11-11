@@ -11,6 +11,6 @@ type IProtectedRouteProps = {
 export const ProtectedRoute = ({ children }: IProtectedRouteProps) => {
     const { user } = useContext(AuthContext);
 
-    if (!user)return <Navigate to='/' />;
-    return children;
+    if (!user) return <><Navigate to='/' /></>;
+    return <>{children}</>;
 }
