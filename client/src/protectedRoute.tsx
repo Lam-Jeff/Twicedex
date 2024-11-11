@@ -1,6 +1,6 @@
 import { useContext } from "react";
 import { AuthContext } from "./authProvider";
-import { Loading } from "./loading";
+import { Navigate } from "react-router-dom";
 
 type IProtectedRouteProps = {
     /**
@@ -9,8 +9,8 @@ type IProtectedRouteProps = {
     children: React.ReactNode
 }
 export const ProtectedRoute = ({ children }: IProtectedRouteProps) => {
-    const { loading } = useContext(AuthContext);
+    const { user } = useContext(AuthContext);
 
-    if (loading) return <Loading isLoading={loading} borderColor='rgb(243, 244, 245)' />;
+    if (!user) <Navigate to='/' />;
     else return children;
 }
