@@ -63,10 +63,10 @@ export const Settings = () => {
     }
 
     return (
-        <div className="settings-box">
+        <div className="settings-container">
             <h2>Settings</h2>
-            <div className="settings-box__stats-box">
-                <div className="settings-box__stats-box__members">
+            <div className="settings-container__stats-box">
+                <div className="settings-container__stats-box__members">
                     <h3>Members</h3>
                     <p> Select the members you are collecting :</p>
                     <ul>
@@ -107,7 +107,7 @@ export const Settings = () => {
                         })}
                     </ul>
                 </div>
-                <button onClick={handleSaveSettings} aria-label={`Save preferences and go back to collection page`}>
+                <button onClick={handleSaveSettings} aria-label={`Save preferences and go back to previous page`}>
                     SAVE
                 </button>
             </div>

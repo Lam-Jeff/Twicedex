@@ -1,5 +1,4 @@
 import { test, expect } from '@playwright/test';
-import game from '../files/game.json'
 
 test.describe('MAIN PAGE', () => {
   test('Home button', async ({ page }) => {

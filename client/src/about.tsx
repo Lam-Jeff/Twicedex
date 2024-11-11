@@ -27,7 +27,7 @@ export const About = () => {
           <div>
             <h3>Data</h3>
             <p>
-              Personal data is not requested to use this website. The data used on <Link to={{ pathname: `/collection/${location.state.category}/${location.state.era}/`, search: location.search }} aria-label='Go to Collection page'>Collection</Link> are stored directly in your browser. This data keeps track of your card collection. Data is not shared.
+              Personal data is not requested to visit this website.However, you will be required to create an account in order to save your data in the <Link to={{ pathname: `/collection/${location.state.category}/${location.state.era}/`, search: location.search }} aria-label='Go to Collection page'>Collection</Link> page. This data keeps track of your card collection. Data is not shared.
             </p>
           </div>
           <h3>Links to other websites</h3>
@@ -68,9 +68,11 @@ export const About = () => {
             <li>@tradeabbey</li>
             <li>@trodriguezredal</li>
             <li>@IRIS__WOON</li>
+            <li>@njbily</li>
             <li>JYP Entertainment</li>
           </ul>
 
+          <p>All icons in <Link to='/profile' aria-label='Go to Profile page'>Profile</Link> are designed by <Link to='https://www.freepik.com/' aria-label='Exit website and Go to Freepik'>Freepik</Link></p>
           <p>
             Given the undetermined origin of some images, you can request the removal of images or the addition of credits via <Link to='mailto:twicedex.contact@gmail.com'>email</Link>.
           </p>

@@ -3,27 +3,31 @@ import { NavBar } from './navBar';
 import { Link, useLocation } from 'react-router-dom';
 
 export const Header = () => {
-  const [hamburgerOpen, setHamburgerOpen] = useState(false);
+  const [isHamburgerOpen, setIsHamburgerOpen] = useState(false);
+  const [isSmallScreen, setIsSmallScreen] = useState(window.innerWidth >= 768 ? false: true);
   const location = useLocation()
 
   useEffect(() => {
     window.addEventListener('resize', () => {
       if (window.innerWidth >= 768) {
-        setHamburgerOpen(false);
+        setIsHamburgerOpen(false);
+        setIsSmallScreen(false);
+      } else {
+        setIsSmallScreen(true)
       }
     })
 
   }, [])
 
   useEffect(() => {
-    setHamburgerOpen(false);
+    setIsHamburgerOpen(false);
   }, [location])
   
   /**
    * Handle open/close hamburger menu.
    */
   const toggleHamburger = (): void => {
-    setHamburgerOpen(!hamburgerOpen);
+    setIsHamburgerOpen(!isHamburgerOpen);
   }
   return (
     <header>
@@ -39,36 +43,13 @@ export const Header = () => {
             </Link>
           </h1>
         </div>
-        <NavBar />
+        <NavBar isHamburgerOpen={isHamburgerOpen} isSmallScreen={isSmallScreen} />
       </div>
-      <div className="hamburger-container" onClick={toggleHamburger} aria-label={hamburgerOpen ? 'Close menu' : 'Open menu'}>
+      <div className={`hamburger-container ${isHamburgerOpen ? "close": "open"}`} onClick={toggleHamburger} aria-label={isHamburgerOpen ? 'Close menu' : 'Open menu'}>
         <span></span>
         <span></span>
         <span></span>
       </div>
-      <style>{`
-                @media screen and (max-width: 768px){
-                    .navigation{
-                      max-height: ${hamburgerOpen ? '10em' : '0'};
-                    }
-
-                    .hamburger-container span:nth-child(2) {
-                      opacity : ${hamburgerOpen ? '0' : '1'};
-                      width : ${hamburgerOpen ? '0' : '100%'};
-                    }
-                    .hamburger-container span:nth-child(1) {
-                      transform : ${hamburgerOpen ? 'rotate(45deg)' : 'rotate(0deg)'};
-                      width : ${hamburgerOpen ? 'calc((3*5px + 0.3rem*2) * 1.414213562)' : '32px'};
-                      translate: ${hamburgerOpen ? '0 calc(5px / -2)' : '0 0'};
-                    }
-                    .hamburger-container span:nth-child(3) {
-                      transform : ${hamburgerOpen ? 'rotate(-45deg)' : 'rotate(0deg)'};
-                      width : ${hamburgerOpen ? 'calc((3*5px + 0.3rem*2) * 1.414213562)' : '32px'};
-                      translate: ${hamburgerOpen ? '0 calc(5px / 2)' : '0 0'};
-                    }
-
-                }          
-            `}</style>
     </header>
 
   )

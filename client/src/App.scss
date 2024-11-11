@@ -20,6 +20,7 @@ $secondary-color: rgb(32, 110, 141);
 $selection-color :#ebf4ff;
 $link-article-category-color: palevioletred;
 
+
 $members : (Nayeon: (color: $nayeon-color,
   ),
   Jeongyeon: (color: $jeongyeon-color,
@@ -46,18 +47,22 @@ $md: 768px;
 $lg: 992px;
 $xl: 1200px;
 $xxl: 1400px;
+$xxxl: 1600px;
+$xxxxl: 1920px;
 
 /* MAPS */
 $breakpoints : (small:(min-width: $sm,
     ratio: 1.5),
   medium:(min-width: $md,
-    ratio: 2),
+    ratio: 1.6),
   large:(min-width: $lg,
     ratio: 2.25),
   x-large:(min-width: $xl,
-    ratio: 2.5),
+    ratio: 2.3),
   xx-large:(min-width: $xxl,
-    ratio: 3));
+    ratio: 2.5),
+  xxx-large:(min-width: $xxxl,
+    ratio: 2.75));
 
 @each $key, $value in $breakpoints {
   @media screen and (min-width: map-get($value, 'min-width')) {
@@ -175,7 +180,7 @@ header {
   border-bottom: 1px solid darkgray;
 
   .banner {
-    height: 5em;
+    height: 5rem;
     display: flex;
     flex-direction: row;
     align-items: center;
@@ -216,6 +221,44 @@ header {
     cursor: pointer;
     width: max-content;
 
+    &.close {
+      span:nth-child(2) {
+        opacity: 0;
+        width: 0;
+      }
+
+      span:nth-child(1) {
+        transform: rotate(45deg);
+        width: calc((3*5px + 0.3rem*2) * 1.414213562);
+        translate: 0 calc(5px / -2);
+      }
+
+      span:nth-child(3) {
+        transform: rotate(-45deg);
+        width: calc((3*5px + 0.3rem*2) * 1.414213562);
+        translate: 0 calc(5px / 2);
+      }
+    }
+
+    &.open {
+      span:nth-child(2) {
+        opacity: 1;
+        width: 100%;
+      }
+
+      span:nth-child(1) {
+        transform: rotate(0deg);
+        width: 32px;
+        translate: 0 0;
+      }
+
+      span:nth-child(3) {
+        transform: rotate(0deg);
+        width: 32px;
+        translate: 0 0;
+      }
+    }
+
     span {
       width: var(--bar-width);
       height: var(--bar-height);
@@ -243,6 +286,14 @@ header {
   width: 100%;
   height: auto;
   border-top: 1px solid darkgray;
+
+  &.hamburgerMenuOpen {
+    max-height: 11em;
+  }
+
+  &.hamburgerMenuClose {
+    max-height: 0;
+  }
 
   .nav_bar {
     position: relative;
@@ -1018,13 +1069,9 @@ a {
                 &:hover:has(input[type="checkbox"]:not(:checked)) {
                   box-shadow: none;
                 }
-
               }
             }
           }
-
-
-
         }
       }
     }
@@ -1389,8 +1436,6 @@ a {
   }
 }
 
-/* MINI GAME PAGE */
-
 .loading-box {
   display: flex;
   flex-direction: row;
@@ -1417,399 +1462,6 @@ a {
     overflow: hidden;
     animation: spin infinite linear 1.5s;
   }
-}
-
-
-.minigame-container {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  width: 100%;
-
-  &__hidden-span {
-    position: absolute;
-    transform: translate(50%, 50%);
-    z-index: -999;
-    visibility: hidden;
-    pointer-events: none;
-  }
-
-  .modal-new-game {
-    &__content {
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      width: 100%;
-
-      h3 {
-        margin: 0;
-      }
-
-      .recap-image-box {
-        width: 90%;
-        height: 20rem;
-
-        &__image {
-          width: 100%;
-          height: 100%;
-        }
-      }
-
-      .timer-container {
-        display: flex;
-        flex-direction: row;
-        font-weight: bold;
-        font-size: 1.5rem;
-      }
-    }
-
-
-    .buttonsBar {
-      display: flex;
-      flex-direction: row;
-      justify-content: center;
-
-      div[class^="button_"] {
-        display: flex;
-        flex-direction: column;
-        justify-content: center;
-        margin: 0.5rem;
-        height: 1.5rem;
-        width: 1rem;
-        border: 1px solid rgba(200, 201, 202, 1);
-        background-color: rgba(200, 201, 202, 1);
-        cursor: pointer;
-        border-radius: 0.2rem;
-
-        &.focus {
-          border: 2px solid rgba(120, 121, 122, 1);
-          background-color: rgba(120, 121, 122, 1);
-        }
-      }
-    }
-  }
-
-  .modal-info {
-    .link {
-      text-decoration: underline;
-      color: black;
-    }
-
-    &__content__text-box {
-      display: flex;
-      flex-direction: column;
-      gap: 0.5rem;
-
-      p {
-        text-align: left;
-        padding: 0;
-        margin: 0;
-      }
-    }
-  }
-
-
-  .modal-tutorial,
-  .modal-info,
-  .modal-score {
-    position: fixed;
-    z-index: 999;
-    left: 0;
-    top: 0;
-    width: 100%;
-    height: 100%;
-    overflow: auto;
-    background-color: rgba(0, 0, 0, 0.4);
-
-    &__content {
-
-      background-color: #fefefe;
-      margin: 10% auto;
-      padding: 20px;
-      border: 1px solid #888;
-      width: 65%;
-
-      &__close-button {
-        float: right;
-        font-size: 1.5rem;
-        font-weight: bold;
-        cursor: pointer;
-      }
-
-      h3 {
-        text-align: center;
-      }
-
-      li {
-        text-align: left;
-        display: flex;
-        flex-direction: row;
-        align-items: center;
-        gap: 1rem;
-
-        [class$='-icon'] {
-          font-size: 1.5rem;
-        }
-      }
-
-      &__graph-score-box {
-        flex-direction: row;
-        display: flex;
-        height: 10rem;
-        width: 100%;
-
-        div {
-          display: flex;
-          flex-direction: column;
-          align-items: center;
-          justify-content: flex-end;
-          width: 100%;
-          gap: 0.25rem;
-
-          div[class^="bar-"] {
-            font-size: 0.75rem;
-
-            &::after {
-              content: '';
-              background-color: darkgreen;
-              width: 2rem;
-            }
-
-            height: 100%;
-          }
-
-          @for $i from 1 through 100 {
-            .bar-#{$i}::after {
-              $value: (
-                $i * 1%
-              );
-            height: $value;
-          }
-        }
-
-        span {
-          font-weight: bold;
-          height: 1rem;
-          width: 1rem;
-          display: flex;
-          flex-direction: column;
-          justify-content: center;
-        }
-      }
-    }
-
-    &__scores-box {
-      display: flex;
-      flex-direction: row;
-      flex-wrap: wrap;
-      justify-content: space-between;
-
-      &__stat {
-        display: flex;
-        flex-direction: column;
-
-        span {
-          font-weight: bold;
-        }
-      }
-    }
-  }
-}
-
-.menu-bar__container {
-  .menu-bar {
-    margin: 0;
-    padding: 1rem;
-    display: flex;
-    flex-direction: row;
-    justify-content: center;
-
-    .icon {
-      cursor: pointer;
-      font-size: 2rem;
-    }
-  }
-}
-
-.answers-box {
-  width: 90%;
-
-  .answers {
-    padding: 0;
-    display: grid;
-    grid-template-columns: repeat(2, 1fr);
-    grid-template-rows: repeat(3, 1fr);
-    align-items: center;
-    justify-items: center;
-    gap: 0.25rem;
-
-    ul {
-      list-style-type: none;
-      text-decoration: none;
-    }
-
-    li {
-      margin: 0.5rem 0;
-      width: 100%;
-
-      div {
-        display: flex;
-        flex-direction: column;
-        justify-content: center;
-        align-items: center;
-        height: 2.5rem;
-        font-weight: bold;
-        border: 1px solid #444;
-
-        .no_answer {
-
-          font-size: 1.5rem;
-          color: darkred;
-        }
-      }
-    }
-  }
-}
-
-.modal-game {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-
-  .game {
-    width: 90%;
-    height: 20rem;
-    border: none;
-    overflow: hidden;
-
-    .image-box {
-      width: 100%;
-      height: 100%;
-      object-fit: fill;
-      transition: filter 0.4s ease;
-    }
-  }
-
-  .progress-bar {
-    display: flex;
-    flex-direction: row;
-    justify-content: center;
-    width: 100%;
-
-    div[class^="progress-bar_"] {
-      margin: 0.2rem;
-      width: 10%;
-      height: 0.6rem;
-      background: linear-gradient(to right, rgb(230, 57, 230) 50%, rgb(90, 90, 90) 50%);
-      background-size: 200% 100%;
-      background-position: left bottom;
-      transition: all .5s ease-out;
-
-      &.off {
-        background-position: right bottom;
-      }
-    }
-  }
-
-  .answerBox__container {
-    position: relative;
-    width: 90%;
-  }
-
-  input {
-    padding: 0;
-    width: 100%;
-    border: 1px solid #b6c1ce;
-    box-sizing: border-box;
-    transition: border-color 150ms linear;
-
-    &:focus {
-      border-color: #0063cc;
-      outline: none;
-    }
-  }
-
-  input[type=text] {
-    padding: 0.5rem;
-  }
-
-  .autoComplete__container {
-    position: absolute;
-    bottom: 100%;
-    left: 0;
-    right: 0;
-    margin: 0 auto;
-    z-index: 1;
-    background: #fff;
-    padding: 0.5rem 0;
-    list-style-type: none;
-    border: 1px solid darkgray;
-    border-radius: 2px;
-    box-sizing: border-box;
-    max-height: 12rem;
-    overflow-y: auto;
-
-    li[class^='autoComplete__item_'] {
-      padding: 0 24px;
-      width: 100%;
-      box-sizing: border-box;
-
-
-      &.selected {
-        background-color: $selection-color;
-      }
-
-      &:hover {
-        background-color: $selection-color;
-      }
-
-      .autoComplete__item__button {
-        background: none;
-        border: none;
-        padding: 0;
-        width: 100%;
-        line-height: 32px;
-        text-align: left;
-        box-shadow: none;
-
-        &:focus {
-          border-color: #3780ce;
-          outline: none;
-        }
-
-        &:active {
-          outline: none;
-          color: #0076f5;
-        }
-      }
-    }
-  }
-}
-
-.inputs-container {
-  display: flex;
-  flex-direction: row;
-  justify-content: center;
-
-  div {
-    cursor: pointer;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    margin: 0.5rem;
-    height: 2rem;
-    width: 4.5rem;
-    color: white;
-    border: 1px solid $secondary-color;
-    background-color: $secondary-color;
-  }
-
-
-  .submit-button {
-    border: 1px solid green;
-    background-color: green;
-  }
-}
 }
 
 /* ABOUT PAGE */
@@ -1850,9 +1502,220 @@ a {
 
 }
 
+/* LOGIN PAGE */
+.login-container {
+  display: flex;
+  flex-direction: column;
+
+  &__form {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+    padding: 1rem;
+    margin-top: 10%;
+
+    &-control {
+      display: flex;
+      flex-direction: column;
+      text-align: left;
+      gap: 0.25rem;
+
+      &__input-email,
+      &__input-password {
+        padding: 0.5rem;
+        border: 1px solid #b6c1ce;
+        box-sizing: border-box;
+
+        &:focus {
+          border-color: #0063cc;
+          outline: none;
+        }
+      }
+
+      &-buttons {
+        display: grid;
+        grid-template-columns: repeat(2, 1fr);
+        gap: 1rem;
+      }
+    }
+  }
+}
+
+/* PROFILE PAGE */
+
+.profile-container {
+  @mixin progressionBar($height-bar, $background-color, $border-radius, $text-color: null) {
+    height: $height-bar;
+    color: $text-color;
+    background-color: $background-color;
+    border-radius: $border-radius;
+  }
+
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-left: auto;
+  margin-right: auto;
+  gap: 1rem;
+
+  &__buttons-container {
+    margin: 1rem 0 0 0;
+    border-radius: 5px;
+    text-wrap: nowrap;
+    display: flex;
+
+    &__logout,
+    &__delete {
+      margin-right: 1rem;
+    }
+  }
+
+  &__details {
+    width: 100%;
+    margin-top: 1rem;
+    background-color: white;
+    border-radius: 5px;
+
+    &__categories {
+      columns: 2;
+      padding: 1rem;
+      text-wrap: nowrap;
+
+      &__list {
+        padding: 0;
+        margin: 0;
+
+        &__item {
+          padding-bottom: 0.25rem;
+          margin-bottom: 0.5rem;
+
+          div[class*="__progressionbar"] {
+            @include progressionBar(1.2rem, rgb(201, 218, 224), 5px);
+
+            &::after {
+              display: flex;
+              justify-content: center;
+              @include progressionBar(1.2rem, rgb(32, 110, 141), 5px, white);
+            }
+          }
+        }
+
+      }
+    }
+  }
+
+  &__achievements {
+    width: 100%;
+
+    &__main {
+      display: grid;
+      grid-template-columns: repeat(5, 20%);
+      overflow: hidden;
+      max-height: 20rem;
+      min-height: 20rem;
+      overflow-y: auto;
+      background-color: white;
+
+      &__item {
+        aspect-ratio: 1;
+        margin: 0.25rem;
+        border: 1px lightgray solid;
+        border-radius: 5px;
+        cursor: pointer;
+
+        &:hover {
+          box-shadow: 0 1px 3px;
+        }
+
+        &.selected {
+          box-shadow: 0 1px 3px;
+        }
+
+        .loading-box {
+          height: 50%;
+          transform: translate(0, 50%);
+        }
+
+        img {
+          height: 50%;
+          transform: translate(0, 50%);
+        }
+
+        &__icon {
+          opacity: 50%;
+        }
+      }
+    }
+
+    &__textbox {
+      min-height: 8rem;
+      max-height: 8rem;
+      background-color: white;
+      border-radius: 5px;
+      margin-top: 0.5rem;
+      border: 1px lightgray solid;
+
+      h3,
+      p {
+        &.visible {
+          transition: opacity 1s ease;
+          opacity: 1;
+        }
+
+        &.hidden {
+
+          opacity: 0;
+        }
+      }
+    }
+  }
+
+  &__progression {
+    width: 100%;
+    background-color: white;
+    border-radius: 5px;
+
+    &__list {
+      columns: 1;
+      padding: 1rem;
+      margin: 0;
+
+      &__item {
+        margin: 12px 0;
+      }
+    }
+  }
+
+  div[class*="__progressionbar"] {
+    @include progressionBar(1.2rem, rgb(201, 218, 224), 5px);
+    display: flex;
+
+    &::after {
+      @include progressionBar(1.2rem, rgb(32, 110, 141), 5px, white);
+    }
+  }
+}
+
+@for $i from 1 through 100 {
+
+  .profile-container__details__categories__list__item__progressionbar-#{$i}::after,
+  .profile-container__progression__list__item__progressionbar-#{$i}::after {
+    $value: $i * 1%;
+    width: $value;
+  }
+
+  .profile-container__progression__list__item__progressionbar-#{$i}::after {
+    content: "#{$i}%";
+  }
+
+  .profile-container__details__categories__list__item__progressionbar-#{$i}::after {
+    content: "";
+  }
+}
+
 /* SETTINGS */
 
-.settings-box {
+.settings-container {
   margin: 0 auto;
   width: 70%;
   display: flex;
@@ -2041,10 +1904,15 @@ footer {
         padding: 10px 20px;
       }
 
-      .navigation-bar__game,
+      .navigation-bar__login,
       .navigation-bar__collection {
         border-right: darkgray 1px solid;
       }
+
+      .navigation-bar__logout {
+        border-left: darkgray 1px solid;
+      }
+
     }
 
     .nav__listitem {
@@ -2085,31 +1953,6 @@ footer {
         }
       }
     }
-  }
-
-  /* MINIGAME PAGE */
-  .minigame-container {
-
-    .game {
-      height: 22rem;
-    }
-
-    .answers-box .answers {
-      display: flex;
-      flex-direction: column;
-      margin: 0;
-      gap: 0;
-    }
-
-    .modal-tutorial,
-    .modal-info,
-    .modal-score {
-      &__content {
-        margin: 8% auto;
-        width: 55%;
-      }
-    }
-
   }
 
   /* FOOTER */
@@ -2184,20 +2027,6 @@ footer {
       width: 70%;
     }
   }
-
-  /* MINIGAME PAGE */
-  .minigame-container {
-
-    .modal-tutorial,
-    .modal-info,
-    .modal-score {
-      &__content {
-        margin: 5% auto;
-        width: 45%;
-      }
-    }
-
-  }
 }
 
 @media screen and (min-width: $xl) {
@@ -2217,21 +2046,6 @@ footer {
     }
 
   }
-
-  /* MINIGAME PAGE */
-  .minigame-container {
-
-    .modal-tutorial,
-    .modal-info,
-    .modal-score {
-      &__content {
-        margin: 5% auto;
-        width: 35%;
-      }
-    }
-
-  }
-
 }
 
 @media screen and (min-width: $xxl) {
@@ -2261,19 +2075,6 @@ footer {
 
       &::after {
         right: 25.5%;
-      }
-    }
-  }
-
-  /* MINI GAME PAGE */
-  .minigame-container {
-
-    .modal-tutorial,
-    .modal-info,
-    .modal-score {
-      &__content {
-        margin: 3% auto;
-        width: 30%;
       }
     }
   }

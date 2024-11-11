@@ -1,8 +1,9 @@
-import { useEffect, useState } from 'react';
+import { useContext, useEffect, useState } from 'react';
 import { RxCross2, RxCheckCircled } from 'react-icons/rx'
 import { BsFillCircleFill } from 'react-icons/bs'
 import { MdOutlineArrowLeft, MdOutlineArrowRight, MdOutlineFavorite } from 'react-icons/md'
 import { ICardsProps } from './collection';
+import { AuthContext } from './authProvider';
 
 export interface ICardDetailsProps {
     /**
@@ -29,7 +30,7 @@ export interface ICardDetailsProps {
      * A method to add the card to the wish list.
      */
     handleCardWish: (name: number, event: React.MouseEvent<HTMLElement>) => void;
-    
+
     /**
      * An object that represents the cards.
      */
@@ -51,11 +52,11 @@ export interface ICardDetailsProps {
     length: number
 }
 
-
 export const ModalCardDetails: React.FunctionComponent<ICardDetailsProps> = ({ setIsOpen, handleCardZoom, handleCardCheck, setIndexCardModal, handleCardWish, object, indexCard, wishes, length }) => {
-    const cardToDisplay = object.filter(card => card.display)
-    const [checked, setChecked] = useState(cardToDisplay[indexCard].checked)
-    const [currentIndex, setCurrentIndex] = useState(indexCard)
+    const cardToDisplay = object.filter(card => card.display);
+    const [checked, setChecked] = useState(cardToDisplay[indexCard].checked);
+    const [currentIndex, setCurrentIndex] = useState(indexCard);
+    const { user } = useContext(AuthContext);
 
 
     /**
@@ -111,7 +112,7 @@ export const ModalCardDetails: React.FunctionComponent<ICardDetailsProps> = ({ s
         <div className="modal__content">
             <div className="modal__topDiv">
                 <h3>Details</h3>
-                <RxCross2 className='modal__close_button' onClick={handleCloseCardModal} aria-label='Close card details'/>
+                <RxCross2 className='modal__close_button' onClick={handleCloseCardModal} aria-label='Close card details' />
             </div>
 
             <div className="card">
@@ -169,7 +170,7 @@ export const ModalCardDetails: React.FunctionComponent<ICardDetailsProps> = ({ s
                 </div>
             </div>
             <div className='collection_edit__container'>
-                <div className='collection_div'>
+                {user ? <>  <div className='collection_div'>
                     <h3>Collection</h3>
                     <div className='check__icon'
                         onClick={handleCardCheckModal}
@@ -177,13 +178,13 @@ export const ModalCardDetails: React.FunctionComponent<ICardDetailsProps> = ({ s
                         {checked ? <RxCheckCircled className='check obtained' /> : <RxCheckCircled className='check' />}
                     </div>
                 </div>
-                <div className='wishlist_div'>
-                    <h3>Wishlist</h3>
-                    <div className='wish__icon'
-                        onClick={(e) => handleCardWish(cardToDisplay[currentIndex].id, e)} aria-label='Add card to wishlish'>
-                        {wishes.includes(cardToDisplay[currentIndex].id) ? <MdOutlineFavorite className='wish obtained' /> : <MdOutlineFavorite className='wish' />}
-                    </div>
-                </div>
+                    <div className='wishlist_div'>
+                        <h3>Wishlist</h3>
+                        <div className='wish__icon'
+                            onClick={(e) => handleCardWish(cardToDisplay[currentIndex].id, e)} aria-label='Add card to wishlish'>
+                            {wishes.includes(cardToDisplay[currentIndex].id) ? <MdOutlineFavorite className='wish obtained' /> : <MdOutlineFavorite className='wish' />}
+                        </div>
+                    </div> </> : null}
             </div>
             <div className='navigation_buttons__container'>
                 <button onClick={previousCard} className='button_previous' aria-label='Previous image'> <MdOutlineArrowLeft className='previous__icon' />Previous card</button>

@@ -1,4 +1,4 @@
-import { useEffect, useMemo, useState } from 'react';
+import { useContext, useEffect, useMemo, useState } from 'react';
 import { useLocation, useParams, useSearchParams } from 'react-router-dom';
 import { Cards } from './cards';
 import { Filter } from './filter';
@@ -12,6 +12,7 @@ import { MdPhotoCamera } from "react-icons/md";
 
 import cardsCollection from './files/cards.json';
 import albums from './files/albums.json';
+import { AuthContext } from './authProvider';
 
 export interface ICardsProps {
     /**
@@ -67,6 +68,8 @@ export const Collection = () => {
     const [searchParams, setSearchParams] = useSearchParams();
     const display = searchParams.get('display');
 
+    const { cardsData, updateCollection, user, updateWishlist, wishesData } = useContext(AuthContext);
+
     const [filter, setFilter] = useState(true);
     const [displayMode, setDisplayMode] = useState(false);
     const [album, setAlbum] = useState<string>(albums.filter(album => album.code === eraParam)[0].name ?? "The Story Begins");
@@ -75,16 +78,8 @@ export const Collection = () => {
     const [isCardDetailsOpen, setIsCardDetailsOpen] = useState(false);
     const [isOptionsOpen, setIsOptionsOpen] = useState(false);
     const [indexCardModal, setIndexCardModal] = useState<number>(0)
-    const [wishesList, setWishesList] = useState<number[]>(() => {
-        const wishes = localStorage.getItem('wishes');
-        if (wishes) return JSON.parse(wishes)
-        return []
-    })
-    const [cardsList, setCardsList] = useState<number[]>(() => {
-        const collection = localStorage.getItem('cards-collection');
-        if (collection) return JSON.parse(collection)
-        return []
-    })
+    const [wishesList, setWishesList] = useState<number[]>(() => { return wishesData ? wishesData : [] })
+    const [cardsList, setCardsList] = useState<number[]>(() => { return cardsData ? cardsData : [] })
     const [cards, setCards] = useState<ICardsProps[]>(cardsCollection.map(card => cardsList.includes(card.id) ? { ...card, checked: true } : { ...card, checked: false }));
 
     const cardsToDiplay = useMemo(() => filterCardsToDisplay(cards), [cards])
@@ -103,12 +98,11 @@ export const Collection = () => {
     }, [location]);
 
     useEffect(() => {
-        localStorage.setItem('wishes', JSON.stringify(wishesList));
-
+        if (user) updateWishlist(wishesList, user.uid);
     }, [wishesList])
 
     useEffect(() => {
-        localStorage.setItem('cards-collection', JSON.stringify(cardsList));
+        if (user) updateCollection(cardsList, user.uid);
     }, [cardsList])
 
 

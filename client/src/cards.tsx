@@ -1,9 +1,10 @@
-import { useState } from 'react';
+import { useContext, useState } from 'react';
 import { ICardsProps } from './collection';
 import { Loading } from './loading';
 
 import { RxCheckCircled, RxZoomIn } from 'react-icons/rx'
 import { MdOutlineFavorite } from 'react-icons/md'
+import { AuthContext } from './authProvider';
 
 
 interface ICardsContainerProps {
@@ -59,7 +60,8 @@ interface ICardsContainerProps {
 }
 
 export const Cards = ({ type, index, object, wishes, length, position, handleCardCheck, handleCardZoom, handleCardModal, handleCardWish }: ICardsContainerProps) => {
-    const [isLoading, setIsLoading] = useState(true)
+    const [isLoading, setIsLoading] = useState(true);
+    const { user } = useContext(AuthContext);
     if (type === "display-1") {
         return (
             <div
@@ -83,16 +85,17 @@ export const Cards = ({ type, index, object, wishes, length, position, handleCar
                     <p>{object.name}</p>
                 </div>
                 <div className='card__icons'>
-                    <div className='card__check__icon'
+                    {user ? <><div className='card__check__icon'
                         onClick={(e) => handleCardCheck(object.id, e)}
                         aria-label={`Add card ${object.name} to the collection`}>
                         {object.checked ? <RxCheckCircled className='check obtained' /> : <RxCheckCircled className='check' />}
                     </div>
-                    <div className='card__wish__icon'
-                        onClick={(e) => handleCardWish(object.id, e)}
-                        aria-label={`Add card ${object.name} to the wishlist`}>
-                        {wishes.includes(object.id) ? <MdOutlineFavorite className='wish obtained' /> : <MdOutlineFavorite className='wish' />}
-                    </div>
+                        <div className='card__wish__icon'
+                            onClick={(e) => handleCardWish(object.id, e)}
+                            aria-label={`Add card ${object.name} to the wishlist`}>
+                            {wishes.includes(object.id) ? <MdOutlineFavorite className='wish obtained' /> : <MdOutlineFavorite className='wish' />}
+                        </div>
+                    </> : null}
 
                 </div>
             </div>)
@@ -120,16 +123,18 @@ export const Cards = ({ type, index, object, wishes, length, position, handleCar
                 <div className='card__number'>{position + 1}/{length}</div>
                 <span className='card__line-separator'></span>
                 <div className='card__icons'>
-                    <div className='card__check__icon'
-                        onClick={(e) => handleCardCheck(object.id, e)}
-                        aria-label={`Add card ${object.name} to the collection`}>
-                        {object.checked ? <RxCheckCircled className='check obtained' /> : <RxCheckCircled className='check' />}
-                    </div>
-                    <div className='card__wish__icon'
-                        onClick={(e) => handleCardWish(object.id, e)}
-                        aria-label={`Add card ${object.name} to the wishlist`}>
-                        {wishes.includes(object.id) ? <MdOutlineFavorite className='wish obtained' /> : <MdOutlineFavorite className='wish' />}
-                    </div>
+                    {user ? <>
+                        <div className='card__check__icon'
+                            onClick={(e) => handleCardCheck(object.id, e)}
+                            aria-label={`Add card ${object.name} to the collection`}>
+                            {object.checked ? <RxCheckCircled className='check obtained' /> : <RxCheckCircled className='check' />}
+                        </div>
+                        <div className='card__wish__icon'
+                            onClick={(e) => handleCardWish(object.id, e)}
+                            aria-label={`Add card ${object.name} to the wishlist`}>
+                            {wishes.includes(object.id) ? <MdOutlineFavorite className='wish obtained' /> : <MdOutlineFavorite className='wish' />}
+                        </div>
+                    </> : null}
                     <div className='card__zoom__icon'
                         onClick={(e) => handleCardZoom(index, e)}
                         aria-label={`Zoom on card ${object.name}`}>
