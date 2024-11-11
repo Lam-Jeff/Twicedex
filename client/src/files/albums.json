@@ -1038,7 +1038,6 @@
             "Original",
             "Withmuu",
             "Tower Records",
-            "Showcase",
             "JYP Shop"
         ],
         "display": false,
@@ -2987,7 +2986,7 @@
             "Tzuyu"
         ],
         "benefits": [
-            "Twice Records",
+            "Original",
             "Special Gift"
         ],
         "display": false,
@@ -3218,7 +3217,7 @@
         "code": "Ponds"
     },
     {
-        "name": "JYP Japan Pop Up Store",
+        "name": "JYP Japan Pop Up Store 2021",
         "checked": false,
         "categories": [
             "Stores/Merch"
@@ -3238,7 +3237,31 @@
             "Original"
         ],
         "display": false,
-        "code": "JYP_Japan_Pop-Up_Store"
+        "code": "JYP_Japan_Pop-Up_Store_2021"
+    }
+    ,
+    {
+        "name": "JYP Japan Pop Up Store 2023",
+        "checked": false,
+        "categories": [
+            "Stores/Merch"
+        ],
+        "members": [
+            "Nayeon",
+            "Jeongyeon",
+            "Momo",
+            "Sana",
+            "Jihyo",
+            "Mina",
+            "Dahyun",
+            "Chaeyoung",
+            "Tzuyu"
+        ],
+        "benefits": [
+            "Original"
+        ],
+        "display": false,
+        "code": "JYP_Japan_Pop-Up_Store_2023"
     },
     {
         "name": "With You-th",
@@ -3356,7 +3379,6 @@
             "Tzuyu"
         ],
         "benefits": [
-            "Original",
             "Upgrade",
             "JYP Shop",
             "Once Japan Mobile"
@@ -3399,7 +3421,9 @@
         ],
         "benefits": [
             "Original",
-            "Tower Records"
+            "Tower Records",
+            "POB",
+            "Venue Exclusive"
         ],
         "display": false,
         "code": "Dive"
@@ -3422,9 +3446,217 @@
             "Blue Dream Media",
             "Yes24",
             "JYP Shop",
-            "Withmuu"
+            "Withmuu",
+            "Soundwave",
+            "Musicplant"
         ],
         "display": false,
         "code": "AboutTzu"
+    },
+    {
+        "name": "TWICE 2024 Fanmeeting HOME 9ROUND",
+        "checked": false,
+        "categories": [
+            "Stores/Merch"
+        ],
+        "members": [
+            "Nayeon",
+            "Jeongyeon",
+            "Momo",
+            "Sana",
+            "Jihyo",
+            "Mina",
+            "Dahyun",
+            "Chaeyoung",
+            "Tzuyu"
+        ],
+        "benefits": [
+            "Original",
+            "JYP Shop"
+        ],
+        "display": false,
+        "code": "T2024FMH9R"
+    },
+    {
+        "name": "Haute Couture",
+        "checked": false,
+        "categories": [
+            "Solo/Subunit",
+            "Japanese Albums"
+        ],
+        "members": [
+            "Momo",
+            "Sana",
+            "Mina"
+        ],
+        "benefits": [
+            "Original"
+        ],
+        "display": false,
+        "code": "HC"
+    },
+    {
+        "name": "Strategy",
+        "checked": false,
+        "categories": [
+            "Korean Albums"
+        ],
+        "members": [
+            "Nayeon",
+            "Jeongyeon",
+            "Momo",
+            "Sana",
+            "Jihyo",
+            "Mina",
+            "Dahyun",
+            "Chaeyoung",
+            "Tzuyu"
+        ],
+        "benefits": [
+            "Original"
+        ],
+        "display": false,
+        "code": "Strategy"
+    },
+    {
+        "name": "Birthday365 2025 Japan Season's Greetings",
+        "checked": false,
+        "categories": [
+            "Greetings"
+        ],
+        "members": [
+            "Nayeon",
+            "Jeongyeon",
+            "Momo",
+            "Sana",
+            "Jihyo",
+            "Mina",
+            "Dahyun",
+            "Chaeyoung",
+            "Tzuyu"
+        ],
+        "benefits": [
+            "Original"
+        ],
+        "display": false,
+        "code": "B365"
+    },
+    {
+        "name": "Collector 2025 Season's Greetings",
+        "checked": false,
+        "categories": [
+            "Greetings"
+        ],
+        "members": [
+            "Nayeon",
+            "Jeongyeon",
+            "Momo",
+            "Sana",
+            "Jihyo",
+            "Mina",
+            "Dahyun",
+            "Chaeyoung",
+            "Tzuyu"
+        ],
+        "benefits": [
+            "Original"
+        ],
+        "display": false,
+        "code": "Collector"
+    },
+    {
+        "name": "Missha",
+        "checked": false,
+        "categories": [
+            "Promos"
+        ],
+        "members": [
+            "Sana"
+        ],
+        "benefits": [
+            "Original"
+        ],
+        "display": false,
+        "code": "Missha"
+    },
+    {
+        "name": "Twice Once Day Japan Fanmeeting 2022",
+        "checked": false,
+        "categories": [
+            "Events"
+        ],
+        "members": [
+            "Nayeon",
+            "Jeongyeon",
+            "Momo",
+            "Sana",
+            "Jihyo",
+            "Mina",
+            "Dahyun",
+            "Chaeyoung",
+            "Tzuyu"
+        ],
+        "benefits": [
+            "JYP Shop",
+            "Once Japan Mobile"
+        ],
+        "display": false,
+        "code": "TODJFM2022"
+    },
+    {
+        "name": "AboutTzu Pop Up Store",
+        "checked": false,
+        "categories": [
+            "Stores/Merch"
+        ],
+        "members": [
+            "Tzuyu"
+        ],
+        "benefits": [
+            "Original"
+        ],
+        "display": false,
+        "code": "AboutTzu_Pop-up_Store"
+    },
+    {
+        "name": "Twice 9th Anniversary HOME 9ROUND Pop Up Store",
+        "checked": false,
+        "categories": [
+            "Stores/Merch"
+        ],
+        "members": [
+            "Nayeon",
+            "Jeongyeon",
+            "Momo",
+            "Sana",
+            "Jihyo",
+            "Mina",
+            "Dahyun",
+            "Chaeyoung",
+            "Tzuyu"
+        ],
+        "benefits": [
+            "Original"
+        ],
+        "display": false,
+        "code": "Home9round_Pop-up_Store"
+    },
+    
+    {
+        "name": "MISAMO Masterpiece Showcase",
+        "checked": false,
+        "categories": [
+            "DVDs/Blu-rays"
+        ],
+        "members": [
+            "Momo",
+            "Sana",
+            "Mina"
+        ],
+        "benefits": [
+            "Original"
+        ],
+        "display": false,
+        "code": "Masterpiece_showcase_dvd"
     }
 ]
