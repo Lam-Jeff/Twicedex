@@ -1,16 +1,25 @@
 import { useLocation } from 'react-router-dom';
 import { useEffect } from 'react';
 
+type Props = {
+    /**
+     * A React component.
+     */
+    children?: React.ReactNode;
+};
 
-export const ScrollToTop = () => {
-    const { pathname } = useLocation();
+export const ScrollToTop = ({ children }: Props) => {
+    const location = useLocation();
 
     useEffect(() => {
         window.scrollTo({
             top: 0,
-            behavior: 'auto'
+            left: 0,
+            behavior: 'instant'
         });
-    }, [pathname]);
+    }, [location.pathname]);
 
-    return <></>;
+    return <>
+        {children}
+    </>
 }

@@ -1,7 +1,8 @@
 import { useEffect } from 'react';
-import { Link, useLocation } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 import { useContext } from "react";
 import { AuthContext } from "./authProvider";
+import global from './files/global';
 
 interface INavBarProps {
   isHamburgerOpen: boolean;
@@ -10,26 +11,7 @@ interface INavBarProps {
 
 export const NavBar = ({ isHamburgerOpen, isSmallScreen }: INavBarProps) => {
   const { user, signOut } = useContext(AuthContext);
-  const hamburger : string = isHamburgerOpen ? "hamburgerMenuOpen" : "hamburgerMenuClose";
-  const location = useLocation();
-  location.state = {
-    from: '/',
-    era: "TSB",
-    category: "Korean Albums"
-  }
-  let albumFromUrl = location.state.era;
-  let categoryFromUrl = location.state.category;
-  if (location.pathname.includes('/collection')) {
-    albumFromUrl = location.pathname.split('/')[3];
-    categoryFromUrl = location.pathname.split('/')[2].replace('&', '/');
-  }
-
-  /**
- * Handle log out.
- */
-  const handleLogOut = () => {
-    signOut();
-  }
+  const hamburger: string = isHamburgerOpen ? "hamburgerMenuOpen" : "hamburgerMenuClose";
 
   useEffect(() => {
     let resizeTimer: NodeJS.Timeout = setTimeout(() => { }, 0);
@@ -42,58 +24,52 @@ export const NavBar = ({ isHamburgerOpen, isSmallScreen }: INavBarProps) => {
     });
   }, []);
 
-  useEffect(() => {
-    if (location.state.era) {
-      albumFromUrl = location.state.era
-    }
-    if (location.state.category) {
-      categoryFromUrl = location.state.category
-    }
-  }, [location]);
-
+  /**
+  * Handle log out.
+  */
+  const handleLogOut = () => {
+    signOut();
+  }
 
   return (
     <div className={`navigation ${isSmallScreen ? hamburger : ""}`}>
       <ul className='nav_bar'>
         <li className='navigation-bar__collection'>
-          <Link to={{ pathname: `/collection/${categoryFromUrl}/${albumFromUrl}`, search: location.search }}
-            state={{
-              ...location.state,
-              from: location.pathname
-            }}
+          <Link to={`/collection/${global.CATEGORY_DEFAULT_VALUE}/${global.ERA_DEFAULT_VALUE}` }
             className='nav__listitem'
-            aria-label={`Go to collection page`}>
+            aria-label={`Go to collection page`}
+          >
             Collection
+          </Link>
+        </li>
+        <li className='navigation-bar__sets'>
+          <Link to="/sets"
+            className='nav__listitem'
+            aria-label={`Go to Sets page`}
+          >
+            Sets
           </Link>
         </li>
         <li className='navigation-bar__login'>
           {user ? <Link to="./profile"
-            state={{
-              ...location.state,
-              from: location.pathname
-            }}
             className='nav__listitem'
-            aria-label={`Go to Profile page`}>
+            aria-label={`Go to Profile page`}
+          >
             Profile
           </Link> :
             <Link to="./login"
-              state={{
-                ...location.state,
-                from: location.pathname
-              }}
               className='nav__listitem'
-              aria-label={`Go to Login page`}>
+              aria-label={`Go to Login page`}
+  
+            >
               Login
             </Link>}
         </li>
         <li className='navigation-bar__about'>
           <Link to="/about"
             className='nav__listitem'
-            state={{
-              ...location.state,
-              from: location.pathname
-            }}
-            aria-label={`Go to about page`}>
+            aria-label={`Go to about page`}
+          >
             About
           </Link>
         </li>

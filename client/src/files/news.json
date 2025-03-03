@@ -4,7 +4,7 @@
         "subject": "Collection",
         "title": "Ready To Be 5th World Tour Japan: photocards have been added.",
         "date": "16/02/2024",
-        "thumbnail": "/images/thumbnail/ready_to_be.jpg",
+        "thumbnail": "/images/thumbnail/ready_to_be_5_japan.webp",
         "alt": "Ready to be 5th world tour japan cards thumbnail",
         "era": "RTB5WTJ",
         "category": "Events"
@@ -14,7 +14,7 @@
         "subject": "Collection",
         "title": "Japan Season's Greetings: Circuit 24 POB photocards have been added.",
         "date": "16/02/2024",
-        "thumbnail": "/images/thumbnail/circuit24.jpg",
+        "thumbnail": "/images/thumbnail/seasons_greetings_circuit24.webp",
         "alt": "seasons greetings cards thumbnail",
         "era": "C24",
         "category": "Greetings"
@@ -24,7 +24,7 @@
         "subject": "Collection",
         "title": "Japan Season's Greetings: Circuit 24 photocards have been added.",
         "date": "09/01/2024",
-        "thumbnail": "/images/thumbnail/circuit24.jpg",
+        "thumbnail": "/images/thumbnail/seasons_greetings_circuit24.webp",
         "alt": "seasons greetings cards thumbnail",
         "era": "C24",
         "category": "Greetings"
@@ -34,7 +34,7 @@
         "subject": "Collection",
         "title": "Season's Greetings: News Room 2024 photocards have been added.",
         "date": "08/01/2024",
-        "thumbnail": "/images/thumbnail/news_room.jpg",
+        "thumbnail": "/images/thumbnail/seasons_greetings_newsRoom.webp",
         "alt": "seasons greetings cards thumbnail",
         "era": "NR",
         "category": "Greetings"
@@ -44,7 +44,7 @@
         "subject": "Collection",
         "title": "SSJYP Nation: Ready To Be Seoul photocards have been added.",
         "date": "04/01/2024",
-        "thumbnail": "/images/thumbnail/collection.jpg",
+        "thumbnail": "/images/thumbnail/ssjypn.webp",
         "alt": "ssjyp nation cards thumbnail",
         "era": "SSJYPN",
         "category": "Promos"
@@ -54,7 +54,7 @@
         "subject": "Collection",
         "title": "SSJYP Nation: Crazy Stupid Love photocards have been added.",
         "date": "03/01/2024",
-        "thumbnail": "/images/thumbnail/collection.jpg",
+        "thumbnail": "/images/thumbnail/ssjypn.webp",
         "alt": "ssjyp nation cards thumbnail",
         "era": "SSJYPN",
         "category": "Promos"
@@ -64,7 +64,7 @@
         "subject": "Collection",
         "title": "SSJYP Nation: Twice-zine photocards have been added.",
         "date": "03/01/2024",
-        "thumbnail": "/images/thumbnail/collection.jpg",
+        "thumbnail": "/images/thumbnail/ssjypn.webp",
         "alt": "ssjyp nation cards thumbnail",
         "era": "SSJYPN",
         "category": "Promos"
@@ -74,27 +74,27 @@
         "subject": "Collection",
         "title": "TWICE 2023 Fanmeeting ONCE AGAIN: photocards have been added.",
         "date": "18/12/2023",
-        "thumbnail": "/images/thumbnail/once_again.jpeg",
+        "thumbnail": "/images/thumbnail/once_again_fanmeeting.webp",
         "alt": "TWICE 2023 Fanmeeting ONCE AGAIN cards thumbnail",
         "era": "T2023FMOA",
-        "category": "Stores&Merch"
+        "category": "Stores/Merch"
     },
     {
         "id": 12,
         "subject": "Collection",
         "title": "Twice Once Again Pop Up Store: photocards have been added.",
         "date": "14/12/2023",
-        "thumbnail": "/images/thumbnail/once_again.jpeg",
+        "thumbnail": "/images/thumbnail/once_again_pop-up.webp",
         "alt": "Twice Once Again Pop Up Store cards thumbnail",
         "era": "T8APUS",
-        "category": "Stores&Merch"
+        "category": "Stores/Merch"
     },
     {
         "id": 11,
         "subject": "Collection",
         "title": "Signal: Broadcast photocards have been added.",
         "date": "11/12/2023",
-        "thumbnail": "/images/thumbnail/Signal.jpg",
+        "thumbnail": "/images/thumbnail/signal.webp",
         "alt": "Signal cards thumbnail",
         "era": "Signal",
         "category": "Korean Albums"
@@ -104,7 +104,7 @@
         "subject": "Collection",
         "title": "Twicetagram: Broadcast photocards have been added.",
         "date": "11/12/2023",
-        "thumbnail": "/images/thumbnail/Twicetagram.jpg",
+        "thumbnail": "/images/thumbnail/Twicetagram.webp",
         "alt": "Twicetagram cards thumbnail",
         "era": "Twicetagram",
         "category": "Korean Albums"
@@ -114,7 +114,7 @@
         "subject": "Collection",
         "title": "Merry & Happy: Broadcast photocards have been added.",
         "date": "09/12/2023",
-        "thumbnail": "/images/thumbnail/M&H.jpg",
+        "thumbnail": "/images/thumbnail/Merry_Happy.webp",
         "alt": "Merry & Happy cards thumbnail",
         "era": "M&H",
         "category": "Korean Albums"
@@ -124,7 +124,7 @@
         "subject": "Collection",
         "title": "Ready To Be 5th World Tour Japan: photocards have been added.",
         "date": "09/12/2023",
-        "thumbnail": "/images/thumbnail/ready_to_be.jpg",
+        "thumbnail": "/images/thumbnail/ready_to_be_5_japan.webp",
         "alt": "Ready to be 5th world tour japan cards thumbnail",
         "era": "RTB5WTJ",
         "category": "Events"
@@ -134,7 +134,7 @@
         "subject": "Collection",
         "title": "Ready To Be 5th World Tour: photocards have been added.",
         "date": "07/12/2023",
-        "thumbnail": "/images/thumbnail/ready_to_be.jpg",
+        "thumbnail": "/images/thumbnail/ready_to_be_5.webp",
         "alt": "Ready to be 5th world tour cards thumbnail",
         "era": "RTB5WT",
         "category": "Events"
@@ -144,7 +144,7 @@
         "subject": "Collection",
         "title": "More & More: Withdrama photocards have been added.",
         "date": "07/12/2023",
-        "thumbnail": "/images/thumbnail/more_and_more.jpeg",
+        "thumbnail": "/images/thumbnail/More&More.webp",
         "alt": "More & More cards thumbnail",
         "era": "M&M",
         "category": "Korean Albums"
@@ -154,7 +154,7 @@
         "subject": "Collection",
         "title": "Between 1&2: Broadcast and Musicplant photocards have been added.",
         "date": "05/12/2023",
-        "thumbnail": "/images/thumbnail/Between_1&2.jpg",
+        "thumbnail": "/images/thumbnail/Between_1&2.webp",
         "alt": "Between 1&2 cards thumbnail",
         "era": "B1&2",
         "category": "Korean Albums"
@@ -164,7 +164,7 @@
         "subject": "Collection",
         "title": "Fancy: Broadcast photocards have been added.",
         "date": "03/12/2023",
-        "thumbnail": "/images/thumbnail/fancy_you_cover.jpg",
+        "thumbnail": "/images/thumbnail/Fancyyou.webp",
         "alt": "Fancy cards thumbnail",
         "era": "Fancy",
         "category": "Korean Albums"
@@ -174,7 +174,7 @@
         "subject": "Collection",
         "title": "D'Festa Mini Edition: PVC & lenticular photocards have been added.",
         "date": "27/11/2023",
-        "thumbnail": "/images/thumbnail/dfesta_collection.jpeg",
+        "thumbnail": "/images/thumbnail/dfesta.webp",
         "alt": "D'festa cards thumbnail",
         "era": "DFesta",
         "category": "Promos"
@@ -184,7 +184,7 @@
         "subject": "Collection",
         "title": "SSJYP Nation: Superstar In London photocards have been added.",
         "date": "27/11/2023",
-        "thumbnail": "/images/thumbnail/collection.jpg",
+        "thumbnail": "/images/thumbnail/ssjypn.webp",
         "alt": "ssjyp nation cards thumbnail",
         "era": "SSJYPN",
         "category": "Promos"
@@ -194,7 +194,7 @@
         "subject": "Collection",
         "title": "SSJYP Nation: Twice Records photocards have been added.",
         "date": "22/11/2023",
-        "thumbnail": "/images/thumbnail/collection.jpg",
+        "thumbnail": "/images/thumbnail/ssjypn.webp",
         "alt": "ssjyp nation cards thumbnail",
         "era": "SSJYPN",
         "category": "Promos"

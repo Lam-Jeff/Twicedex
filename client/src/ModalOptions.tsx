@@ -1,5 +1,7 @@
+import { useContext } from 'react';
 import { RxCross2 } from 'react-icons/rx';
 import { useNavigate, useLocation } from 'react-router-dom';
+import { AuthContext } from './authProvider';
 
 
 export interface setOptionsProps {
@@ -27,22 +29,13 @@ export interface setOptionsProps {
      * Remove all cards from collection list.
      */
     collectionNone: () => void;
-
-    /**
-     * Display only cards in the collection list.
-     */
-    displayOnlyChecked: () => void
-
-    /**
-     * Display only cards in the wish list.
-     */
-    displayOnlyWished: () => void
 }
 
-export const ModalOptions = ({ setIsOpen, wishesAll, collectionAll, wishesNone, collectionNone, displayOnlyChecked, displayOnlyWished }: setOptionsProps) => {
+export const ModalOptions = ({ setIsOpen, wishesAll, collectionAll, wishesNone, collectionNone }: setOptionsProps) => {
 
     const navigate = useNavigate();
     const location = useLocation();
+    const {user} = useContext(AuthContext);
 
     /**
      * Go to settings page.
@@ -59,8 +52,6 @@ export const ModalOptions = ({ setIsOpen, wishesAll, collectionAll, wishesNone, 
             </div>
             <div className='divers'>
                 <h3>DIVERS</h3>
-                <button onClick={displayOnlyChecked} aria-label='Display owned cards' >Show only owned cards</button>
-                <button onClick={displayOnlyWished} aria-label='Display wished cards'>Show only wished cards</button>
             </div>
             <div className='additions'>
                 <h3>ADDITIONS</h3>

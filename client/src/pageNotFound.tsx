@@ -8,7 +8,7 @@ export function PageNotFound() {
         }}>
       <h2>404 Error</h2>
       <p>We cannot find that page!</p>
-      <NavLink to='/' aria-label={`Go to home page`}>Take me back to Home</NavLink>
+      <NavLink to='/home' aria-label={`Go to home page`}>Take me back to Home</NavLink>
     </div>
   )
 }

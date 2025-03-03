@@ -34,11 +34,7 @@ export const Header = () => {
       <div className="banner">
         <div className="banner__logo">
           <h1 className='banner__logo__container'>
-            <Link to="/" aria-label={`Go to home page`}
-              state={{
-                ...location.state,
-                from: location.pathname
-              }}>
+            <Link to="/" aria-label={`Go to home page`}>
               TWICEDEX
             </Link>
           </h1>

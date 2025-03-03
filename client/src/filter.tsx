@@ -1,13 +1,16 @@
-import { useState, useEffect, useMemo } from 'react';
+import { useState, useEffect, useMemo, useContext } from 'react';
 import { Checkbox } from './checkbox';
 import { ICardsProps } from './collection';
-import { getLocalStoragePreferences, getValuesArrayFromUrl, filterValues, firstElementOfCategory } from './helpers';
-import { useLocation, useSearchParams } from 'react-router-dom';
+import { getLocalStoragePreferences, filterValues, firstElementOfCategory } from './helpers';
 
-import albumsList from './files/albums.json'
-import benefitsList from './files/benefits.json'
-import categoriesList from './files/categories.json'
-import membersList from './files/members.json'
+import albumsFile from './files/albums.json'
+import benefitsFile from './files/benefits.json'
+import categoriesFile from './files/categories.json'
+import membersFile from './files/members.json'
+import { TAlbumsProps } from './types/albums';
+import { UrlContext } from './urlProvider';
+import { AuthContext } from './authProvider';
+import { useLocation } from 'react-router-dom';
 
 interface IFilterProps {
     /**
@@ -51,84 +54,95 @@ interface IFilterProps {
     handleFilterBox: () => void;
 }
 
-interface IAlbumsProps {
-    /**
-     * Name of the album.
-     */
-    name: string;
-
-    /**
-     * boolean to check wether the album is selected or not.
-     */
-    checked: boolean;
-
-    /**
-     * Category array of the album.
-     */
-    categories: string[];
-
-    /**
-     * Member array of the album.
-     */
-    members: string[];
-
-    /**
-     * Benefit array of the album.
-     */
-    benefits: string[];
-
-    /**
-     * boolean to check wether the album is displayed or not.
-     */
-    display: boolean;
-
-    /**
-     * Code of the album.
-     */
-    code: string;
-}
-
 export const Filter = ({ setCards, cards, filter, album, setAlbum, category, setCategory, handleFilterBox }: IFilterProps) => {
-    const [searchParams, setSearchParams] = useSearchParams();
-    const location = useLocation()
-    const preferences: string[] = getLocalStoragePreferences('preferences-members')
-    const benefitsParams = searchParams.get('benefits')
-    const membersParams = searchParams.get('members')
-    const displayParams = searchParams.get('display')
-    const categories: { name: string, checked: boolean }[] = categoriesList;
-
-    const [prevAlbum, setPrevAlbum] = useState(album)
-    const [prevCategory, setPrevCategory] = useState(category)
-    const [focusCategory, setFocusCategory] = useState(false)
+    const location = useLocation();
+    const SEARCH_TYPE_DEFAULT_VALUE = location.state ? location.state.radioType : "All";
+    const SEARCH_VALUES = ["All", "In collection", "Not in collection", "In wishlist"];
+    const { searchParams, setSearchParams, updateParams, categoryParam, codeParam } = useContext(UrlContext);
+    const { cardsData, wishesData } = useContext(AuthContext);
+    const [searchType, setSearchType] = useState(SEARCH_TYPE_DEFAULT_VALUE);
+    const membersLocalStorage = localStorage.getItem("members");
+    const benefitsLocalStorage = localStorage.getItem("benefits");
+    const categories: { name: string, checked: boolean }[] = categoriesFile;
+    const [focusCategory, setFocusCategory] = useState(false);
     const [focusAlbum, setFocusAlbum] = useState(false);
-    const [albums, setAlbums] = useState<IAlbumsProps[]>(albumsList)
-    const [members, setMembers] = useState<{ name: string, checked: boolean, display: boolean }[]>(() => {
-        let newMembers = membersList;
-        if (preferences) {
-            newMembers = newMembers.map(member => preferences.includes(member.name) ?
-                { ...member, checked: true } : { ...member, checked: false })
-        }
-        return newMembers
-    });
+    const [albums, setAlbums] = useState<TAlbumsProps[]>(albumsFile);
+    const [members, setMembers] = useState<{ name: string, checked: boolean, display: boolean }[]>(membersFile);
+    const [benefits, setBenefits] = useState<{ name: string, checked: boolean, display: boolean }[]>(benefitsFile);
 
-    const [benefits, setBenefits] = useState<{ name: string, checked: boolean, display: boolean }[]>(benefitsList);
     useEffect(() => {
         updateCategories(category);
         updateAlbums(album);
-    }, [])
+        applyUpdates();
+    }, []);
 
     useEffect(() => {
-        location.state = {
-            from: '/collection',
-            era: albums.filter(object => object.name === album)[0].code,
-            category: category
-        };
-    }, [location]);
+        updateParams(benefits, members);
+        applyUpdates();
+    }, [members, benefits]);
 
+    const filterMembers = useMemo(() => filterValues(members), [members]);
+    const filterBenefits = useMemo(() => filterValues(benefits), [benefits]);
 
-    const filterMembers = useMemo(() => filterValues(members), [members])
-    const filterBenefits = useMemo(() => filterValues(benefits), [benefits])
-    const filterAlbums = useMemo(() => filterValues(albums), [albums])
+    const handleSearchTypeChange = (value: string) => {
+        setSearchType(value);
+        let currentCards = cards.filter((object) =>
+            filterBenefits.includes(object.benefit)
+            && album === object.era
+            && object.categories.includes(category)
+            && filterMembers.some(member => object.members.includes(member))
+        ).map(_card => _card.id);
+        let newCards = cards;
+        switch (value) {
+            case "All":
+                newCards = newCards.map(_card => currentCards.includes(_card.id) ? { ..._card, display: true } : { ..._card, display: false });
+                break;
+            case "In collection":
+                newCards = newCards.map(_card => currentCards.includes(_card.id) && cardsData.includes(_card.id) ? { ..._card, display: true } : { ..._card, display: false });
+                break;
+            case "Not in collection":
+                newCards = newCards.map(_card => currentCards.includes(_card.id) && !cardsData.includes(_card.id) ? { ..._card, display: true } : { ..._card, display: false })
+                break;
+            case "In wishlist":
+                newCards = newCards.map(_card => currentCards.includes(_card.id) && wishesData.includes(_card.id) ? { ..._card, display: true } : { ..._card, display: false })
+                break;
+        }
+        setCards(newCards);
+    }
+
+    const applyUpdates = () => {
+        let newCards = cards;
+
+        if (searchType === "All") {
+            newCards = cards.map((object) => {
+                filterBenefits.includes(object.benefit)
+                    && album === object.era
+                    && object.categories.includes(category)
+                    && filterMembers.some(member => object.members.includes(member)) ? object.display = true : object.display = false;
+                return object;
+            });
+        }
+        else if (searchType === "In collection") {
+            newCards = cards.map((object) => {
+                filterBenefits.includes(object.benefit)
+                    && album === object.era
+                    && object.categories.includes(category)
+                    && filterMembers.some(member => object.members.includes(member)) && cardsData.includes(object.id) ? object.display = true : object.display = false;
+                return object;
+            });
+        }
+        else if (searchType === "In wishlist") {
+            newCards = cards.map((object) => {
+                filterBenefits.includes(object.benefit)
+                    && album === object.era
+                    && object.categories.includes(category)
+                    && filterMembers.some(member => object.members.includes(member)) && wishesData.includes(object.id) ? object.display = true : object.display = false;
+                return object;
+            });
+        }
+
+        setCards(newCards);
+    };
 
     /**
      * Update the member array.
@@ -136,37 +150,8 @@ export const Filter = ({ setCards, cards, filter, album, setAlbum, category, set
      * @param {number} index - number representing the member to update in the array
      */
     const updateMembers = (index: number) => {
-        const newMembers = members.map((object, currentIndex) => currentIndex === index ? { ...object, checked: !object.checked } : object)
-        const filteredMembers = filterValues(newMembers)
-        const filteredBenefits = filterBenefits
-        const filteredAlbums = filterAlbums
-        const newCards = cards.map((object) => {
-            object.members.some(member => filteredMembers.includes(member)
-                && filteredAlbums.includes(object.era)
-                && object.categories.includes(category)
-                && filteredBenefits.includes(object.benefit)) ? object.display = true : object.display = false;
-            return object
-        })
-
-        let params = {}
-
-        if (newMembers.filter(member => member.checked).length) {
-            params = {
-                benefits: JSON.stringify(benefits.filter(benefit => benefit.checked).map(benefit => benefit.name)),
-                members: JSON.stringify(newMembers.filter(member => member.checked).map(member => member.name)),
-                display: displayParams ? JSON.parse(displayParams) : 0
-            }
-        } else {
-            params = {
-                benefits: JSON.stringify(benefits.filter(benefit => benefit.checked).map(benefit => benefit.name)),
-                display: displayParams ? JSON.parse(displayParams) : 0
-            }
-        }
-
-        setSearchParams(params)
-        setCards(newCards)
-        setMembers(newMembers)
-
+        const newMembers = members.map((object, currentIndex) => currentIndex === index ? { ...object, checked: !object.checked } : object);
+        setMembers(newMembers);
     }
 
     /**
@@ -175,37 +160,8 @@ export const Filter = ({ setCards, cards, filter, album, setAlbum, category, set
      * @param {number} index - number representing the benefit to update in the array
      */
     const updateBenefits = (index: number) => {
-        const newBenefits = benefits.map((object, currentIndex) => currentIndex === index ? { ...object, checked: !object.checked } : object)
-        const filteredBenefits = filterValues(newBenefits)
-        const filteredMembers = filterMembers
-        const filteredAlbums = filterAlbums
-        const newCards = cards.map((object) => {
-            filteredBenefits.includes(object.benefit)
-                && filteredAlbums.includes(object.era)
-                && object.categories.includes(category)
-                && filteredMembers.some(member => object.members.includes(member)) ? object.display = true : object.display = false;
-            return object;
-        })
-
-        let params = {}
-
-        if (newBenefits.filter(benefit => benefit.checked).length) {
-            params = {
-                benefits: JSON.stringify(newBenefits.filter(benefit => benefit.checked).map(benefit => benefit.name)),
-                members: JSON.stringify(members.filter(member => member.checked).map(member => member.name)),
-                display: displayParams ? JSON.parse(displayParams) : 0
-            }
-        } else {
-            params = {
-                members: JSON.stringify(members.filter(member => member.checked).map(member => member.name)),
-                display: displayParams ? JSON.parse(displayParams) : 0
-            }
-        }
-
-        setSearchParams(params)
-        setCards(newCards);
+        const newBenefits = benefits.map((object, currentIndex) => currentIndex === index ? { ...object, checked: !object.checked } : object);
         setBenefits(newBenefits);
-
     }
 
     /**
@@ -214,58 +170,45 @@ export const Filter = ({ setCards, cards, filter, album, setAlbum, category, set
      * @param {string} [newAlbum="The Story Begins"] - number representing the album to update in the array
      */
     const updateAlbums = (newAlbum: string = 'The Story Begins') => {
-        const newAlbums = albums.map((object) => object.name === newAlbum ? { ...object, checked: true } : { ...object, checked: false })
-        const checkedMembers = newAlbums.filter(object => object.checked)[0].members.some(member => preferences.includes(member))
+        const newAlbums = albums.map((object) => object.name === newAlbum ? { ...object, checked: true } : { ...object, checked: false });
+        const currentMembers = albums.find(_album => _album.name === newAlbum)!.members;
+        const currentBenefits = albums.find(_album => _album.name === newAlbum)!.benefits;
+        const currentCode = albums.find(_album => _album.name === newAlbum)!.code;
 
-        let newMembers = members.map((object) =>
-            albums.some(album => album.name === newAlbum && album.members.includes(object.name)) ?
-                { ...object, display: true, checked: preferences.includes(object.name) ? true : !checkedMembers ? true : false }
+
+        let newMembers = members.map(_object =>
+            currentMembers.includes(_object.name) ?
+                { ..._object, display: true, checked: true }
                 :
-                { ...object, display: false, checked: false }
-        )
+                { ..._object, display: false, checked: false }
+        );
+        let newBenefits = benefits.map(_object =>
+            currentBenefits.includes(_object.name) ?
+                { ..._object, display: true, checked: true }
+                :
+                { ..._object, display: false, checked: false }
+        );
+        if (currentCode === codeParam) {
+            if (membersLocalStorage) {
+                newMembers = newMembers.map(_object =>
+                    membersLocalStorage.includes(_object.name) ?
+                        { ..._object, checked: true }
+                        :
+                        { ..._object, checked: false }
+                );
+            };
 
-        const filteredAlbums = filterValues(newAlbums)
-        const benefitsCards = newAlbums.filter(album => album.checked)[0].benefits
-        let newBenefits = benefits.map((object) => {
-            if (albums.some(album => album.name === newAlbum
-                && album.benefits.includes(object.name)
-                && benefitsCards.includes(object.name))) {
-                object.display = true;
-                object.checked = true;
-            }
-            else {
-                object.display = false;
-                object.checked = false;
-            }
-            return object
-        })
-        if (prevAlbum === newAlbum) {
-            newMembers = getValuesArrayFromUrl(membersParams, newMembers)
-            newBenefits = getValuesArrayFromUrl(benefitsParams, newBenefits)
-        } else {
-            setPrevAlbum(newAlbum)
+            if (benefitsLocalStorage) {
+                newBenefits = newBenefits.map(_object =>
+                    benefitsLocalStorage.includes(_object.name) ?
+                        { ..._object, checked: true }
+                        :
+                        { ..._object, checked: false }
+                );
+            };
         }
-
-        const params = {
-            benefits: JSON.stringify(newBenefits.filter(benefit => benefit.checked).map(benefit => benefit.name)),
-            members: JSON.stringify(newMembers.filter(member => member.checked).map(member => member.name)),
-            display: displayParams ? JSON.parse(displayParams) : 0
-        }
-
-        const filteredMembers = filterValues(newMembers)
-
-        const newCards = cards.map((object) => {
-            object.members.some(member => filteredMembers.includes(member))
-                && filteredAlbums.includes(object.era)
-                && object.categories.includes(category)
-                && newBenefits.filter(benefit => benefit.checked).map(benefit => benefit.name).includes(object.benefit) ? object.display = true : object.display = false;
-            return object;
-        })
-
-        setSearchParams(params);
         setMembers(newMembers);
         setBenefits(newBenefits);
-        setCards(newCards);
         setAlbums(newAlbums);
         setAlbum(newAlbum);
     }
@@ -276,72 +219,60 @@ export const Filter = ({ setCards, cards, filter, album, setAlbum, category, set
      * @param {string} [newCategory="Korean Albums"] - number representing the category to update in the array
      */
     const updateCategories = (newCategory: string = 'Korean Albums') => {
+        const firstElement = firstElementOfCategory[newCategory];
         const newAlbums = albums.map((object, currentIndex) => {
             if (object.categories.some(categoryObject => newCategory === categoryObject)) {
                 object.display = true;
-                object.checked = currentIndex === firstElementOfCategory[newCategory];
+                object.checked = currentIndex === firstElement;
             } else {
                 object.display = false;
                 object.checked = false;
             }
             return object
         })
-        const filteredAlbums = filterValues(newAlbums)
-        const checkedMembers = albums[firstElementOfCategory[newCategory]].members.some(member => preferences.includes(member))
+        const filteredAlbums = filterValues(newAlbums);
 
-        let newBenefits = benefits.map((object) => {
-            if (albums[firstElementOfCategory[newCategory]].benefits.includes(object.name)
-                && albums[firstElementOfCategory[newCategory]].categories.some(categoryObject => newCategory === categoryObject)) {
-                object.display = true;
-                object.checked = true
-            }
-            else {
-                object.display = false;
-                object.checked = false;
-            }
+        const currentMembers = albums[firstElement].members;
+        const currentBenefits = albums[firstElement].benefits;
 
-            return object
-        })
-
-        let newMembers = members.map((object) =>
-            albums.some(album => album.members.includes(object.name)
-                && album.checked) ?
-                { ...object, display: true, checked: preferences.includes(object.name) ? true : !checkedMembers ? true : false }
+        let newMembers = members.map(_object =>
+            currentMembers.includes(_object.name) ?
+                { ..._object, display: true, checked: true }
                 :
-                { ...object, display: false, checked: false }
-        )
+                { ..._object, display: false, checked: false }
+        );
+        let newBenefits = benefits.map(_object =>
+            currentBenefits.includes(_object.name) ?
+                { ..._object, display: true, checked: true }
+                :
+                { ..._object, display: false, checked: false }
+        );
 
-        if (prevCategory === newCategory) {
-            newMembers = getValuesArrayFromUrl(membersParams, newMembers)
-            newBenefits = getValuesArrayFromUrl(benefitsParams, newBenefits)
-        }
-        else {
-            setPrevCategory(newCategory)
-        }
+        if (newCategory === categoryParam) {
+            if (membersLocalStorage) {
+                newMembers = newMembers.map(_object =>
+                    membersLocalStorage.includes(_object.name) ?
+                        { ..._object, checked: true }
+                        :
+                        { ..._object, checked: false }
+                );
+            };
 
+            if (benefitsLocalStorage) {
+                newBenefits = newBenefits.map(_object =>
+                    benefitsLocalStorage.includes(_object.name) ?
+                        { ..._object, checked: true }
+                        :
+                        { ..._object, checked: false }
+                );
+            };
+        };
 
-        const params = {
-            benefits: JSON.stringify(newBenefits.filter(benefit => benefit.checked).map(benefit => benefit.name)),
-            members: JSON.stringify(newMembers.filter(member => member.checked).map(member => member.name)),
-            display: displayParams ? JSON.parse(displayParams) : 0
-        }
-        const filteredMembers = filterValues(newMembers)
-        const newCards = cards.map((object) => {
-            object.members.some(member => filteredMembers.includes(member))
-                && filteredAlbums.includes(object.era)
-                && object.categories.includes(newCategory)
-                && newBenefits.filter(benefit => benefit.checked).map(benefit => benefit.name).includes(object.benefit) ? object.display = true : object.display = false;
-            return object;
-        })
-
-        setSearchParams(params)
         setMembers(newMembers);
         setBenefits(newBenefits);
-        setCards(newCards)
-        setPrevAlbum(filteredAlbums[0])
-        setAlbum(filteredAlbums[0])
-        setAlbums(newAlbums)
-        setCategory(newCategory)
+        setAlbum(filteredAlbums[0]);
+        setAlbums(newAlbums);
+        setCategory(newCategory);
     }
 
     /**
@@ -372,13 +303,8 @@ export const Filter = ({ setCards, cards, filter, album, setAlbum, category, set
                 newCards.push({ ...card, display: true }) :
                 newCards.push(card)
         })
-        const params = {
-            benefits: JSON.stringify(newBenefits.filter(benefit => benefit.checked).map(benefit => benefit.name)),
-            members: JSON.stringify(newMembers.filter(member => member.checked).map(member => member.name)),
-            display: displayParams ? JSON.parse(displayParams) : 0
-        }
-        setSearchParams(params)
-        setCards(newCards)
+
+        setCards(newCards);
 
     }
 
@@ -402,8 +328,8 @@ export const Filter = ({ setCards, cards, filter, album, setAlbum, category, set
             )
 
             if (searchParams.has('members')) {
-                searchParams.set('members', "false")
-                setSearchParams(searchParams)
+                searchParams.set('members', "false");
+                setSearchParams(searchParams, { replace: true });
             }
         }
         else if (filter === "benefits") {
@@ -419,17 +345,10 @@ export const Filter = ({ setCards, cards, filter, album, setAlbum, category, set
             )
 
             if (searchParams.has('benefits')) {
-                searchParams.set('benefits', "false")
-                setSearchParams(searchParams)
+                searchParams.set('benefits', "false");
+                setSearchParams(searchParams, { replace: true });
             }
         }
-    }
-
-    /**
-     * Reset filter box
-     */
-    const reset = () => {
-        updateCategories()
     }
 
     /**
@@ -462,13 +381,13 @@ export const Filter = ({ setCards, cards, filter, album, setAlbum, category, set
         return numberElementsSelected === data.filter(element => element.display).length
     }
 
-        /**
-     * Disable unselect all button or not
-     * 
-     * @param {{ name: string, checked: boolean}[]} data - array representing elements of a filter
-     * 
-     * @returns {boolean}
-     */
+    /**
+    * Disable unselect all button or not
+    * 
+    * @param {{ name: string, checked: boolean}[]} data - array representing elements of a filter
+    * 
+    * @returns {boolean}
+    */
     const checkDisabledUnselectAllButton = (data: { name: string, checked: boolean }[]) => {
         const numberElementsSelected = data.filter(element => element.checked).length
         return numberElementsSelected === 0;
@@ -485,19 +404,17 @@ export const Filter = ({ setCards, cards, filter, album, setAlbum, category, set
             <div className='inputs__container'>
                 <div className='select__container'>
                     <div className={focusCategory ? 'input__container active' : 'input__container'}>
-                        <div className='checkboxes__container'>
-                            <select name="select-category"
-                                id="select-category" value={category}
-                                onChange={handleChangeCategory}
-                                onClick={() => setFocusCategory(prevState => !prevState)}
-                                onBlur={() => setFocusCategory(false)}>
-                                {categories.map((object) => {
-                                    return (
-                                        <option value={object.name} key={`option_${object.name}`}>{object.name}</option>
-                                    )
-                                })}
-                            </select>
-                        </div>
+                        <select name="select-category"
+                            id="select-category" value={category}
+                            onChange={handleChangeCategory}
+                            onClick={() => setFocusCategory(prevState => !prevState)}
+                            onBlur={() => setFocusCategory(false)}>
+                            {categories.map((object) => {
+                                return (
+                                    <option value={object.name} key={`option_${object.name}`}>{object.name}</option>
+                                )
+                            })}
+                        </select>
                     </div>
                     <div className={focusAlbum ? 'input__container active' : 'input__container'}>
                         <select name="select-album" id="select-album" value={album}
@@ -574,11 +491,23 @@ export const Filter = ({ setCards, cards, filter, album, setAlbum, category, set
                             )
                         })}
                     </div>
-
                 </div>
-                <div className='input__container'>
-                    <div className='buttons__container'>
-                        <button onClick={reset} aria-label='Reset filters'>Reset</button>
+
+                <div className="input__container">
+                    <div className={`radio__container`}>
+                        {
+                            SEARCH_VALUES.map((value) => {
+                                return (<div className={`radio__container__item-${value}`} key={`search-type-box-${value}`}>
+                                    <input type="radio"
+                                        id={value}
+                                        value={value}
+                                        checked={searchType === value}
+                                        onChange={() => handleSearchTypeChange(value)}
+                                        key={`search-type-input-${value}`} />
+                                    <label htmlFor={value} key={`search-type-label-${value}`} >{value}</label>
+                                </div>)
+                            })
+                        }
                     </div>
                 </div>
             </div>

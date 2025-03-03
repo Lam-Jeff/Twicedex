@@ -1,8 +1,9 @@
 import React, { useContext, useRef } from "react";
 import { AuthContext } from "./authProvider";
 export const Login = () => {
-    const { signIn, signUp } = useContext(AuthContext);
+    const { signIn, signUp, forgotPassword } = useContext(AuthContext);
     const buttonRef = useRef<string | null>(null);
+    const emailRef = useRef<HTMLInputElement>(null);
 
     /**
      * Get name of the clicked button.
@@ -12,7 +13,7 @@ export const Login = () => {
     const handleClick = (event: React.MouseEvent<HTMLElement>) => {
         buttonRef.current = event.currentTarget.id;
     }
-    
+
     /**
      * Submit form.
      * 
@@ -25,9 +26,14 @@ export const Login = () => {
         let password = target.password.value;
         let id = buttonRef.current;
         if (id === "login-button") signIn(email, password);
-        else signUp(email, password);
+        else if (id === "signup-button") signUp(email, password);
         target.reset();
     };
+
+    const handleForgotPassword = () => {
+        if (emailRef.current)
+            forgotPassword(emailRef.current.value);
+    }
 
     return (
         <div className="login-container">
@@ -42,6 +48,7 @@ export const Login = () => {
                         placeholder="Email"
                         className="login-container__form-control__input-email"
                         aria-label="Enter email"
+                        ref={emailRef}
                     />
                 </div>
                 <div className="login-container__form-control">
@@ -56,12 +63,13 @@ export const Login = () => {
                         aria-label="Enter password"
                     />
                 </div>
-                <div className="login-container__form-control-buttons">
+                <button className="login-container__form-control__forgot-password-button" onClick={handleForgotPassword}>Forgot your password?</button>
+                <div className="login-container__form-control__buttons">
                     <button id="login-button"
-                        className="login-container__form-control__button-login"
+                        className="login-container__form-control__buttons-login"
                         aria-label="Click to login"
                         onClick={e => handleClick(e)}>Login</button>
-                    <button id="signup-button" className="login-container__form-control__button-signup" aria-label="Click to create account">Sign Up</button>
+                    <button id="signup-button" className="login-container__form-control__buttons-signup" aria-label="Click to create account" onClick={e => handleClick(e)}>Sign Up</button>
                 </div>
             </form>
         </div>

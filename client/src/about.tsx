@@ -1,8 +1,8 @@
-import { Link, useLocation } from "react-router-dom";
+import { Link } from "react-router-dom";
+import global from "./files/global";
 
 export const About = () => {
-  const date = '23/09/2024'
-  const location = useLocation()
+  const date = '06/02/2025';
   return (
     <div className="about-container">
       <h2>About</h2>
@@ -20,26 +20,10 @@ export const About = () => {
       </div>
       <div className="policy-box">
         <div>
-          <h3>Cookies</h3>
-          <p>No advertising or tracking cookies are used when you use this website.If cookies are to be added in the future, we will ask for your consent, which you can revoke at any time.</p>
-        </div>
-        <div>
-          <div>
-            <h3>Data</h3>
-            <p>
-              Personal data is not requested to visit this website.However, you will be required to create an account in order to save your data in the <Link to={{ pathname: `/collection/${location.state.category}/${location.state.era}/`, search: location.search }} aria-label='Go to Collection page'>Collection</Link> page. This data keeps track of your card collection. Data is not shared.
-            </p>
-          </div>
-          <h3>Links to other websites</h3>
-          <p>
-            The website may contain links to third-party websites. These websites may have different policies and practices. Users should review the policy of each website they visit.
-          </p>
-        </div>
-        <div>
           <h3>Copyrights</h3>
           <p>
             Images come from various sources such as Pinterest, Twitter or Google Images. This website brings together all these images.<br />
-            Most of the images on <Link to={{ pathname: `/collection/${location.state.category}/${location.state.era}/`, search: location.search }} aria-label='Go to Collection page'>Collection</Link> have been found on this <Link to='https://www.pinterest.fr/Ariririu/' aria-label='Exit website and go to Pinterest'>Pinterest</Link> account.<br />
+            Most of the images on <Link to={`/collection/${global.CATEGORY_DEFAULT_VALUE}/${global.ERA_DEFAULT_VALUE}`} aria-label='Go to Collection page'>Collection</Link> have been found on this <Link to='https://www.pinterest.fr/Ariririu/' aria-label='Exit website and go to Pinterest'>Pinterest</Link> account.<br />
             Credits whenever it is possible:
           </p>
           <ul>
@@ -71,15 +55,10 @@ export const About = () => {
             <li>@njbily</li>
             <li>JYP Entertainment</li>
           </ul>
-
           <p>All icons in <Link to='/profile' aria-label='Go to Profile page'>Profile</Link> are designed by <Link to='https://www.freepik.com/' aria-label='Exit website and Go to Freepik'>Freepik</Link></p>
           <p>
             Given the undetermined origin of some images, you can request the removal of images or the addition of credits via <Link to='mailto:twicedex.contact@gmail.com'>email</Link>.
           </p>
-        </div>
-        <div>
-          <h3>Changes to Policy</h3>
-          <p>Policy may be modified at any time. Any changes will be visible on this page. Users may check the Policy as often as possible for further information. By using this website, you agree with the Policy.</p>
         </div>
       </div>
     </div>

@@ -2,10 +2,10 @@ import { useContext, useState, useEffect } from "react";
 import { AuthContext } from "./authProvider";
 import { useNavigate } from "react-router-dom";
 import { computeProgressionPercentByEra, computeProgressionPercentByCategory, checkAchievement } from "./helpers";
-import albums from './files/albums.json'
-import achievements from './files/achievements.json'
-import cardsFile from './files/cards.json'
-import categories from './files/categories.json'
+import albums from './files/albums.json';
+import achievements from './files/achievements.json';
+import cardsFile from './files/cards.json';
+import categories from './files/categories.json';
 import { TAchievementProps } from './types/achievement';
 import { Achievement } from "./achievement";
 
@@ -21,8 +21,7 @@ export const Profile = () => {
     achievements.map(achievement => {
         let result = checkAchievement(achievement, [], cardsFile, cardsList, progressionByEra, progressionByCategory);
         if (result) achievementsList.push(achievement.id);
-    })
-        ;
+    });
 
     useEffect(() => {
         const timeout = setInterval(() => {
@@ -30,7 +29,7 @@ export const Profile = () => {
         }, 500)
 
         return () => { clearInterval(timeout) }
-    }, [achievement])
+    }, [achievement]);
 
     /**
      * Handle log out.
@@ -114,13 +113,13 @@ export const Profile = () => {
                 <div className="profile-container__achievements__main">
                     {
                         achievements.map((object, index) => {
-                            return (<>
+                            return (
                                 <Achievement handleClickOnAchievement={handleClickOnAchievement}
                                     achievement={achievement}
                                     currentAchievement={object}
                                     currentIndex={index}
-                                    userAchievementsList={achievementsList} />
-                            </>
+                                    userAchievementsList={achievementsList}
+                                    key={`achievement-component-${object.name}`} />
                             )
                         })
                     }
@@ -135,23 +134,6 @@ export const Profile = () => {
                         }>{achievement?.description}</p>
                     </>}
                 </div>
-            </div>
-            <div className="profile-container__progression">
-                <ul className="profile-container__progression__list">
-                    {
-                        albums.map((album, _) => {
-                            return (<li
-                                className="profile-container__progression__list__item"
-                                key={`progression_${album.code}`}>
-                                <span className="profile-container__progression__list__item__name"
-                                    key={`progression_name_${album.code}`}>{album.name}</span>
-                                <div className={`profile-container__progression__list__item__progressionbar-${progressionByEra[album.name] ? progressionByEra[album.name] : 0}`}
-                                    key={`progression_progressionbar_${album.code}`}>
-                                </div>
-                            </li>)
-                        })
-                    }
-                </ul>
             </div>
         </div >
     )

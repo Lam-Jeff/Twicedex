@@ -1,6 +1,4 @@
 import { useState } from 'react';
-
-import Footer from './footer';
 import { Pagination } from './pagination';
 
 import { TNewsProps } from './types/news';
@@ -44,7 +42,6 @@ export const Home = () => {
             data={newsArray} />
         </section>
       </div>
-      <Footer />
     </>
 
   )

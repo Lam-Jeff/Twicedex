@@ -1,5 +1,5 @@
-import { useState, useEffect, useRef } from "react"
-import { Link, useLocation } from 'react-router-dom';
+import { useState, useEffect, useRef, useContext } from "react"
+import { Link } from 'react-router-dom';
 
 import { TNewsProps } from "./types/news";
 import { PaginationIndicator } from "./paginationIndicators";
@@ -7,6 +7,10 @@ import { PaginationIndicator } from "./paginationIndicators";
 import { MdOutlineKeyboardDoubleArrowRight } from 'react-icons/md'
 import { getPages } from "./helpers";
 import { Loading } from "./loading";
+import { UrlContext } from "./urlProvider";
+import benefitsFile from "./files/benefits.json";
+import membersFile from "./files/members.json";
+import albumsFile from "./files/albums.json"
 
 interface PaginationProps {
     /**
@@ -20,7 +24,7 @@ interface PaginationProps {
     data: TNewsProps[]
 }
 export const Pagination = ({ sizePage, data }: PaginationProps) => {
-    const { pathname } = useLocation()
+    const { setCodeUrl, setCategoryUrl, setDisplayUrl, updateParams } = useContext(UrlContext);
     const [currentPage, setCurrentPage] = useState(1)
     const [isLoadingThumbnail, setIsLoadingThumbnail] = useState(true)
     const [numberElementPerPage, setNumberElementPerPage] = useState(sizePage)
@@ -62,6 +66,28 @@ export const Pagination = ({ sizePage, data }: PaginationProps) => {
         setNumberElementPerPage((prevState: number) => prevState + 5)
     }
 
+    const handleClickOnLink = (album: string, category: string) => {
+        const currentMembers = albumsFile.find(_album => _album.code === album)!.members;
+        const currentBenefits = albumsFile.find(_album => _album.code === album)!.benefits;
+
+        let newMembers = membersFile.map(_object =>
+            currentMembers.includes(_object.name) ?
+                { ..._object, display: true, checked: true }
+                :
+                { ..._object, display: false, checked: false }
+        );
+        let newBenefits = benefitsFile.map(_object =>
+            currentBenefits.includes(_object.name) ?
+                { ..._object, display: true, checked: true }
+                :
+                { ..._object, display: false, checked: false }
+        );
+        setDisplayUrl("0");
+        setCodeUrl(album);
+        setCategoryUrl(category);
+        updateParams(newBenefits, newMembers);
+    }
+
     return (
         <div className="pagination-box">
             {itemsToDisplay.map((object, index) => {
@@ -70,13 +96,15 @@ export const Pagination = ({ sizePage, data }: PaginationProps) => {
                         key={`article_${index}`} >
                         <div className='thumbnail'
                             key={`article_thumbnail_${index}`} >
-                            <Link to={object.subject === 'Collection' ? `/collection/${object.category}/${object.era}` : '/minigame'}
-                                state={{ from: pathname }}
+                            <Link to={`/collection/${encodeURIComponent(object.category)}/${object.era}`}
                                 className='article__link'
                                 key={`article_link_thumbnail_${index}`}
-                                aria-label={`Go to ${object.subject === 'Collection' ? 'Collection' : 'Game'} page`}>
+                                aria-label={`Go to Collection page`}
+                                onClick={() => handleClickOnLink(object.era, object.category)}
+                                >
                                 <Loading isLoading={isLoadingThumbnail}
-                                    borderColor='transparent' />
+                                    borderColor='transparent'
+                                    keyIndex={index} />
                                 <img src={object.thumbnail}
                                     alt={object.alt}
                                     key={`article_thumbnail_image_${index}`}
@@ -88,17 +116,19 @@ export const Pagination = ({ sizePage, data }: PaginationProps) => {
                         </div>
                         <div className='article__content'
                             key={`article_content${index}`}>
-                            <Link to={object.subject === 'Collection' ? `/collection/${object.category}/${object.era}` : '/minigame'}
-                                state={{ from: pathname }}
+                            <Link to={`/collection/${encodeURIComponent(object.category)}/${object.era}`}
                                 key={`article_link_${index}`}
-                                aria-label={`Go to ${object.subject === 'Collection' ? 'Collection' : 'Game'} page`}>
+                                aria-label={`Go to Collection page`}
+                                onClick={() => handleClickOnLink(object.era, object.category)}
+                                >
                                 <span className='article__category'
                                     key={`article_link_${index}`}>{object.subject}</span>
                             </Link>
-                            <Link to={object.subject === 'Collection' ? `/collection/${object.category}/${object.era}` : '/minigame'}
-                                state={{ from: pathname }}
+                            <Link to={`/collection/${object.category}/${object.era}`}
                                 key={`article_link_title_${index}`}
-                                aria-label={`Go to ${object.subject === 'Collection' ? 'Collection' : 'Game'} page`}>
+                                aria-label={`Go to Collection page`}
+                                onClick={() => handleClickOnLink(object.era, object.category)}
+                                >
                                 <h3 className='article__title'
                                     key={`article_title_${index}`}>{object.title}</h3>
                             </Link>
@@ -107,10 +137,11 @@ export const Pagination = ({ sizePage, data }: PaginationProps) => {
                                 key={`article_date_${index}`}>{object.date}</time>
                             <div className='article__button'
                                 key={`article_button_${index}`}>
-                                <Link to={object.subject === 'Collection' ? `/collection/${object.category}/${object.era}` : '/minigame'}
-                                    state={{ from: pathname }}
+                                <Link to={`/collection/${encodeURIComponent(object.category)}/${object.era}`}
                                     className='article__link' key={`article_link_button_${index}`}
-                                    aria-label={`Go to ${object.subject === 'Collection' ? 'Collection' : 'Game'} page`}>
+                                    aria-label={`Go to Collection page`}
+                                    onClick={() => handleClickOnLink(object.era, object.category)}
+                                    >
                                     Go to {object.subject}
                                     <MdOutlineKeyboardDoubleArrowRight className='article__button__icon'
                                         key={`article_button_icon_${index}`} />

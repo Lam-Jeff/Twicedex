@@ -11,15 +11,15 @@ interface IAchievementProps {
 }
 export const Achievement = ({ handleClickOnAchievement, achievement, currentAchievement, currentIndex, userAchievementsList }: IAchievementProps) => {
     const [isLoading, setIsLoading] = useState(true);
-    return (
-        <>
+    return (  
             <div onClick={() => handleClickOnAchievement(currentIndex)}
                 className={`profile-container__achievements__main__item ${achievement?.id == currentAchievement.id ? "selected" : ""}`}
-                key={`achievement_${currentIndex}`}
+                key={`achievement-container-${currentIndex}`}
                 role='button'
                 aria-label={`Button for achievement ${currentAchievement.name}`}>
                 <Loading isLoading={isLoading}
-                    borderColor='white' />
+                    borderColor='white' 
+                    keyIndex={currentIndex}/>
                 {userAchievementsList.includes(currentAchievement.id) ? <img src={currentAchievement.icon_animated}
                     alt="plant-achievement-animated"
                     className="profile-container__achievements__main__item__icon-animated"
@@ -37,7 +37,6 @@ export const Achievement = ({ handleClickOnAchievement, achievement, currentAchi
                         style={{
                             display: isLoading ? 'none' : 'inline'
                         }} />}
-            </div>
-        </>
+            </div>     
     )
 }

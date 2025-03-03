@@ -26,10 +26,9 @@ interface CarouselProps {
      * Handle open/close modal.
      */
     setModal: (value: boolean) => void
-    isCardModalDetailsOpen: boolean
 }
 
-export const Carousel = ({ data, currentCardIndex, setCurrentCardIndex, setModal, isCardModalDetailsOpen }: CarouselProps) => {
+export const Carousel = ({ data, currentCardIndex, setCurrentCardIndex, setModal }: CarouselProps) => {
 
     /**
      * Initialize the slide array.
@@ -229,7 +228,8 @@ export const Carousel = ({ data, currentCardIndex, setCurrentCardIndex, setModal
     return (<>
         <div className='card-modal'>
             <Loading isLoading={isLoadingPreview}
-                borderColor='transparent' />
+                borderColor='transparent'
+                keyIndex={currentCardIndex} />
             <div className='card-modal__images-box'
                 style={{
                     transform: `translate3d(${transform.translate}px, 0, 0)`,
@@ -260,8 +260,7 @@ export const Carousel = ({ data, currentCardIndex, setCurrentCardIndex, setModal
             </div>
             <RxCross2 className='modal__cross_close' onClick={() => setModal(false)} aria-label="Close Image Preview" />
         </div>
-        <div className="carousel-container"
-            style={{ display: isCardModalDetailsOpen ? 'none' : 'block' }}>
+        <div className="carousel-container">
             <div className="carousel-container__left-arrow-container"
                 onClick={previousSlide}
                 aria-label="View Previous Image">
@@ -276,6 +275,7 @@ export const Carousel = ({ data, currentCardIndex, setCurrentCardIndex, setModal
                         aria-label={`View Image ${index + 1}`}>
                         <Loading isLoading={isLoadingCarouselImages}
                             borderColor='transparent'
+                            keyIndex={currentCardIndex}
                         />
                         <img src={object.thumbnail}
                             alt={`preview ${object.name}`}

@@ -1,18 +1,16 @@
 import { useContext, useEffect, useMemo, useState } from 'react';
-import { useLocation, useParams, useSearchParams } from 'react-router-dom';
 import { Cards } from './cards';
 import { Filter } from './filter';
-import { ModalCardDetails } from './ModalCardDetails';
 import { ModalOptions } from './ModalOptions';
 import { Carousel } from './carousel';
 import { getLengthCardsDisplayed, filterByAlbumAndCategory, filterCardsToDisplay } from './helpers'
 
 import { PiSquaresFourFill, PiSquareSplitVerticalFill } from 'react-icons/pi'
-import { MdPhotoCamera } from "react-icons/md";
 
-import cardsCollection from './files/cards.json';
-import albums from './files/albums.json';
+import cardsFile from './files/cards.json';
+import albumsFile from './files/albums.json';
 import { AuthContext } from './authProvider';
+import { UrlContext } from './urlProvider';
 
 export interface ICardsProps {
     /**
@@ -62,110 +60,39 @@ export interface ICardsProps {
 }
 
 export const Collection = () => {
+    const { codeParam, categoryParam, searchParams, displayParam, setSearchParams, getSearchParams, computeNewPath } = useContext(UrlContext);
+    const { cardsData, wishesData, updateCollection, updateWishlist, user } = useContext(AuthContext);
 
-    const { categoryParam, eraParam } = useParams();
-    const location = useLocation();
-    const [searchParams, setSearchParams] = useSearchParams();
-    const display = searchParams.get('display');
-
-    const { cardsData, updateCollection, user, updateWishlist, wishesData } = useContext(AuthContext);
-
-    const [filter, setFilter] = useState(true);
-    const [displayMode, setDisplayMode] = useState(false);
-    const [album, setAlbum] = useState<string>(albums.filter(album => album.code === eraParam)[0].name ?? "The Story Begins");
-    const [category, setCategory] = useState<string>(categoryParam?.replace('&', '/') ?? "Korean Albums");
-    const [modal, setModal] = useState(false)
-    const [isCardDetailsOpen, setIsCardDetailsOpen] = useState(false);
+    const CODE_INIT_VALUE = decodeURIComponent(codeParam);
+    const ALBUM_INIT_VALUE = albumsFile.filter(album => album.code === decodeURIComponent(CODE_INIT_VALUE))[0].name;
+    const CATEGORY_INIT_VALUE = decodeURIComponent(categoryParam);
+    const DISPLAY_INIT_VALUE = displayParam ? Boolean(Number(JSON.parse(displayParam))) : false;
+    const [album, setAlbum] = useState<string>(ALBUM_INIT_VALUE);
+    const [category, setCategory] = useState<string>(CATEGORY_INIT_VALUE);
+    const [modal, setModal] = useState(false);
     const [isOptionsOpen, setIsOptionsOpen] = useState(false);
-    const [indexCardModal, setIndexCardModal] = useState<number>(0)
-    const [wishesList, setWishesList] = useState<number[]>(() => { return wishesData ? wishesData : [] })
-    const [cardsList, setCardsList] = useState<number[]>(() => { return cardsData ? cardsData : [] })
-    const [cards, setCards] = useState<ICardsProps[]>(cardsCollection.map(card => cardsList.includes(card.id) ? { ...card, checked: true } : { ...card, checked: false }));
+    const [indexCardModal, setIndexCardModal] = useState<number>(0);
+    const [cards, setCards] = useState<ICardsProps[]>(cardsFile.map(card => {
+        return { ...card, checked: cardsData.includes(card.id), display: card.era === ALBUM_INIT_VALUE && card.categories.includes(CATEGORY_INIT_VALUE) }
+    }));
+    const [filter, setFilter] = useState(true);
+    const [displayMode, setDisplayMode] = useState(DISPLAY_INIT_VALUE);
 
-    const cardsToDiplay = useMemo(() => filterCardsToDisplay(cards), [cards])
-
-    useEffect(() => {
-        if (display) {
-            const displayParam = JSON.parse(display)
-            setDisplayMode(Number(displayParam) ? true : false)
-            searchParams.set('display', displayParam ? "1" : "0")
-            setSearchParams(searchParams)
-        }
-    }, []);
+    const cardsToDisplay = useMemo(() => filterCardsToDisplay(cards), [cards]);
 
     useEffect(() => {
-        window.history.pushState(window.history.state, '', `/collection/${location.state.category.replace('/', '&')}/${location.state.era}${location.search}`)
-    }, [location]);
-
-    useEffect(() => {
-        if (user) updateWishlist(wishesList, user.uid);
-    }, [wishesList])
-
-    useEffect(() => {
-        if (user) updateCollection(cardsList, user.uid);
-    }, [cardsList])
-
-
-    /**
-     * Handle open/close card details modal.
-     * 
-     * @param {boolean} isOpen - boolean representing whether the modal is open or not
-     * @param {number} index - index of the card selected
-     */
-    const handleCardModal = (isOpen: boolean, index: number) => {
-        setIndexCardModal(index);
-        setIsCardDetailsOpen(isOpen);
-    }
-
+        const checkSearchParams = getSearchParams("benefits") && getSearchParams('members') && getSearchParams('display');
+        if (!checkSearchParams || !album || !category) return;
+        const albumCode = albumsFile.find(object => object.name === album)!.code;
+        const displayValue = displayMode ? "1" : "0";
+        computeNewPath(category, albumCode, undefined, displayValue);
+    }, [album, category, searchParams, displayMode]);
 
     /**
      * Handle open/close the filter box.
      */
     const handleFilterBox = () => {
         setFilter(prevState => !prevState)
-    }
-
-
-    /**
-     * Add a card to the collection list.
-     * 
-     * @param {number} id - Id of the card to add
-     * @param {React.MouseEvent<HTMLElement>} event - event clicker
-     */
-    const handleCardCheck = (id: number, event: React.MouseEvent<HTMLElement>) => {
-        event.stopPropagation()
-        const newWishes = wishesList.filter(wish => wish !== id)
-        const indexOfCard = cards.findIndex(card => card.id === id)
-        if (cardsList.includes(id)) {
-            const newArray = cardsList.filter((value) => value !== id)
-            setCardsList(newArray)
-        }
-        else setCardsList([...cardsList, cards[indexOfCard].id])
-
-        setCards(prevState => {
-            const newCard = { ...prevState[indexOfCard], checked: !(prevState[indexOfCard].checked) }
-            const newCards = [...prevState]
-            newCards[indexOfCard] = newCard;
-            return newCards;
-        })
-        setWishesList(newWishes)
-    }
-
-    /**
-     * Add a card to the wish list.
-     * 
-     * @param {number} id - Id of the card to add
-     * @param {React.MouseEvent<HTMLElement>} event - event clicker
-     */
-    const handleCardWish = (id: number, event: React.MouseEvent<HTMLElement>) => {
-        event.stopPropagation()
-        const indexCard = cards.findIndex(card => card.id === id)
-        if (wishesList.includes(id)) {
-            const newArray = wishesList.filter((value) => value !== id)
-            setWishesList(newArray)
-        } else if (!cards[indexCard].checked) {
-            setWishesList([...wishesList, id])
-        }
     }
 
     /**
@@ -175,27 +102,30 @@ export const Collection = () => {
      * @param {React.MouseEvent<HTMLElement>} event - event clicker
      */
     const handleCardZoom = (index: number, event: React.MouseEvent<HTMLElement>) => {
-        event.stopPropagation()
+        event.preventDefault();
         setIndexCardModal(index)
         setModal(true);
     }
-
 
     /**
      * Change display mode.
      */
     const handleDisplayMode = () => {
-        setDisplayMode(prevState => !prevState)
-        searchParams.set('display', displayMode ? "0" : "1")
-        setSearchParams(searchParams)
+        const newDisplayValue = !displayMode;
+        setDisplayMode(newDisplayValue);
+        searchParams.set('display', newDisplayValue ? "1" : "0");
+        localStorage.setItem("display", newDisplayValue ? "1" : "0");
+        setSearchParams(searchParams, { replace: true });
     }
 
     /**
      * Add all diplayed elements to the wish list.
      */
     const wishesAll = () => {
-        const newList = [...cards.filter(card => card.display && !cardsList.includes(card.id) && !wishesList.includes(card.id)).map(card => card.id)]
-        setWishesList([...wishesList, ...newList]);
+        const newList = [...cards.filter(card => card.display && !cardsData.includes(card.id) && !wishesData.includes(card.id)).map(card => card.id)];
+        if (user) {
+            newList.forEach(_id => updateWishlist(_id, user.uid));
+        }
     }
 
     /**
@@ -203,14 +133,16 @@ export const Collection = () => {
      */
     const collectionAll = () => {
         const newList = [...cards.filter(card => card.display).map(card => card.id)]
-        const newWhishes = [...wishesList.filter(wish => !newList.includes(wish))]
-        setCards(
-            cards.map((object) =>
-                (object.display ? { ...object, checked: true } : object)
-            )
-        )
-        setCardsList([...cardsList, ...newList])
-        setWishesList(newWhishes);
+        const newWhishes = [...wishesData.filter(wish => !newList.includes(wish))]
+        if (user) {
+            newWhishes.forEach(_id => updateWishlist(_id, user.uid));
+            newList.forEach(_id => updateCollection(_id, user.uid));
+            setCards(
+                cards.map((object) =>
+                    (object.display ? { ...object, checked: true } : object)
+                )
+            );
+        }
     }
 
     /**
@@ -218,8 +150,10 @@ export const Collection = () => {
      */
     const wishesNone = () => {
         if (window.confirm('Are you sure you want to REMOVE ALL the displayed cards from your WISHLIST ?')) {
-            const newWhishes = [...wishesList.filter(id => !cards.filter(card => card.id === id)[0].display)]
-            setWishesList(newWhishes);
+            const newWhishes = [...wishesData.filter(id => !cards.filter(card => card.id === id)[0].display)]
+            if (user) {
+                newWhishes.forEach(_id => updateWishlist(_id, user.uid));
+            }
         }
     }
 
@@ -228,65 +162,27 @@ export const Collection = () => {
      */
     const collectionNone = () => {
         if (window.confirm('Are you sure you want to REMOVE ALL the displayed cards from your COLLECTION ?')) {
-            const newList = [...cardsList.filter(id => !cards.filter(card => card.id === id)[0].display)]
-            setCards(
-                cards.map((object) =>
-                    (object.era === album && object.categories.includes(category) ? { ...object, checked: false } : object)
-                )
-            )
-            setCardsList(newList)
+            const newList = [...cardsData.filter(id => !cards.filter(card => card.id === id)[0].display)];
+            if(user) {
+                newList.forEach(_id => updateCollection(_id, user.uid));
+                setCards(
+                    cards.map((object) =>
+                        (object.era === album && object.categories.includes(category) ? { ...object, checked: false } : object)
+                    )
+                );
+            }
         }
     }
 
-    /**
-     * Display only elements present in the collection list.
-     */
-    const displayOnlyChecked = () => {
-        const newCards: ICardsProps[] = cards.map(card => {
-            cardsList.includes(card.id)
-                && card.categories.includes(category)
-                && card.era === album ? card.display = true : card.display = false;
-            return card;
-        })
-        setCards(newCards)
-    }
-
-    /**
-     * Display only elements present in the wish list.
-     */
-    const displayOnlyWished = () => {
-        const newCards: ICardsProps[] = cards.map(card => {
-            wishesList.includes(card.id)
-                && card.categories.includes(category)
-                && card.era === album ? card.display = true : card.display = false;
-            return card;
-        })
-        setCards(newCards)
-    }
-
     return (
-        <div className="collection-content">
+        <div className="collection-content" >
             <div className="collection-content__option-modal">
                 {isOptionsOpen && <ModalOptions setIsOpen={setIsOptionsOpen}
                     wishesAll={wishesAll}
                     collectionAll={collectionAll}
                     wishesNone={wishesNone}
-                    collectionNone={collectionNone}
-                    displayOnlyChecked={displayOnlyChecked}
-                    displayOnlyWished={displayOnlyWished} />}
+                    collectionNone={collectionNone} />}
 
-            </div>
-            <div className="collection-content__card-details-modal">
-                {isCardDetailsOpen && <ModalCardDetails setIsOpen={setIsCardDetailsOpen}
-                    handleCardZoom={handleCardZoom}
-                    handleCardCheck={handleCardCheck}
-                    setIndexCardModal={setIndexCardModal}
-                    handleCardWish={handleCardWish}
-                    object={filterByAlbumAndCategory(cards, album, category)}
-                    indexCard={indexCardModal}
-                    wishes={wishesList}
-                    length={filterByAlbumAndCategory(cards, album, category).length}
-                />}
             </div>
             <Filter
                 setCards={setCards}
@@ -316,38 +212,24 @@ export const Collection = () => {
             </div>
 
             <div className='card-modal__container'>
-                {modal && <Carousel data={cardsToDiplay}
+                {modal && <Carousel data={cardsToDisplay}
                     currentCardIndex={indexCardModal}
                     setCurrentCardIndex={setIndexCardModal}
                     setModal={setModal}
-                    isCardModalDetailsOpen={isCardDetailsOpen}
                 />}
             </div>
 
             {
                 displayMode ? (<>
                     <div className='cards__container-1'>
-                        <div className='cards__container-1__info-bar'>
-                            <div className='card__number'>#</div>
-                            <div className='card__serie'>Benefit</div>
-                            <div className='card__picture'><MdPhotoCamera className='card__picture__icon' /></div>
-                            <div className='card__name'>
-                                Name
-                            </div>
-                        </div>
-                        {cardsToDiplay.map((object, index) => {
+                        {cardsToDisplay.map((object, index) => {
                             return (
                                 <Cards type={"display-1"}
                                     key={`card_${object.name}`}
                                     index={index}
-                                    object={object}
-                                    wishes={wishesList}
-                                    length={filterByAlbumAndCategory(cards, album, category).length}
-                                    position={filterByAlbumAndCategory(cards, album, category).indexOf(object)}
-                                    handleCardCheck={handleCardCheck}
+                                    cards={filterByAlbumAndCategory(cards, album, category)}
+                                    cardInAlbum={object}
                                     handleCardZoom={handleCardZoom}
-                                    handleCardModal={handleCardModal}
-                                    handleCardWish={handleCardWish}
                                 />
                             )
                         })}
@@ -356,19 +238,14 @@ export const Collection = () => {
                     :
                     (<>
                         <div className='cards__container-2'>
-                            {cardsToDiplay.map((object, index) => {
+                            {cardsToDisplay.map((object, index) => {
                                 return (
                                     <Cards type={"display-2"}
                                         key={`card_${object.name}`}
                                         index={index}
-                                        object={object}
-                                        wishes={wishesList}
-                                        length={filterByAlbumAndCategory(cards, album, category).length}
-                                        position={filterByAlbumAndCategory(cards, album, category).indexOf(object)}
-                                        handleCardCheck={handleCardCheck}
+                                        cards={filterByAlbumAndCategory(cards, album, category)}
+                                        cardInAlbum={object}
                                         handleCardZoom={handleCardZoom}
-                                        handleCardModal={handleCardModal}
-                                        handleCardWish={handleCardWish}
                                     />
                                 )
                             })}
@@ -381,17 +258,7 @@ export const Collection = () => {
                     opacity: ${modal ? '1' : '0'};
                     visibility: ${modal ? 'visible' : 'hidden'};
                     transform: ${modal ? 'scale(1)' : 'scale(0)'};
-                }
-
-                div.collection-content > div.collection-content__card-details-modal {
-                    opacity: ${isCardDetailsOpen ? '1' : '0'};
-                    visibility: ${isCardDetailsOpen ? 'visible' : 'hidden'};
-                }
-                body {
-                    overflow: ${isCardDetailsOpen || modal || isOptionsOpen ? "hidden" : "auto"};
-                    padding-right: ${isCardDetailsOpen || modal || isOptionsOpen ? "15px" : "0"};
-                }
-                
+                }            
                 `}
             </style>
         </div >

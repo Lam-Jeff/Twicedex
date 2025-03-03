@@ -1,28 +1,6 @@
-import { Link, useLocation } from 'react-router-dom';
-import { useEffect } from 'react';
-
+import { Link } from 'react-router-dom';
+import { FaDiscord, FaInstagram, FaTwitter, FaYoutube } from "react-icons/fa";
 function Footer() {
-  const location = useLocation()
-  location.state = {
-    from: '/',
-    era: "TSB",
-    category: "Korean Albums"
-  }
-  let albumFromUrl = location.state.era
-  let categoryFromUrl = location.state.category
-  if (location.pathname.includes('/collection')) {
-    albumFromUrl = location.pathname.split('/')[3]
-    categoryFromUrl = location.pathname.split('/')[2].replace('&', '/')
-  }
-
-  useEffect(() => {
-    if (location.state.era) {
-      albumFromUrl = location.state.era
-    }
-    if (location.state.category) {
-      categoryFromUrl = location.state.category
-    }
-  }, [location]);
 
   return (
     <footer>
@@ -31,41 +9,27 @@ function Footer() {
           <h1>TWICEDEX</h1>
           A fanmade website to keep track of your photocard collection.
         </div>
-
         <div className='container-footer__overview'>
-          <span className='container-footer__overview__title'>Overview</span>
-          <ul className='container-footer__overview__links'>
-
-            <li className='navigation-bar__collection'>
-              <Link to={{ pathname: `/collection/${categoryFromUrl}/${albumFromUrl}`, search: location.search }}
-                state={{
-                  ...location.state,
-                  from: location.pathname
-                }}
+          <ul className='container-footer__overview__links-list'>
+            <li className='navigation-bar__login'>
+              <Link to="/"
                 className='nav__listitem'
-                aria-label={`Go to collection page`}>
-                Collection
+                aria-label={`Go to Home page`}>
+                News
               </Link>
             </li>
-            <li className='navigation-bar__login'>
-              <Link to="./login"
-                state={{
-                  ...location.state,
-                  from: location.pathname
-                }}
+            <li className='navigation-bar__terms'>
+              <Link to="/terms"
                 className='nav__listitem'
-                aria-label={`Go to Login page`}>
-                Login
+
+                aria-label={`Go to terms and privacy page`}>
+                Terms and privacy
               </Link>
             </li>
             <li className='navigation-bar__about'>
               <Link to="/about"
                 className='nav__listitem'
-                state={{
-                  ...location.state,
-                  from: location.pathname
-                }}
-                aria-label={`Go to about page`}>
+                aria-label={`Go to aboutpage`}>
                 About
               </Link>
             </li>
@@ -73,19 +37,17 @@ function Footer() {
         </div>
 
         <div className='container-footer_useful-links'>
-          <span className='container-footer_useful-links__title'>Useful Links</span>
-          <ul className='container-footer_useful-links__links'>
-            <li> <Link to='https://twflix.carrd.co/#' target='_blank' aria-label='Go to Twflix website'>Twflix</Link></li>
-            <li> <Link to='https://discord.com/invite/twice' target='_blank' aria-label='Go to Twice discord'>Twice Discord</Link></li>
-            <li> <Link to='https://twitter.com/JYPETWICE' target='_blank' aria-label='Go to Twice twitter'>Twitter</Link></li>
-            <li> <Link to='https://www.youtube.com/channel/UCzgxx_DM2Dcb9Y1spb9mUJA' target='_blank' aria-label='Go to Twice Youtube channel'>Youtube</Link></li>
-            <li> <Link to='https://www.instagram.com/twicetagram/' target='_blank' aria-label='Go to Twice Instagram'>Instagram</Link></li>
+          <ul className='container-footer_useful-links__links-list'>
+            <li> <Link to='https://discord.com/invite/twice' target='_blank' aria-label='Go to Twice discord'><FaDiscord /></Link></li>
+            <li> <Link to='https://twitter.com/JYPETWICE' target='_blank' aria-label='Go to Twice twitter'><FaTwitter /></Link></li>
+            <li> <Link to='https://www.youtube.com/channel/UCzgxx_DM2Dcb9Y1spb9mUJA' target='_blank' aria-label='Go to Twice Youtube channel'><FaYoutube /></Link></li>
+            <li> <Link to='https://www.instagram.com/twicetagram/' target='_blank' aria-label='Go to Twice Instagram'><FaInstagram /></Link></li>
           </ul>
         </div>
       </section>
 
       <section className='copyright'>
-        <span>© Twicedex 2023</span>
+        <span>© 2025 Twicedex </span>
       </section>
     </footer>
   )
