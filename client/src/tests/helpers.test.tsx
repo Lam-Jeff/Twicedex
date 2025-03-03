@@ -1257,7 +1257,8 @@ describe('getLengthSetsDisplayed', () => {
             ],
             "display": true,
             "code": "Masterpiece_showcase_dvd",
-            "release": "2023-12-20T00:00:00.000Z"
+            "release": "2023-12-20T00:00:00.000Z",
+            "image":""
         }]
         expect(helpers.getLengthSetsDisplayed(array)).toBe(1);
     })
@@ -1283,6 +1284,8 @@ describe('filterAlbumsbyRadioButtonType', () => {
             "display": false,
             "code": "Masterpiece_showcase_dvd",
             "release": "2023-12-20T00:00:00.000Z"
+            ,
+            "image":""
         }]
 
         const result = helpers.filterAlbumsbyRadioButtonType(array, "All", percentEras, "Korean Albums").filter(album => album.display);
@@ -1307,7 +1310,8 @@ describe('filterAlbumsbyRadioButtonType', () => {
             ],
             "display": false,
             "code": "Masterpiece_showcase_dvd",
-            "release": "2023-12-20T00:00:00.000Z"
+            "release": "2023-12-20T00:00:00.000Z",
+            "image":""
         }];
         const result = helpers.filterAlbumsbyRadioButtonType(array, "All", percentEras, "DVDs/Blu-rays").filter(album => album.display);
         expect(result.length).toBe(1);
@@ -1331,7 +1335,8 @@ describe('filterAlbumsbyRadioButtonType', () => {
             ],
             "display": false,
             "code": "Masterpiece_showcase_dvd",
-            "release": "2023-12-20T00:00:00.000Z"
+            "release": "2023-12-20T00:00:00.000Z",
+            "image":""
         }]
 
         const result = helpers.filterAlbumsbyRadioButtonType(array, "In progress", percentEras, "Korean Albums").filter(album => album.display);
@@ -1356,7 +1361,8 @@ describe('filterAlbumsbyRadioButtonType', () => {
             ],
             "display": false,
             "code": "Masterpiece_showcase_dvd",
-            "release": "2023-12-20T00:00:00.000Z"
+            "release": "2023-12-20T00:00:00.000Z",
+            "image":""
         }]
         const result = helpers.filterAlbumsbyRadioButtonType(array, "In progress", percentEras, "DVDs/Blu-rays").filter(album => album.display);
         expect(result.length).toBe(1);
@@ -1380,7 +1386,8 @@ describe('filterAlbumsbyRadioButtonType', () => {
             ],
             "display": false,
             "code": "Masterpiece_showcase_dvd",
-            "release": "2023-12-20T00:00:00.000Z"
+            "release": "2023-12-20T00:00:00.000Z",
+            "image":""
         }]
 
         const result = helpers.filterAlbumsbyRadioButtonType(array, "Completed", percentEras, "Korean Albums").filter(album => album.display);
@@ -1405,7 +1412,8 @@ describe('filterAlbumsbyRadioButtonType', () => {
             ],
             "display": false,
             "code": "Masterpiece_showcase_dvd",
-            "release": "2023-12-20T00:00:00.000Z"
+            "release": "2023-12-20T00:00:00.000Z",
+            "image":""
         }]
         const result = helpers.filterAlbumsbyRadioButtonType(array, "Completed", percentEras, "DVDs/Blu-rays").filter(album => album.display);
         expect(result.length).toBe(1);
@@ -1430,7 +1438,8 @@ describe('filterAlbumsBySearchValue', () => {
             ],
             "display": true,
             "code": "Masterpiece_showcase_dvd",
-            "release": "2023-12-20T00:00:00.000Z"
+            "release": "2023-12-20T00:00:00.000Z",
+            "image":""
         }, {
             "name": "SKI BAR Twice JYP Japan Pop Up Store 2024",
             "checked": false,
@@ -1453,7 +1462,8 @@ describe('filterAlbumsBySearchValue', () => {
             ],
             "display": true,
             "code": "SKIBAR_JYP_Japan_Pop-up_Store_2024",
-            "release": "2024-11-30T00:00:00.000Z"
+            "release": "2024-11-30T00:00:00.000Z",
+            "image":""
         }]
         const result = helpers.filterAlbumsBySearchValue(array, "").filter(album => album.display);
         expect(result.length).toBe(2);
@@ -1476,7 +1486,8 @@ describe('filterAlbumsBySearchValue', () => {
             ],
             "display": true,
             "code": "Masterpiece_showcase_dvd",
-            "release": "2023-12-20T00:00:00.000Z"
+            "release": "2023-12-20T00:00:00.000Z",
+            "image":""
         }, {
             "name": "SKI BAR Twice JYP Japan Pop Up Store 2024",
             "checked": false,
@@ -1499,7 +1510,8 @@ describe('filterAlbumsBySearchValue', () => {
             ],
             "display": true,
             "code": "SKIBAR_JYP_Japan_Pop-up_Store_2024",
-            "release": "2024-11-30T00:00:00.000Z"
+            "release": "2024-11-30T00:00:00.000Z",
+            "image":""
         }]
         const result = helpers.filterAlbumsBySearchValue(array, "MISAMO").filter(album => album.display);
         expect(result.length > 0 && result[0].name === "MISAMO Masterpiece Showcase").toBeTruthy();
@@ -1522,7 +1534,8 @@ describe('filterAlbumsBySearchValue', () => {
             ],
             "display": true,
             "code": "Masterpiece_showcase_dvd",
-            "release": "2023-12-20T00:00:00.000Z"
+            "release": "2023-12-20T00:00:00.000Z",
+            "image":""
         }, {
             "name": "SKI BAR Twice JYP Japan Pop Up Store 2024",
             "checked": false,
@@ -1545,7 +1558,8 @@ describe('filterAlbumsBySearchValue', () => {
             ],
             "display": true,
             "code": "SKIBAR_JYP_Japan_Pop-up_Store_2024",
-            "release": "2024-11-30T00:00:00.000Z"
+            "release": "2024-11-30T00:00:00.000Z",
+            "image":""
         }]
         const result = helpers.filterAlbumsBySearchValue(array, "The Story Begins").filter(album => album.display);
         expect(result.length).toBe(0);
@@ -1570,7 +1584,8 @@ describe('filterAlbumsByCategory', () => {
             ],
             "display": true,
             "code": "Masterpiece_showcase_dvd",
-            "release": "2023-12-20T00:00:00.000Z"
+            "release": "2023-12-20T00:00:00.000Z",
+            "image":""
         }, {
             "name": "SKI BAR Twice JYP Japan Pop Up Store 2024",
             "checked": false,
@@ -1593,7 +1608,8 @@ describe('filterAlbumsByCategory', () => {
             ],
             "display": true,
             "code": "SKIBAR_JYP_Japan_Pop-up_Store_2024",
-            "release": "2024-11-30T00:00:00.000Z"
+            "release": "2024-11-30T00:00:00.000Z",
+            "image":""
         }]
         const result = helpers.filterAlbumsByCategory(array, "Stores/Merch").filter(album => album.display);
         expect(result.length).toBe(1);
@@ -1725,7 +1741,8 @@ describe('sortAlbums', () => {
             ],
             "display": true,
             "code": "Masterpiece_showcase_dvd",
-            "release": "2023-12-20T00:00:00.000Z"
+            "release": "2023-12-20T00:00:00.000Z",
+            "image":""
         },
         {
             "name": "SKI BAR Twice JYP Japan Pop Up Store 2024",
@@ -1749,7 +1766,8 @@ describe('sortAlbums', () => {
             ],
             "display": true,
             "code": "SKIBAR_JYP_Japan_Pop-up_Store_2024",
-            "release": "2024-11-30T00:00:00.000Z"
+            "release": "2024-11-30T00:00:00.000Z",
+            "image":""
         },
         {
             "name": "TWICE “STRATEGY” Pop Up In LA",
@@ -1773,7 +1791,8 @@ describe('sortAlbums', () => {
             ],
             "display": true,
             "code": "TWICE_STRATEGY_POP-UP_In_LA",
-            "release": "2024-11-23T00:00:00.000Z"
+            "release": "2024-11-23T00:00:00.000Z",
+            "image":""
         },
         {
             "name": "HAUTE COUTURE Japan Dome Tour 2024",
@@ -1791,7 +1810,8 @@ describe('sortAlbums', () => {
             ],
             "display": true,
             "code": "HC_DT",
-            "release": "2024-11-02T00:00:00.000Z"
+            "release": "2024-11-02T00:00:00.000Z",
+            "image":""
         }]
 
         const mockProgression: Record<string, { percent: number, acquired: number, total: number }> = { "SKI BAR Twice JYP Japan Pop Up Store 2024": { percent: 100, acquired: 2, total: 2 }, "MISAMO Masterpiece Showcase": { percent: 0, acquired: 2, total: 2 }, "TWICE “STRATEGY” Pop Up In LA": { percent: 25, acquired: 2, total: 2 }, "HAUTE COUTURE Japan Dome Tour 2024": { percent: 35, acquired: 0, total: 1 } };
@@ -1820,7 +1840,8 @@ describe('sortAlbums', () => {
             ],
             "display": true,
             "code": "Masterpiece_showcase_dvd",
-            "release": "2023-12-20T00:00:00.000Z"
+            "release": "2023-12-20T00:00:00.000Z",
+            "image":""
         },
         {
             "name": "SKI BAR Twice JYP Japan Pop Up Store 2024",
@@ -1844,7 +1865,8 @@ describe('sortAlbums', () => {
             ],
             "display": true,
             "code": "SKIBAR_JYP_Japan_Pop-up_Store_2024",
-            "release": "2024-11-30T00:00:00.000Z"
+            "release": "2024-11-30T00:00:00.000Z",
+            "image":""
         },
         {
             "name": "TWICE “STRATEGY” Pop Up In LA",
@@ -1868,7 +1890,8 @@ describe('sortAlbums', () => {
             ],
             "display": true,
             "code": "TWICE_STRATEGY_POP-UP_In_LA",
-            "release": "2024-11-23T00:00:00.000Z"
+            "release": "2024-11-23T00:00:00.000Z",
+            "image":""
         },
         {
             "name": "HAUTE COUTURE Japan Dome Tour 2024",
@@ -1886,7 +1909,8 @@ describe('sortAlbums', () => {
             ],
             "display": true,
             "code": "HC_DT",
-            "release": "2024-11-02T00:00:00.000Z"
+            "release": "2024-11-02T00:00:00.000Z",
+            "image":""
         }]
         const mockProgression: Record<string, { percent: number, acquired: number, total: number }> = { "SKI BAR Twice JYP Japan Pop Up Store 2024": { percent: 100, acquired: 2, total: 2 }, "MISAMO Masterpiece Showcase": { percent: 0, acquired: 2, total: 2 }, "TWICE “STRATEGY” Pop Up In LA": { percent: 25, acquired: 2, total: 2 }, "HAUTE COUTURE Japan Dome Tour 2024": { percent: 35, acquired: 0, total: 1 } };
         const result: TAlbumsProps[] = helpers.sortAlbums(array, "Collection progress (Descending)", mockProgression);
@@ -1914,7 +1938,8 @@ describe('sortAlbums', () => {
             ],
             "display": true,
             "code": "Masterpiece_showcase_dvd",
-            "release": "2023-12-20T00:00:00.000Z"
+            "release": "2023-12-20T00:00:00.000Z",
+            "image":""
         },
         {
             "name": "SKI BAR Twice JYP Japan Pop Up Store 2024",
@@ -1938,7 +1963,8 @@ describe('sortAlbums', () => {
             ],
             "display": true,
             "code": "SKIBAR_JYP_Japan_Pop-up_Store_2024",
-            "release": "2024-11-30T00:00:00.000Z"
+            "release": "2024-11-30T00:00:00.000Z",
+            "image":""
         },
         {
             "name": "TWICE “STRATEGY” Pop Up In LA",
@@ -1962,7 +1988,8 @@ describe('sortAlbums', () => {
             ],
             "display": true,
             "code": "TWICE_STRATEGY_POP-UP_In_LA",
-            "release": "2024-11-23T00:00:00.000Z"
+            "release": "2024-11-23T00:00:00.000Z",
+            "image":""
         },
         {
             "name": "HAUTE COUTURE Japan Dome Tour 2024",
@@ -1980,7 +2007,8 @@ describe('sortAlbums', () => {
             ],
             "display": true,
             "code": "HC_DT",
-            "release": "2024-11-02T00:00:00.000Z"
+            "release": "2024-11-02T00:00:00.000Z",
+            "image":""
         }]
         const mockProgression: Record<string, { percent: number, acquired: number, total: number }> = { "SKI BAR Twice JYP Japan Pop Up Store 2024": { percent: 100, acquired: 2, total: 2 }, "MISAMO Masterpiece Showcase": { percent: 0, acquired: 2, total: 2 }, "TWICE “STRATEGY” Pop Up In LA": { percent: 25, acquired: 2, total: 2 }, "HAUTE COUTURE Japan Dome Tour 2024": { percent: 35, acquired: 0, total: 1 } };
         const result: TAlbumsProps[] = helpers.sortAlbums(array, "Name (A - Z)", mockProgression);
@@ -2008,7 +2036,8 @@ describe('sortAlbums', () => {
             ],
             "display": true,
             "code": "Masterpiece_showcase_dvd",
-            "release": "2023-12-20T00:00:00.000Z"
+            "release": "2023-12-20T00:00:00.000Z",
+            "image":""
         },
         {
             "name": "SKI BAR Twice JYP Japan Pop Up Store 2024",
@@ -2032,7 +2061,8 @@ describe('sortAlbums', () => {
             ],
             "display": true,
             "code": "SKIBAR_JYP_Japan_Pop-up_Store_2024",
-            "release": "2024-11-30T00:00:00.000Z"
+            "release": "2024-11-30T00:00:00.000Z",
+            "image":""
         },
         {
             "name": "TWICE “STRATEGY” Pop Up In LA",
@@ -2056,7 +2086,8 @@ describe('sortAlbums', () => {
             ],
             "display": true,
             "code": "TWICE_STRATEGY_POP-UP_In_LA",
-            "release": "2024-11-23T00:00:00.000Z"
+            "release": "2024-11-23T00:00:00.000Z",
+            "image":""
         },
         {
             "name": "HAUTE COUTURE Japan Dome Tour 2024",
@@ -2074,7 +2105,8 @@ describe('sortAlbums', () => {
             ],
             "display": true,
             "code": "HC_DT",
-            "release": "2024-11-02T00:00:00.000Z"
+            "release": "2024-11-02T00:00:00.000Z",
+            "image":""
         }]
         const mockProgression: Record<string, { percent: number, acquired: number, total: number }> = { "SKI BAR Twice JYP Japan Pop Up Store 2024": { percent: 100, acquired: 2, total: 2 }, "MISAMO Masterpiece Showcase": { percent: 0, acquired: 2, total: 2 }, "TWICE “STRATEGY” Pop Up In LA": { percent: 25, acquired: 2, total: 2 }, "HAUTE COUTURE Japan Dome Tour 2024": { percent: 35, acquired: 0, total: 1 } };
         const result: TAlbumsProps[] = helpers.sortAlbums(array, "Name (Z - A)", mockProgression);
@@ -2101,7 +2133,8 @@ describe('sortAlbums', () => {
             ],
             "display": true,
             "code": "Masterpiece_showcase_dvd",
-            "release": "2023-12-20T00:00:00.000Z"
+            "release": "2023-12-20T00:00:00.000Z",
+            "image":""
         },
         {
             "name": "SKI BAR Twice JYP Japan Pop Up Store 2024",
@@ -2125,7 +2158,8 @@ describe('sortAlbums', () => {
             ],
             "display": true,
             "code": "SKIBAR_JYP_Japan_Pop-up_Store_2024",
-            "release": "2024-11-30T00:00:00.000Z"
+            "release": "2024-11-30T00:00:00.000Z",
+            "image":""
         },
         {
             "name": "TWICE “STRATEGY” Pop Up In LA",
@@ -2149,7 +2183,8 @@ describe('sortAlbums', () => {
             ],
             "display": true,
             "code": "TWICE_STRATEGY_POP-UP_In_LA",
-            "release": "2024-11-23T00:00:00.000Z"
+            "release": "2024-11-23T00:00:00.000Z",
+            "image":""
         },
         {
             "name": "HAUTE COUTURE Japan Dome Tour 2024",
@@ -2167,7 +2202,8 @@ describe('sortAlbums', () => {
             ],
             "display": true,
             "code": "HC_DT",
-            "release": "2024-11-02T00:00:00.000Z"
+            "release": "2024-11-02T00:00:00.000Z",
+            "image":""
         }]
         const mockProgression: Record<string, { percent: number, acquired: number, total: number }> = { "SKI BAR Twice JYP Japan Pop Up Store 2024": { percent: 100, acquired: 2, total: 2 }, "MISAMO Masterpiece Showcase": { percent: 0, acquired: 2, total: 2 }, "TWICE “STRATEGY” Pop Up In LA": { percent: 25, acquired: 2, total: 2 }, "HAUTE COUTURE Japan Dome Tour 2024": { percent: 35, acquired: 0, total: 1 } };
         const result: TAlbumsProps[] = helpers.sortAlbums(array, "Release date (Old to new)", mockProgression);
@@ -2194,7 +2230,8 @@ describe('sortAlbums', () => {
             ],
             "display": true,
             "code": "Masterpiece_showcase_dvd",
-            "release": "2023-12-20T00:00:00.000Z"
+            "release": "2023-12-20T00:00:00.000Z",
+            "image":""
         },
         {
             "name": "SKI BAR Twice JYP Japan Pop Up Store 2024",
@@ -2218,7 +2255,8 @@ describe('sortAlbums', () => {
             ],
             "display": true,
             "code": "SKIBAR_JYP_Japan_Pop-up_Store_2024",
-            "release": "2024-11-30T00:00:00.000Z"
+            "release": "2024-11-30T00:00:00.000Z",
+            "image":""
         },
         {
             "name": "TWICE “STRATEGY” Pop Up In LA",
@@ -2242,7 +2280,8 @@ describe('sortAlbums', () => {
             ],
             "display": true,
             "code": "TWICE_STRATEGY_POP-UP_In_LA",
-            "release": "2024-11-23T00:00:00.000Z"
+            "release": "2024-11-23T00:00:00.000Z",
+            "image":""
         },
         {
             "name": "HAUTE COUTURE Japan Dome Tour 2024",
@@ -2260,7 +2299,8 @@ describe('sortAlbums', () => {
             ],
             "display": true,
             "code": "HC_DT",
-            "release": "2024-11-02T00:00:00.000Z"
+            "release": "2024-11-02T00:00:00.000Z",
+            "image":""
         }]
         const mockProgression: Record<string, { percent: number, acquired: number, total: number }> = { "SKI BAR Twice JYP Japan Pop Up Store 2024": { percent: 100, acquired: 2, total: 2 }, "MISAMO Masterpiece Showcase": { percent: 0, acquired: 2, total: 2 }, "TWICE “STRATEGY” Pop Up In LA": { percent: 25, acquired: 2, total: 2 }, "HAUTE COUTURE Japan Dome Tour 2024": { percent: 35, acquired: 0, total: 1 } };
         const result: TAlbumsProps[] = helpers.sortAlbums(array, "Release date (New to old)", mockProgression);
