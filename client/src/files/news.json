@@ -1,5 +1,55 @@
 [
     {
+        "id": 25,
+        "subject": "Collection",
+        "title": "Strategy: photocards have been added.",
+        "date": "18/03/2025",
+        "thumbnail": "/images/thumbnail/Strategy.webp",
+        "alt": "Strategy cards thumbnail",
+        "era": "Strategy",
+        "category": "Korean Albums"
+    },
+    {
+        "id": 24,
+        "subject": "Collection",
+        "title": "TWICE “STRATEGY” Pop Up In Seoul: photocards have been added.",
+        "date": "17/03/2025",
+        "thumbnail": "/images/thumbnail/twice_strategy_pop-up_seoul.webp",
+        "alt": "TWICE “STRATEGY” Pop Up In Seoul cards thumbnail",
+        "era": "TSPUIS",
+        "category": "Stores/Merch"
+    },
+    {
+        "id": 23,
+        "subject": "Collection",
+        "title": "Ready To Be 5th World Tour In Seoul: photocards have been added.",
+        "date": "11/03/2025",
+        "thumbnail": "/images/thumbnail/ready_to_be_seoul.webp",
+        "alt": "Ready To Be 5th World Tour In Seoul cards thumbnail",
+        "era": "RTBDVD",
+        "category": "Dvds/Blu-rays"
+    },
+    {
+        "id": 22,
+        "subject": "Collection",
+        "title": "SSJYP Nation: photocards have been added.",
+        "date": "10/03/2025",
+        "thumbnail": "/images/thumbnail/ssjypn.webp",
+        "alt": "SSJYP Nation: Superstar In London cards thumbnail",
+        "era": "SSJYPN",
+        "category": "Promos"
+    },
+    {
+        "id": 21,
+        "subject": "Collection",
+        "title": "Twice Strategy Pop Up Store In LA: photocards have been added.",
+        "date": "10/03/2025",
+        "thumbnail": "/images/thumbnail/strategy_pop-up_LA.webp",
+        "alt": "Twice Strategy Pop Up Store In LA cards thumbnail",
+        "era": "TSPUILA",
+        "category": "Stores/Merch"
+    },
+    {
         "id": 20,
         "subject": "Collection",
         "title": "Ready To Be 5th World Tour Japan: photocards have been added.",

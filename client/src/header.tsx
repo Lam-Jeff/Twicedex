@@ -31,7 +31,7 @@ export const Header = () => {
   }
   return (
     <header>
-      <div className="banner">
+      <div className="banner" id='banner'>
         <div className="banner__logo">
           <h1 className='banner__logo__container'>
             <Link to="/" aria-label={`Go to home page`}>

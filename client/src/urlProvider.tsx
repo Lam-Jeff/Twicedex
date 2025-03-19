@@ -90,19 +90,19 @@ export const UrlProvider = ({ children }: Props) => {
     const [cardIDUrl, setCardIDUrl] = useState<string>("");
 
     useEffect(() => {
-        const currentPosition = location.pathname.split("/")[1].length > 0 ? location.pathname.split("/")[1] : "/";
+        let currentPosition = "/";
+        if (location.pathname.split("/")[4] !== undefined) currentPosition = "cardDetails";
+        else if (location.pathname.split("/")[1].length > 0) currentPosition = location.pathname.split("/")[1];
         const positionLocalStorage = localStorage.getItem("position");
         const oldPosition = positionLocalStorage ? JSON.parse(positionLocalStorage) : global.POSITION_DEFAULT_VALUE;
         if (currentPosition !== "collection"
-            && oldPosition !== "collection"
-            && categoryUrl !== global.CATEGORY_DEFAULT_VALUE
-            && codeUrl !== global.ERA_DEFAULT_VALUE) {
+            && oldPosition !== "collection") {
             resetUrl();
         }
 
         localStorage.setItem('position', JSON.stringify(currentPosition));
 
-        if(currentPosition != "collection") window.history.replaceState(null, "", location.pathname)
+        if (currentPosition != "collection") window.history.replaceState(null, "", location.pathname)
     }, [location.pathname])
 
     /**

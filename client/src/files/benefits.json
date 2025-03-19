@@ -205,11 +205,6 @@
         "display": false
     },
     {
-        "name": "Premiere Event",
-        "checked": false,
-        "display": false
-    },
-    {
         "name": "Barnes&Noble",
         "checked": false,
         "display": false
@@ -231,6 +226,11 @@
     },
     {
         "name": "Venue Exclusive",
+        "checked": false,
+        "display": false
+    },
+    {
+        "name": "Starriver",
         "checked": false,
         "display": false
     }

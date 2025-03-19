@@ -1,7 +1,7 @@
 import { useState, useEffect, useMemo, useContext } from 'react';
 import { Checkbox } from './checkbox';
 import { ICardsProps } from './collection';
-import { getLocalStoragePreferences, filterValues, firstElementOfCategory } from './helpers';
+import {filterValues, firstElementOfCategory } from './helpers';
 
 import albumsFile from './files/albums.json'
 import benefitsFile from './files/benefits.json'

@@ -53,6 +53,9 @@ export const About = () => {
             <li>@trodriguezredal</li>
             <li>@IRIS__WOON</li>
             <li>@njbily</li>
+            <li>@nixnixxq</li>
+            <li>@vvauot</li>
+            <li>@nepthysbby</li>
             <li>JYP Entertainment</li>
           </ul>
           <p>All icons in <Link to='/profile' aria-label='Go to Profile page'>Profile</Link> are designed by <Link to='https://www.freepik.com/' aria-label='Exit website and Go to Freepik'>Freepik</Link></p>

@@ -12,11 +12,12 @@ export const ScrollToTop = ({ children }: Props) => {
     const location = useLocation();
 
     useEffect(() => {
-        window.scrollTo({
+        setTimeout(()=> window.scrollTo({
             top: 0,
             left: 0,
-            behavior: 'smooth'
-        });
+            behavior: 'auto'
+        }), 0);
+
     }, [location.pathname]);
 
     return <>
