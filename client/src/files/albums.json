@@ -3274,7 +3274,7 @@
         "name": "MISAMO Japan Showcase Masterpiece",
         "checked": false,
         "categories": [
-           "Events"
+            "Events"
         ],
         "members": [
             "Mina",
@@ -3289,8 +3289,7 @@
         "code": "MJSM",
         "release": "2023-07-22T00:00:00.000Z",
         "image": "/images/thumbnail/MISAMO_Japan_Showcase.webp"
-    }
-    ,
+    },
     {
         "name": "Masterpiece",
         "checked": false,
@@ -3677,8 +3676,7 @@
         "code": "ABCDPE",
         "release": "2024-06-13T00:00:00.000Z",
         "image": "/images/thumbnail/na_premiere.webp"
-    }
-    ,
+    },
     {
         "name": "NA",
         "checked": false,
@@ -3947,7 +3945,9 @@
             "Events"
         ],
         "benefits": [
-            "Original"
+            "Original",
+            "Upgrade",
+            "Venue Exclusive"
         ],
         "members": [
             "Mina",
@@ -4075,7 +4075,8 @@
             "Broadcast",
             "Target",
             "Barnes&Noble",
-            "Starriver"
+            "Starriver",
+            "Showcase"
         ],
         "members": [
             "Chaeyoung",
@@ -4209,5 +4210,119 @@
         "code": "OJ8APUSI",
         "release": "2025-03-21T00:00:00.000Z",
         "image": "/images/thumbnail/infinity_pop_up_store.webp"
+    },
+    {
+        "name": "Sie.",
+        "checked": false,
+        "categories": [
+            "Promos"
+        ],
+        "benefits": [
+            "Original"
+        ],
+        "members": [
+            "Momo"
+        ],
+        "display": false,
+        "code": "Sie",
+        "release": "2025-03-28T00:00:00.000Z",
+        "image": "/images/thumbnail/twice5.webp"
+    },
+    {
+        "name": "#TWICE5",
+        "checked": false,
+        "categories": [
+            "Japanese Albums"
+        ],
+        "benefits": [
+            "Original"
+        ],
+        "members": [
+            "Chaeyoung",
+            "Dahyun",
+            "Jeongyeon",
+            "Jihyo",
+            "Mina",
+            "Momo",
+            "Nayeon",
+            "Sana",
+            "Tzuyu"
+        ],
+        "display": false,
+        "code": "#Twice5",
+        "release": "2025-05-14T00:00:00.000Z",
+        "image": "/images/thumbnail/twice5.webp"
+    },
+    {
+        "name": "Fanclub 5th Generation",
+        "checked": false,
+        "categories": [
+            "Memberships"
+        ],
+        "benefits": [
+            "Original"
+        ],
+        "members": [
+            "Chaeyoung",
+            "Dahyun",
+            "Jeongyeon",
+            "Jihyo",
+            "Mina",
+            "Momo",
+            "Nayeon",
+            "Sana",
+            "Tzuyu"
+        ],
+        "display": false,
+        "code": "F5G",
+        "release": "2025-04-07T00:00:00.000Z",
+        "image": "/images/thumbnail/Fanclub_5.webp"
+    },
+    {
+        "name": "KPop Demon Hunters",
+        "checked": false,
+        "categories": [
+            "Promos"
+        ],
+        "benefits": [
+            "Original"
+        ],
+        "members": [
+            "Chaeyoung",
+            "Jeongyeon",
+            "Jihyo"
+        ],
+        "display": false,
+        "code": "KDH",
+        "release": "2025-06-20T00:00:00.000Z",
+        "image": "/images/thumbnail/kpop_demon_hunters.webp"
+    },
+    {
+        "name": "This Is For",
+        "checked": false,
+        "categories": [
+            "Korean Albums"
+        ],
+        "benefits": [
+            "Original",
+            "Withmuu",
+            "Blue Dream Media",
+            "Fans"
+        ],
+        "members": [
+            "Chaeyoung",
+            "Dahyun",
+            "Jeongyeon",
+            "Jihyo",
+            "Mina",
+            "Momo",
+            "Nayeon",
+            "Sana",
+            "Tzuyu"
+        ],
+        "display": false,
+        "code": "TIF",
+        "release": "2025-07-11T00:00:00.000Z",
+        "image": "/images/thumbnail/This_is_for.webp"
     }
 ]

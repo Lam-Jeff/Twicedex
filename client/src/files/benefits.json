@@ -233,5 +233,10 @@
         "name": "Starriver",
         "checked": false,
         "display": false
+    },
+    {
+        "name": "Fans",
+        "checked": false,
+        "display": false
     }
 ]
