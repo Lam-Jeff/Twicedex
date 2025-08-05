@@ -451,28 +451,3 @@ export function computeProgressionByBenefitsAndEra(userCollection: number[], car
     };
     return progression;
 }
-
-/**
- * Format card's name : [Member name] [Benefit name] [umpteenth card using letter]
- * 
- * @param {ICardsProps} card - Card's name to format
- * 
- * @returns {string}
- */
-export function formatNameToDisplay(card: ICardsProps, cards: ICardsProps[]): string {
-    if (cards.length === 0) return "";
-    let cardNameToDisplay = "";
-    let letter = "A";
-    const totalCardsMatchingNameAndBenefit = cards.filter(_card => _card.benefit === card.benefit
-        && card.members.length === _card.members.length
-        && card.members.every(_member => _card.members.includes(_member)));
-    if (totalCardsMatchingNameAndBenefit.length == 1) {
-        letter = "";
-    }
-    else {
-        const index = totalCardsMatchingNameAndBenefit.findIndex(_card => _card.id === card.id);
-        letter = String.fromCharCode(65 + index);
-    }
-    cardNameToDisplay = card.name.split("_")[0] + " " + card.benefit + " " + letter;
-    return cardNameToDisplay;
-}

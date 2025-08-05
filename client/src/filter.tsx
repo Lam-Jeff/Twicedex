@@ -231,7 +231,6 @@ export const Filter = ({ setCards, cards, filter, album, setAlbum, category, set
             return object
         })
         const filteredAlbums = filterValues(newAlbums);
-
         const currentMembers = albums[firstElement].members;
         const currentBenefits = albums[firstElement].benefits;
 

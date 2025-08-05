@@ -3,7 +3,7 @@ import { RxCheckCircled } from 'react-icons/rx'
 import { BsFillCircleFill } from 'react-icons/bs'
 import { MdOutlineFavorite } from 'react-icons/md'
 import { AuthContext } from './authProvider';
-import { filterByAlbumAndCategory, formatNameToDisplay } from './helpers';
+import { filterByAlbumAndCategory } from './helpers';
 import { useParams } from 'react-router-dom';
 import cardsFile from "./files/cards.json";
 import albumsFile from "./files/albums.json";
@@ -17,7 +17,6 @@ export const CardDetails = () => {
     const album = albumsFile.find(album => album.code === cardID?.split("_")[1]);
     const cardsToDisplay = filterByAlbumAndCategory(cardsFile, album?.name ?? "The Story Begins", decodeURIComponent(categoryParam) ?? "Korean Albums");
     const indexCard = cardsToDisplay.findIndex(card => card.name === decodedCardID);
-    const cardNameToDisplay = formatNameToDisplay(cardsToDisplay[indexCard], cardsToDisplay);
     const { user, cardsData, wishesData, updateWishlist, updateCollection } = useContext(AuthContext);
 
     useEffect(() => {
@@ -50,7 +49,7 @@ export const CardDetails = () => {
             <div className='card-details-container__card-info'>
                 <div className='card-details-container__card-info__header'>
                     <div className='card-details-container__card-info__header-title'>
-                        <h2>{cardNameToDisplay}</h2>
+                        <h2>{cardsToDisplay[indexCard]?.name}</h2>
                         <div className='card-details-container__card-info__header-title__badge'>
                             <span className='card-details-container__card-info__header-title__badge-number'>{cardsToDisplay[indexCard]?.id}</span>
                         </div>

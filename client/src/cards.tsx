@@ -5,7 +5,6 @@ import { Loading } from './loading';
 import { RxCheckCircled, RxZoomIn } from 'react-icons/rx'
 import { MdOutlineFavorite } from 'react-icons/md'
 import { AuthContext } from './authProvider';
-import { formatNameToDisplay } from './helpers';
 import { UrlContext } from './urlProvider';
 
 interface ICardsContainerProps {
@@ -39,7 +38,6 @@ export const Cards = ({ type, index, cards, cardInAlbum, handleCardZoom }: ICard
     const { categoryParam, codeParam } = useContext(UrlContext);
     const cardIndex = cards.findIndex(_card => _card.name === cardInAlbum.name);
     const [isLoading, setIsLoading] = useState(true);
-    const cardNameToDisplay = formatNameToDisplay(cardInAlbum, cards);
     const { user, wishesData, cardsData, updateWishlist, updateCollection } = useContext(AuthContext);
 
     const clickOnWish = (e: React.MouseEvent<HTMLDivElement>) => {
@@ -68,7 +66,7 @@ export const Cards = ({ type, index, cards, cardInAlbum, handleCardZoom }: ICard
                 <div className='card__serie'>{decodeURIComponent(codeParam)}</div>
                 <div className='card__benefit'>{cardInAlbum.benefit}</div>
                 <div className='card__name'>
-                    <p>{cardNameToDisplay}</p>
+                    <p>{cardInAlbum.name}</p>
                 </div>
                 <div className='card__icons'>
                     <div className={`card__check__icon ${user ? "" : "disabled"}`}
