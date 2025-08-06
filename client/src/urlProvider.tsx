@@ -1,10 +1,11 @@
-import { createContext, useEffect, useState } from "react";
+import { createContext, useEffect, useState, useRef } from "react";
 import PropTypes from "prop-types";
 import {
   generatePath,
   SetURLSearchParams,
   useLocation,
   useSearchParams,
+  useNavigate,
 } from "react-router-dom";
 import global from "./files/global";
 interface IUrlProviderProps {
@@ -92,6 +93,9 @@ type Props = {
 
 export const UrlProvider = ({ children }: Props) => {
   const location = useLocation();
+  const navigate = useNavigate();
+  const hasNavigatedBack = useRef(false);
+
   const categoryLocalStorage = localStorage.getItem("category");
   const codeLocalStorage = localStorage.getItem("code");
   const displayLocalStorage = localStorage.getItem("display");
@@ -113,6 +117,8 @@ export const UrlProvider = ({ children }: Props) => {
   const [cardIDUrl, setCardIDUrl] = useState<string>("");
 
   useEffect(() => {
+    const isFirstLoad = !sessionStorage.getItem("hasLoaded");
+    let isBackNavigation = false;
     let currentPosition = "/";
     if (location.pathname.split("/")[4] !== undefined)
       currentPosition = "cardDetails";
@@ -122,14 +128,39 @@ export const UrlProvider = ({ children }: Props) => {
     const oldPosition = positionLocalStorage
       ? JSON.parse(positionLocalStorage)
       : global.POSITION_DEFAULT_VALUE;
-    if (currentPosition !== "collection" && oldPosition !== "collection") {
-      resetUrl();
+
+    if (isFirstLoad) {
+      sessionStorage.setItem("hasLoaded", "true");
+      return;
+    }
+
+    if (oldPosition !== currentPosition) {
+      const referrer = document.referrer;
+
+      if (!["collection", "sets"].includes(oldPosition)) {
+        resetUrl();
+      }
+
+      if (
+        referrer &&
+        referrer.startsWith(window.location.origin) &&
+        referrer.includes(oldPosition)
+      ) {
+        isBackNavigation = true;
+      } else if (!referrer) {
+        isBackNavigation = false;
+      }
+    }
+
+    if (!hasNavigatedBack.current && isBackNavigation) {
+      hasNavigatedBack.current = true;
+
+      navigate(-1);
+      return;
     }
 
     localStorage.setItem("position", JSON.stringify(currentPosition));
-
-    if (currentPosition != "collection")
-      window.history.replaceState(null, "", location.pathname);
+    window.history.replaceState(null, "", location.pathname);
   }, [location.pathname]);
 
   /**
