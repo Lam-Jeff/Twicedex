@@ -3398,7 +3398,7 @@
     "display": false,
     "code": "Sie",
     "release": "2025-03-28T00:00:00.000Z",
-    "image": "/images/thumbnail/twice5.webp"
+    "image": "/images/thumbnail/Sie.webp"
   },
   {
     "name": "#TWICE5",
@@ -3543,5 +3543,26 @@
     "code": "TISFWTIJPUS",
     "release": "2025-07-04T00:00:00.000Z",
     "image": "/images/thumbnail/Richeese.webp"
+  },
+  {
+    "name": "Nabati",
+    "checked": false,
+    "categories": ["Promos"],
+    "benefits": ["Original"],
+    "members": [
+      "Chaeyoung",
+      "Dahyun",
+      "Jeongyeon",
+      "Jihyo",
+      "Mina",
+      "Momo",
+      "Nayeon",
+      "Sana",
+      "Tzuyu"
+    ],
+    "display": false,
+    "code": "Nabati",
+    "release": "2025-06-15T00:00:00.000Z",
+    "image": "/images/thumbnail/Nabati.webp"
   }
 ]
