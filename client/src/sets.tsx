@@ -19,6 +19,7 @@ import categoriesFile from "./files/categories.json";
 import cardsFile from "./files/cards.json";
 import { StatsInfo } from "./stats";
 import { UrlContext } from "./urlProvider";
+import { RxCross2 } from "react-icons/rx";
 
 export const Sets = () => {
   const SORT_DEFAULT_VALUE = "Release date (New to old)";
@@ -52,6 +53,7 @@ export const Sets = () => {
   const [albums, setAlbums] = useState<TAlbumsProps[]>(
     sortAlbums(ALBUMS_DEFAULT_STATE, SORT_DEFAULT_VALUE, progression),
   );
+  const [isFilterOpen, setIsFilterOpen] = useState(false);
   const [searchText, setSearchText] = useState<string>("");
   const [sortValue, setSortValue] = useState<string>(SORT_DEFAULT_VALUE);
   const [isModalSetDetailsOpen, setIsModalSetDetailsOpen] = useState(false);
@@ -60,13 +62,6 @@ export const Sets = () => {
     code: string;
     image: string;
   }>({ name: "", code: "", image: "" });
-  if (isModalSetDetailsOpen) {
-    document.body.style.overflow = "hidden";
-    document.body.style.paddingRight = "17px";
-  } else {
-    document.body.style.overflow = "auto";
-    document.body.style.paddingRight = "0px";
-  }
   const handleSearchTextChange = (value: string) => {
     let newAlbums: TAlbumsProps[] = filterAlbumsByCategory(
       ALBUMS_DEFAULT_STATE,
@@ -94,6 +89,16 @@ export const Sets = () => {
     newAlbums = filterAlbumsBySearchValue(newAlbums, searchText);
     setSearchType(value);
     setAlbums(newAlbums);
+  };
+
+  const handleClickOnFilter = () => {
+    const newValue = isFilterOpen ? false : true;
+    setIsFilterOpen(newValue);
+    if (newValue) {
+      document.body.classList.add("modal-open");
+    } else {
+      document.body.classList.remove("modal-open");
+    }
   };
 
   const handleClickOnCategory = (value: string) => {
@@ -133,6 +138,7 @@ export const Sets = () => {
   }) => {
     SetAlbumInViewDetails(album);
     setIsModalSetDetailsOpen(true);
+    document.body.classList.add("modal-open");
   };
 
   const handleClickLinkToAlbum = (code: string) => {
@@ -162,73 +168,104 @@ export const Sets = () => {
         setIsModalSetDetailsOpen={setIsModalSetDetailsOpen}
         progression={progression}
       />
-
-      <div className="sets-container__filter-box">
-        <div className="sets-container__filter-box__category">
-          {categoriesFile.map((object) => {
-            return (
-              <button
-                className={category === object.name ? "selected" : ""}
-                key={`option_${object.name}`}
-                onClick={() => handleClickOnCategory(object.name)}
-              >
-                {object.name}
-              </button>
-            );
-          })}
+      <div
+        className={`overlay ${isFilterOpen ? "active" : ""}`}
+        onClick={() => setIsFilterOpen(false)}
+      ></div>
+      <div
+        className={`sets-container__filter-box ${isFilterOpen ? "open" : "close"}`}
+      >
+        <div className="sets-container__filter-box__header__container">
+          FILTER
+          <button
+            onClick={handleClickOnFilter}
+            aria-label={isFilterOpen ? "Close filter box" : "Open filter box"}
+          >
+            <RxCross2 />
+          </button>
         </div>
-        <div className="sets-container__filter-box__search">
-          <input
-            className="sets-container__filter-box__search-input"
-            type="search"
-            autoComplete="off"
-            placeholder="Search sets..."
-            value={searchText}
-            onChange={(e) => handleSearchTextChange(e.target.value)}
-          />
-          <div className="sets-container__filter-box__search-type-container">
-            {SEARCH_VALUES.map((value) => {
+        <div className="sets-container__filter-box__main">
+          <div className="sets-container__filter-box__main-category">
+            {categoriesFile.map((object) => {
               return (
-                <div
-                  className={`sets-container__filter-box__search-type-container__radio`}
-                  key={`search-type-box-${value}`}
+                <button
+                  className={category === object.name ? "selected" : ""}
+                  key={`option_${object.name}`}
+                  onClick={() => handleClickOnCategory(object.name)}
                 >
-                  <input
-                    type="radio"
-                    id={value}
-                    value={value}
-                    checked={searchType === value}
-                    onChange={() => handleSearchTypeChange(value)}
-                    key={`search-type-input-${value}`}
-                  />
-                  <label htmlFor={value} key={`search-type-label-${value}`}>
-                    {value}
-                  </label>
-                </div>
+                  {object.name}
+                </button>
               );
             })}
           </div>
-          <div className="sets-container__filter-box__sort-filter">
-            <select name="" id="" value={sortValue} onChange={handleChangeSort}>
-              {SORT_OPTIONS.map((sort_option) => {
+          <div className="sets-container__filter-box__main-search">
+            <input
+              className="sets-container__filter-box__main-search-input"
+              type="search"
+              autoComplete="off"
+              placeholder="Search sets..."
+              value={searchText}
+              onChange={(e) => handleSearchTextChange(e.target.value)}
+            />
+            <div className="sets-container__filter-box__main-search-type__container">
+              {SEARCH_VALUES.map((value) => {
                 return (
-                  <option
-                    value={sort_option}
-                    key={`filter-options-${sort_option}`}
+                  <div
+                    className={`sets-container__filter-box__search-type__container__radio`}
+                    key={`search-type-box-${value}`}
                   >
-                    {sort_option}
-                  </option>
+                    <input
+                      type="radio"
+                      id={value}
+                      value={value}
+                      checked={searchType === value}
+                      onChange={() => handleSearchTypeChange(value)}
+                      key={`search-type-input-${value}`}
+                    />
+                    <label htmlFor={value} key={`search-type-label-${value}`}>
+                      {value}
+                    </label>
+                  </div>
                 );
               })}
-            </select>
+            </div>
+            <div className="sets-container__filter-box__main-sort-filter">
+              <select
+                name=""
+                id=""
+                value={sortValue}
+                onChange={handleChangeSort}
+              >
+                {SORT_OPTIONS.map((sort_option) => {
+                  return (
+                    <option
+                      value={sort_option}
+                      key={`filter-options-${sort_option}`}
+                    >
+                      {sort_option}
+                    </option>
+                  );
+                })}
+              </select>
+            </div>
           </div>
+        </div>
+        <div className={`sets-container__filter-box__footer__container `}>
+          <button onClick={handleClickOnFilter}> APPLY FILTER </button>
         </div>
       </div>
       <div className="sets-container__main">
         <div className="sets-container__main__header">
           <p className="sets-container__main__header-text">{`${getLengthSetsDisplayed(albums)} sets found`}</p>
+          <button
+            onClick={handleClickOnFilter}
+            className="sets-container__main__header-filter__button"
+          >
+            {" "}
+            FILTER{" "}
+          </button>
         </div>
-        <div>
+        <div className="sets-container__main__set">
           {albums.map((album) => {
             return album.display ? (
               <div
@@ -297,4 +334,3 @@ export const Sets = () => {
     </div>
   );
 };
-

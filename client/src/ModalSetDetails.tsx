@@ -103,8 +103,7 @@ export const ModalSetDetails = ({
 
   const handleClickOnLink = (type: string, value: string) => {
     setIsModalSetDetailsOpen(false);
-    document.body.style.overflow = "auto";
-    document.body.style.paddingRight = "0px";
+    document.body.classList.remove("modal-open");
     const currentBenefitsName = benefits.map((_benefit) => _benefit.benefit);
     const currentMembersName = members.map((_member) => _member.member);
     let newBenefits = benefitsFile.map((_benefit) =>
@@ -142,6 +141,7 @@ export const ModalSetDetails = ({
 
   const handleClickOnClose = () => {
     setIsModalSetDetailsOpen(false);
+    document.body.classList.remove("modal-open");
     setCurrentAlbum("");
     refModal.current?.scrollTo(0, 0);
   };
@@ -251,4 +251,3 @@ export const ModalSetDetails = ({
     </div>
   );
 };
-

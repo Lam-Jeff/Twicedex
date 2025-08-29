@@ -4,7 +4,6 @@ import { Link } from "react-router-dom";
 import { TNewsProps } from "./types/news";
 import { PaginationIndicator } from "./paginationIndicators";
 
-import { MdOutlineKeyboardDoubleArrowRight } from "react-icons/md";
 import { getPages } from "./helpers";
 import { Loading } from "./loading";
 import { UrlContext } from "./urlProvider";
@@ -96,14 +95,14 @@ export const Pagination = ({ sizePage, data }: PaginationProps) => {
       {itemsToDisplay.map((object, index) => {
         return (
           <article className={`article_${index}`} key={`article_${index}`}>
-            <div className="thumbnail" key={`article_thumbnail_${index}`}>
-              <Link
-                to={`/collection/${encodeURIComponent(object.category)}/${encodeURIComponent(object.era)}`}
-                className="article__link"
-                key={`article_link_thumbnail_${index}`}
-                aria-label={`Go to Collection page`}
-                onClick={() => handleClickOnLink(object.era, object.category)}
-              >
+            <Link
+              to={`/collection/${encodeURIComponent(object.category)}/${encodeURIComponent(object.era)}`}
+              className="article__link"
+              key={`article_link_thumbnail_${index}`}
+              aria-label={`Go to Collection page`}
+              onClick={() => handleClickOnLink(object.era, object.category)}
+            >
+              <div className="thumbnail" key={`article_thumbnail_${index}`}>
                 <Loading
                   isLoading={isLoadingThumbnail}
                   borderColor="transparent"
@@ -118,55 +117,27 @@ export const Pagination = ({ sizePage, data }: PaginationProps) => {
                     display: isLoadingThumbnail ? "none" : "flex",
                   }}
                 />
-              </Link>
-            </div>
-            <div className="article__content" key={`article_content${index}`}>
-              <Link
-                to={`/collection/${encodeURIComponent(object.category)}/${encodeURIComponent(object.era)}`}
-                key={`article_link_${index}`}
-                aria-label={`Go to Collection page`}
-                onClick={() => handleClickOnLink(object.era, object.category)}
-              >
+              </div>
+              <div className="article__content" key={`article_content${index}`}>
                 <span
                   className="article__category"
                   key={`article_link_${index}`}
                 >
                   {object.subject}
                 </span>
-              </Link>
-              <Link
-                to={`/collection/${encodeURIComponent(object.category)}/${encodeURIComponent(object.era)}`}
-                key={`article_link_title_${index}`}
-                aria-label={`Go to Collection page`}
-                onClick={() => handleClickOnLink(object.era, object.category)}
-              >
+
                 <h3 className="article__title" key={`article_title_${index}`}>
                   {object.title}
                 </h3>
-              </Link>
-              <time
-                dateTime=""
-                className="article__date"
-                key={`article_date_${index}`}
-              >
-                {object.date}
-              </time>
-              <div className="article__button" key={`article_button_${index}`}>
-                <Link
-                  to={`/collection/${encodeURIComponent(object.category)}/${encodeURIComponent(object.era)}`}
-                  className="article__link"
-                  key={`article_link_button_${index}`}
-                  aria-label={`Go to Collection page`}
-                  onClick={() => handleClickOnLink(object.era, object.category)}
+                <time
+                  dateTime=""
+                  className="article__date"
+                  key={`article_date_${index}`}
                 >
-                  Go to {object.subject}
-                  <MdOutlineKeyboardDoubleArrowRight
-                    className="article__button__icon"
-                    key={`article_button_icon_${index}`}
-                  />
-                </Link>
+                  {object.date}
+                </time>
               </div>
-            </div>
+            </Link>
           </article>
         );
       })}

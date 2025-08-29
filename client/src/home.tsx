@@ -24,7 +24,6 @@ export const Home = () => {
     <>
       <div className="home-container">
         <section className="news">
-          <h2 className="home-title__news">News</h2>
           {/* <div className="home-container__filter-button-box">
             <button onClick={() => handleFilterNewsArray('All')}
               disabled={!(news.length > 0)}>
@@ -42,4 +41,3 @@ export const Home = () => {
     </>
   );
 };
-

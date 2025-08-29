@@ -96,13 +96,19 @@ export const UrlProvider = ({ children }: Props) => {
   const navigate = useNavigate();
   const hasNavigatedBack = useRef(false);
 
-  const categoryLocalStorage = localStorage.getItem("category");
-  const codeLocalStorage = localStorage.getItem("code");
-  const displayLocalStorage = localStorage.getItem("display");
+  const categoryLocalStorage = sessionStorage.getItem("category");
+  const codeLocalStorage = sessionStorage.getItem("code");
+  const displayLocalStorage = sessionStorage.getItem("display");
+  const session = sessionStorage.getItem("session");
+  let isNewSession = false;
+  if (!session) {
+    isNewSession = true;
+    sessionStorage.setItem("session", "true");
+  }
 
   const [searchParams, setSearchParams] = useSearchParams();
   const [categoryUrl, setCategoryUrl] = useState<string>(
-    categoryLocalStorage
+    categoryLocalStorage && !isNewSession
       ? JSON.parse(categoryLocalStorage)
       : global.CATEGORY_DEFAULT_VALUE,
   );
@@ -110,7 +116,7 @@ export const UrlProvider = ({ children }: Props) => {
     codeLocalStorage ? JSON.parse(codeLocalStorage) : global.ERA_DEFAULT_VALUE,
   );
   const [displayUrl, setDisplayUrl] = useState<string>(
-    displayLocalStorage
+    displayLocalStorage && !isNewSession
       ? JSON.parse(displayLocalStorage)
       : global.DISPLAY_DEFAULT_VALUE,
   );
@@ -124,7 +130,7 @@ export const UrlProvider = ({ children }: Props) => {
       currentPosition = "cardDetails";
     else if (location.pathname.split("/")[1].length > 0)
       currentPosition = location.pathname.split("/")[1];
-    const positionLocalStorage = localStorage.getItem("position");
+    const positionLocalStorage = sessionStorage.getItem("position");
     const oldPosition = positionLocalStorage
       ? JSON.parse(positionLocalStorage)
       : global.POSITION_DEFAULT_VALUE;
@@ -159,7 +165,7 @@ export const UrlProvider = ({ children }: Props) => {
       return;
     }
 
-    localStorage.setItem("position", JSON.stringify(currentPosition));
+    sessionStorage.setItem("position", JSON.stringify(currentPosition));
     window.history.replaceState(null, "", location.pathname);
   }, [location.pathname]);
 
@@ -170,15 +176,15 @@ export const UrlProvider = ({ children }: Props) => {
     setCategoryUrl(global.CATEGORY_DEFAULT_VALUE);
     setCodeUrl(global.ERA_DEFAULT_VALUE);
     setDisplayUrl(global.DISPLAY_DEFAULT_VALUE);
-    localStorage.setItem(
+    sessionStorage.setItem(
       "benefits",
       JSON.stringify(global.BENEFITS_DEFAULT_VALUE),
     );
-    localStorage.setItem(
+    sessionStorage.setItem(
       "members",
       JSON.stringify(global.MEMBERS_DEFAULT_VALUE),
     );
-    localStorage.setItem(
+    sessionStorage.setItem(
       "display",
       JSON.stringify(global.DISPLAY_DEFAULT_VALUE),
     );
@@ -219,8 +225,8 @@ export const UrlProvider = ({ children }: Props) => {
       display: displayUrl,
     };
 
-    localStorage.setItem("benefits", benefitsStringify);
-    localStorage.setItem("members", membersStringify);
+    sessionStorage.setItem("benefits", benefitsStringify);
+    sessionStorage.setItem("members", membersStringify);
     setSearchParams(newParamsStringify, { replace: true });
   };
 
@@ -250,7 +256,7 @@ export const UrlProvider = ({ children }: Props) => {
 
     if (cardID) {
       setCardIDUrl(cardID);
-      localStorage.setItem("cardID", JSON.stringify(cardID));
+      sessionStorage.setItem("cardID", JSON.stringify(cardID));
     } else {
       newPath = generatePath(`/collection/:categoryParam/:codeParam`, {
         categoryParam: encodeCategory,
@@ -260,9 +266,9 @@ export const UrlProvider = ({ children }: Props) => {
       setCategoryUrl(encodeCategory);
       setCodeUrl(encodeCode);
       setDisplayUrl(display);
-      localStorage.setItem("category", JSON.stringify(encodeCategory));
-      localStorage.setItem("code", JSON.stringify(code));
-      localStorage.setItem("display", JSON.stringify(display));
+      sessionStorage.setItem("category", JSON.stringify(encodeCategory));
+      sessionStorage.setItem("code", JSON.stringify(code));
+      sessionStorage.setItem("display", JSON.stringify(display));
     }
     window.history.replaceState(null, "", newPath);
   };
