@@ -91,76 +91,85 @@ export const Pagination = ({ sizePage, data }: PaginationProps) => {
   };
 
   return (
-    <div className="pagination-box">
-      {itemsToDisplay.map((object, index) => {
-        return (
-          <article className={`article_${index}`} key={`article_${index}`}>
-            <Link
-              to={`/collection/${encodeURIComponent(object.category)}/${encodeURIComponent(object.era)}`}
-              className="article__link"
-              key={`article_link_thumbnail_${index}`}
-              aria-label={`Go to Collection page`}
-              onClick={() => handleClickOnLink(object.era, object.category)}
-            >
-              <div className="thumbnail" key={`article_thumbnail_${index}`}>
-                <Loading
-                  isLoading={isLoadingThumbnail}
-                  borderColor="transparent"
-                  keyIndex={index}
-                />
-                <img
-                  src={object.thumbnail}
-                  alt={object.alt}
-                  key={`article_thumbnail_image_${index}`}
-                  onLoad={handleLoadingImages}
-                  style={{
-                    display: isLoadingThumbnail ? "none" : "flex",
-                  }}
-                />
-              </div>
-              <div className="article__content" key={`article_content${index}`}>
-                <span
-                  className="article__category"
-                  key={`article_link_${index}`}
+    <>
+      <div className="pagination-box">
+        {itemsToDisplay.map((object, index) => {
+          return (
+            <article className={`article_${index}`} key={`article_${index}`}>
+              <Link
+                to={`/collection/${encodeURIComponent(object.category)}/${encodeURIComponent(object.era)}`}
+                className="article__link"
+                key={`article_link_thumbnail_${index}`}
+                aria-label={`Go to Collection page`}
+                onClick={() => handleClickOnLink(object.era, object.category)}
+              >
+                <div className="thumbnail" key={`article_thumbnail_${index}`}>
+                  <Loading
+                    isLoading={isLoadingThumbnail}
+                    borderColor="transparent"
+                    keyIndex={index}
+                  />
+                  <img
+                    src={object.thumbnail}
+                    alt={object.alt}
+                    key={`article_thumbnail_image_${index}`}
+                    onLoad={handleLoadingImages}
+                    style={{
+                      display: isLoadingThumbnail ? "none" : "flex",
+                    }}
+                  />
+                </div>
+                <div
+                  className="article__content"
+                  key={`article_content${index}`}
                 >
-                  {object.subject}
-                </span>
+                  <span
+                    className="article__category"
+                    key={`article_link_${index}`}
+                  >
+                    {object.subject}
+                  </span>
 
-                <h3 className="article__title" key={`article_title_${index}`}>
-                  {object.title}
-                </h3>
-                <time
-                  dateTime=""
-                  className="article__date"
-                  key={`article_date_${index}`}
-                >
-                  {object.date}
-                </time>
-              </div>
-            </Link>
-          </article>
-        );
-      })}
-      <PaginationIndicator
-        setCurrentPage={setCurrentPage}
-        pages={pages}
-        currentPage={currentPage}
-        numberIndicatorsToDisplayMin={1}
-        numberIndicatorsToDisplayMax={5}
-        maxPageIndicatorsToDisplay={5}
-      />
-      <button
-        className="pagination-box-indicators__load-more-button"
-        onClick={handleLoadMore}
-        style={{
-          display:
-            pages.length === 1 || !pages.length || currentPage !== 1
-              ? "none"
-              : "block",
-        }}
-      >
-        Load More...
-      </button>
-    </div>
+                  <h3 className="article__title" key={`article_title_${index}`}>
+                    {object.title}
+                  </h3>
+                  <time
+                    dateTime=""
+                    className="article__date"
+                    key={`article_date_${index}`}
+                  >
+                    {object.date}
+                  </time>
+                </div>
+              </Link>
+            </article>
+          );
+        })}
+      </div>
+      <div className="page-indicator-wrapper">
+        <PaginationIndicator
+          setCurrentPage={setCurrentPage}
+          pages={pages}
+          currentPage={currentPage}
+          numberIndicatorsToDisplayMin={1}
+          numberIndicatorsToDisplayMax={5}
+          maxPageIndicatorsToDisplay={5}
+        />
+        <div className="load-more-button-wrapper">
+          <button
+            className="pagination-box-indicators__load-more-button"
+            onClick={handleLoadMore}
+            style={{
+              display:
+                pages.length === 1 || !pages.length || currentPage !== 1
+                  ? "none"
+                  : "block",
+            }}
+          >
+            Load More...
+          </button>
+        </div>
+      </div>
+    </>
   );
 };

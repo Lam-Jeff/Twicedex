@@ -103,8 +103,21 @@ export const Collection = () => {
   );
   const [filter, setFilter] = useState(false);
   const [displayMode, setDisplayMode] = useState(DISPLAY_INIT_VALUE);
+  const [isSmallScreen, setIsSmallScreen] = useState(
+    window.innerWidth <= 480 ? true : false,
+  );
 
   const cardsToDisplay = useMemo(() => filterCardsToDisplay(cards), [cards]);
+
+  useEffect(() => {
+    window.addEventListener("resize", () => {
+      if (window.innerWidth <= 480) {
+        setIsSmallScreen(true);
+      } else {
+        setIsSmallScreen(false);
+      }
+    });
+  }, []);
 
   useEffect(() => {
     const checkSearchParams =
@@ -118,7 +131,7 @@ export const Collection = () => {
   }, [album, category, searchParams, displayMode]);
 
   /**
-   * Handle open/close the filter box.
+   * Open or close the filter window.
    */
   const handleFilterBox = () => {
     const newValue = filter ? false : true;
@@ -130,6 +143,9 @@ export const Collection = () => {
     }
   };
 
+  /**
+   * Open or close the options window.
+   */
   const handleOptionsBox = () => {
     const newValue = isOptionsOpen ? false : true;
     setIsOptionsOpen(newValue);
@@ -140,6 +156,9 @@ export const Collection = () => {
     }
   };
 
+  /**
+   * Handle click on overlay.
+   */
   const handleclickOnOverlay = () => {
     if (filter) {
       setFilter(false);
@@ -263,7 +282,7 @@ export const Collection = () => {
   };
 
   return (
-    <div className="collection-content">
+    <div className="collection-container">
       <ModalOptions
         isOptionsOpen={isOptionsOpen}
         wishesAll={wishesAll}
@@ -309,7 +328,9 @@ export const Collection = () => {
             </span>
           </button>
         </div>
-        <div className="utility-bar__info-set">
+        <div
+          className={`utility-bar__info-set ${isSmallScreen ? "small-screen" : ""}`}
+        >
           <p>{getLengthCardsDisplayed(cards, album, category)} cards</p>
         </div>
         <div className="utility-bar__right-box">
@@ -379,7 +400,7 @@ export const Collection = () => {
       )}
       <style>
         {`
-                div.collection-content > .card-modal__container{
+                div.collection-container > .card-modal__container{
                     opacity: ${modal ? "1" : "0"};
                     visibility: ${modal ? "visible" : "hidden"};
                     transform: ${modal ? "scale(1)" : "scale(0)"};

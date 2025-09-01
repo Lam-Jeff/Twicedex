@@ -62,6 +62,12 @@ export const Sets = () => {
     code: string;
     image: string;
   }>({ name: "", code: "", image: "" });
+
+  /**
+   * Filter the collection by the text input.
+   *
+   * @param {string} value - string representing the text input used for filtering
+   */
   const handleSearchTextChange = (value: string) => {
     let newAlbums: TAlbumsProps[] = filterAlbumsByCategory(
       ALBUMS_DEFAULT_STATE,
@@ -74,10 +80,16 @@ export const Sets = () => {
       category,
     );
     newAlbums = filterAlbumsBySearchValue(newAlbums, value);
+    newAlbums = sortAlbums(newAlbums, sortValue, progression);
     setSearchText(value);
     setAlbums(newAlbums);
   };
 
+  /**
+   * Update the search type.
+   *
+   * @param {string} value - string representing the search type.
+   */
   const handleSearchTypeChange = (value: string) => {
     let newAlbums: TAlbumsProps[] = filterAlbumsByCategory(albums, category);
     newAlbums = filterAlbumsbyRadioButtonType(
@@ -87,10 +99,16 @@ export const Sets = () => {
       category,
     );
     newAlbums = filterAlbumsBySearchValue(newAlbums, searchText);
+    newAlbums = sortAlbums(newAlbums, sortValue, progression);
+
     setSearchType(value);
     setAlbums(newAlbums);
   };
 
+  /**
+   * Open or close the filter window.
+   *
+   */
   const handleClickOnFilter = () => {
     const newValue = isFilterOpen ? false : true;
     setIsFilterOpen(newValue);
@@ -101,6 +119,11 @@ export const Sets = () => {
     }
   };
 
+  /**
+   * Update the category.
+   *
+   * @param {string} value - string representing the category
+   */
   const handleClickOnCategory = (value: string) => {
     let newAlbums: TAlbumsProps[] = filterAlbumsByCategory(
       ALBUMS_DEFAULT_STATE,
@@ -131,6 +154,11 @@ export const Sets = () => {
     setAlbums(newAlbums);
   };
 
+  /**
+   * Open the details window.
+   *
+   * @param {{name:string, code:string, image:string}} album - object representing an album
+   */
   const handleClickOnViewDetails = (album: {
     name: string;
     code: string;
@@ -141,6 +169,11 @@ export const Sets = () => {
     document.body.classList.add("modal-open");
   };
 
+  /**
+   * Update parameters to access the album page.
+   *
+   * @param {string} code - string representing an album code
+   */
   const handleClickLinkToAlbum = (code: string) => {
     const currentAlbum = albums.filter((_album) => _album.code === code);
     const currentMembers = membersFile.map((_member) =>
