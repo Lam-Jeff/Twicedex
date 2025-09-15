@@ -23,8 +23,13 @@ interface PaginationProps {
   data: TNewsProps[];
 }
 export const Pagination = ({ sizePage, data }: PaginationProps) => {
-  const { setCodeUrl, setCategoryUrl, setDisplayUrl, updateParams } =
-    useContext(UrlContext);
+  const {
+    setCodeUrl,
+    setCategoryUrl,
+    setDisplayUrl,
+    updateParams,
+    optionParam,
+  } = useContext(UrlContext);
   const [currentPage, setCurrentPage] = useState(1);
   const [isLoadingThumbnail, setIsLoadingThumbnail] = useState(true);
   const [numberElementPerPage, setNumberElementPerPage] = useState(sizePage);
@@ -87,7 +92,7 @@ export const Pagination = ({ sizePage, data }: PaginationProps) => {
     setDisplayUrl("0");
     setCodeUrl(album);
     setCategoryUrl(category);
-    updateParams(newBenefits, newMembers);
+    updateParams(newBenefits, newMembers, optionParam);
   };
 
   return (
