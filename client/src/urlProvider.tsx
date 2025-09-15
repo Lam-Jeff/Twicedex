@@ -6,8 +6,10 @@ import {
   useLocation,
   useSearchParams,
   useNavigate,
+  useParams,
 } from "react-router-dom";
 import global from "./files/global";
+import { getInitialValue, optionToCode } from "./helpers";
 interface IUrlProviderProps {
   /**
    * Category value in Url.
@@ -23,6 +25,11 @@ interface IUrlProviderProps {
    * Card ID in Url. Only defined in cardDetails component.
    */
   cardID: string | undefined;
+
+  /**
+   * Option in Url.
+   */
+  optionParam: string;
 
   /**
    * Query string in Url.
@@ -47,6 +54,7 @@ interface IUrlProviderProps {
     code: string,
     cardID: string | undefined,
     display: string,
+    option: string,
   ) => void;
 
   /**
@@ -55,6 +63,7 @@ interface IUrlProviderProps {
   updateParams: (
     benefits: { name: string; checked: boolean; display: boolean }[],
     members: { name: string; checked: boolean; display: boolean }[],
+    option: string,
   ) => void;
 
   /**
@@ -73,6 +82,7 @@ export const UrlContext = createContext<IUrlProviderProps>({
   codeParam: "",
   searchParams: new URLSearchParams(),
   cardID: "",
+  optionParam: "",
   setSearchParams: () => {},
   getSearchParams: () => "",
   computeNewPath: () => {},
@@ -94,33 +104,35 @@ type Props = {
 export const UrlProvider = ({ children }: Props) => {
   const location = useLocation();
   const navigate = useNavigate();
+  const params = useParams();
   const hasNavigatedBack = useRef(false);
-
-  const categoryLocalStorage = sessionStorage.getItem("category");
-  const codeLocalStorage = sessionStorage.getItem("code");
-  const displayLocalStorage = sessionStorage.getItem("display");
-  const session = sessionStorage.getItem("session");
-  let isNewSession = false;
-  if (!session) {
-    isNewSession = true;
-    sessionStorage.setItem("session", "true");
-  }
 
   const [searchParams, setSearchParams] = useSearchParams();
   const [categoryUrl, setCategoryUrl] = useState<string>(
-    categoryLocalStorage && !isNewSession
-      ? JSON.parse(categoryLocalStorage)
-      : global.CATEGORY_DEFAULT_VALUE,
+    getInitialValue(
+      "category",
+      global.CATEGORY_DEFAULT_VALUE,
+      params.categoryParam,
+    ),
   );
   const [codeUrl, setCodeUrl] = useState<string>(
-    codeLocalStorage ? JSON.parse(codeLocalStorage) : global.ERA_DEFAULT_VALUE,
+    getInitialValue("code", global.ERA_DEFAULT_VALUE, params.codeParam),
   );
   const [displayUrl, setDisplayUrl] = useState<string>(
-    displayLocalStorage && !isNewSession
-      ? JSON.parse(displayLocalStorage)
-      : global.DISPLAY_DEFAULT_VALUE,
+    getInitialValue(
+      "display",
+      global.DISPLAY_DEFAULT_VALUE,
+      searchParams.get("display"),
+    ),
   );
   const [cardIDUrl, setCardIDUrl] = useState<string>("");
+  const [optionUrl, setOptionUrl] = useState<string>(
+    getInitialValue(
+      "option",
+      global.OPTION_DEFAULT_VALUE,
+      searchParams.get("option"),
+    ),
+  );
 
   useEffect(() => {
     const isFirstLoad = !sessionStorage.getItem("hasLoaded");
@@ -130,9 +142,9 @@ export const UrlProvider = ({ children }: Props) => {
       currentPosition = "cardDetails";
     else if (location.pathname.split("/")[1].length > 0)
       currentPosition = location.pathname.split("/")[1];
-    const positionLocalStorage = sessionStorage.getItem("position");
-    const oldPosition = positionLocalStorage
-      ? JSON.parse(positionLocalStorage)
+    const positionSessionStorage = sessionStorage.getItem("position");
+    const oldPosition = positionSessionStorage
+      ? JSON.parse(positionSessionStorage)
       : global.POSITION_DEFAULT_VALUE;
 
     if (isFirstLoad) {
@@ -176,40 +188,41 @@ export const UrlProvider = ({ children }: Props) => {
     setCategoryUrl(global.CATEGORY_DEFAULT_VALUE);
     setCodeUrl(global.ERA_DEFAULT_VALUE);
     setDisplayUrl(global.DISPLAY_DEFAULT_VALUE);
-    sessionStorage.setItem(
-      "benefits",
-      JSON.stringify(global.BENEFITS_DEFAULT_VALUE),
-    );
-    sessionStorage.setItem(
-      "members",
-      JSON.stringify(global.MEMBERS_DEFAULT_VALUE),
-    );
+    setOptionUrl(global.OPTION_DEFAULT_VALUE);
+    sessionStorage.setItem("benefits", JSON.stringify([]));
+    sessionStorage.setItem("members", JSON.stringify([]));
     sessionStorage.setItem(
       "display",
       JSON.stringify(global.DISPLAY_DEFAULT_VALUE),
+    );
+    sessionStorage.setItem(
+      "option",
+      JSON.stringify(global.OPTION_DEFAULT_VALUE),
     );
   };
 
   /**
    * Return search parameter based on its name.
    *
-   * @param {string} searchParameter - name of the parameter in Url.
+   * @param {string} searchParameters - name of the parameter in Url.
    *
    * @returns {string|null}
    */
-  const getSearchParams = (searchParameter: string) => {
-    return searchParams.get(searchParameter);
+  const getSearchParams = (searchParameters: string) => {
+    return searchParams.get(searchParameters);
   };
 
   /**
-   * Update parameters in Url and local storage.
+   * Update parameters in Url and session storage.
    *
    * @param {{ name: string, checked: boolean, display: boolean }[]} benefits - Array representing the benefits.
    * @param {{ name: string, checked: boolean, display: boolean }[]} members - Array representing the members.
+   * @param {string} option - String representing the type of cards daatabase to display.
    */
   const updateParams = (
     benefits: { name: string; checked: boolean; display: boolean }[],
     members: { name: string; checked: boolean; display: boolean }[],
+    option: string,
   ) => {
     const benefitsStringify = JSON.stringify(
       benefits
@@ -219,14 +232,19 @@ export const UrlProvider = ({ children }: Props) => {
     const membersStringify = JSON.stringify(
       members.filter((member) => member.checked).map((member) => member.name),
     );
+
+    const optionCode = optionToCode(option);
+    const optionCodeStringify = JSON.stringify(optionCode);
     const newParamsStringify = {
       benefits: benefitsStringify,
       members: membersStringify,
       display: displayUrl,
+      option: optionCodeStringify,
     };
-
     sessionStorage.setItem("benefits", benefitsStringify);
     sessionStorage.setItem("members", membersStringify);
+    sessionStorage.setItem("option", optionCodeStringify);
+    setOptionUrl(optionCode);
     setSearchParams(newParamsStringify, { replace: true });
   };
 
@@ -237,12 +255,14 @@ export const UrlProvider = ({ children }: Props) => {
    * @param {string} code - A string representing the album's code.
    * @param {string|undefined} cardID - A string representing the card ID selected.
    * @param {string} display - A string representing the display mode.
+   * @param {string} option - A String representing the cards database to display.
    */
   const computeNewPath = (
     category: string,
     code: string,
     cardID: string | undefined = undefined,
     display: string,
+    option: string,
   ) => {
     const benefitsParams = getSearchParams("benefits") || "";
     const membersParams = getSearchParams("members") || "";
@@ -251,6 +271,7 @@ export const UrlProvider = ({ children }: Props) => {
     const encodeBenefits = encodeURIComponent(benefitsParams);
     const encodeMembers = encodeURIComponent(membersParams);
     const encodeCode = encodeURIComponent(code);
+    const encodeOption = encodeURIComponent(option);
 
     let newPath = "";
 
@@ -262,13 +283,15 @@ export const UrlProvider = ({ children }: Props) => {
         categoryParam: encodeCategory,
         codeParam: encodeCode,
       });
-      newPath += `?benefits=${encodeBenefits}&members=${encodeMembers}&display=${display}`;
+      newPath += `?benefits=${encodeBenefits}&members=${encodeMembers}&display=${display}&option=${encodeOption}`;
       setCategoryUrl(encodeCategory);
       setCodeUrl(encodeCode);
+      setOptionUrl(option);
       setDisplayUrl(display);
       sessionStorage.setItem("category", JSON.stringify(encodeCategory));
       sessionStorage.setItem("code", JSON.stringify(code));
       sessionStorage.setItem("display", JSON.stringify(display));
+      sessionStorage.setItem("option", JSON.stringify(option));
     }
     window.history.replaceState(null, "", newPath);
   };
@@ -277,6 +300,7 @@ export const UrlProvider = ({ children }: Props) => {
     categoryParam: categoryUrl,
     codeParam: codeUrl,
     cardID: cardIDUrl,
+    optionParam: optionUrl,
     searchParams: searchParams,
     setSearchParams: setSearchParams,
     getSearchParams: getSearchParams,

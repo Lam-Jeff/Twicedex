@@ -41,13 +41,13 @@ export const firstElementOfCategory: Record<string, number> = {
 };
 
 /**
- * Retrieve data from the LocalStorage.
+ * Retrieve data from the sessionStorage.
  *
- * @param {string} name - name of the local storage
+ * @param {string} name - name of the session storage
  *
  * @return {{ name: string, checked: boolean }}
  */
-export function getLocalStoragePreferences(name: string): string[] {
+export function getSessionStoragePreferences(name: string): string[] {
   const pref = sessionStorage.getItem(name);
   if (pref) {
     const object = JSON.parse(pref);
@@ -68,12 +68,14 @@ export function getLocalStoragePreferences(name: string): string[] {
 export function filterValues(
   data: { name: string; checked: boolean }[],
 ): string[] {
-  const filteredData = data
+  let filteredData = data
     .filter((object) => {
       return object.checked;
     })
     .map((object) => object.name);
-
+  if (filteredData.length == 0) {
+    filteredData = data.map((_object) => _object.name);
+  }
   return filteredData;
 }
 
@@ -563,9 +565,8 @@ export function sortAlbums(
 
 /**
  * Get progression by members and era.
- *
- * @param {ICardsProps[]} cards - list of cards in the database
  * @param {number[]} userCollection - an array representing the cards acquired
+ * @param {ICardsProps[]} cards - list of cards in the database
  *
  * @returns {Record<string, { percent: number, acquired: number, total: number }>}
  */
@@ -608,8 +609,8 @@ export function computeProgressionByMemberAndEra(
 /**
  * Get progression by benefits and era.
  *
- * @param {ICardsProps[]} cards - list of cards in the database
  * @param {number[]} userCollection - an array representing the cards acquired
+ * @param {ICardsProps[]} cards - list of cards in the database
  *
  * @returns {Record<string, { percent: number, acquired: number, total: number }>}
  */
@@ -644,3 +645,67 @@ export function computeProgressionByBenefitsAndEra(
   return progression;
 }
 
+/**
+ * Get value in sesstionStorage or in url if its exist.
+ *
+ * @param {string} key - string representing a key in sessionStorage
+ * @param {T} fallback - fallback value if value in sessionStorage is null
+ * @param {string|null} urlValue - value in url
+ *
+ * @returns {T}
+ */
+export function getInitialValue<T>(
+  key: string,
+  fallback: T,
+  urlValue?: string | null,
+): T {
+  if (urlValue !== undefined && urlValue !== null)
+    return urlValue as unknown as T;
+  const stored = sessionStorage.getItem(key);
+  if (!stored) return fallback;
+  return JSON.parse(stored) as T;
+}
+
+/**
+ * Convert option string to its code.
+ *
+ * @param {string} option - Filter option
+ *
+ * @return {string}
+ */
+export function optionToCode(option: string): string {
+  switch (option) {
+    case "All":
+      return "all";
+    case "In collection":
+      return "inc";
+    case "Not in collection":
+      return "notin";
+    case "In wishlist":
+      return "inw";
+    default:
+      return "all";
+  }
+}
+
+/**
+ * Convert code to its option string.
+ *
+ * @param {string} code - Code representing a filter option
+ *
+ * @return {string}
+ */
+export function codeToOption(code: string): string {
+  switch (code) {
+    case "all":
+      return "All";
+    case "inc":
+      return "In collection";
+    case "notin":
+      return "Not in collection";
+    case "inw":
+      return "In wishlist";
+    default:
+      return "All";
+  }
+}

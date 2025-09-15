@@ -14,8 +14,8 @@ import { SlOptions } from "react-icons/sl";
 
 import cardsFile from "./files/cards.json";
 import albumsFile from "./files/albums.json";
-import { AuthContext } from "./authProvider";
 import { UrlContext } from "./urlProvider";
+import { IndexedDBContext } from "./indexedDBProvider";
 
 export interface ICardsProps {
   /**
@@ -70,16 +70,15 @@ export const Collection = () => {
     categoryParam,
     searchParams,
     displayParam,
+    optionParam,
     setSearchParams,
     getSearchParams,
     computeNewPath,
   } = useContext(UrlContext);
-  const { cardsData, wishesData, updateCollection, updateWishlist, user } =
-    useContext(AuthContext);
-
-  const CODE_INIT_VALUE = decodeURIComponent(codeParam);
+  const { collection, wishlist, addData, deleteData, database } =
+    useContext(IndexedDBContext);
   const ALBUM_INIT_VALUE = albumsFile.filter(
-    (album) => album.code === decodeURIComponent(CODE_INIT_VALUE),
+    (album) => album.code === decodeURIComponent(codeParam),
   )[0].name;
   const CATEGORY_INIT_VALUE = decodeURIComponent(categoryParam);
   const DISPLAY_INIT_VALUE = displayParam
@@ -94,7 +93,6 @@ export const Collection = () => {
     cardsFile.map((card) => {
       return {
         ...card,
-        checked: cardsData.includes(card.id),
         display:
           card.era === ALBUM_INIT_VALUE &&
           card.categories.includes(CATEGORY_INIT_VALUE),
@@ -108,6 +106,10 @@ export const Collection = () => {
   );
 
   const cardsToDisplay = useMemo(() => filterCardsToDisplay(cards), [cards]);
+  const numberCardsDisplayed = useMemo(
+    () => getLengthCardsDisplayed(cards, album, category),
+    [cards, album, category],
+  );
 
   useEffect(() => {
     window.addEventListener("resize", () => {
@@ -123,12 +125,13 @@ export const Collection = () => {
     const checkSearchParams =
       getSearchParams("benefits") &&
       getSearchParams("members") &&
-      getSearchParams("display");
-    if (!checkSearchParams || !album || !category) return;
+      getSearchParams("display") &&
+      getSearchParams("option");
+    if (!checkSearchParams || !album || !category || !optionParam) return;
     const albumCode = albumsFile.find((object) => object.name === album)!.code;
     const displayValue = displayMode ? "1" : "0";
-    computeNewPath(category, albumCode, undefined, displayValue);
-  }, [album, category, searchParams, displayMode]);
+    computeNewPath(category, albumCode, undefined, displayValue, optionParam);
+  }, [album, category, searchParams, displayMode, optionParam]);
 
   /**
    * Open or close the filter window.
@@ -161,10 +164,10 @@ export const Collection = () => {
    */
   const handleclickOnOverlay = () => {
     if (filter) {
-      setFilter(false);
+      handleFilterBox();
     }
     if (isOptionsOpen) {
-      setIsOptionsOpen(false);
+      handleOptionsBox();
     }
   };
 
@@ -197,41 +200,45 @@ export const Collection = () => {
   /**
    * Add all diplayed elements to the wish list.
    */
-  const wishesAll = () => {
+  const wishesAll = async () => {
     const newList = [
       ...cards
         .filter(
           (card) =>
             card.display &&
-            !cardsData.includes(card.id) &&
-            !wishesData.includes(card.id),
+            !collection.includes(card.id) &&
+            !wishlist.includes(card.id),
         )
         .map((card) => card.id),
     ];
-    if (user) {
-      newList.forEach((_id) => updateWishlist(_id, user.uid));
+    if (database) {
+      await Promise.all(
+        newList.map((_id) => addData(database, _id, "wishlist")),
+      );
     }
   };
 
   /**
    * Add all diplayed elements to the collection list.
    */
-  const collectionAll = () => {
+  const collectionAll = async () => {
     const newList = [
       ...cards.filter((card) => card.display).map((card) => card.id),
     ];
-    const newWhishes = [
-      ...wishesData.filter((wish) => !newList.includes(wish)),
-    ];
-    if (user) {
-      newWhishes.forEach((_id) => updateWishlist(_id, user.uid));
-      newList.forEach((_id) => updateCollection(_id, user.uid));
-      setCards(
-        cards.map((object) =>
-          object.display ? { ...object, checked: true } : object,
-        ),
+    const newWhishes = [...wishlist.filter((wish) => newList.includes(wish))];
+    if (database) {
+      await Promise.all(
+        newWhishes.map((_id) => deleteData(database, _id, "wishlist")),
+      );
+      await Promise.all(
+        newList.map((_id) => addData(database, _id, "collection")),
       );
     }
+    setCards(
+      cards.map((object) =>
+        object.display ? { ...object, checked: true } : object,
+      ),
+    );
   };
 
   /**
@@ -243,14 +250,13 @@ export const Collection = () => {
         "Are you sure you want to REMOVE ALL the displayed cards from your WISHLIST ?",
       )
     ) {
-      const newWhishes = [
-        ...wishesData.filter(
-          (id) => !cards.filter((card) => card.id === id)[0].display,
-        ),
+      const newList = [
+        ...cards.filter((card) => card.display).map((card) => card.id),
       ];
-      if (user) {
-        newWhishes.forEach((_id) => updateWishlist(_id, user.uid));
-      }
+
+      const newWhishes = [...wishlist.filter((id) => newList.includes(id))];
+      if (database)
+        newWhishes.forEach((_id) => deleteData(database, _id, "wishlist"));
     }
   };
 
@@ -264,20 +270,21 @@ export const Collection = () => {
       )
     ) {
       const newList = [
-        ...cardsData.filter(
-          (id) => !cards.filter((card) => card.id === id)[0].display,
-        ),
+        ...cards.filter((card) => card.display).map((card) => card.id),
       ];
-      if (user) {
-        newList.forEach((_id) => updateCollection(_id, user.uid));
-        setCards(
-          cards.map((object) =>
-            object.era === album && object.categories.includes(category)
-              ? { ...object, checked: false }
-              : object,
-          ),
-        );
-      }
+
+      const newCollection = [
+        ...collection.filter((id) => newList.includes(id)),
+      ];
+      if (database)
+        newCollection.forEach((_id) => deleteData(database, _id, "collection"));
+      setCards(
+        cards.map((object) =>
+          object.era === album && object.categories.includes(category)
+            ? { ...object, checked: false }
+            : object,
+        ),
+      );
     }
   };
 
@@ -331,7 +338,7 @@ export const Collection = () => {
         <div
           className={`utility-bar__info-set ${isSmallScreen ? "small-screen" : ""}`}
         >
-          <p>{getLengthCardsDisplayed(cards, album, category)} cards</p>
+          <p>{numberCardsDisplayed} cards</p>
         </div>
         <div className="utility-bar__right-box">
           <button

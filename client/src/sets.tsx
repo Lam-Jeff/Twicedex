@@ -20,6 +20,7 @@ import cardsFile from "./files/cards.json";
 import { StatsInfo } from "./stats";
 import { UrlContext } from "./urlProvider";
 import { RxCross2 } from "react-icons/rx";
+import { IndexedDBContext } from "./indexedDBProvider";
 
 export const Sets = () => {
   const SORT_DEFAULT_VALUE = "Release date (New to old)";
@@ -39,14 +40,19 @@ export const Sets = () => {
     "Release date (New to old)",
   ];
   const SEARCH_VALUES = ["All", "In progress", "Completed"];
-  const { cardsData } = useContext(AuthContext);
-  const { setCodeUrl, setCategoryUrl, setDisplayUrl, updateParams } =
-    useContext(UrlContext);
+  const { collection } = useContext(IndexedDBContext);
+  const {
+    setCodeUrl,
+    setCategoryUrl,
+    setDisplayUrl,
+    updateParams,
+    optionParam,
+  } = useContext(UrlContext);
 
   const [category, setCategory] = useState(CATEGORY_DEFAULT_VALUE);
   const [searchType, setSearchType] = useState(SEARCH_TYPE_DEFAULT_VALUE);
   const progression = computeProgressionByEraAndCategory(
-    cardsData,
+    collection,
     cardsFile,
     category,
   );
@@ -103,6 +109,10 @@ export const Sets = () => {
 
     setSearchType(value);
     setAlbums(newAlbums);
+  };
+
+  const handleClickOnOverlay = () => {
+    handleClickOnFilter();
   };
 
   /**
@@ -189,7 +199,7 @@ export const Sets = () => {
     setCodeUrl(code);
     setCategoryUrl(category);
     setDisplayUrl("0");
-    updateParams(currentBenefits, currentMembers);
+    updateParams(currentBenefits, currentMembers, optionParam);
   };
 
   return (
@@ -203,7 +213,7 @@ export const Sets = () => {
       />
       <div
         className={`overlay ${isFilterOpen ? "active" : ""}`}
-        onClick={() => setIsFilterOpen(false)}
+        onClick={handleClickOnOverlay}
       ></div>
       <div
         className={`sets-container__filter-box ${isFilterOpen ? "open" : "close"}`}

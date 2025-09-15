@@ -1,7 +1,5 @@
-import { useContext } from "react";
 import { RxCross2 } from "react-icons/rx";
 import { useNavigate, useLocation } from "react-router-dom";
-import { AuthContext } from "./authProvider";
 
 export interface setOptionsProps {
   isOptionsOpen: boolean;
@@ -25,6 +23,9 @@ export interface setOptionsProps {
    */
   collectionNone: () => void;
 
+  /**
+   * Open or close the options window.
+   */
   handleOptionsBox: () => void;
 }
 
@@ -36,20 +37,6 @@ export const ModalOptions = ({
   collectionNone,
   handleOptionsBox,
 }: setOptionsProps) => {
-  const navigate = useNavigate();
-  const location = useLocation();
-  const { user } = useContext(AuthContext);
-
-  /**
-   * Go to settings page.
-   */
-  const handleClickPreferences = () => {
-    navigate(
-      `/collection/${location.state.category}/${location.state.era}/settings`,
-      { state: location.state },
-    );
-  };
-
   return (
     <div className={`modal_options ${isOptionsOpen ? "open" : "close"}`}>
       <div className="modal__content">
@@ -94,15 +81,6 @@ export const ModalOptions = ({
             aria-label="Delete all displayed cards from the collection"
           >
             Remove ALL displayed cards from COLLECTION
-          </button>
-        </div>
-
-        <div className="preferences">
-          <button
-            onClick={handleClickPreferences}
-            aria-label="Go to preferences page"
-          >
-            Preferences
           </button>
         </div>
       </div>

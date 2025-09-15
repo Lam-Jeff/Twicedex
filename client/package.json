@@ -14,6 +14,7 @@
     "dotenv": "^16.3.1",
     "firebase": "^10.5.0",
     "framer-motion": "^10.16.1",
+    "idb": "^8.0.3",
     "imagekitio-react": "^3.0.0",
     "playwright": "^1.40.1",
     "react": "^18.2.0",
@@ -22,7 +23,6 @@
     "react-router-dom": "^6.14.1",
     "regenerator-runtime": "^0.14.0",
     "typescript": "^4.9.5",
-    "vite": "^4.5.1",
     "vite-plugin-svgr": "^3.2.0",
     "vite-tsconfig-paths": "^4.2.1",
     "web-vitals": "^2.1.4"
@@ -68,7 +68,7 @@
     "react-test-renderer": "^18.2.0",
     "sass": "^1.67.0",
     "ts-jest": "^29.1.1",
+    "vite": "^4.5.14",
     "vitest": "^0.34.6"
   }
 }
-

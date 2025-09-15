@@ -6,18 +6,15 @@ import { About } from "./about";
 import { Terms } from "./terms";
 import { ScrollUpButton } from "./scrollUpButton";
 import { PageNotFound } from "./pageNotFound";
-import { Login } from "./login";
 import { ScrollToTop } from "./scrollToTop";
 import { Collection } from "./collection";
 import { Settings } from "./settings";
-import { AuthProvider } from "./authProvider";
-import { Profile } from "./profile";
 import { Sets } from "./sets";
-import { ProtectedRoute } from "./protectedRoute";
 import Footer from "./footer";
 import { CardDetails } from "./cardDetails";
 import { UrlProvider } from "./urlProvider";
 import { ThemeProvider } from "./themeContext";
+import { IndexedDBProvider } from "./indexedDBProvider";
 interface IApplicationProps {}
 
 const App: React.FunctionComponent<IApplicationProps> = () => {
@@ -27,13 +24,14 @@ const App: React.FunctionComponent<IApplicationProps> = () => {
         <ScrollToTop>
           <ThemeProvider>
             <UrlProvider>
-              <AuthProvider>
+              {/* <AuthProvider> */}
+              <IndexedDBProvider>
                 <Header />
                 <Routes>
                   <Route path="/">
                     <Route index element={<Home />} />
                   </Route>
-                  <Route path="/login" element={<Login />} />
+                  {/*<Route path="/login" element={<Login />} />
                   <Route path="/profile">
                     <Route
                       index
@@ -51,7 +49,7 @@ const App: React.FunctionComponent<IApplicationProps> = () => {
                         </ProtectedRoute>
                       }
                     />
-                  </Route>
+                  </Route> */}
                   <Route path="/sets" element={<Sets />} />
                   <Route path="/collection/:categoryParam/:codeParam">
                     <Route index element={<Collection />} />
@@ -62,7 +60,8 @@ const App: React.FunctionComponent<IApplicationProps> = () => {
                   <Route path="/terms" element={<Terms />} />
                   <Route path="*" element={<PageNotFound />} />
                 </Routes>
-              </AuthProvider>
+              </IndexedDBProvider>
+              {/*</AuthProvider> */}
             </UrlProvider>
           </ThemeProvider>
           <ScrollUpButton />

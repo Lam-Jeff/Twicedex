@@ -1,7 +1,5 @@
 import { useEffect } from "react";
 import { Link } from "react-router-dom";
-import { useContext } from "react";
-import { AuthContext } from "./authProvider";
 import global from "./files/global";
 
 interface INavBarProps {
@@ -10,7 +8,7 @@ interface INavBarProps {
 }
 
 export const NavBar = ({ isHamburgerOpen, isSmallScreen }: INavBarProps) => {
-  const { user, signOut } = useContext(AuthContext);
+  // const { user, signOut } = useContext(AuthContext);
   const hamburger: string = isHamburgerOpen
     ? "hamburgerMenuOpen"
     : "hamburgerMenuClose";
@@ -29,9 +27,9 @@ export const NavBar = ({ isHamburgerOpen, isSmallScreen }: INavBarProps) => {
   /**
    * Handle log out.
    */
-  const handleLogOut = () => {
-    signOut();
-  };
+  //const handleLogOut = () => {
+  //signOut();
+  // };
 
   return (
     <div className={`navigation ${isSmallScreen ? hamburger : ""}`}>
@@ -54,16 +52,15 @@ export const NavBar = ({ isHamburgerOpen, isSmallScreen }: INavBarProps) => {
             Sets
           </Link>
         </li>
-        <li className="navigation-bar__login">
-          {user ? (
-            <Link
-              to="./profile"
-              className="nav__listitem"
-              aria-label={`Go to Profile page`}
-            >
-              Profile
-            </Link>
-          ) : (
+        {/* <li className="navigation-bar__login">
+          <Link
+            to="./profile"
+            className="nav__listitem"
+            aria-label={`Go to Profile page`}
+          >
+            Profile
+          </Link>{" "}
+          ):(
             <Link
               to="./login"
               className="nav__listitem"
@@ -71,8 +68,9 @@ export const NavBar = ({ isHamburgerOpen, isSmallScreen }: INavBarProps) => {
             >
               Login
             </Link>
-          )}
+          )
         </li>
+         */}
         <li className="navigation-bar__about">
           <Link
             to="/about"
@@ -82,7 +80,7 @@ export const NavBar = ({ isHamburgerOpen, isSmallScreen }: INavBarProps) => {
             About
           </Link>
         </li>
-        {user ? (
+        {/*user ? (
           <li className="navigation-bar__logout">
             <div
               className="nav__listitem"
@@ -92,11 +90,10 @@ export const NavBar = ({ isHamburgerOpen, isSmallScreen }: INavBarProps) => {
               Log Out
             </div>
           </li>
-        ) : null}
+        ) : null */}
       </ul>
     </div>
   );
 };
 
 export default NavBar;
-

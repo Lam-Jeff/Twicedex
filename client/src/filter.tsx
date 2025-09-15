@@ -1,7 +1,14 @@
-import { useState, useEffect, useMemo, useContext } from "react";
+import {
+  useState,
+  useEffect,
+  useMemo,
+  useContext,
+  useRef,
+  useLayoutEffect,
+} from "react";
 import { Checkbox } from "./checkbox";
 import { ICardsProps } from "./collection";
-import { filterValues, firstElementOfCategory } from "./helpers";
+import { filterValues, firstElementOfCategory, codeToOption } from "./helpers";
 
 import albumsFile from "./files/albums.json";
 import benefitsFile from "./files/benefits.json";
@@ -9,9 +16,8 @@ import categoriesFile from "./files/categories.json";
 import membersFile from "./files/members.json";
 import { TAlbumsProps } from "./types/albums";
 import { UrlContext } from "./urlProvider";
-import { AuthContext } from "./authProvider";
-import { useLocation } from "react-router-dom";
 import { RxCross2 } from "react-icons/rx";
+import { IndexedDBContext } from "./indexedDBProvider";
 
 interface IFilterProps {
   /**
@@ -65,27 +71,25 @@ export const Filter = ({
   setCategory,
   handleFilterBox,
 }: IFilterProps) => {
-  const location = useLocation();
-  const SEARCH_TYPE_DEFAULT_VALUE = location.state
-    ? location.state.radioType
-    : "All";
-  const SEARCH_VALUES = [
-    "All",
-    "In collection",
-    "Not in collection",
-    "In wishlist",
-  ];
   const {
     searchParams,
     setSearchParams,
     updateParams,
     categoryParam,
     codeParam,
+    optionParam,
   } = useContext(UrlContext);
-  const { cardsData, wishesData } = useContext(AuthContext);
-  const [searchType, setSearchType] = useState(SEARCH_TYPE_DEFAULT_VALUE);
-  const membersLocalStorage = sessionStorage.getItem("members");
-  const benefitsLocalStorage = sessionStorage.getItem("benefits");
+
+  const SEARCH_VALUES = [
+    "All",
+    "In collection",
+    "Not in collection",
+    "In wishlist",
+  ];
+  const { collection, wishlist } = useContext(IndexedDBContext);
+  const [searchType, setSearchType] = useState(codeToOption(optionParam));
+  const membersSessionStorage = sessionStorage.getItem("members");
+  const benefitsSessionStorage = sessionStorage.getItem("benefits");
   const categories: { name: string; checked: boolean }[] = categoriesFile;
   const [focusCategory, setFocusCategory] = useState(false);
   const [focusAlbum, setFocusAlbum] = useState(false);
@@ -99,20 +103,30 @@ export const Filter = ({
       benefitsFile,
     );
 
-  useEffect(() => {
+  const modalFilterRef = useRef<HTMLDivElement | null>(null);
+
+  useLayoutEffect(() => {
+    if (modalFilterRef.current) {
+      modalFilterRef.current.scrollTo({ top: 0, behavior: "auto" });
+    }
     updateCategories(category);
     updateAlbums(album);
     applyUpdates();
   }, []);
 
   useEffect(() => {
-    updateParams(benefits, members);
+    updateParams(benefits, members, searchType);
     applyUpdates();
-  }, [members, benefits]);
+  }, [members, benefits, searchType]);
 
   const filterMembers = useMemo(() => filterValues(members), [members]);
   const filterBenefits = useMemo(() => filterValues(benefits), [benefits]);
 
+  /**
+   * Change the search type.
+   *
+   * @param {string} value - A string representing the search type.
+   */
   const handleSearchTypeChange = (value: string) => {
     setSearchType(value);
     let currentCards = cards
@@ -135,21 +149,21 @@ export const Filter = ({
         break;
       case "In collection":
         newCards = newCards.map((_card) =>
-          currentCards.includes(_card.id) && cardsData.includes(_card.id)
+          currentCards.includes(_card.id) && collection.includes(_card.id)
             ? { ..._card, display: true }
             : { ..._card, display: false },
         );
         break;
       case "Not in collection":
         newCards = newCards.map((_card) =>
-          currentCards.includes(_card.id) && !cardsData.includes(_card.id)
+          currentCards.includes(_card.id) && !collection.includes(_card.id)
             ? { ..._card, display: true }
             : { ..._card, display: false },
         );
         break;
       case "In wishlist":
         newCards = newCards.map((_card) =>
-          currentCards.includes(_card.id) && wishesData.includes(_card.id)
+          currentCards.includes(_card.id) && wishlist.includes(_card.id)
             ? { ..._card, display: true }
             : { ..._card, display: false },
         );
@@ -158,43 +172,44 @@ export const Filter = ({
     setCards(newCards);
   };
 
+  /**
+   * Apply the parameters in the filter window.
+   */
   const applyUpdates = () => {
     let newCards = cards;
-
     if (searchType === "All") {
       newCards = cards.map((object) => {
-        filterBenefits.includes(object.benefit) &&
         album === object.era &&
         object.categories.includes(category) &&
-        filterMembers.some((member) => object.members.includes(member))
+        filterMembers.some((member) => object.members.includes(member)) &&
+        filterBenefits.includes(object.benefit)
           ? (object.display = true)
           : (object.display = false);
         return object;
       });
     } else if (searchType === "In collection") {
       newCards = cards.map((object) => {
-        filterBenefits.includes(object.benefit) &&
         album === object.era &&
         object.categories.includes(category) &&
         filterMembers.some((member) => object.members.includes(member)) &&
-        cardsData.includes(object.id)
+        filterBenefits.includes(object.benefit) &&
+        collection.includes(object.id)
           ? (object.display = true)
           : (object.display = false);
         return object;
       });
     } else if (searchType === "In wishlist") {
       newCards = cards.map((object) => {
-        filterBenefits.includes(object.benefit) &&
         album === object.era &&
         object.categories.includes(category) &&
         filterMembers.some((member) => object.members.includes(member)) &&
-        wishesData.includes(object.id)
+        filterBenefits.includes(object.benefit) &&
+        wishlist.includes(object.id)
           ? (object.display = true)
           : (object.display = false);
         return object;
       });
     }
-
     setCards(newCards);
   };
 
@@ -243,26 +258,26 @@ export const Filter = ({
 
     let newMembers = members.map((_object) =>
       currentMembers.includes(_object.name)
-        ? { ..._object, display: true, checked: true }
+        ? { ..._object, display: true, checked: false }
         : { ..._object, display: false, checked: false },
     );
     let newBenefits = benefits.map((_object) =>
       currentBenefits.includes(_object.name)
-        ? { ..._object, display: true, checked: true }
+        ? { ..._object, display: true, checked: false }
         : { ..._object, display: false, checked: false },
     );
     if (currentCode === codeParam) {
-      if (membersLocalStorage) {
+      if (membersSessionStorage) {
         newMembers = newMembers.map((_object) =>
-          membersLocalStorage.includes(_object.name)
+          membersSessionStorage.includes(_object.name)
             ? { ..._object, checked: true }
             : { ..._object, checked: false },
         );
       }
 
-      if (benefitsLocalStorage) {
+      if (benefitsSessionStorage) {
         newBenefits = newBenefits.map((_object) =>
-          benefitsLocalStorage.includes(_object.name)
+          benefitsSessionStorage.includes(_object.name)
             ? { ..._object, checked: true }
             : { ..._object, checked: false },
         );
@@ -301,27 +316,27 @@ export const Filter = ({
 
     let newMembers = members.map((_object) =>
       currentMembers.includes(_object.name)
-        ? { ..._object, display: true, checked: true }
+        ? { ..._object, display: true, checked: false }
         : { ..._object, display: false, checked: false },
     );
     let newBenefits = benefits.map((_object) =>
       currentBenefits.includes(_object.name)
-        ? { ..._object, display: true, checked: true }
+        ? { ..._object, display: true, checked: false }
         : { ..._object, display: false, checked: false },
     );
 
     if (newCategory === categoryParam) {
-      if (membersLocalStorage) {
+      if (membersSessionStorage) {
         newMembers = newMembers.map((_object) =>
-          membersLocalStorage.includes(_object.name)
+          membersSessionStorage.includes(_object.name)
             ? { ..._object, checked: true }
             : { ..._object, checked: false },
         );
       }
 
-      if (benefitsLocalStorage) {
+      if (benefitsSessionStorage) {
         newBenefits = newBenefits.map((_object) =>
-          benefitsLocalStorage.includes(_object.name)
+          benefitsSessionStorage.includes(_object.name)
             ? { ..._object, checked: true }
             : { ..._object, checked: false },
         );
@@ -382,31 +397,52 @@ export const Filter = ({
    * @param {string} filter - name of the filter
    */
   const unSelectAll = (filter: string) => {
+    const newCards: ICardsProps[] = [];
+
+    let newMembers: { name: string; checked: boolean; display: boolean }[] =
+      members;
+    let newBenefits: { name: string; checked: boolean; display: boolean }[] =
+      benefits;
+
     if (filter === "members") {
-      setMembers(
-        members.map((object) =>
-          object.checked ? { ...object, checked: false } : object,
-        ),
+      newMembers = members.map((object) =>
+        object.display && object.checked
+          ? { ...object, checked: false }
+          : object,
       );
-      setCards(cards.map((object) => ({ ...object, display: false })));
+
+      setMembers(newMembers);
 
       if (searchParams.has("members")) {
         searchParams.set("members", "false");
         setSearchParams(searchParams, { replace: true });
       }
     } else if (filter === "benefits") {
-      setBenefits(
-        benefits.map((object) =>
-          object.checked ? { ...object, checked: false } : object,
-        ),
+      newBenefits = benefits.map((object) =>
+        object.display && object.checked
+          ? { ...object, checked: false }
+          : object,
       );
-      setCards(cards.map((object) => ({ ...object, display: false })));
+
+      setBenefits(newBenefits);
 
       if (searchParams.has("benefits")) {
         searchParams.set("benefits", "false");
         setSearchParams(searchParams, { replace: true });
       }
     }
+    const filteredMembers = filterValues(newMembers);
+    const filteredBenefits = filterValues(newBenefits);
+    cards.forEach((card) => {
+      filteredMembers.some((member) => card.members.includes(member)) &&
+      album == card.era &&
+      filteredBenefits.includes(card.benefit) &&
+      card.categories.includes(category)
+        ? newCards.push({ ...card, display: true })
+        : newCards.push(card);
+    });
+
+    setCards(newCards);
   };
 
   /**
@@ -476,7 +512,7 @@ export const Filter = ({
             <RxCross2 />
           </button>
         </div>
-        <div className="inputs__container">
+        <div className="inputs__container" ref={modalFilterRef}>
           <div className="select__container">
             <div
               className={

@@ -22,7 +22,6 @@ import {
   serverTimestamp,
 } from "firebase/firestore";
 import { FirebaseError } from "firebase/app";
-import { TParamsProps } from "./types/params";
 
 interface IProviderProps {
   /**

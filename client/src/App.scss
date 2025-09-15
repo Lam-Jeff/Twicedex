@@ -613,8 +613,7 @@ a {
 
       .additions,
       .deletions,
-      .divers,
-      .preferences {
+      .divers {
         display: flex;
         flex-direction: column;
         gap: 1em;
@@ -663,19 +662,6 @@ a {
         }
       }
 
-      .preferences {
-
-        button {
-          margin: 10px 0;
-          background: #373b3a;
-
-          &:hover {
-            border-color: #232525;
-            background: #232525;
-          }
-        }
-
-      }
     }
   }
 
@@ -1112,15 +1098,15 @@ a {
 
           .check,
           .wish {
-            color: black;
+            color: $text-color;
             font-size: 1.5rem;
             border-radius: 50%;
             background-color: $card-background-color;
             opacity: 0.4;
 
             &:hover {
-              filter: opacity(0.5);
-              color: $hover-background-color;
+              opacity: 0.6;
+              transition: $hover-transition-opacity;
             }
           }
 
@@ -1250,7 +1236,13 @@ a {
           border-radius: $border05;
           width: 100%;
           height: 100%;
+          opacity: 0.4;
+
+          &.in-collection {
+            opacity: 1;
+          }
         }
+
       }
 
       &:hover {
@@ -1985,6 +1977,10 @@ a {
       padding: 0 1rem;
       width: 90%;
 
+      &-box h3>a {
+        overflow: hidden;
+        text-overflow: ellipsis;
+      }
     }
 
     &__header {
@@ -2014,7 +2010,7 @@ a {
       border-radius: $border1;
       display: grid;
       grid-template-columns: repeat(2, 1fr);
-      grid-template-rows: 1fr 2fr 1fr;
+      grid-template-rows: 1.25fr 2fr 1fr;
       padding: 0.75rem;
       background: $card-background-color;
 
@@ -2464,8 +2460,9 @@ footer {
   }
 
   .sets-container__main__set {
+    width: 100%;
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(0, 350px));
+    grid-template-columns: repeat(auto-fit, minmax(350px, 400px));
     grid-auto-rows: auto;
     gap: 1.25rem;
     justify-content: center;
@@ -2618,6 +2615,7 @@ footer {
 
   .sets-container__main__set {
     gap: 1.75rem;
+
   }
 
 }
@@ -2627,6 +2625,8 @@ footer {
 
   /* COLLECTION PAGE */
   .collection-container {
+    max-width: 90%;
+
     .modal_cardDetails {
       .modal__content {
         margin: 3% auto;
@@ -2642,6 +2642,11 @@ footer {
   /* SETS */
   .sets-container {
     max-width: 90%;
+
+    &__main__set {
+      grid-template-columns: repeat(auto-fit, minmax(400px, 425px));
+
+    }
   }
 
 }

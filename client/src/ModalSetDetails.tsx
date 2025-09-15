@@ -1,7 +1,6 @@
 import { Link } from "react-router-dom";
 import { useContext, useRef, useState } from "react";
 import cardsFile from "./files/cards.json";
-import { AuthContext } from "./authProvider";
 import { StatsInfo } from "./stats";
 import { RxChevronRight } from "react-icons/rx";
 import {
@@ -11,6 +10,7 @@ import {
 import { UrlContext } from "./urlProvider";
 import benefitsFile from "./files/benefits.json";
 import membersFile from "./files/members.json";
+import { IndexedDBContext } from "./indexedDBProvider";
 interface IModalSetDetails {
   album: { name: string; code: string; image: string };
   category: string;
@@ -33,7 +33,7 @@ export const ModalSetDetails = ({
   setIsModalSetDetailsOpen,
   progression,
 }: IModalSetDetails) => {
-  const { user, cardsData } = useContext(AuthContext);
+  const { collection } = useContext(IndexedDBContext);
   const { setCodeUrl, setCategoryUrl, updateParams } = useContext(UrlContext);
   const [currentAlbum, setCurrentAlbum] = useState(album.name);
   const [benefits, setBenefits] = useState<
@@ -81,11 +81,11 @@ export const ModalSetDetails = ({
       (card) => card.era === album.name && card.categories.includes(category),
     );
     const progressionMembers = computeProgressionByMemberAndEra(
-      cardsData,
+      collection,
       newCards,
     );
     const progressionBenefits = computeProgressionByBenefitsAndEra(
-      cardsData,
+      collection,
       newCards,
     );
     newBenefits = Object.entries(progressionBenefits).map(([key, value]) => ({
@@ -101,6 +101,12 @@ export const ModalSetDetails = ({
     setCurrentAlbum(album.name);
   }
 
+  /**
+   * Click on link. Update data according to the information to display.
+   *
+   * @param {string} type - Data type to update.
+   * @param {string} value - Search type.
+   */
   const handleClickOnLink = (type: string, value: string) => {
     setIsModalSetDetailsOpen(false);
     document.body.classList.remove("modal-open");
@@ -108,12 +114,12 @@ export const ModalSetDetails = ({
     const currentMembersName = members.map((_member) => _member.member);
     let newBenefits = benefitsFile.map((_benefit) =>
       currentBenefitsName.includes(_benefit.name)
-        ? { ..._benefit, display: true, checked: true }
+        ? { ..._benefit, display: true, checked: false }
         : { ..._benefit, display: false, checked: false },
     );
     let newMembers = membersFile.map((_member) =>
       currentMembersName.includes(_member.name)
-        ? { ..._member, display: true, checked: true }
+        ? { ..._member, display: true, checked: false }
         : { ..._member, display: false, checked: false },
     );
     switch (type) {
@@ -136,9 +142,11 @@ export const ModalSetDetails = ({
     }
     setCodeUrl(album.code);
     setCategoryUrl(category);
-    updateParams(newBenefits, newMembers);
+    updateParams(newBenefits, newMembers, value);
   };
-
+  /**
+   * Handle click on close button.
+   */
   const handleClickOnClose = () => {
     setIsModalSetDetailsOpen(false);
     document.body.classList.remove("modal-open");
@@ -177,8 +185,7 @@ export const ModalSetDetails = ({
             <h3>Quick access</h3>
             <Link
               to={`/collection/${encodeURIComponent(category)}/${encodeURIComponent(album.code)}`}
-              state={{ radioType: "All" }}
-              onClick={() => handleClickOnLink("all", "all")}
+              onClick={() => handleClickOnLink("all", "All")}
               replace
             >
               All cards
@@ -186,9 +193,7 @@ export const ModalSetDetails = ({
             </Link>
             <Link
               to={`/collection/${encodeURIComponent(category)}/${encodeURIComponent(album.code)}`}
-              state={{ radioType: "In collection" }}
-              className={!user ? "disabled" : ""}
-              onClick={() => handleClickOnLink("all", "collection")}
+              onClick={() => handleClickOnLink("all", "In collection")}
               replace
             >
               Cards in collection
@@ -196,9 +201,7 @@ export const ModalSetDetails = ({
             </Link>
             <Link
               to={`/collection/${encodeURIComponent(category)}/${encodeURIComponent(album.code)}`}
-              state={{ radioType: "In wishlist" }}
-              className={!user ? "disabled" : ""}
-              onClick={() => handleClickOnLink("all", "wishlist")}
+              onClick={() => handleClickOnLink("all", "In wishlist")}
               replace
             >
               Cards in wishlist
