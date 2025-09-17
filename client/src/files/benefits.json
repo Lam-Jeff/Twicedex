@@ -1,242 +1,247 @@
 [
-    {
-        "name": "POB",
-        "checked": false,
-        "display": false
-    },
-    {
-        "name": "Original",
-        "checked": true,
-        "display": true
-    },
-    {
-        "name": "Monograph",
-        "checked": false,
-        "display": false
-    },
-    {
-        "name": "Withmuu",
-        "checked": false,
-        "display": false
-    },
-    {
-        "name": "JYP Shop",
-        "checked": false,
-        "display": false
-    },
-    {
-        "name": "Musicplant",
-        "checked": false,
-        "display": false
-    },
-    {
-        "name": "Soundwave",
-        "checked": false,
-        "display": false
-    },
-    {
-        "name": "Synnara",
-        "checked": false,
-        "display": false
-    },
-    {
-        "name": "Interpark",
-        "checked": false,
-        "display": false
-    },
-    {
-        "name": "Aladin",
-        "checked": false,
-        "display": false
-    },
-    {
-        "name": "Withdrama",
-        "checked": false,
-        "display": false
-    },
-    {
-        "name": "Flo",
-        "checked": false,
-        "display": false
-    },
-    {
-        "name": "Film Keyring",
-        "checked": false,
-        "display": false
-    },
-    {
-        "name": "Lotte Duty-Free",
-        "checked": false,
-        "display": false
-    },
-    {
-        "name": "Target",
-        "checked": false,
-        "display": false
-    },
-    {
-        "name": "Blue Dream Media",
-        "checked": false,
-        "display": false
-    },
-    {
-        "name": "Broadcast",
-        "checked": false,
-        "display": false
-    },
-    {
-        "name": "Yes24",
-        "checked": false,
-        "display": false
-    },
-    {
-        "name": "Music Korea",
-        "checked": false,
-        "display": false
-    },
-    {
-        "name": "Everline",
-        "checked": false,
-        "display": false
-    },
-    {
-        "name": "HMV",
-        "checked": false,
-        "display": false
-    },
-    {
-        "name": "Hi-Touch",
-        "checked": false,
-        "display": false
-    },
-    {
-        "name": "Comic Book",
-        "checked": false,
-        "display": false
-    },
-    {
-        "name": "Arena Tour",
-        "checked": false,
-        "display": false
-    },
-    {
-        "name": "Tower Records",
-        "checked": false,
-        "display": false
-    },
-    {
-        "name": "Showcase",
-        "checked": false,
-        "display": false
-    },
-    {
-        "name": "Special",
-        "checked": false,
-        "display": false
-    },
-    {
-        "name": "Ktown4U",
-        "checked": false,
-        "display": false
-    },
-    {
-        "name": "Cosme Tokyo",
-        "checked": false,
-        "display": false
-    },
-    {
-        "name": "Rakuten",
-        "checked": false,
-        "display": false
-    },
-    {
-        "name": "Plaza",
-        "checked": false,
-        "display": false
-    },
-    {
-        "name": "NUNC",
-        "checked": false,
-        "display": false
-    },
-    {
-        "name": "LOHBs",
-        "checked": false,
-        "display": false
-    },
-    {
-        "name": "Lalavla",
-        "checked": false,
-        "display": false
-    },
-    {
-        "name": "Qoo10",
-        "checked": false,
-        "display": false
-    },
-    {
-        "name": "Kiosk",
-        "checked": false,
-        "display": false
-    },
-    {
-        "name": "Once Japan Mobile",
-        "checked": false,
-        "display": false
-    },
-    {
-        "name": "Upgrade",
-        "checked": false,
-        "display": false
-    },
-    {
-        "name": "Special Gift",
-        "checked": false,
-        "display": false
-    },
-    {
-        "name": "Apple Music",
-        "checked": false,
-        "display": false
-    },
-    {
-        "name": "KakaoTalk",
-        "checked": false,
-        "display": false
-    },
-    {
-        "name": "Barnes&Noble",
-        "checked": false,
-        "display": false
-    },
-    {
-        "name": "Walmart",
-        "checked": false,
-        "display": false
-    },
-    {
-        "name": "Novelty Fair",
-        "checked": false,
-        "display": false
-    },
-    {
-        "name": "Puzzle Event",
-        "checked": false,
-        "display": false
-    },
-    {
-        "name": "Venue Exclusive",
-        "checked": false,
-        "display": false
-    },
-    {
-        "name": "Starriver",
-        "checked": false,
-        "display": false
-    },
-    {
-        "name": "Fans",
-        "checked": false,
-        "display": false
-    }
+  {
+    "name": "POB",
+    "checked": false,
+    "display": false
+  },
+  {
+    "name": "Original",
+    "checked": true,
+    "display": true
+  },
+  {
+    "name": "Monograph",
+    "checked": false,
+    "display": false
+  },
+  {
+    "name": "Withmuu",
+    "checked": false,
+    "display": false
+  },
+  {
+    "name": "JYP Shop",
+    "checked": false,
+    "display": false
+  },
+  {
+    "name": "Musicplant",
+    "checked": false,
+    "display": false
+  },
+  {
+    "name": "Soundwave",
+    "checked": false,
+    "display": false
+  },
+  {
+    "name": "Synnara",
+    "checked": false,
+    "display": false
+  },
+  {
+    "name": "Interpark",
+    "checked": false,
+    "display": false
+  },
+  {
+    "name": "Aladin",
+    "checked": false,
+    "display": false
+  },
+  {
+    "name": "Withdrama",
+    "checked": false,
+    "display": false
+  },
+  {
+    "name": "Flo",
+    "checked": false,
+    "display": false
+  },
+  {
+    "name": "Film Keyring",
+    "checked": false,
+    "display": false
+  },
+  {
+    "name": "Lotte Duty-Free",
+    "checked": false,
+    "display": false
+  },
+  {
+    "name": "Target",
+    "checked": false,
+    "display": false
+  },
+  {
+    "name": "Blue Dream Media",
+    "checked": false,
+    "display": false
+  },
+  {
+    "name": "Broadcast",
+    "checked": false,
+    "display": false
+  },
+  {
+    "name": "Yes24",
+    "checked": false,
+    "display": false
+  },
+  {
+    "name": "Music Korea",
+    "checked": false,
+    "display": false
+  },
+  {
+    "name": "Everline",
+    "checked": false,
+    "display": false
+  },
+  {
+    "name": "HMV",
+    "checked": false,
+    "display": false
+  },
+  {
+    "name": "Hi-Touch",
+    "checked": false,
+    "display": false
+  },
+  {
+    "name": "Comic Book",
+    "checked": false,
+    "display": false
+  },
+  {
+    "name": "Arena Tour",
+    "checked": false,
+    "display": false
+  },
+  {
+    "name": "Tower Records",
+    "checked": false,
+    "display": false
+  },
+  {
+    "name": "Showcase",
+    "checked": false,
+    "display": false
+  },
+  {
+    "name": "Special",
+    "checked": false,
+    "display": false
+  },
+  {
+    "name": "Ktown4U",
+    "checked": false,
+    "display": false
+  },
+  {
+    "name": "Cosme Tokyo",
+    "checked": false,
+    "display": false
+  },
+  {
+    "name": "Rakuten",
+    "checked": false,
+    "display": false
+  },
+  {
+    "name": "Plaza",
+    "checked": false,
+    "display": false
+  },
+  {
+    "name": "NUNC",
+    "checked": false,
+    "display": false
+  },
+  {
+    "name": "LOHBs",
+    "checked": false,
+    "display": false
+  },
+  {
+    "name": "Lalavla",
+    "checked": false,
+    "display": false
+  },
+  {
+    "name": "Qoo10",
+    "checked": false,
+    "display": false
+  },
+  {
+    "name": "Kiosk",
+    "checked": false,
+    "display": false
+  },
+  {
+    "name": "Once Japan Mobile",
+    "checked": false,
+    "display": false
+  },
+  {
+    "name": "Upgrade",
+    "checked": false,
+    "display": false
+  },
+  {
+    "name": "Special Gift",
+    "checked": false,
+    "display": false
+  },
+  {
+    "name": "Apple Music",
+    "checked": false,
+    "display": false
+  },
+  {
+    "name": "KakaoTalk",
+    "checked": false,
+    "display": false
+  },
+  {
+    "name": "Barnes&Noble",
+    "checked": false,
+    "display": false
+  },
+  {
+    "name": "Walmart",
+    "checked": false,
+    "display": false
+  },
+  {
+    "name": "Novelty Fair",
+    "checked": false,
+    "display": false
+  },
+  {
+    "name": "Puzzle Event",
+    "checked": false,
+    "display": false
+  },
+  {
+    "name": "Venue Exclusive",
+    "checked": false,
+    "display": false
+  },
+  {
+    "name": "Starriver",
+    "checked": false,
+    "display": false
+  },
+  {
+    "name": "Fans Shop",
+    "checked": false,
+    "display": false
+  },
+  {
+    "name": "Kpop Nara",
+    "checked": false,
+    "display": false
+  }
 ]

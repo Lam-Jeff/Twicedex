@@ -1,5 +1,36 @@
 [
   {
+    "id": 32,
+    "subject": "Collection",
+    "title": "This Is For World Tour In Japan added.",
+    "date": "17/09/2025",
+    "thumbnail": "/images/thumbnail/This_is_for_in_japan.webp",
+    "alt": "This Is For World Tour In Japan cards thumbnail",
+    "era": "TIFWTIJ",
+    "category": "Events"
+  },
+
+  {
+    "id": 31,
+    "subject": "Collection",
+    "title": "This Is For shop benefits added.",
+    "date": "16/09/2025",
+    "thumbnail": "/images/thumbnail/This_is_for.webp",
+    "alt": "This Is For cards thumbnail",
+    "era": "TIF",
+    "category": "Korean Albums"
+  },
+  {
+    "id": 30,
+    "subject": "Collection",
+    "title": "Lil Fantasy broadcast added.",
+    "date": "12/09/2025",
+    "thumbnail": "/images/thumbnail/Lil_fantasy.webp",
+    "alt": "Lil Fantasy cards thumbnail",
+    "era": "LF",
+    "category": "Korean Albums"
+  },
+  {
     "id": 29,
     "subject": "Collection",
     "title": "Sie added.",

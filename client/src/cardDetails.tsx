@@ -41,6 +41,7 @@ export const CardDetails = () => {
       displayParam,
       optionParam,
     );
+    console.log(cardsFile, album);
   }, []);
 
   return (
@@ -161,4 +162,3 @@ export const CardDetails = () => {
     </div>
   );
 };
-

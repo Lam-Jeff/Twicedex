@@ -3461,9 +3461,13 @@
       "Original",
       "Withmuu",
       "Blue Dream Media",
-      "Fans",
+      "Fans Shop",
       "Broadcast",
-      "POB"
+      "POB",
+      "Soundwave",
+      "Musicplant",
+      "Music Korea",
+      "Kpop Nara"
     ],
     "members": [
       "Chaeyoung",
@@ -3540,7 +3544,7 @@
       "Tzuyu"
     ],
     "display": false,
-    "code": "TISFWTIJPUS",
+    "code": "TIFWTIJPUS",
     "release": "2025-07-04T00:00:00.000Z",
     "image": "/images/thumbnail/This_is_for_japan_pop_up.webp"
   },
@@ -3564,5 +3568,37 @@
     "code": "Nabati",
     "release": "2025-06-15T00:00:00.000Z",
     "image": "/images/thumbnail/Nabati.webp"
+  },
+  {
+    "name": "Lil Fantasy",
+    "checked": false,
+    "categories": ["Korean Albums", "Solo/Subunit"],
+    "benefits": ["Original", "Broadcast"],
+    "members": ["Chaeyoung"],
+    "display": false,
+    "code": "LF",
+    "release": "2025-09-12T00:00:00.000Z",
+    "image": "/images/thumbnail/Lil_fantasy.webp"
+  },
+  {
+    "name": "This Is For World Tour In Japan",
+    "checked": false,
+    "categories": ["Events"],
+    "benefits": ["Original"],
+    "members": [
+      "Chaeyoung",
+      "Dahyun",
+      "Jeongyeon",
+      "Jihyo",
+      "Mina",
+      "Momo",
+      "Nayeon",
+      "Sana",
+      "Tzuyu"
+    ],
+    "display": false,
+    "code": "TIFWTIJ",
+    "release": "2025-07-26T00:00:00.000Z",
+    "image": "/images/thumbnail/This_is_for_in_japan.webp"
   }
 ]

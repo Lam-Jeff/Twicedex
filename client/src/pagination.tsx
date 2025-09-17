@@ -71,6 +71,12 @@ export const Pagination = ({ sizePage, data }: PaginationProps) => {
     setNumberElementPerPage((prevState: number) => prevState + 5);
   };
 
+  /**
+   * Handle click on link that redirect to the collection page.
+   *
+   * @param {string} album - album's name
+   * @param {string} category - cateogory of the album
+   */
   const handleClickOnLink = (album: string, category: string) => {
     const currentMembers = albumsFile.find(
       (_album) => _album.code === album,
@@ -81,12 +87,12 @@ export const Pagination = ({ sizePage, data }: PaginationProps) => {
 
     let newMembers = membersFile.map((_object) =>
       currentMembers.includes(_object.name)
-        ? { ..._object, display: true, checked: true }
+        ? { ..._object, display: true, checked: false }
         : { ..._object, display: false, checked: false },
     );
     let newBenefits = benefitsFile.map((_object) =>
       currentBenefits.includes(_object.name)
-        ? { ..._object, display: true, checked: true }
+        ? { ..._object, display: true, checked: false }
         : { ..._object, display: false, checked: false },
     );
     setDisplayUrl("0");
