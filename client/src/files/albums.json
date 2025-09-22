@@ -3298,7 +3298,7 @@
     "name": "Collector 2025 Season's Greetings",
     "checked": false,
     "categories": ["Greetings"],
-    "benefits": ["Original"],
+    "benefits": ["Original", "POB"],
     "members": [
       "Chaeyoung",
       "Dahyun",
@@ -3600,5 +3600,26 @@
     "code": "TIFWTIJ",
     "release": "2025-07-26T00:00:00.000Z",
     "image": "/images/thumbnail/This_is_for_in_japan.webp"
+  },
+  {
+    "name": "Ten: The Story Goes On",
+    "checked": false,
+    "categories": ["Korean Albums"],
+    "benefits": ["Original"],
+    "members": [
+      "Chaeyoung",
+      "Dahyun",
+      "Jeongyeon",
+      "Jihyo",
+      "Mina",
+      "Momo",
+      "Nayeon",
+      "Sana",
+      "Tzuyu"
+    ],
+    "display": false,
+    "code": "10TSGO",
+    "release": "2025-10-10T00:00:00.000Z",
+    "image": "/images/thumbnail/the_story_goes_on.webp"
   }
 ]

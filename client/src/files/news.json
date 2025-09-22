@@ -1,5 +1,27 @@
 [
   {
+    "id": 34,
+    "subject": "Collection",
+    "title": "Birthday365 2025 Japan Season's Greetings added.",
+    "date": "22/09/2025",
+    "thumbnail": "/images/thumbnail/seasons_greetings_365.webp",
+    "alt": "Birthday365 2025 Japan Season's Greetings cards thumbnail",
+    "era": "B365",
+    "category": "Greetings"
+  },
+
+  {
+    "id": 33,
+    "subject": "Collection",
+    "title": "TWICE “STRATEGY” Pop Up In Seoul tincase added.",
+    "date": "18/09/2025",
+    "thumbnail": "/images/thumbnail/twice_strategy_pop-up_seoul.webp",
+    "alt": "TWICE “STRATEGY” Pop Up In Seoul cards thumbnail",
+    "era": "TSPUIS",
+    "category": "Stores/Merch"
+  },
+
+  {
     "id": 32,
     "subject": "Collection",
     "title": "This Is For World Tour In Japan added.",
