@@ -1,5 +1,36 @@
 [
   {
+    "id": 37,
+    "subject": "Collection",
+    "title": "SSJYP Nation added.",
+    "date": "23/09/2025",
+    "thumbnail": "/images/thumbnail/ssjypn.webp",
+    "alt": "SSJYP Nation in Toronto 2 cards thumbnail",
+    "era": "SSJYPN",
+    "category": "Promos"
+  },
+  {
+    "id": 36,
+    "subject": "Collection",
+    "title": "This Is For World Tour In Japan added.",
+    "date": "23/09/2025",
+    "thumbnail": "/images/thumbnail/This_is_for_in_japan.webp",
+    "alt": "This Is For World Tour In Japan cards thumbnail",
+    "era": "TIFWTIJ",
+    "category": "Events"
+  },
+  {
+    "id": 35,
+    "subject": "Collection",
+    "title": "Nabati added.",
+    "date": "23/09/2025",
+    "thumbnail": "/images/thumbnail/Nabati.webp",
+    "alt": "Nabati cards thumbnail",
+    "era": "Nabati",
+    "category": "Promos"
+  },
+
+  {
     "id": 34,
     "subject": "Collection",
     "title": "Birthday365 2025 Japan Season's Greetings added.",

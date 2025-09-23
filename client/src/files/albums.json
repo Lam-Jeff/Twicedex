@@ -3584,7 +3584,7 @@
     "name": "This Is For World Tour In Japan",
     "checked": false,
     "categories": ["Events"],
-    "benefits": ["Original"],
+    "benefits": ["Original", "Upgrade"],
     "members": [
       "Chaeyoung",
       "Dahyun",
