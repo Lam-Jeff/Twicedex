@@ -66,27 +66,22 @@ $xxxl: 1600px;
 $xxxxl: 1920px;
 
 /* MAPS */
-$breakpoints : (small:(min-width: $sm,
-    ratio: 1.1),
-  medium:(min-width: $md,
-    ratio: 1.2),
-  large:(min-width: $lg,
-    ratio: 1.2),
-  x-large:(min-width: $xl,
-    ratio: 1.4),
-  xx-large:(min-width: $xxl,
-    ratio: 1.5),
-  xxx-large:(min-width: $xxxl,
-    ratio: 1.65),
-  xxxx-large:(min-width: $xxxxl,
-    ratio: 1.6));
+$breakpoints: (
+  small:      (min-width: $sm,    max-content: 520px),
+  medium:     (min-width: $md,    max-content: 700px),
+  large:      (min-width: $lg,    max-content: 880px),
+  x-large:    (min-width: $xl,    max-content: 1060px),
+  xx-large:   (min-width: $xxl,   max-content: 1200px),
+  xxx-large:  (min-width: $xxxl,  max-content: 1360px),
+  xxxx-large: (min-width: $xxxxl, max-content: 1560px),
+);
 
 @each $key, $value in $breakpoints {
   @media screen and (min-width: map.get($value, 'min-width')) {
     [class$='-container'] {
       margin-left: auto;
       margin-right: auto;
-      max-width: calc(100% / map.get($value, 'ratio'));
+      max-width: map.get($value, 'max-content');
 
     }
   }
