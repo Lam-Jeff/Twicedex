@@ -3298,7 +3298,7 @@
     "name": "Collector 2025 Season's Greetings",
     "checked": false,
     "categories": ["Greetings"],
-    "benefits": ["Original", "POB"],
+    "benefits": ["Original", "JYP Shop", "Fanplee"],
     "members": [
       "Chaeyoung",
       "Dahyun",
@@ -3621,5 +3621,174 @@
     "code": "10TSGO",
     "release": "2025-10-10T00:00:00.000Z",
     "image": "/images/thumbnail/the_story_goes_on.webp"
+  },
+  {
+    "name": "2025 Twice Fanmeeting: 10VE UNIVERSE",
+    "checked": false,
+    "categories": ["Events"],
+    "benefits": ["Original"],
+    "members": [
+      "Chaeyoung",
+      "Dahyun",
+      "Jeongyeon",
+      "Jihyo",
+      "Mina",
+      "Momo",
+      "Nayeon",
+      "Sana",
+      "Tzuyu"
+    ],
+    "display": false,
+    "code": "10VEU",
+    "release": "2025-10-18T00:00:00.000Z",
+    "image": "/images/thumbnail/10ve_universe.webp"
+  },
+  {
+    "name": "Red Whispers 2026 Season's Greetings",
+    "checked": false,
+    "categories": ["Greetings"],
+    "benefits": ["Original", "Soundwave", "Fans Shop", "Yes24"],
+    "members": [
+      "Chaeyoung",
+      "Dahyun",
+      "Jeongyeon",
+      "Jihyo",
+      "Mina",
+      "Momo",
+      "Nayeon",
+      "Sana",
+      "Tzuyu"
+    ],
+    "display": false,
+    "code": "SG2026RW",
+    "release": "2025-12-31T00:00:00.000Z",
+    "image": "/images/thumbnail/red_whispers.webp"
+  },
+  {
+    "name": "Captured Moments 2026 Japan Season's Greetings",
+    "checked": false,
+    "categories": ["Greetings"],
+    "benefits": ["Original"],
+    "members": [
+      "Chaeyoung",
+      "Dahyun",
+      "Jeongyeon",
+      "Jihyo",
+      "Mina",
+      "Momo",
+      "Nayeon",
+      "Sana",
+      "Tzuyu"
+    ],
+    "display": false,
+    "code": "SG2026CM",
+    "release": "2025-12-31T00:00:00.000Z",
+    "image": "/images/thumbnail/captured_moments.webp"
+  },
+  {
+    "name": "Play",
+    "checked": false,
+    "categories": ["Japanese Albums", "Solo/Subunit"],
+    "benefits": ["Original", "Once Japan Mobile"],
+    "members": ["Mina", "Momo", "Sana"],
+    "display": false,
+    "code": "Play",
+    "release": "2026-02-04T00:00:00.000Z",
+    "image": "/images/thumbnail/play.webp"
+  },
+  {
+    "name": "Be@rbrick",
+    "checked": false,
+    "categories": ["Promos"],
+    "benefits": ["Original"],
+    "members": [
+      "Chaeyoung",
+      "Dahyun",
+      "Jeongyeon",
+      "Jihyo",
+      "Mina",
+      "Momo",
+      "Nayeon",
+      "Sana",
+      "Tzuyu"
+    ],
+    "display": false,
+    "code": "Bearbrick",
+    "release": "2025-12-26T00:00:00.000Z",
+    "image": "/images/thumbnail/bearbrick.webp"
+  },
+  {
+    "name": "This Is For MUFG Stadium",
+    "checked": false,
+    "categories": ["Events"],
+    "benefits": ["Original"],
+    "members": [
+      "Chaeyoung",
+      "Dahyun",
+      "Jeongyeon",
+      "Jihyo",
+      "Mina",
+      "Momo",
+      "Nayeon",
+      "Sana",
+      "Tzuyu"
+    ],
+    "display": false,
+    "code": "TIFMUFGS",
+    "release": "2026-04-25T00:00:00.000Z",
+    "image": "/images/thumbnail/this_is_for_mufg.webp"
+  },
+  {
+    "name": "Rolling Stone Korea Special Edition 4",
+    "checked": false,
+    "categories": ["Promos"],
+    "benefits": ["Original"],
+    "members": ["Mina", "Momo", "Sana"],
+    "display": false,
+    "code": "RLKSE4",
+    "release": "2026-02-09T00:00:00.000Z",
+    "image": "/images/thumbnail/rolling_stone.webp"
+  },
+  {
+    "name": "Teazen Kombucha",
+    "checked": false,
+    "categories": ["Promos"],
+    "benefits": ["Original"],
+    "members": [
+      "Chaeyoung",
+      "Dahyun",
+      "Jeongyeon",
+      "Jihyo",
+      "Mina",
+      "Momo",
+      "Nayeon",
+      "Sana",
+      "Tzuyu"
+    ],
+    "display": false,
+    "code": "Teazen",
+    "release": "2026-02-24T00:00:00.000Z",
+    "image": "/images/thumbnail/teazen.webp"
+  },
+  {
+    "name": "One In A Mill10n",
+    "checked": false,
+    "categories": ["Events"],
+    "benefits": ["Original"],
+    "members": [
+      "Chaeyoung",
+      "Dahyun",
+      "Jeongyeon",
+      "Jihyo",
+      "Mina",
+      "Momo",
+      "Nayeon",
+      "Sana",
+      "Tzuyu"
+    ],
+    "display": false,
+    "code": "OIAM",
+    "release": "2025-10-20T00:00:00.000Z",
+    "image": "/images/thumbnail/one_in_a_million.webp"
   }
 ]

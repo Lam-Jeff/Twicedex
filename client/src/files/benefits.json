@@ -243,5 +243,10 @@
     "name": "Kpop Nara",
     "checked": false,
     "display": false
+  },
+  {
+    "name": "Fanplee",
+    "checked": false,
+    "display": false
   }
 ]

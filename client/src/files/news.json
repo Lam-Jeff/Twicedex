@@ -1,5 +1,71 @@
 [
   {
+    "id": 43,
+    "subject": "Collection",
+    "title": "One In A Mill10n added.",
+    "date": "10/06/2026",
+    "thumbnail": "/images/thumbnail/one_in_a_million.webp",
+    "alt": "one in a million cards thumbnail",
+    "era": "OIAM",
+    "category": "Events"
+  },
+
+  {
+    "id": 42,
+    "subject": "Collection",
+    "title": "Teazen Kombucha added.",
+    "date": "10/06/2026",
+    "thumbnail": "/images/thumbnail/teazen.webp",
+    "alt": "teazen cards thumbnail",
+    "era": "Teazen",
+    "category": "Promos"
+  },
+
+  {
+    "id": 41,
+    "subject": "Collection",
+    "title": "Rolling Stone MISAMO added.",
+    "date": "10/06/2026",
+    "thumbnail": "/images/thumbnail/rolling_stone.webp",
+    "alt": "rolling stone misamo cards thumbnail",
+    "era": "RLKSE4",
+    "category": "Promos"
+  },
+
+  {
+    "id": 40,
+    "subject": "Collection",
+    "title": "Be@rbrick added.",
+    "date": "10/06/2026",
+    "thumbnail": "/images/thumbnail/bearbrick.webp",
+    "alt": "bearbrick cards thumbnail",
+    "era": "Bearbrick",
+    "category": "Promos"
+  },
+
+  {
+    "id": 39,
+    "subject": "Collection",
+    "title": "Red Whispers added.",
+    "date": "09/06/2026",
+    "thumbnail": "/images/thumbnail/red_whispers.webp",
+    "alt": "red whispers cards thumbnail",
+    "era": "SG2026RW",
+    "category": "Greetings"
+  },
+
+  {
+    "id": 38,
+    "subject": "Collection",
+    "title": "Collector added.",
+    "date": "22/10/2025",
+    "thumbnail": "/images/thumbnail/seasons_greetings_collector.webp",
+    "alt": "collector cards thumbnail",
+    "era": "Collector",
+    "category": "Greetings"
+  },
+
+  {
     "id": 37,
     "subject": "Collection",
     "title": "SSJYP Nation added.",
