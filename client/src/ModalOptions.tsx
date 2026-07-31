@@ -1,5 +1,4 @@
 import { RxCross2 } from "react-icons/rx";
-import { useNavigate, useLocation } from "react-router-dom";
 
 export interface setOptionsProps {
   isOptionsOpen: boolean;

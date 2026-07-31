@@ -138,11 +138,11 @@ export const Pagination = ({ sizePage, data }: PaginationProps) => {
                     className="article__category"
                     key={`article_link_${index}`}
                   >
-                    {object.subject}
+                    {object.title}
                   </span>
 
                   <h3 className="article__title" key={`article_title_${index}`}>
-                    {object.title}
+                    Cards added to collection
                   </h3>
                   <time
                     dateTime=""

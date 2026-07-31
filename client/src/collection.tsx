@@ -15,8 +15,7 @@ import { SlOptions } from "react-icons/sl";
 import cardsFile from "./files/cards.json";
 import albumsFile from "./files/albums.json";
 import { UrlContext } from "./urlProvider";
-import { IndexedDBContext } from "./indexedDBProvider";
-
+import { useCollectionContext } from "./CollectionContext";
 export interface ICardsProps {
   /**
    * ID of the card.
@@ -75,8 +74,7 @@ export const Collection = () => {
     getSearchParams,
     computeNewPath,
   } = useContext(UrlContext);
-  const { collection, wishlist, addData, deleteData, database } =
-    useContext(IndexedDBContext);
+  const { owned, toggleOwned, wished, toggleWished } = useCollectionContext();
   const ALBUM_INIT_VALUE = albumsFile.filter(
     (album) => album.code === decodeURIComponent(codeParam),
   )[0].name;
@@ -204,18 +202,11 @@ export const Collection = () => {
     const newList = [
       ...cards
         .filter(
-          (card) =>
-            card.display &&
-            !collection.includes(card.id) &&
-            !wishlist.includes(card.id),
+          (card) => card.display && !owned.has(card.id) && !wished.has(card.id),
         )
         .map((card) => card.id),
     ];
-    if (database) {
-      await Promise.all(
-        newList.map((_id) => addData(database, _id, "wishlist")),
-      );
-    }
+    newList.map((_id) => toggleWished(_id));
   };
 
   /**
@@ -225,15 +216,7 @@ export const Collection = () => {
     const newList = [
       ...cards.filter((card) => card.display).map((card) => card.id),
     ];
-    const newWhishes = [...wishlist.filter((wish) => newList.includes(wish))];
-    if (database) {
-      await Promise.all(
-        newWhishes.map((_id) => deleteData(database, _id, "wishlist")),
-      );
-      await Promise.all(
-        newList.map((_id) => addData(database, _id, "collection")),
-      );
-    }
+    newList.map((_id) => toggleOwned(_id));
     setCards(
       cards.map((object) =>
         object.display ? { ...object, checked: true } : object,
@@ -253,10 +236,10 @@ export const Collection = () => {
       const newList = [
         ...cards.filter((card) => card.display).map((card) => card.id),
       ];
-
-      const newWhishes = [...wishlist.filter((id) => newList.includes(id))];
-      if (database)
-        newWhishes.forEach((_id) => deleteData(database, _id, "wishlist"));
+      const newWishes = [...wished].filter((wish: number) =>
+        newList.includes(wish),
+      );
+      newWishes.forEach((_id: number) => toggleWished(_id));
     }
   };
 
@@ -273,11 +256,8 @@ export const Collection = () => {
         ...cards.filter((card) => card.display).map((card) => card.id),
       ];
 
-      const newCollection = [
-        ...collection.filter((id) => newList.includes(id)),
-      ];
-      if (database)
-        newCollection.forEach((_id) => deleteData(database, _id, "collection"));
+      const newCollection = [...owned].filter((id) => newList.includes(id));
+      newCollection.forEach((_id: number) => toggleOwned(_id));
       setCards(
         cards.map((object) =>
           object.era === album && object.categories.includes(category)

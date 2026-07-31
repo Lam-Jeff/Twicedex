@@ -10,7 +10,7 @@ import {
 import { UrlContext } from "./urlProvider";
 import benefitsFile from "./files/benefits.json";
 import membersFile from "./files/members.json";
-import { IndexedDBContext } from "./indexedDBProvider";
+import { useCollection } from "./useOwned";
 interface IModalSetDetails {
   album: { name: string; code: string; image: string };
   category: string;
@@ -33,7 +33,7 @@ export const ModalSetDetails = ({
   setIsModalSetDetailsOpen,
   progression,
 }: IModalSetDetails) => {
-  const { collection } = useContext(IndexedDBContext);
+  const { owned } = useCollection();
   const { setCodeUrl, setCategoryUrl, updateParams } = useContext(UrlContext);
   const [currentAlbum, setCurrentAlbum] = useState(album.name);
   const [benefits, setBenefits] = useState<
@@ -81,11 +81,11 @@ export const ModalSetDetails = ({
       (card) => card.era === album.name && card.categories.includes(category),
     );
     const progressionMembers = computeProgressionByMemberAndEra(
-      collection,
+      [...owned],
       newCards,
     );
     const progressionBenefits = computeProgressionByBenefitsAndEra(
-      collection,
+      [...owned],
       newCards,
     );
     newBenefits = Object.entries(progressionBenefits).map(([key, value]) => ({

@@ -5,8 +5,8 @@ import { Loading } from "./loading";
 import { RxCheckCircled, RxZoomIn } from "react-icons/rx";
 import { MdOutlineFavorite } from "react-icons/md";
 import { UrlContext } from "./urlProvider";
-import { IndexedDBContext } from "./indexedDBProvider";
-
+import { useCollectionContext } from "./CollectionContext";
+import { parseCardName } from "./helpers";
 interface ICardsContainerProps {
   /**
    * Type of display : 1 or 2.
@@ -42,38 +42,20 @@ export const Cards = ({
   handleCardZoom,
 }: ICardsContainerProps) => {
   const { categoryParam, codeParam } = useContext(UrlContext);
-  const { database, wishlist, collection, addData, deleteData } =
-    useContext(IndexedDBContext);
+  const { owned, toggleOwned, wished, toggleWished } = useCollectionContext();
   const cardIndex = cards.findIndex((_card) => _card.name === cardInAlbum.name);
   const [isLoading, setIsLoading] = useState(true);
 
   const clickOnWish = async (e: React.MouseEvent<HTMLDivElement>) => {
     e.preventDefault();
-    if (database) {
-      if (
-        !wishlist.includes(cardInAlbum.id) &&
-        !collection.includes(cardInAlbum.id)
-      ) {
-        await addData(database, cardInAlbum.id, "wishlist");
-      } else {
-        await deleteData(database, cardInAlbum.id, "wishlist");
-      }
+    if (!owned.has(cardInAlbum.id)) {
+      toggleWished(cardInAlbum.id);
     }
   };
 
   const clickOnCheck = async (e: React.MouseEvent<HTMLDivElement>) => {
     e.preventDefault();
-    if (database) {
-      if (!collection.includes(cardInAlbum.id)) {
-        await addData(database, cardInAlbum.id, "collection");
-      } else {
-        await deleteData(database, cardInAlbum.id, "collection");
-      }
-
-      if (wishlist.includes(cardInAlbum.id)) {
-        await deleteData(database, cardInAlbum.id, "wishlist");
-      }
-    }
+    toggleOwned(cardInAlbum.id);
   };
 
   if (type === "display-1") {
@@ -90,7 +72,16 @@ export const Cards = ({
         <div className="card__serie">{decodeURIComponent(codeParam)}</div>
         <div className="card__benefit">{cardInAlbum.benefit}</div>
         <div className="card__name">
-          <p>{cardInAlbum.name}</p>
+          {(() => {
+            const { member, index } = parseCardName(cardInAlbum.name);
+            return (
+              <p className="card-id">
+                <span className="card-id-member">{member}</span>
+                <span className="card-id-sep">·</span>
+                <span className="card-id-index">#{index}</span>
+              </p>
+            );
+          })()}
         </div>
         <div className="card__icons">
           <div
@@ -98,7 +89,7 @@ export const Cards = ({
             onClick={(e) => clickOnCheck(e)}
             aria-label={`Add card ${cardInAlbum.name} to the collection`}
           >
-            {collection.includes(cardInAlbum.id) ? (
+            {owned.has(cardInAlbum.id) ? (
               <RxCheckCircled className="check obtained" />
             ) : (
               <RxCheckCircled className="check" />
@@ -109,7 +100,7 @@ export const Cards = ({
             onClick={(e) => clickOnWish(e)}
             aria-label={`Add card ${cardInAlbum.name} to the wishlist`}
           >
-            {wishlist.includes(cardInAlbum.id) ? (
+            {wished.has(cardInAlbum.id) ? (
               <MdOutlineFavorite className="wish obtained" />
             ) : (
               <MdOutlineFavorite className="wish" />
@@ -130,7 +121,7 @@ export const Cards = ({
           <img
             src={cardInAlbum.thumbnail}
             alt={cardInAlbum.thumbnail}
-            className={`card_${index} ${collection.includes(cardInAlbum.id) ? "in-collection" : ""}`}
+            className={`card_${index} ${owned.has(cardInAlbum.id) ? "in-collection" : ""}`}
             key={`card_${index}`}
             onLoad={() => setIsLoading(false)}
             aria-label={`Go to details page for card ${cardInAlbum.name}`}
@@ -149,7 +140,7 @@ export const Cards = ({
             onClick={(e) => clickOnCheck(e)}
             aria-label={`Add card ${cardInAlbum.name} to the collection`}
           >
-            {collection.includes(cardInAlbum.id) ? (
+            {owned.has(cardInAlbum.id) ? (
               <RxCheckCircled className="check obtained" />
             ) : (
               <RxCheckCircled className="check" />
@@ -160,7 +151,7 @@ export const Cards = ({
             onClick={(e) => clickOnWish(e)}
             aria-label={`Add card ${cardInAlbum.name} to the wishlist`}
           >
-            {wishlist.includes(cardInAlbum.id) ? (
+            {wished.has(cardInAlbum.id) ? (
               <MdOutlineFavorite className="wish obtained" />
             ) : (
               <MdOutlineFavorite className="wish" />

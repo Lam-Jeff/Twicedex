@@ -1,5 +1,4 @@
-import { useState, useEffect } from "react";
-import { PiAlignRightSimple } from "react-icons/pi";
+import { useState } from "react";
 
 interface PaginationIndicatorProps {
   /**
@@ -117,4 +116,3 @@ export const PaginationIndicator = ({
     </div>
   );
 };
-

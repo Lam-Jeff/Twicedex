@@ -1,6 +1,5 @@
 import { Link } from "react-router-dom";
 import { useContext, useState } from "react";
-import { AuthContext } from "./authProvider";
 import {
   computeProgressionByEraAndCategory,
   filterAlbumsByCategory,
@@ -8,6 +7,7 @@ import {
   filterAlbumsbyRadioButtonType,
   getLengthSetsDisplayed,
   sortAlbums,
+  getInitialValue,
 } from "./helpers";
 import { TAlbumsProps } from "./types/albums";
 import { ModalSetDetails } from "./ModalSetDetails";
@@ -20,17 +20,33 @@ import cardsFile from "./files/cards.json";
 import { StatsInfo } from "./stats";
 import { UrlContext } from "./urlProvider";
 import { RxCross2 } from "react-icons/rx";
-import { IndexedDBContext } from "./indexedDBProvider";
+import { useCollection } from "./useOwned";
 
 export const Sets = () => {
   const SORT_DEFAULT_VALUE = "Release date (New to old)";
   const CATEGORY_DEFAULT_VALUE = "Korean Albums";
   const SEARCH_TYPE_DEFAULT_VALUE = "All";
-  const ALBUMS_DEFAULT_STATE = albumsFile.map((album) =>
-    album.categories.includes(CATEGORY_DEFAULT_VALUE)
-      ? { ...album, display: true }
-      : { ...album, display: false },
+  const sortSessionStorage = getInitialValue(
+    "sortValue",
+    SORT_DEFAULT_VALUE,
+    null,
   );
+  const categorySetsSessionStorage = getInitialValue(
+    "categorySets",
+    CATEGORY_DEFAULT_VALUE,
+    null,
+  );
+
+  const searchTypeSessionStorage = getInitialValue(
+    "searchType",
+    SEARCH_TYPE_DEFAULT_VALUE,
+    null,
+  );
+  const ALBUMS_DEFAULT_STATE = filterAlbumsByCategory(
+    albumsFile,
+    CATEGORY_DEFAULT_VALUE,
+  );
+
   const SORT_OPTIONS = [
     "Collection progress (Ascending)",
     "Collection progress (Descending)",
@@ -40,7 +56,7 @@ export const Sets = () => {
     "Release date (New to old)",
   ];
   const SEARCH_VALUES = ["All", "In progress", "Completed"];
-  const { collection } = useContext(IndexedDBContext);
+  const { owned } = useCollection();
   const {
     setCodeUrl,
     setCategoryUrl,
@@ -49,19 +65,30 @@ export const Sets = () => {
     optionParam,
   } = useContext(UrlContext);
 
-  const [category, setCategory] = useState(CATEGORY_DEFAULT_VALUE);
-  const [searchType, setSearchType] = useState(SEARCH_TYPE_DEFAULT_VALUE);
+  const [category, setCategory] = useState(
+    decodeURIComponent(categorySetsSessionStorage) ?? CATEGORY_DEFAULT_VALUE,
+  );
+  const [searchType, setSearchType] = useState(
+    searchTypeSessionStorage ?? SEARCH_TYPE_DEFAULT_VALUE,
+  );
   const progression = computeProgressionByEraAndCategory(
-    collection,
+    [...owned],
     cardsFile,
     category,
   );
-  const [albums, setAlbums] = useState<TAlbumsProps[]>(
-    sortAlbums(ALBUMS_DEFAULT_STATE, SORT_DEFAULT_VALUE, progression),
-  );
+
   const [isFilterOpen, setIsFilterOpen] = useState(false);
   const [searchText, setSearchText] = useState<string>("");
-  const [sortValue, setSortValue] = useState<string>(SORT_DEFAULT_VALUE);
+  const [sortValue, setSortValue] = useState<string>(
+    sortSessionStorage ?? SORT_DEFAULT_VALUE,
+  );
+  const [albums, setAlbums] = useState<TAlbumsProps[]>(
+    sortAlbums(
+      filterAlbumsByCategory(albumsFile, category),
+      sortValue,
+      progression,
+    ),
+  );
   const [isModalSetDetailsOpen, setIsModalSetDetailsOpen] = useState(false);
   const [albumInViewDetails, SetAlbumInViewDetails] = useState<{
     name: string;
@@ -109,6 +136,8 @@ export const Sets = () => {
 
     setSearchType(value);
     setAlbums(newAlbums);
+    const searchTypeStringify = JSON.stringify(value);
+    sessionStorage.setItem("searchType", searchTypeStringify);
   };
 
   const handleClickOnOverlay = () => {
@@ -151,6 +180,8 @@ export const Sets = () => {
     setSearchType(SEARCH_TYPE_DEFAULT_VALUE);
     setCategory(value);
     setAlbums(newAlbums);
+    const categoryStringify = JSON.stringify(value);
+    sessionStorage.setItem("categorySets", categoryStringify);
   };
 
   /**
@@ -162,6 +193,8 @@ export const Sets = () => {
     let newAlbums = sortAlbums(albums, event.target.value, progression);
     setSortValue(event.target.value);
     setAlbums(newAlbums);
+    const sortValueStringify = JSON.stringify(event.target.value);
+    sessionStorage.setItem("sortValue", sortValueStringify);
   };
 
   /**
@@ -315,39 +348,56 @@ export const Sets = () => {
                 className={`sets-container__main__set-box ${!cardsFile.find((card) => card.era === album.name) ? "disabled" : ""}`}
                 key={`sets-container__main__set-box-${album.name}`}
               >
-                <h3 key={`sets-container__main__set-box__header-${album.name}`}>
-                  <Link
-                    to={`/collection/${encodeURIComponent(category)}/${encodeURIComponent(album.code)}`}
-                    className="sets-container__main__set-box-link"
-                    aria-label={`Go to Collection page`}
-                    onClick={() => handleClickLinkToAlbum(album.code)}
+                <Link
+                  to={`/collection/${encodeURIComponent(category)}/${encodeURIComponent(album.code)}`}
+                  className="sets-container__main__set-box-link sets-container__main__set-box-overlay"
+                  aria-label={`Go to ${album.name}`}
+                  onClick={() => handleClickLinkToAlbum(album.code)}
+                />
+                <div className={"sets-container__main__set-box__header"}>
+                  <h3
+                    key={`sets-container__main__set-box__header-${album.name}`}
                   >
                     {album.name}
-                  </Link>
+                  </h3>
                   <span
                     className="sets-container__main__set-box__header-code"
                     key={`sets-container__main__set-box-code-${album.name}`}
                   >
                     {album.code}
                   </span>
-                </h3>
+                </div>
+                <div className="sets-container__main__set-box__image">
+                  <img src={album.image} alt={album.name} />
+                </div>
                 <div
                   className="sets-container__main__set-box__body"
                   key={`sets-container__main__set-box-body-${album.name}`}
                 >
-                  <Link
-                    to={`/collection/${encodeURIComponent(category)}/${encodeURIComponent(album.code)}`}
-                    className="sets-container__main__set-box-link"
-                    aria-label={`Go to Collection page`}
-                    onClick={() => handleClickLinkToAlbum(album.code)}
+                  <p className="sets-container__main__set-box__body-date">
+                    {new Date(album.release).toLocaleDateString("en-US", {
+                      year: "numeric",
+                      month: "short",
+                      day: "numeric",
+                    })}
+                  </p>
+                  <p
+                    className="sets-container__main__set-box__body-count"
+                    key={`status-total-${album.code}`}
                   >
-                    <img src={album.image} alt={album.name} />
-                  </Link>
-                  {new Date(album.release).toLocaleDateString("en-US", {
-                    year: "numeric",
-                    month: "short",
-                    day: "numeric",
-                  })}
+                    {progression[album.name]
+                      ? `${progression[album.name].acquired}/${progression[album.name].total}`
+                      : ""}
+                  </p>
+                  <p
+                    className="sets-container__main__set-box__body-percent"
+                    key={`status-percent-${album.code}`}
+                  >
+                    {progression[album.name]
+                      ? progression[album.name].percent
+                      : 0}
+                    %
+                  </p>
                 </div>
                 <div
                   className="sets-container__main__set-box__footer"

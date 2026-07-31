@@ -199,6 +199,10 @@ export const UrlProvider = ({ children }: Props) => {
       "option",
       JSON.stringify(global.OPTION_DEFAULT_VALUE),
     );
+    sessionStorage.setItem(
+      "categorySets",
+      JSON.stringify(global.CATEGORY_DEFAULT_VALUE),
+    );
   };
 
   /**

@@ -1,9 +1,6 @@
 import { useContext, useEffect } from "react";
-import { RxCheckCircled } from "react-icons/rx";
 import { BsFillCircleFill } from "react-icons/bs";
-import { MdOutlineFavorite } from "react-icons/md";
-import { AuthContext } from "./authProvider";
-import { filterByAlbumAndCategory } from "./helpers";
+import { filterByAlbumAndCategory, parseCardName } from "./helpers";
 import { useParams } from "react-router-dom";
 import cardsFile from "./files/cards.json";
 import albumsFile from "./files/albums.json";
@@ -30,8 +27,6 @@ export const CardDetails = () => {
   const indexCard = cardsToDisplay.findIndex(
     (card) => card.name === decodedCardID,
   );
-  const { user, cardsData, wishesData, updateWishlist, updateCollection } =
-    useContext(AuthContext);
 
   useEffect(() => {
     computeNewPath(
@@ -41,7 +36,6 @@ export const CardDetails = () => {
       displayParam,
       optionParam,
     );
-    console.log(cardsFile, album);
   }, []);
 
   return (
@@ -53,51 +47,27 @@ export const CardDetails = () => {
             alt={cardsToDisplay[indexCard]?.name}
           />
         </div>
-        <div className="card-details-container__edit-container">
-          {user ? (
-            <>
-              {" "}
-              <div className="collection_div">
-                <h3>Collection</h3>
-                <div
-                  className="check__icon"
-                  onClick={(e) => {
-                    updateCollection(cardsToDisplay[indexCard]?.id, user.uid);
-                    e.stopPropagation();
-                  }}
-                  aria-label="Add card to collection"
-                >
-                  {cardsData.includes(indexCard) ? (
-                    <RxCheckCircled className="check obtained" />
-                  ) : (
-                    <RxCheckCircled className="check" />
-                  )}
-                </div>
-              </div>
-              <div className="wishlist_div">
-                <h3>Wishlist</h3>
-                <div
-                  className="wish__icon"
-                  onClick={(e) => {
-                    updateWishlist(cardsToDisplay[indexCard]?.id, user.uid);
-                    e.stopPropagation();
-                  }}
-                  aria-label="Add card to wishlish"
-                >
-                  {wishesData.includes(cardsToDisplay[indexCard]?.id) ? (
-                    <MdOutlineFavorite className="wish obtained" />
-                  ) : (
-                    <MdOutlineFavorite className="wish" />
-                  )}
-                </div>
-              </div>{" "}
-            </>
-          ) : null}
-        </div>
         <div className="card-details-container__card-info">
           <div className="card-details-container__card-info__header">
             <div className="card-details-container__card-info__header-title">
-              <h2>{cardsToDisplay[indexCard]?.name}</h2>
+              {(() => {
+                const { member, index } = parseCardName(
+                  cardsToDisplay[indexCard].name,
+                );
+                return (
+                  <p className="card-details-container__card-info__header-title__card-id">
+                    <span className="card-details-container__card-info__header-title__card-id-member">
+                      {member}
+                    </span>
+                    <span className="card-details-container__card-info__header-title__card-id-sep">
+                      ·
+                    </span>
+                    <span className="card-details-container__card-info__header-title__card-id-index">
+                      #{index}
+                    </span>
+                  </p>
+                );
+              })()}
               <div className="card-details-container__card-info__header-title__badge">
                 <span className="card-details-container__card-info__header-title__badge-number">
                   {cardsToDisplay[indexCard]?.id}
@@ -125,13 +95,12 @@ export const CardDetails = () => {
               <div className="card-details-container__card-info__body-members-box">
                 {cardsToDisplay[indexCard]?.members.map((member, index) => {
                   return (
-                    <p key={`p_members_${index}`}>
-                      <BsFillCircleFill
-                        className={`circle_${member}`}
-                        key={`circle_member_${index}`}
-                      />
-                      {member}
-                    </p>
+                    <div
+                      key={`p_members_${index}`}
+                      className={`member-chip member-chip--${member}`}
+                    >
+                      <span className="member-chip__name"> {member}</span>
+                    </div>
                   );
                 })}
               </div>

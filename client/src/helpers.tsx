@@ -709,3 +709,22 @@ export function codeToOption(code: string): string {
       return "All";
   }
 }
+
+/**
+ * Parse the card's name
+ *
+ * @param {string} name - Card's name
+ *
+ * @return {member: string, code:string, index:number}
+ */
+export function parseCardName(name: string): {
+  member: string;
+  code: string;
+  index: number;
+} {
+  const parts = name.split("_");
+  const index = parseInt(parts[parts.length - 1]);
+  const member = parts[0];
+  const code = parts.slice(1, -1).join("_");
+  return { member, code, index };
+}
