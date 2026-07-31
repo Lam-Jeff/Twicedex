@@ -3154,7 +3154,7 @@
     "name": "TWICE 2024 Fanmeeting HOME 9ROUND",
     "checked": false,
     "categories": ["Events"],
-    "benefits": ["JYP Shop", "Original"],
+    "benefits": ["Original"],
     "members": [
       "Chaeyoung",
       "Dahyun",
@@ -3351,7 +3351,7 @@
     "name": "Ready To Be 5th World Tour In Japan Special DVD",
     "checked": false,
     "categories": ["DVDs/Blu-rays"],
-    "benefits": ["Original"],
+    "benefits": ["Original", "JYP Shop"],
     "members": [
       "Chaeyoung",
       "Dahyun",
@@ -3443,7 +3443,7 @@
     "image": "/images/thumbnail/Fanclub_5.webp"
   },
   {
-    "name": "KPop Demon Hunters",
+    "name": "Kpop Demon Hunters",
     "checked": false,
     "categories": ["Promos"],
     "benefits": ["Original"],
@@ -3573,7 +3573,19 @@
     "name": "Lil Fantasy",
     "checked": false,
     "categories": ["Korean Albums", "Solo/Subunit"],
-    "benefits": ["Original", "Broadcast"],
+    "benefits": [
+      "Original",
+      "Broadcast",
+      "POB",
+      "Fans Shop",
+      "Soundwave",
+      "Musicplant",
+      "Music Korea",
+      "Apple Music",
+      "Withmuu",
+      "Target",
+      "Barne&Noble"
+    ],
     "members": ["Chaeyoung"],
     "display": false,
     "code": "LF",
@@ -3641,13 +3653,13 @@
     "display": false,
     "code": "10VEU",
     "release": "2025-10-18T00:00:00.000Z",
-    "image": "/images/thumbnail/10ve_universe.webp"
+    "image": "/images/thumbnail/10veuniverse.webp"
   },
   {
     "name": "Red Whispers 2026 Season's Greetings",
     "checked": false,
     "categories": ["Greetings"],
-    "benefits": ["Original", "Soundwave", "Fans Shop", "Yes24"],
+    "benefits": ["Original", "Soundwave", "Fans Shop", "Yes24", "Music Korea"],
     "members": [
       "Chaeyoung",
       "Dahyun",
@@ -3718,7 +3730,7 @@
     "image": "/images/thumbnail/bearbrick.webp"
   },
   {
-    "name": "This Is For MUFG Stadium",
+    "name": "This Is For World Tour In MUFG Stadium",
     "checked": false,
     "categories": ["Events"],
     "benefits": ["Original"],
@@ -3790,5 +3802,293 @@
     "code": "OIAM",
     "release": "2025-10-20T00:00:00.000Z",
     "image": "/images/thumbnail/one_in_a_million.webp"
+  },
+  {
+    "name": "Wowpass",
+    "checked": false,
+    "categories": ["Promos"],
+    "benefits": ["Original"],
+    "members": [
+      "Chaeyoung",
+      "Dahyun",
+      "Jeongyeon",
+      "Jihyo",
+      "Mina",
+      "Momo",
+      "Nayeon",
+      "Sana",
+      "Tzuyu"
+    ],
+    "display": false,
+    "code": "Wowpass",
+    "release": "2025-10-29T00:00:00.000Z",
+    "image": "/images/thumbnail/wowpass.webp"
+  },
+  {
+    "name": "This Is For World Tour In Incheon",
+    "checked": false,
+    "categories": ["Events"],
+    "benefits": ["Original"],
+    "members": [
+      "Chaeyoung",
+      "Dahyun",
+      "Jeongyeon",
+      "Jihyo",
+      "Mina",
+      "Momo",
+      "Nayeon",
+      "Sana",
+      "Tzuyu"
+    ],
+    "display": false,
+    "code": "TIFWTII",
+    "release": "2025-07-19T00:00:00.000Z",
+    "image": "/images/thumbnail/this_is_for_incheon.webp"
+  },
+  {
+    "name": "CipiCipi",
+    "checked": false,
+    "categories": ["Promos"],
+    "benefits": ["Original"],
+    "members": ["Chaeyoung"],
+    "display": false,
+    "code": "CipiCipi",
+    "release": "2023-11-01T00:00:00.000Z",
+    "image": "/images/thumbnail/cipi.webp"
+  },
+  {
+    "name": "This Is For World Tour In Osaka",
+    "checked": false,
+    "categories": ["Events"],
+    "benefits": ["Original"],
+    "members": [
+      "Chaeyoung",
+      "Dahyun",
+      "Jeongyeon",
+      "Jihyo",
+      "Mina",
+      "Momo",
+      "Nayeon",
+      "Sana",
+      "Tzuyu"
+    ],
+    "display": false,
+    "code": "TIFIO",
+    "release": "2025-07-26T00:00:00.000Z",
+    "image": "/images/thumbnail/this_is_for_osaka.webp"
+  },
+  {
+    "name": "This Is For World Tour Finale In Seoul Pop Up Store",
+    "checked": false,
+    "categories": ["Stores/Merch"],
+    "benefits": ["Original"],
+    "members": [
+      "Chaeyoung",
+      "Dahyun",
+      "Jeongyeon",
+      "Jihyo",
+      "Mina",
+      "Momo",
+      "Nayeon",
+      "Sana",
+      "Tzuyu"
+    ],
+    "display": false,
+    "code": "TIFWTFISPUS",
+    "release": "2026-07-02T00:00:00.000Z",
+    "image": "/images/thumbnail/tif_finale_seoul_pop_up.webp"
+  },
+  {
+    "name": "Fwee",
+    "checked": false,
+    "categories": ["Promos"],
+    "benefits": ["Original"],
+    "members": ["Nayeon"],
+    "display": false,
+    "code": "Fwee",
+    "release": "2025-10-24T00:00:00.000Z",
+    "image": "/images/thumbnail/fwee.webp"
+  },
+  {
+    "name": "Eyestar",
+    "checked": false,
+    "categories": ["Promos"],
+    "benefits": ["Original"],
+    "members": ["Nayeon"],
+    "display": false,
+    "code": "Eyestar",
+    "release": "2025-09-22T00:00:00.000Z",
+    "image": "/images/thumbnail/eyestar.webp"
+  },
+  {
+    "name": "Biore UV",
+    "checked": false,
+    "categories": ["Promos"],
+    "benefits": ["Original"],
+    "members": ["Sana"],
+    "display": false,
+    "code": "Biore",
+    "release": "2026-04-01T00:00:00.000Z",
+    "image": "/images/thumbnail/biore.webp"
+  },
+  {
+    "name": "Twice This Is For World Tour In Japan DVD",
+    "checked": false,
+    "categories": ["Dvds/Blu-rays"],
+    "benefits": ["Original"],
+    "members": [
+      "Chaeyoung",
+      "Dahyun",
+      "Jeongyeon",
+      "Jihyo",
+      "Mina",
+      "Momo",
+      "Nayeon",
+      "Sana",
+      "Tzuyu"
+    ],
+    "display": false,
+    "code": "TTIFWTIJDVD",
+    "release": "2026-08-26T00:00:00.000Z",
+    "image": "/images/thumbnail/biore.webp"
+  },
+  {
+    "name": "Twice This Is For World Tour In Incheon DVD",
+    "checked": false,
+    "categories": ["Dvds/Blu-rays"],
+    "benefits": ["Original"],
+    "members": [
+      "Chaeyoung",
+      "Dahyun",
+      "Jeongyeon",
+      "Jihyo",
+      "Mina",
+      "Momo",
+      "Nayeon",
+      "Sana",
+      "Tzuyu"
+    ],
+    "display": false,
+    "code": "TTIFWTIIDVD",
+    "release": "2026-08-13T00:00:00.000Z",
+    "image": "/images/thumbnail/biore.webp"
+  },
+  {
+    "name": "17th Kaohsiung Beer Rock Festival",
+    "checked": false,
+    "categories": ["Events"],
+    "benefits": ["Original"],
+    "members": ["Nayeon"],
+    "display": false,
+    "code": "17KBRF",
+    "release": "2025-07-04T00:00:00.000Z",
+    "image": "/images/thumbnail/kaohsiung_beer_rock_festival_17.webp"
+  },
+  {
+    "name": "18th Kaohsiung Beer Rock Festival",
+    "checked": false,
+    "categories": ["Events"],
+    "benefits": ["Original"],
+    "members": ["Tzuyu"],
+    "display": false,
+    "code": "18KBRF",
+    "release": "2026-07-03T00:00:00.000Z",
+    "image": "/images/thumbnail/kaohsiung_beer_rock_festival_18.webp"
+  },
+  {
+    "name": "7 Eleven Taïwan",
+    "checked": false,
+    "categories": ["Promos"],
+    "benefits": ["Original"],
+    "members": ["Tzuyu"],
+    "display": false,
+    "code": "7ET",
+    "release": "2026-03-12T00:00:00.000Z",
+    "image": "/images/thumbnail/7eleven.webp"
+  },
+  {
+    "name": "This Is For World Tour Finale In Seoul",
+    "checked": false,
+    "categories": ["Events"],
+    "benefits": ["Original"],
+    "members": [
+      "Chaeyoung",
+      "Dahyun",
+      "Jeongyeon",
+      "Jihyo",
+      "Mina",
+      "Momo",
+      "Nayeon",
+      "Sana",
+      "Tzuyu"
+    ],
+    "display": false,
+    "code": "TIFWTFIS",
+    "release": "2026-07-10T00:00:00.000Z",
+    "image": "/images/thumbnail/this_is_for_finale_seoul.webp"
+  },
+  {
+    "name": "Distant Lover",
+    "checked": false,
+    "members": ["Jihyo"],
+    "categories": ["Solo/Subunit"],
+    "benefits": ["Original"],
+    "display": true,
+    "code": "DL",
+    "release": "2026-07-10T00:00:00.000Z",
+    "image": "/images/thumbnail/Distant_lover.webp"
+  },
+  {
+    "name": "#BEST",
+    "checked": false,
+    "categories": ["Japanese Albums"],
+    "benefits": ["Original"],
+    "members": [
+      "Chaeyoung",
+      "Dahyun",
+      "Jeongyeon",
+      "Jihyo",
+      "Mina",
+      "Momo",
+      "Nayeon",
+      "Sana",
+      "Tzuyu"
+    ],
+    "display": false,
+    "code": "#BEST",
+    "release": "2026-08-26T00:00:00.000Z",
+    "image": "/images/thumbnail/hashtag_best.webp"
+  },
+  {
+    "name": "ReFa Pop Up Store",
+    "checked": false,
+    "categories": ["Stores/Merch"],
+    "benefits": ["Original"],
+    "members": ["Mina", "Momo", "Sana"],
+    "display": false,
+    "code": "ReFa",
+    "release": "2026-08-22T00:00:00.000Z",
+    "image": "/images/thumbnail/refa.webp"
+  },
+  {
+    "name": "This Is For World Tour In Fukuoka",
+    "checked": false,
+    "categories": ["Events"],
+    "benefits": ["Original"],
+    "members": [
+      "Chaeyoung",
+      "Dahyun",
+      "Jeongyeon",
+      "Jihyo",
+      "Mina",
+      "Momo",
+      "Nayeon",
+      "Sana",
+      "Tzuyu"
+    ],
+    "display": false,
+    "code": "TIFIF",
+    "release": "2025-08-30T00:00:00.000Z",
+    "image": "/images/thumbnail/this_is_for_fukuoka.webp"
   }
 ]

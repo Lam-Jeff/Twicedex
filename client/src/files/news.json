@@ -1,8 +1,193 @@
 [
   {
+    "id": 60,
+    "subject": "Collection",
+    "title": "This Is For World Tour In Fukuoka",
+    "date": "26/07/2026",
+    "thumbnail": "/images/thumbnail/this_is_for_fukuoka.webp",
+    "alt": "This Is For World Tour In Fukuoka cards thumbnail",
+    "era": "TIFIF",
+    "category": "Events"
+  },
+
+  {
+    "id": 59,
+    "subject": "Collection",
+    "title": "You Are The Apple Of My Eye",
+    "date": "04/07/2026",
+    "thumbnail": "/images/thumbnail/you_are_the_apple_of_my_eye.webp",
+    "alt": "You Are The Apple Of My Eye cards thumbnail",
+    "era": "YATAOME",
+    "category": "Promos"
+  },
+
+  {
+    "id": 58,
+    "subject": "Collection",
+    "title": "18th Kaohsiung Beer Rock Festival",
+    "date": "04/07/2026",
+    "thumbnail": "/images/thumbnail/kaohsiung_beer_rock_festival_18.webp",
+    "alt": "18th Kaohsiung Festival cards thumbnail",
+    "era": "18KBRF",
+    "category": "Events"
+  },
+
+  {
+    "id": 57,
+    "subject": "Collection",
+    "title": "7 Eleven Taïwan",
+    "date": "03/07/2026",
+    "thumbnail": "/images/thumbnail/7eleven.webp",
+    "alt": "7 Eleven Taïwan cards thumbnail",
+    "era": "7ET",
+    "category": "Promos"
+  },
+
+  {
+    "id": 56,
+    "subject": "Collection",
+    "title": "17th Kaohsiung Beer Rock Festival",
+    "date": "03/07/2026",
+    "thumbnail": "/images/thumbnail/kaohsiung_beer_rock_festival_17.webp",
+    "alt": "17th Kaohsiung Festival cards thumbnail",
+    "era": "17KBRF",
+    "category": "Events"
+  },
+
+  {
+    "id": 55,
+    "subject": "Collection",
+    "title": "Ready To Be 5th World Tour In Japan Special DVD",
+    "date": "26/06/2026",
+    "thumbnail": "/images/thumbnail/twice_rtb_in_japan_special.webp",
+    "alt": "Ready To Be 5th World Tour In Japan Special DVD cards thumbnail",
+    "era": "RTB5SJDVD",
+    "category": "DVDs/Blu-rays"
+  },
+
+  {
+    "id": 54,
+    "subject": "Collection",
+    "title": "Fanclub 5th Generation",
+    "date": "24/06/2026",
+    "thumbnail": "/images/thumbnail/Fanclub_5.webp",
+    "alt": "Fanclub 5th Generation cards thumbnail",
+    "era": "F5G",
+    "category": "Memberships"
+  },
+
+  {
+    "id": 53,
+    "subject": "Collection",
+    "title": "Wowpass",
+    "date": "19/06/2026",
+    "thumbnail": "/images/thumbnail/wowpass.webp",
+    "alt": "Wowpass cards thumbnail",
+    "era": "Wowpass",
+    "category": "Promos"
+  },
+
+  {
+    "id": 52,
+    "subject": "Collection",
+    "title": "Haute Couture",
+    "date": "18/06/2026",
+    "thumbnail": "/images/thumbnail/HAUTE_COUTURE.webp",
+    "alt": "Haute Couture cards thumbnail",
+    "era": "HC",
+    "category": "Japanese Albums"
+  },
+
+  {
+    "id": 51,
+    "subject": "Collection",
+    "title": "2025 Twice Fanmeeting: 10VE UNIVERSE",
+    "date": "17/06/2026",
+    "thumbnail": "/images/thumbnail/10veuniverse.webp",
+    "alt": "2025 Twice Fanmeeting: 10VE UNIVERSE cards thumbnail",
+    "era": "10VEU",
+    "category": "Events"
+  },
+
+  {
+    "id": 50,
+    "subject": "Collection",
+    "title": "This Is For World Tour In Osaka",
+    "date": "17/06/2026",
+    "thumbnail": "/images/thumbnail/this_is_for_osaka.webp",
+    "alt": "This Is For In Osaka cards thumbnail",
+    "era": "TIFIO",
+    "category": "Events"
+  },
+
+  {
+    "id": 49,
+    "subject": "Collection",
+    "title": "This Is For World Tour In MUFG Stadium",
+    "date": "17/06/2026",
+    "thumbnail": "/images/thumbnail/this_is_for_mufg.webp",
+    "alt": "This Is For MUFG Stadium cards thumbnail",
+    "era": "TIFMUFGS",
+    "category": "Events"
+  },
+  {
+    "id": 48,
+    "subject": "Collection",
+    "title": "CipiCipi",
+    "date": "17/06/2026",
+    "thumbnail": "/images/thumbnail/cipi.webp",
+    "alt": "CipiCipi cards thumbnail",
+    "era": "CipiCipi",
+    "category": "Promos"
+  },
+
+  {
+    "id": 47,
+    "subject": "Collection",
+    "title": "This Is For World Tour In Incheon",
+    "date": "17/06/2026",
+    "thumbnail": "/images/thumbnail/this_is_for_incheon.webp",
+    "alt": "This Is For World Tour In Incheon cards thumbnail",
+    "era": "TIFWTII",
+    "category": "Events"
+  },
+
+  {
+    "id": 46,
+    "subject": "Collection",
+    "title": "TWICE 2024 Fanmeeting HOME 9ROUND",
+    "date": "16/06/2026",
+    "thumbnail": "/images/thumbnail/fanmeeting_home9round.webp",
+    "alt": "TWICE 2024 Fanmeeting HOME 9ROUND cards thumbnail",
+    "era": "T2024FMH9R",
+    "category": "Events"
+  },
+
+  {
+    "id": 45,
+    "subject": "Collection",
+    "title": "Kpop Demon Hunters",
+    "date": "12/06/2026",
+    "thumbnail": "/images/thumbnail/kpop_demon_hunters.webp",
+    "alt": "Kpop demon hunters cards thumbnail",
+    "era": "KDH",
+    "category": "Promos"
+  },
+
+  {
+    "id": 44,
+    "subject": "Collection",
+    "title": "Lil Fantasy",
+    "date": "11/06/2026",
+    "thumbnail": "/images/thumbnail/Lil_fantasy.webp",
+    "alt": "lil fantasy cards thumbnail",
+    "era": "LF",
+    "category": "Korean Albums"
+  },
+  {
     "id": 43,
     "subject": "Collection",
-    "title": "One In A Mill10n added.",
+    "title": "One In A Mill10n",
     "date": "10/06/2026",
     "thumbnail": "/images/thumbnail/one_in_a_million.webp",
     "alt": "one in a million cards thumbnail",
@@ -13,7 +198,7 @@
   {
     "id": 42,
     "subject": "Collection",
-    "title": "Teazen Kombucha added.",
+    "title": "Teazen Kombucha",
     "date": "10/06/2026",
     "thumbnail": "/images/thumbnail/teazen.webp",
     "alt": "teazen cards thumbnail",
@@ -24,7 +209,7 @@
   {
     "id": 41,
     "subject": "Collection",
-    "title": "Rolling Stone MISAMO added.",
+    "title": "Rolling Stone MISAMO",
     "date": "10/06/2026",
     "thumbnail": "/images/thumbnail/rolling_stone.webp",
     "alt": "rolling stone misamo cards thumbnail",
@@ -35,7 +220,7 @@
   {
     "id": 40,
     "subject": "Collection",
-    "title": "Be@rbrick added.",
+    "title": "Be@rbrick",
     "date": "10/06/2026",
     "thumbnail": "/images/thumbnail/bearbrick.webp",
     "alt": "bearbrick cards thumbnail",
@@ -46,7 +231,7 @@
   {
     "id": 39,
     "subject": "Collection",
-    "title": "Red Whispers added.",
+    "title": "Red Whispers",
     "date": "09/06/2026",
     "thumbnail": "/images/thumbnail/red_whispers.webp",
     "alt": "red whispers cards thumbnail",
@@ -57,7 +242,7 @@
   {
     "id": 38,
     "subject": "Collection",
-    "title": "Collector added.",
+    "title": "Collector",
     "date": "22/10/2025",
     "thumbnail": "/images/thumbnail/seasons_greetings_collector.webp",
     "alt": "collector cards thumbnail",
@@ -68,7 +253,7 @@
   {
     "id": 37,
     "subject": "Collection",
-    "title": "SSJYP Nation added.",
+    "title": "SSJYP Nation",
     "date": "23/09/2025",
     "thumbnail": "/images/thumbnail/ssjypn.webp",
     "alt": "SSJYP Nation in Toronto 2 cards thumbnail",
@@ -78,7 +263,7 @@
   {
     "id": 36,
     "subject": "Collection",
-    "title": "This Is For World Tour In Japan added.",
+    "title": "This Is For World Tour In Japan",
     "date": "23/09/2025",
     "thumbnail": "/images/thumbnail/This_is_for_in_japan.webp",
     "alt": "This Is For World Tour In Japan cards thumbnail",
@@ -88,7 +273,7 @@
   {
     "id": 35,
     "subject": "Collection",
-    "title": "Nabati added.",
+    "title": "Nabati",
     "date": "23/09/2025",
     "thumbnail": "/images/thumbnail/Nabati.webp",
     "alt": "Nabati cards thumbnail",
@@ -99,7 +284,7 @@
   {
     "id": 34,
     "subject": "Collection",
-    "title": "Birthday365 2025 Japan Season's Greetings added.",
+    "title": "Birthday365 2025 Japan Season's Greetings",
     "date": "22/09/2025",
     "thumbnail": "/images/thumbnail/seasons_greetings_365.webp",
     "alt": "Birthday365 2025 Japan Season's Greetings cards thumbnail",
@@ -110,7 +295,7 @@
   {
     "id": 33,
     "subject": "Collection",
-    "title": "TWICE “STRATEGY” Pop Up In Seoul tincase added.",
+    "title": "TWICE “STRATEGY” Pop Up In Seoul tincase",
     "date": "18/09/2025",
     "thumbnail": "/images/thumbnail/twice_strategy_pop-up_seoul.webp",
     "alt": "TWICE “STRATEGY” Pop Up In Seoul cards thumbnail",
@@ -121,7 +306,7 @@
   {
     "id": 32,
     "subject": "Collection",
-    "title": "This Is For World Tour In Japan added.",
+    "title": "This Is For World Tour In Japan",
     "date": "17/09/2025",
     "thumbnail": "/images/thumbnail/This_is_for_in_japan.webp",
     "alt": "This Is For World Tour In Japan cards thumbnail",
@@ -132,7 +317,7 @@
   {
     "id": 31,
     "subject": "Collection",
-    "title": "This Is For shop benefits added.",
+    "title": "This Is For shop benefits",
     "date": "16/09/2025",
     "thumbnail": "/images/thumbnail/This_is_for.webp",
     "alt": "This Is For cards thumbnail",
@@ -142,7 +327,7 @@
   {
     "id": 30,
     "subject": "Collection",
-    "title": "Lil Fantasy broadcast added.",
+    "title": "Lil Fantasy broadcast",
     "date": "12/09/2025",
     "thumbnail": "/images/thumbnail/Lil_fantasy.webp",
     "alt": "Lil Fantasy cards thumbnail",
@@ -152,7 +337,7 @@
   {
     "id": 29,
     "subject": "Collection",
-    "title": "Sie added.",
+    "title": "Sie",
     "date": "11/08/2025",
     "thumbnail": "/images/thumbnail/Sie.webp",
     "alt": "Sie cards thumbnail",
@@ -163,7 +348,7 @@
   {
     "id": 28,
     "subject": "Collection",
-    "title": "This Is For added.",
+    "title": "This Is For",
     "date": "08/08/2025",
     "thumbnail": "/images/thumbnail/This_is_for.webp",
     "alt": "This Is For cards thumbnail",
@@ -174,7 +359,7 @@
   {
     "id": 27,
     "subject": "Collection",
-    "title": "#TWICE5 added.",
+    "title": "#TWICE5",
     "date": "05/08/2025",
     "thumbnail": "/images/thumbnail/twice5.webp",
     "alt": "#TWICE5 cards thumbnail",
@@ -184,7 +369,7 @@
   {
     "id": 26,
     "subject": "Collection",
-    "title": "HOME 9ROUND Pop Up Store added.",
+    "title": "HOME 9ROUND Pop Up Store",
     "date": "05/06/2025",
     "thumbnail": "/images/thumbnail/pop-up_home9round.webp",
     "alt": "HOME 9ROUND Pop Up Store cards thumbnail",
@@ -194,7 +379,7 @@
   {
     "id": 25,
     "subject": "Collection",
-    "title": "Strategy added.",
+    "title": "Strategy",
     "date": "18/03/2025",
     "thumbnail": "/images/thumbnail/Strategy.webp",
     "alt": "Strategy cards thumbnail",
@@ -204,7 +389,7 @@
   {
     "id": 24,
     "subject": "Collection",
-    "title": "TWICE “STRATEGY” Pop Up In Seoul added.",
+    "title": "TWICE “STRATEGY” Pop Up In Seoul",
     "date": "17/03/2025",
     "thumbnail": "/images/thumbnail/twice_strategy_pop-up_seoul.webp",
     "alt": "TWICE “STRATEGY” Pop Up In Seoul cards thumbnail",
@@ -214,7 +399,7 @@
   {
     "id": 23,
     "subject": "Collection",
-    "title": "Ready To Be 5th World Tour In Seoul added.",
+    "title": "Ready To Be 5th World Tour In Seoul",
     "date": "11/03/2025",
     "thumbnail": "/images/thumbnail/ready_to_be_seoul.webp",
     "alt": "Ready To Be 5th World Tour In Seoul cards thumbnail",
@@ -224,7 +409,7 @@
   {
     "id": 22,
     "subject": "Collection",
-    "title": "SSJYP Nation added.",
+    "title": "SSJYP Nation",
     "date": "10/03/2025",
     "thumbnail": "/images/thumbnail/ssjypn.webp",
     "alt": "SSJYP Nation: Superstar In London cards thumbnail",
@@ -234,7 +419,7 @@
   {
     "id": 21,
     "subject": "Collection",
-    "title": "Twice Strategy Pop Up Store In LA added.",
+    "title": "Twice Strategy Pop Up Store In LA",
     "date": "10/03/2025",
     "thumbnail": "/images/thumbnail/strategy_pop-up_LA.webp",
     "alt": "Twice Strategy Pop Up Store In LA cards thumbnail",
@@ -244,7 +429,7 @@
   {
     "id": 20,
     "subject": "Collection",
-    "title": "Ready To Be 5th World Tour Japan added.",
+    "title": "Ready To Be 5th World Tour Japan",
     "date": "16/02/2024",
     "thumbnail": "/images/thumbnail/ready_to_be_5_japan.webp",
     "alt": "Ready to be 5th world tour japan cards thumbnail",
@@ -254,7 +439,7 @@
   {
     "id": 19,
     "subject": "Collection",
-    "title": "Japan Season's Greetings Circuit 24 POB added.",
+    "title": "Japan Season's Greetings Circuit 24 POB",
     "date": "16/02/2024",
     "thumbnail": "/images/thumbnail/seasons_greetings_circuit24.webp",
     "alt": "seasons greetings cards thumbnail",
@@ -264,7 +449,7 @@
   {
     "id": 18,
     "subject": "Collection",
-    "title": "Japan Season's Greetings Circuit 24 added.",
+    "title": "Japan Season's Greetings Circuit 24",
     "date": "09/01/2024",
     "thumbnail": "/images/thumbnail/seasons_greetings_circuit24.webp",
     "alt": "seasons greetings cards thumbnail",
@@ -274,7 +459,7 @@
   {
     "id": 17,
     "subject": "Collection",
-    "title": "Season's Greetings News Room 2024 added.",
+    "title": "Season's Greetings News Room 2024",
     "date": "08/01/2024",
     "thumbnail": "/images/thumbnail/seasons_greetings_newsRoom.webp",
     "alt": "seasons greetings cards thumbnail",
@@ -284,7 +469,7 @@
   {
     "id": 16,
     "subject": "Collection",
-    "title": "SSJYP Nation Ready To Be Seoul added.",
+    "title": "SSJYP Nation Ready To Be Seoul",
     "date": "04/01/2024",
     "thumbnail": "/images/thumbnail/ssjypn.webp",
     "alt": "ssjyp nation cards thumbnail",
@@ -294,7 +479,7 @@
   {
     "id": 15,
     "subject": "Collection",
-    "title": "SSJYP Nation Crazy Stupid Love added.",
+    "title": "SSJYP Nation Crazy Stupid Love",
     "date": "03/01/2024",
     "thumbnail": "/images/thumbnail/ssjypn.webp",
     "alt": "ssjyp nation cards thumbnail",
@@ -304,7 +489,7 @@
   {
     "id": 14,
     "subject": "Collection",
-    "title": "SSJYP Nation Twice-zine added.",
+    "title": "SSJYP Nation Twice-zine",
     "date": "03/01/2024",
     "thumbnail": "/images/thumbnail/ssjypn.webp",
     "alt": "ssjyp nation cards thumbnail",
@@ -314,7 +499,7 @@
   {
     "id": 13,
     "subject": "Collection",
-    "title": "TWICE 2023 Fanmeeting ONCE AGAIN added.",
+    "title": "TWICE 2023 Fanmeeting ONCE AGAIN",
     "date": "18/12/2023",
     "thumbnail": "/images/thumbnail/once_again_fanmeeting.webp",
     "alt": "TWICE 2023 Fanmeeting ONCE AGAIN cards thumbnail",
@@ -324,7 +509,7 @@
   {
     "id": 12,
     "subject": "Collection",
-    "title": "Twice Once Again Pop Up Store added.",
+    "title": "Twice Once Again Pop Up Store",
     "date": "14/12/2023",
     "thumbnail": "/images/thumbnail/once_again_pop-up.webp",
     "alt": "Twice Once Again Pop Up Store cards thumbnail",
@@ -334,7 +519,7 @@
   {
     "id": 11,
     "subject": "Collection",
-    "title": "Signal Broadcast added.",
+    "title": "Signal Broadcast",
     "date": "11/12/2023",
     "thumbnail": "/images/thumbnail/signal.webp",
     "alt": "Signal cards thumbnail",
@@ -344,7 +529,7 @@
   {
     "id": 10,
     "subject": "Collection",
-    "title": "Twicetagram Broadcast added.",
+    "title": "Twicetagram Broadcast",
     "date": "11/12/2023",
     "thumbnail": "/images/thumbnail/Twicetagram.webp",
     "alt": "Twicetagram cards thumbnail",
@@ -354,7 +539,7 @@
   {
     "id": 9,
     "subject": "Collection",
-    "title": "Merry & Happy Broadcast added.",
+    "title": "Merry & Happy Broadcast",
     "date": "09/12/2023",
     "thumbnail": "/images/thumbnail/Merry_Happy.webp",
     "alt": "Merry & Happy cards thumbnail",
@@ -364,7 +549,7 @@
   {
     "id": 8,
     "subject": "Collection",
-    "title": "Ready To Be 5th World Tour Japan added.",
+    "title": "Ready To Be 5th World Tour Japan",
     "date": "09/12/2023",
     "thumbnail": "/images/thumbnail/ready_to_be_5_japan.webp",
     "alt": "Ready to be 5th world tour japan cards thumbnail",
@@ -374,7 +559,7 @@
   {
     "id": 7,
     "subject": "Collection",
-    "title": "Ready To Be 5th World Tour added.",
+    "title": "Ready To Be 5th World Tour",
     "date": "07/12/2023",
     "thumbnail": "/images/thumbnail/ready_to_be_5.webp",
     "alt": "Ready to be 5th world tour cards thumbnail",
@@ -384,7 +569,7 @@
   {
     "id": 6,
     "subject": "Collection",
-    "title": "More & More Withdrama added.",
+    "title": "More & More Withdrama",
     "date": "07/12/2023",
     "thumbnail": "/images/thumbnail/More&More.webp",
     "alt": "More & More cards thumbnail",
@@ -394,7 +579,7 @@
   {
     "id": 5,
     "subject": "Collection",
-    "title": "Between 1&2 Broadcast and Musicplant added.",
+    "title": "Between 1&2 Broadcast and Musicplant",
     "date": "05/12/2023",
     "thumbnail": "/images/thumbnail/Between_1&2.webp",
     "alt": "Between 1&2 cards thumbnail",
@@ -404,7 +589,7 @@
   {
     "id": 4,
     "subject": "Collection",
-    "title": "Fancy Broadcast added.",
+    "title": "Fancy Broadcast",
     "date": "03/12/2023",
     "thumbnail": "/images/thumbnail/Fancyyou.webp",
     "alt": "Fancy cards thumbnail",
@@ -414,7 +599,7 @@
   {
     "id": 3,
     "subject": "Collection",
-    "title": "D'Festa Mini Edition PVC & lenticular added.",
+    "title": "D'Festa Mini Edition PVC & lenticular",
     "date": "27/11/2023",
     "thumbnail": "/images/thumbnail/dfesta.webp",
     "alt": "D'festa cards thumbnail",
@@ -424,7 +609,7 @@
   {
     "id": 2,
     "subject": "Collection",
-    "title": "SSJYP Nation Superstar In London added.",
+    "title": "SSJYP Nation Superstar In London",
     "date": "27/11/2023",
     "thumbnail": "/images/thumbnail/ssjypn.webp",
     "alt": "ssjyp nation cards thumbnail",
@@ -434,7 +619,7 @@
   {
     "id": 1,
     "subject": "Collection",
-    "title": "SSJYP Nation Twice Records added.",
+    "title": "SSJYP Nation Twice Records",
     "date": "22/11/2023",
     "thumbnail": "/images/thumbnail/ssjypn.webp",
     "alt": "ssjyp nation cards thumbnail",
