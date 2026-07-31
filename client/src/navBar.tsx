@@ -71,15 +71,7 @@ export const NavBar = ({ isHamburgerOpen, isSmallScreen }: INavBarProps) => {
           )
         </li>
          */}
-        <li className="navigation-bar__scan">
-          <Link
-            to="/scan"
-            className="nav__listitem"
-            aria-label={`Go to Scanner page`}
-          >
-            Scanner
-          </Link>
-        </li>
+        
 
         <li className="navigation-bar__about">
           <Link
