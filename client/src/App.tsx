@@ -4,7 +4,6 @@ import { Header } from "./header";
 import { Home } from "./home";
 import { About } from "./about";
 import { Terms } from "./terms";
-import { CardSearch } from "./cardSearch";
 import { ScrollUpButton } from "./scrollUpButton";
 import { PageNotFound } from "./pageNotFound";
 import { ScrollToTop } from "./scrollToTop";
@@ -57,7 +56,6 @@ const App: React.FunctionComponent<IApplicationProps> = () => {
                     <Route path="settings" element={<Settings />} />
                     <Route path=":cardID" element={<CardDetails />} />
                   </Route>
-                  <Route path="/scan" element={<CardSearch />} />
                   <Route path="/about" element={<About />} />
                   <Route path="/terms" element={<Terms />} />
                   <Route path="*" element={<PageNotFound />} />
