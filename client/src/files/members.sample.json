@@ -1,0 +1,47 @@
+[
+  {
+    "name": "MemberA",
+    "checked": true,
+    "display": true
+  },
+  {
+    "name": "MemberB",
+    "checked": true,
+    "display": true
+  },
+  {
+    "name": "MemberC",
+    "checked": true,
+    "display": true
+  },
+  {
+    "name": "MemberD",
+    "checked": true,
+    "display": true
+  },
+  {
+    "name": "MemberE",
+    "checked": true,
+    "display": true
+  },
+  {
+    "name": "MemberF",
+    "checked": true,
+    "display": true
+  },
+  {
+    "name": "MemberG",
+    "checked": true,
+    "display": true
+  },
+  {
+    "name": "MemberH",
+    "checked": true,
+    "display": true
+  },
+  {
+    "name": "MemberI",
+    "checked": true,
+    "display": true
+  }
+]

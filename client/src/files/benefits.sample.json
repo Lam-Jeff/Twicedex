@@ -1,0 +1,17 @@
+[
+  {
+    "name": "Original",
+    "checked": true,
+    "display": true
+  },
+  {
+    "name": "Pre-order",
+    "checked": false,
+    "display": true
+  },
+  {
+    "name": "Store",
+    "checked": false,
+    "display": true
+  }
+]

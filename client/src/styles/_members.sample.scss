@@ -1,0 +1,23 @@
+@use "sass:map";
+
+$memberA-color: #49c0ec;
+$memberB-color: #a3cc54;
+$memberC-color: #e67ea3;
+$memberD-color: #8c79b4;
+$memberE-color: #f9cc85;
+$memberF-color: #71c7d4;
+$memberG-color: #fefefe;
+$memberH-color: #e62722;
+$memberI-color: #2253a3;
+
+$members: (
+  MemberA: (color: $memberA-color),
+  MemberB: (color: $memberB-color),
+  MemberC: (color: $memberC-color),
+  MemberD: (color: $memberD-color),
+  MemberE: (color: $memberE-color),
+  MemberF: (color: $memberF-color),
+  MemberG: (color: $memberG-color),
+  MemberH: (color: $memberH-color),
+  MemberI: (color: $memberI-color),
+);

@@ -1,0 +1,12 @@
+[
+  {
+    "name": "Albums",
+    "checked": false,
+    "code": "Albums"
+  },
+  {
+    "name": "Events",
+    "checked": false,
+    "code": "Events"
+  }
+]

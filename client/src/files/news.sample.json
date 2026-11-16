@@ -1,0 +1,32 @@
+[
+  {
+    "id": 3,
+    "subject": "Collection",
+    "title": "Era Three cards added",
+    "date": "03/11/2023",
+    "thumbnail": "/images/thumbnail/Era_Three.webp",
+    "alt": "Era Three cards thumbnail",
+    "era": "E3",
+    "category": "Events"
+  },
+  {
+    "id": 2,
+    "subject": "Collection",
+    "title": "Era Two cards added",
+    "date": "10/06/2022",
+    "thumbnail": "/images/thumbnail/Era_Two.webp",
+    "alt": "Era Two cards thumbnail",
+    "era": "E2",
+    "category": "Albums"
+  },
+  {
+    "id": 1,
+    "subject": "Collection",
+    "title": "Era One cards added",
+    "date": "15/01/2021",
+    "thumbnail": "/images/thumbnail/Era_One.webp",
+    "alt": "Era One cards thumbnail",
+    "era": "E1",
+    "category": "Albums"
+  }
+]

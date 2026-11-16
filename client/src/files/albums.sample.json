@@ -1,0 +1,83 @@
+[
+  {
+    "name": "Era One",
+    "checked": false,
+    "benefits": [
+      "Original",
+      "Pre-order",
+      "Store"
+    ],
+    "categories": [
+      "Albums"
+    ],
+    "members": [
+      "MemberA",
+      "MemberB",
+      "MemberC",
+      "MemberD",
+      "MemberE",
+      "MemberF",
+      "MemberG",
+      "MemberH",
+      "MemberI"
+    ],
+    "display": true,
+    "code": "E1",
+    "release": "2021-01-15T00:00:00.000Z",
+    "image": "/images/thumbnail/Era_One.webp"
+  },
+  {
+    "name": "Era Two",
+    "checked": false,
+    "benefits": [
+      "Original",
+      "Pre-order",
+      "Store"
+    ],
+    "categories": [
+      "Albums"
+    ],
+    "members": [
+      "MemberA",
+      "MemberB",
+      "MemberC",
+      "MemberD",
+      "MemberE",
+      "MemberF",
+      "MemberG",
+      "MemberH",
+      "MemberI"
+    ],
+    "display": true,
+    "code": "E2",
+    "release": "2022-06-10T00:00:00.000Z",
+    "image": "/images/thumbnail/Era_Two.webp"
+  },
+  {
+    "name": "Era Three",
+    "checked": false,
+    "benefits": [
+      "Original",
+      "Pre-order",
+      "Store"
+    ],
+    "categories": [
+      "Events"
+    ],
+    "members": [
+      "MemberA",
+      "MemberB",
+      "MemberC",
+      "MemberD",
+      "MemberE",
+      "MemberF",
+      "MemberG",
+      "MemberH",
+      "MemberI"
+    ],
+    "display": true,
+    "code": "E3",
+    "release": "2023-11-03T00:00:00.000Z",
+    "image": "/images/thumbnail/Era_Three.webp"
+  }
+]
