@@ -1,2516 +1,498 @@
 import * as helpers from "../helpers";
 import { ICardsProps } from "../collection";
-import { TAchievementProps } from "../types/achievement";
 import { TAlbumsProps } from "../types/albums";
+import { firstElementOfCategory } from "../helpers";
+
+type Progress = { percent: number; acquired: number; total: number };
+
+const categoryNames = Object.keys(firstElementOfCategory);
+const [catA, catB] = categoryNames;
+
+const makeCard = (overrides: Partial<ICardsProps> = {}): ICardsProps => ({
+  id: 1,
+  name: "MemberA_E1_1",
+  checked: false,
+  thumbnail: "",
+  categories: [catA],
+  members: ["MemberA"],
+  era: "Era One",
+  benefit: "Original",
+  display: true,
+  ...overrides,
+});
+
+const makeAlbum = (overrides: Partial<TAlbumsProps> = {}): TAlbumsProps => ({
+  name: "Album Alpha",
+  checked: false,
+  categories: ["Cat1"],
+  members: ["MemberA", "MemberB"],
+  benefits: ["Original"],
+  display: true,
+  code: "ALPHA",
+  release: "2024-01-01T00:00:00.000Z",
+  image: "",
+  ...overrides,
+});
+
 afterEach(() => {
   sessionStorage.removeItem("TEST");
 });
 
+/* ------------------------------------------------------------------ */
+/* Tests                                                               */
+/* ------------------------------------------------------------------ */
+
 describe("getSessionStoragePreferences", () => {
-  test('get names with checked=true in sessionStorage when setted : ["1"]', () => {
-    const preferences: { name: string; checked: boolean }[] = [
-      {
-        name: "1",
-        checked: true,
-      },
-      {
-        name: "2",
-        checked: false,
-      },
+  test("returns the names with checked=true when set", () => {
+    const preferences = [
+      { name: "1", checked: true },
+      { name: "2", checked: false },
     ];
-
-    const expected = ["1"];
-
     sessionStorage.setItem("TEST", JSON.stringify(preferences));
-    expect(helpers.getSessionStoragePreferences("TEST")).toEqual(expected);
+    expect(helpers.getSessionStoragePreferences("TEST")).toEqual(["1"]);
   });
 
-  test("get Preferences in sessionStorage when not setted : []", () => {
-    const expected: string[] = [];
-    expect(helpers.getSessionStoragePreferences("TEST")).toEqual(expected);
+  test("returns [] when nothing is stored", () => {
+    expect(helpers.getSessionStoragePreferences("TEST")).toEqual([]);
   });
 });
 
 describe("filterValues", () => {
-  test("return only names with checked=true : 1 2 4", () => {
-    const testArray = [
-      {
-        name: "1",
-        checked: true,
-      },
-      {
-        name: "2",
-        checked: true,
-      },
-      {
-        name: "3",
-        checked: false,
-      },
-      {
-        name: "4",
-        checked: true,
-      },
+  test("returns only the names with checked=true", () => {
+    const values = [
+      { name: "1", checked: true },
+      { name: "2", checked: true },
+      { name: "3", checked: false },
+      { name: "4", checked: true },
     ];
-
-    expect(helpers.filterValues(testArray)).toEqual(["1", "2", "4"]);
+    expect(helpers.filterValues(values)).toEqual(["1", "2", "4"]);
   });
 });
 
 describe("getPages", () => {
-  test("array.length=0 : []", () => {
-    const array: any = [];
-    expect(helpers.getPages(array, 5)).toEqual([]);
+  test("returns [] for an empty array", () => {
+    expect(helpers.getPages([], 5)).toEqual([]);
   });
 
-  test("array.length>0: [1, 2]", () => {
-    const array: any = [1, 2, 3, 4, 5, 6];
-    expect(helpers.getPages(array, 5)).toEqual([1, 2]);
+  test("returns one page number per chunk of 5 items", () => {
+    expect(helpers.getPages([1, 2, 3, 4, 5, 6], 5)).toEqual([1, 2]);
   });
 });
 
 describe("filterCardsToDisplay", () => {
-  test("no cards to display: []", () => {
-    const array: ICardsProps[] = [
-      {
-        id: 1,
-        name: "Nayeon_TSB_1",
-        checked: false,
-        thumbnail: "",
-        categories: ["Korean Albums"],
-        members: ["Nayeon"],
-        era: "The Story Begins",
-        benefit: "Original",
-        display: false,
-      },
-      {
-        id: 2,
-        name: "Jeongyeon_TSB_1",
-        checked: false,
-        thumbnail: "",
-        categories: ["Korean Albums"],
-        members: ["Jeongyeon"],
-        era: "The Story Begins",
-        benefit: "Original",
-        display: false,
-      },
+  test("returns [] when no card has display=true", () => {
+    const cards = [
+      makeCard({ id: 1, display: false }),
+      makeCard({ id: 2, display: false }),
     ];
-    expect(helpers.filterCardsToDisplay(array)).toEqual([]);
+    expect(helpers.filterCardsToDisplay(cards)).toEqual([]);
   });
 
-  test("cards to display: [2]", () => {
-    const array: ICardsProps[] = [
-      {
-        id: 1,
-        name: "Nayeon_TSB_1",
-        checked: false,
-        thumbnail: "",
-        categories: ["Korean Albums"],
-        members: ["Nayeon"],
-        era: "The Story Begins",
-        benefit: "Original",
-        display: false,
-      },
-      {
-        id: 2,
-        name: "Jeongyeon_TSB_1",
-        checked: false,
-        thumbnail: "",
-        categories: ["Korean Albums"],
-        members: ["Jeongyeon"],
-        era: "The Story Begins",
-        benefit: "Original",
-        display: true,
-      },
+  test("keeps only the cards with display=true", () => {
+    const cards = [
+      makeCard({ id: 1, display: false }),
+      makeCard({ id: 2, display: true }),
     ];
-
-    const expected = [
-      {
-        id: 2,
-        name: "Jeongyeon_TSB_1",
-        checked: false,
-        thumbnail: "",
-        categories: ["Korean Albums"],
-        members: ["Jeongyeon"],
-        era: "The Story Begins",
-        benefit: "Original",
-        display: true,
-      },
-    ];
-    expect(helpers.filterCardsToDisplay(array)).toEqual(expected);
+    expect(helpers.filterCardsToDisplay(cards).map((c) => c.id)).toEqual([2]);
   });
 });
 
 describe("getLengthCardsDisplayed", () => {
-  test("empty array: 0", () => {
-    const array: ICardsProps[] = [];
-    expect(
-      helpers.getLengthCardsDisplayed(
-        array,
-        "The Story Begins",
-        "Korean Albums",
-      ),
-    ).toBe(0);
+  const cards = [makeCard({ id: 1 }), makeCard({ id: 2 })];
+
+  test("returns 0 for an empty array", () => {
+    expect(helpers.getLengthCardsDisplayed([], "Era One", catA)).toBe(0);
   });
 
-  test("no matches for album: 0", () => {
-    const array: ICardsProps[] = [
-      {
-        id: 1,
-        name: "Nayeon_TSB_1",
-        checked: false,
-        thumbnail: "",
-        categories: ["Korean Albums"],
-        members: ["Nayeon"],
-        era: "The Story Begins",
-        benefit: "Original",
-        display: false,
-      },
-      {
-        id: 2,
-        name: "Jeongyeon_TSB_1",
-        checked: false,
-        thumbnail: "",
-        categories: ["Korean Albums"],
-        members: ["Jeongyeon"],
-        era: "The Story Begins",
-        benefit: "Original",
-        display: true,
-      },
-    ];
-    expect(
-      helpers.getLengthCardsDisplayed(array, "Fancy", "Korean Albums"),
-    ).toBe(0);
+  test("returns 0 when no card matches the album", () => {
+    expect(helpers.getLengthCardsDisplayed(cards, "Unknown era", catA)).toBe(0);
   });
 
-  test("matches: 2", () => {
-    const array: ICardsProps[] = [
-      {
-        id: 1,
-        name: "Nayeon_TSB_1",
-        checked: false,
-        thumbnail: "",
-        categories: ["Korean Albums"],
-        members: ["Nayeon"],
-        era: "The Story Begins",
-        benefit: "Original",
-        display: true,
-      },
-      {
-        id: 2,
-        name: "Jeongyeon_TSB_1",
-        checked: false,
-        thumbnail: "",
-        categories: ["Korean Albums"],
-        members: ["Jeongyeon"],
-        era: "The Story Begins",
-        benefit: "Original",
-        display: true,
-      },
-    ];
-    expect(
-      helpers.getLengthCardsDisplayed(
-        array,
-        "The Story Begins",
-        "Korean Albums",
-      ),
-    ).toBe(2);
+  test("counts the displayed cards matching the album and category", () => {
+    expect(helpers.getLengthCardsDisplayed(cards, "Era One", catA)).toBe(2);
   });
 });
 
 describe("filterByAlbumAndCategory", () => {
-  test("empty array: []", () => {
-    const array: ICardsProps[] = [];
+  test("returns [] for an empty array", () => {
+    expect(helpers.filterByAlbumAndCategory([], "Era One", catA)).toEqual([]);
+  });
+
+  test("returns [] when no card matches the album", () => {
+    const cards = [makeCard({ id: 1 }), makeCard({ id: 2 })];
     expect(
-      helpers.filterByAlbumAndCategory(
-        array,
-        "The Story Begins",
-        "Korean Albums",
-      ),
+      helpers.filterByAlbumAndCategory(cards, "Unknown era", catA),
     ).toEqual([]);
   });
 
-  test("no matches: []", () => {
-    const array: ICardsProps[] = [
-      {
-        id: 1,
-        name: "Nayeon_TSB_1",
-        checked: false,
-        thumbnail: "",
-        categories: ["Korean Albums"],
-        members: ["Nayeon"],
-        era: "The Story Begins",
-        benefit: "Original",
-        display: true,
-      },
-      {
-        id: 2,
-        name: "Jeongyeon_TSB_1",
-        checked: false,
-        thumbnail: "",
-        categories: ["Korean Albums"],
-        members: ["Jeongyeon"],
-        era: "The Story Begins",
-        benefit: "Original",
-        display: true,
-      },
+  test("returns the cards matching the album and category, whatever their display value", () => {
+    const cards = [
+      makeCard({ id: 1, display: false }),
+      makeCard({ id: 2, display: true }),
     ];
-    expect(
-      helpers.filterByAlbumAndCategory(array, "Fancy", "Korean Albums"),
-    ).toEqual([]);
-  });
-
-  test("matches: [1, 2]", () => {
-    const array: ICardsProps[] = [
-      {
-        id: 1,
-        name: "Nayeon_TSB_1",
-        checked: false,
-        thumbnail: "",
-        categories: ["Korean Albums"],
-        members: ["Nayeon"],
-        era: "The Story Begins",
-        benefit: "Original",
-        display: false,
-      },
-      {
-        id: 2,
-        name: "Jeongyeon_TSB_1",
-        checked: false,
-        thumbnail: "",
-        categories: ["Korean Albums"],
-        members: ["Jeongyeon"],
-        era: "The Story Begins",
-        benefit: "Original",
-        display: true,
-      },
-    ];
-    expect(
-      helpers.filterByAlbumAndCategory(
-        array,
-        "The Story Begins",
-        "Korean Albums",
-      ),
-    ).toEqual(array);
+    expect(helpers.filterByAlbumAndCategory(cards, "Era One", catA)).toEqual(
+      cards,
+    );
   });
 });
 
 describe("computeProgressionPercentByEra", () => {
-  test("array=[] : 0", () => {
-    const array: ICardsProps[] = [
-      {
-        id: 1,
-        name: "Nayeon_TSB_1",
-        checked: false,
-        thumbnail: "",
-        categories: ["Korean Albums"],
-        members: ["Nayeon"],
-        era: "The Story Begins",
-        benefit: "Original",
-        display: false,
-      },
-      {
-        id: 2,
-        name: "Jeongyeon_TSB_1",
-        checked: false,
-        thumbnail: "",
-        categories: ["Korean Albums"],
-        members: ["Jeongyeon"],
-        era: "The Story Begins",
-        benefit: "Original",
-        display: true,
-      },
-      {
-        id: 3,
-        name: "Momo_WY_1",
-        checked: false,
-        thumbnail: "",
-        categories: ["Korean Albums"],
-        members: ["Momo"],
-        era: "With You-th",
-        benefit: "Original",
-        display: true,
-      },
-    ];
-    const expected: Record<
-      string,
-      { percent: number; acquired: number; total: number }
-    > = {
-      "The Story Begins": { percent: 0, acquired: 0, total: 2 },
-      "With You-th": { percent: 0, acquired: 0, total: 1 },
+  const cards = [
+    makeCard({ id: 1, display: false }),
+    makeCard({ id: 2 }),
+    makeCard({ id: 3, era: "Era Two", members: ["MemberC"] }),
+  ];
+
+  test("returns 0% for every era when nothing is owned", () => {
+    const expected: Record<string, Progress> = {
+      "Era One": { percent: 0, acquired: 0, total: 2 },
+      "Era Two": { percent: 0, acquired: 0, total: 1 },
     };
-    expect(helpers.computeProgressionPercentByEra([], array)).toEqual(expected);
+    expect(helpers.computeProgressionPercentByEra([], cards)).toEqual(expected);
   });
 
-  test("array=[1,2]: 100", () => {
-    const array: ICardsProps[] = [
-      {
-        id: 1,
-        name: "Nayeon_TSB_1",
-        checked: false,
-        thumbnail: "",
-        categories: ["Korean Albums"],
-        members: ["Nayeon"],
-        era: "The Story Begins",
-        benefit: "Original",
-        display: false,
-      },
-      {
-        id: 2,
-        name: "Jeongyeon_TSB_1",
-        checked: false,
-        thumbnail: "",
-        categories: ["Korean Albums"],
-        members: ["Jeongyeon"],
-        era: "The Story Begins",
-        benefit: "Original",
-        display: true,
-      },
-      {
-        id: 3,
-        name: "Momo_WY_1",
-        checked: false,
-        thumbnail: "",
-        categories: ["Korean Albums"],
-        members: ["Momo"],
-        era: "With You-th",
-        benefit: "Original",
-        display: true,
-      },
-    ];
-
-    const expected: Record<
-      string,
-      { percent: number; acquired: number; total: number }
-    > = {
-      "The Story Begins": { percent: 100, acquired: 2, total: 2 },
-      "With You-th": { percent: 0, acquired: 0, total: 1 },
+  test("returns 100% for the era whose cards are all owned", () => {
+    const expected: Record<string, Progress> = {
+      "Era One": { percent: 100, acquired: 2, total: 2 },
+      "Era Two": { percent: 0, acquired: 0, total: 1 },
     };
-    expect(helpers.computeProgressionPercentByEra([1, 2], array)).toEqual(
+    expect(helpers.computeProgressionPercentByEra([1, 2], cards)).toEqual(
       expected,
     );
   });
 });
 
 describe("computeProgressionPercentByCategory", () => {
-  test("array=[] : {002, 001, 001}", () => {
-    const array: ICardsProps[] = [
-      {
-        id: 1,
-        name: "Nayeon_TSB_1",
-        checked: false,
-        thumbnail: "",
-        categories: ["Korean Albums"],
-        members: ["Nayeon"],
-        era: "The Story Begins",
-        benefit: "Original",
-        display: false,
-      },
-      {
-        id: 2,
-        name: "Jeongyeon_TSB_1",
-        checked: false,
-        thumbnail: "",
-        categories: ["Korean Albums"],
-        members: ["Jeongyeon"],
-        era: "The Story Begins",
-        benefit: "Original",
-        display: true,
-      },
-      {
-        id: 3,
-        name: "Momo_HC_1",
-        checked: false,
-        thumbnail: "",
-        categories: ["Japanese Albums", "Solo/Subunit"],
-        members: ["Momo"],
-        era: "Haute Couture",
-        benefit: "Original",
-        display: true,
-      },
-    ];
+  // Cards 1 and 2 are in catA, card 3 is in both catA and catB.
+  const cards = [
+    makeCard({ id: 1, display: false }),
+    makeCard({ id: 2 }),
+    makeCard({ id: 3, categories: [catA, catB], members: ["MemberB"] }),
+  ];
 
-    const expected: Record<
-      string,
-      { percent: number; acquired: number; total: number }
-    > = {
-      "DVDs/Blu-rays": {
-        acquired: 0,
-        percent: NaN,
-        total: 0,
-      },
-      Events: {
-        acquired: 0,
-        percent: NaN,
-        total: 0,
-      },
-      Greetings: {
-        acquired: 0,
-        percent: NaN,
-        total: 0,
-      },
-      "Japanese Albums": {
-        acquired: 0,
-        percent: 0,
-        total: 1,
-      },
-      "Korean Albums": {
-        acquired: 0,
-        percent: 0,
-        total: 2,
-      },
-      Memberships: {
-        acquired: 0,
-        percent: NaN,
-        total: 0,
-      },
-      Promos: {
-        acquired: 0,
-        percent: NaN,
-        total: 0,
-      },
-      "Solo/Subunit": {
-        acquired: 0,
-        percent: 0,
-        total: 1,
-      },
-      "Stores/Merch": {
-        acquired: 0,
-        percent: NaN,
-        total: 0,
-      },
-      "Thai Albums": {
-        acquired: 0,
-        percent: NaN,
-        total: 0,
-      },
-    };
-    expect(helpers.computeProgressionPercentByCategory([], array)).toEqual(
-      expected,
+  const expectedFor = (
+    overrides: Record<string, Progress>,
+  ): Record<string, Progress> => ({
+    ...Object.fromEntries(
+      categoryNames.map((name) => [
+        name,
+        { acquired: 0, percent: NaN, total: 0 },
+      ]),
+    ),
+    ...overrides,
+  });
+
+  test("returns 0% for the categories with cards when nothing is owned", () => {
+    expect(helpers.computeProgressionPercentByCategory([], cards)).toEqual(
+      expectedFor({
+        [catA]: { acquired: 0, percent: 0, total: 3 },
+        [catB]: { acquired: 0, percent: 0, total: 1 },
+      }),
     );
   });
 
-  test("array=[1, 2] : {002, 001, 001}", () => {
-    const array: ICardsProps[] = [
-      {
-        id: 1,
-        name: "Nayeon_TSB_1",
-        checked: false,
-        thumbnail: "",
-        categories: ["Korean Albums"],
-        members: ["Nayeon"],
-        era: "The Story Begins",
-        benefit: "Original",
-        display: false,
-      },
-      {
-        id: 2,
-        name: "Jeongyeon_TSB_1",
-        checked: false,
-        thumbnail: "",
-        categories: ["Korean Albums"],
-        members: ["Jeongyeon"],
-        era: "The Story Begins",
-        benefit: "Original",
-        display: true,
-      },
-      {
-        id: 3,
-        name: "Momo_HC_1",
-        checked: false,
-        thumbnail: "",
-        categories: ["Japanese Albums", "Solo/Subunit"],
-        members: ["Momo"],
-        era: "Haute Couture",
-        benefit: "Original",
-        display: true,
-      },
-    ];
-
-    const expected: Record<
-      string,
-      { percent: number; acquired: number; total: number }
-    > = {
-      "DVDs/Blu-rays": {
-        acquired: 0,
-        percent: NaN,
-        total: 0,
-      },
-      Events: {
-        acquired: 0,
-        percent: NaN,
-        total: 0,
-      },
-      Greetings: {
-        acquired: 0,
-        percent: NaN,
-        total: 0,
-      },
-      "Japanese Albums": {
-        acquired: 0,
-        percent: 0,
-        total: 1,
-      },
-      "Korean Albums": {
-        acquired: 2,
-        percent: 100,
-        total: 2,
-      },
-      Memberships: {
-        acquired: 0,
-        percent: NaN,
-        total: 0,
-      },
-      Promos: {
-        acquired: 0,
-        percent: NaN,
-        total: 0,
-      },
-      "Solo/Subunit": {
-        acquired: 0,
-        percent: 0,
-        total: 1,
-      },
-      "Stores/Merch": {
-        acquired: 0,
-        percent: NaN,
-        total: 0,
-      },
-      "Thai Albums": {
-        acquired: 0,
-        percent: NaN,
-        total: 0,
-      },
-    };
-    expect(helpers.computeProgressionPercentByCategory([1, 2], array)).toEqual(
-      expected,
+  test("counts a card in each of its categories and rounds the percent", () => {
+    // owned: cards 1 and 2 (both only in catA); card 3 (catA and catB) is not owned
+    expect(helpers.computeProgressionPercentByCategory([1, 2], cards)).toEqual(
+      expectedFor({
+        [catA]: { acquired: 2, percent: 67, total: 3 }, // Math.round(2 / 3 * 100)
+        [catB]: { acquired: 0, percent: 0, total: 1 },
+      }),
     );
   });
 });
 
 describe("computeProgressionByMembers", () => {
-  test("array=[1,2],members=[] : 0", () => {
-    const array: ICardsProps[] = [
-      {
-        id: 1,
-        name: "Nayeon_TSB_1",
-        checked: false,
-        thumbnail: "",
-        categories: ["Korean Albums"],
-        members: ["Nayeon"],
-        era: "The Story Begins",
-        benefit: "Original",
-        display: false,
-      },
-      {
-        id: 2,
-        name: "Jeongyeon_TSB_1",
-        checked: false,
-        thumbnail: "",
-        categories: ["Korean Albums"],
-        members: ["Jeongyeon"],
-        era: "The Story Begins",
-        benefit: "Original",
-        display: true,
-      },
-      {
-        id: 3,
-        name: "Momo_HC_1",
-        checked: false,
-        thumbnail: "",
-        categories: ["Japanese Albums", "Solo/Subunit"],
-        members: ["Momo"],
-        era: "Haute Couture",
-        benefit: "Original",
-        display: true,
-      },
+  test("returns 0 when no member is requested", () => {
+    const cards = [
+      makeCard({ id: 1 }),
+      makeCard({ id: 2, members: ["MemberB"] }),
     ];
-    expect(helpers.computeProgressionByMembers([1, 2], array, [])).toEqual(0);
+    expect(helpers.computeProgressionByMembers([1, 2], cards, [])).toBe(0);
   });
 
-  test('array=[1,2,3],members=["Momo"] : 1', () => {
-    const array: ICardsProps[] = [
-      {
-        id: 1,
-        name: "Nayeon_TSB_1",
-        checked: false,
-        thumbnail: "",
-        categories: ["Korean Albums"],
-        members: ["Nayeon"],
-        era: "The Story Begins",
-        benefit: "Original",
-        display: false,
-      },
-      {
-        id: 2,
-        name: "Jeongyeon_TSB_1",
-        checked: false,
-        thumbnail: "",
-        categories: ["Korean Albums"],
-        members: ["Jeongyeon"],
-        era: "The Story Begins",
-        benefit: "Original",
-        display: true,
-      },
-      {
-        id: 3,
-        name: "Momo_HC_1",
-        checked: false,
-        thumbnail: "",
-        categories: ["Japanese Albums", "Solo/Subunit"],
-        members: ["Momo"],
-        era: "Haute Couture",
-        benefit: "Original",
-        display: true,
-      },
+  test("counts the owned cards of the requested member", () => {
+    const cards = [
+      makeCard({ id: 1, members: ["MemberA"] }),
+      makeCard({ id: 2, members: ["MemberB"] }),
+      makeCard({ id: 3, members: ["MemberC"] }),
     ];
     expect(
-      helpers.computeProgressionByMembers([1, 2, 3], array, ["Momo"]),
-    ).toEqual(1);
+      helpers.computeProgressionByMembers([1, 2, 3], cards, ["MemberC"]),
+    ).toBe(1);
   });
 
-  test('array=[1,2,3],members=["Momo","Nayeon"] : 1', () => {
-    const array: ICardsProps[] = [
-      {
-        id: 1,
-        name: "Nayeon_TSB_1",
-        checked: false,
-        thumbnail: "",
-        categories: ["Korean Albums"],
-        members: ["Nayeon"],
-        era: "The Story Begins",
-        benefit: "Original",
-        display: false,
-      },
-      {
-        id: 2,
-        name: "Group_TSB_1",
-        checked: false,
-        thumbnail: "",
-        categories: ["Korean Albums"],
-        members: ["Nayeon", "Momo"],
-        era: "The Story Begins",
-        benefit: "Original",
-        display: true,
-      },
-      {
-        id: 3,
-        name: "Momo_HC_1",
-        checked: false,
-        thumbnail: "",
-        categories: ["Japanese Albums", "Solo/Subunit"],
-        members: ["Momo"],
-        era: "Haute Couture",
-        benefit: "Original",
-        display: true,
-      },
+  test("counts only the cards containing all the requested members", () => {
+    const cards = [
+      makeCard({ id: 1, members: ["MemberA"] }),
+      makeCard({ id: 2, members: ["MemberA", "MemberC"] }),
+      makeCard({ id: 3, members: ["MemberC"] }),
     ];
     expect(
-      helpers.computeProgressionByMembers([1, 2, 3], array, ["Momo", "Nayeon"]),
-    ).toEqual(1);
-  });
-});
-
-describe("checkAchievement", () => {
-  test("isThresholdEraReached triggered: True", () => {
-    const achievement: TAchievementProps = {
-      id: 2,
-      name: "The Story Begins pt1",
-      description: "Get 25% of the cards from The Story Begins collection.",
-      group: "completion",
-      criteria: {
-        trigger: {
-          rule: "threshold_era",
-          target: ["The Story Begins"],
-          match: 25,
-        },
-        conditions: [],
-      },
-      checked: false,
-      icon: "/images/icons/no_animation/celery_12414330.png",
-      icon_animated: "/images/icons/animation/celery_12414330.gif",
-    };
-    const userAchievements: number[] = [];
-    const cards: ICardsProps[] = [
-      {
-        id: 1,
-        name: "Nayeon_TSB_1",
-        checked: false,
-        thumbnail: "",
-        categories: ["Korean Albums"],
-        members: ["Nayeon"],
-        era: "The Story Begins",
-        benefit: "Original",
-        display: false,
-      },
-      {
-        id: 2,
-        name: "Jeongyeon_TSB_1",
-        checked: false,
-        thumbnail: "",
-        categories: ["Korean Albums"],
-        members: ["Jeongyeon"],
-        era: "The Story Begins",
-        benefit: "Original",
-        display: true,
-      },
-      {
-        id: 3,
-        name: "Momo_HC_1",
-        checked: false,
-        thumbnail: "",
-        categories: ["Japanese Albums", "Solo/Subunit"],
-        members: ["Momo"],
-        era: "Haute Couture",
-        benefit: "Original",
-        display: true,
-      },
-    ];
-    const userCollection: number[] = [1, 2];
-    const percentEras: Record<
-      string,
-      { percent: number; acquired: number; total: number }
-    > = helpers.computeProgressionPercentByEra(userCollection, cards);
-    const percentCategories: Record<
-      string,
-      { percent: number; acquired: number; total: number }
-    > = helpers.computeProgressionPercentByCategory(userCollection, cards);
-    expect(
-      helpers.checkAchievement(
-        achievement,
-        userAchievements,
-        cards,
-        userCollection,
-        percentEras,
-        percentCategories,
-      ),
-    ).toBeTruthy();
-  });
-  test("isThresholdCategoryReached triggered: True", () => {
-    const achievement: TAchievementProps = {
-      id: 2,
-      name: "The Story Begins pt1",
-      description: "Get 25% of the cards from The Story Begins collection.",
-      group: "completion",
-      criteria: {
-        trigger: {
-          rule: "threshold_category",
-          target: ["Korean Albums"],
-          match: 25,
-        },
-        conditions: [],
-      },
-      checked: false,
-      icon: "/images/icons/no_animation/celery_12414330.png",
-      icon_animated: "/images/icons/animation/celery_12414330.gif",
-    };
-    const userAchievements: number[] = [];
-    const cards: ICardsProps[] = [
-      {
-        id: 1,
-        name: "Nayeon_TSB_1",
-        checked: false,
-        thumbnail: "",
-        categories: ["Korean Albums"],
-        members: ["Nayeon"],
-        era: "The Story Begins",
-        benefit: "Original",
-        display: false,
-      },
-      {
-        id: 2,
-        name: "Jeongyeon_TSB_1",
-        checked: false,
-        thumbnail: "",
-        categories: ["Korean Albums"],
-        members: ["Jeongyeon"],
-        era: "The Story Begins",
-        benefit: "Original",
-        display: true,
-      },
-      {
-        id: 3,
-        name: "Momo_HC_1",
-        checked: false,
-        thumbnail: "",
-        categories: ["Japanese Albums", "Solo/Subunit"],
-        members: ["Momo"],
-        era: "Haute Couture",
-        benefit: "Original",
-        display: true,
-      },
-    ];
-    const userCollection: number[] = [1, 2];
-    const percentEras: Record<
-      string,
-      { percent: number; acquired: number; total: number }
-    > = helpers.computeProgressionPercentByEra(userCollection, cards);
-    const percentCategories: Record<
-      string,
-      { percent: number; acquired: number; total: number }
-    > = helpers.computeProgressionPercentByCategory(userCollection, cards);
-    expect(
-      helpers.checkAchievement(
-        achievement,
-        userAchievements,
-        cards,
-        userCollection,
-        percentEras,
-        percentCategories,
-      ),
-    ).toBeTruthy();
-  });
-  test("isThresholdMembersReached triggered: True", () => {
-    const achievement: TAchievementProps = {
-      id: 1,
-      name: "Baby Once",
-      description: "Create an account.",
-      group: "creation",
-      criteria: {
-        trigger: {
-          rule: "threshold_members",
-          target: ["Nayeon"],
-          match: 1,
-        },
-        conditions: [],
-      },
-      checked: false,
-      icon: "/images/icons/no_animation/marjoram_12414327.png",
-      icon_animated: "/images/icons/animation/marjoram_12414327.gif",
-    };
-    const userAchievements: number[] = [];
-    const cards: ICardsProps[] = [
-      {
-        id: 1,
-        name: "Nayeon_TSB_1",
-        checked: false,
-        thumbnail: "",
-        categories: ["Korean Albums"],
-        members: ["Nayeon"],
-        era: "The Story Begins",
-        benefit: "Original",
-        display: false,
-      },
-      {
-        id: 2,
-        name: "Jeongyeon_TSB_1",
-        checked: false,
-        thumbnail: "",
-        categories: ["Korean Albums"],
-        members: ["Jeongyeon"],
-        era: "The Story Begins",
-        benefit: "Original",
-        display: true,
-      },
-      {
-        id: 3,
-        name: "Momo_HC_1",
-        checked: false,
-        thumbnail: "",
-        categories: ["Japanese Albums", "Solo/Subunit"],
-        members: ["Momo"],
-        era: "Haute Couture",
-        benefit: "Original",
-        display: true,
-      },
-    ];
-    const userCollection: number[] = [1, 2];
-    const percentEras: Record<
-      string,
-      { percent: number; acquired: number; total: number }
-    > = helpers.computeProgressionPercentByEra(userCollection, cards);
-    const percentCategories: Record<
-      string,
-      { percent: number; acquired: number; total: number }
-    > = helpers.computeProgressionPercentByCategory(userCollection, cards);
-    expect(
-      helpers.checkAchievement(
-        achievement,
-        userAchievements,
-        cards,
-        userCollection,
-        percentEras,
-        percentCategories,
-      ),
-    ).toBeTruthy();
-  });
-  test("isThresholdCollectionReached triggered: False", () => {
-    const achievement: TAchievementProps = {
-      id: 15,
-      name: "Candy",
-      description: "Get 1000 cards.",
-      group: "collection",
-      criteria: {
-        trigger: {
-          rule: "threshold_collection_size",
-          match: 1000,
-        },
-      },
-      checked: false,
-      icon: "/images/icons/no_animation/leek_12414316.png",
-      icon_animated: "/images/icons/animation/leek_12414316.gif",
-    };
-    const userAchievements: number[] = [];
-    const cards: ICardsProps[] = [
-      {
-        id: 1,
-        name: "Nayeon_TSB_1",
-        checked: false,
-        thumbnail: "",
-        categories: ["Korean Albums"],
-        members: ["Nayeon"],
-        era: "The Story Begins",
-        benefit: "Original",
-        display: false,
-      },
-      {
-        id: 2,
-        name: "Jeongyeon_TSB_1",
-        checked: false,
-        thumbnail: "",
-        categories: ["Korean Albums"],
-        members: ["Jeongyeon"],
-        era: "The Story Begins",
-        benefit: "Original",
-        display: true,
-      },
-      {
-        id: 3,
-        name: "Momo_HC_1",
-        checked: false,
-        thumbnail: "",
-        categories: ["Japanese Albums", "Solo/Subunit"],
-        members: ["Momo"],
-        era: "Haute Couture",
-        benefit: "Original",
-        display: true,
-      },
-    ];
-    const userCollection: number[] = [1, 2];
-    const percentEras: Record<
-      string,
-      { percent: number; acquired: number; total: number }
-    > = helpers.computeProgressionPercentByEra(userCollection, cards);
-    const percentCategories: Record<
-      string,
-      { percent: number; acquired: number; total: number }
-    > = helpers.computeProgressionPercentByCategory(userCollection, cards);
-    expect(
-      helpers.checkAchievement(
-        achievement,
-        userAchievements,
-        cards,
-        userCollection,
-        percentEras,
-        percentCategories,
-      ),
-    ).toBeFalsy();
-  });
-  test("isThresholdAchievementsReached triggered: False", () => {
-    const achievement: TAchievementProps = {
-      id: 13,
-      name: "Achievement hunter",
-      description: "Get 20 achievements.",
-      group: "success",
-      criteria: {
-        trigger: {
-          rule: "threshold_achievements",
-          match: 20,
-        },
-      },
-      checked: false,
-      icon: "/images/icons/no_animation/asparagus_12414318.png",
-      icon_animated: "/images/icons/animation/asparagus_12414318.gif",
-    };
-    const userAchievements: number[] = [1];
-    const cards: ICardsProps[] = [
-      {
-        id: 1,
-        name: "Nayeon_TSB_1",
-        checked: false,
-        thumbnail: "",
-        categories: ["Korean Albums"],
-        members: ["Nayeon"],
-        era: "The Story Begins",
-        benefit: "Original",
-        display: false,
-      },
-      {
-        id: 2,
-        name: "Jeongyeon_TSB_1",
-        checked: false,
-        thumbnail: "",
-        categories: ["Korean Albums"],
-        members: ["Jeongyeon"],
-        era: "The Story Begins",
-        benefit: "Original",
-        display: true,
-      },
-      {
-        id: 3,
-        name: "Momo_HC_1",
-        checked: false,
-        thumbnail: "",
-        categories: ["Japanese Albums", "Solo/Subunit"],
-        members: ["Momo"],
-        era: "Haute Couture",
-        benefit: "Original",
-        display: true,
-      },
-    ];
-    const userCollection: number[] = [1, 2];
-    const percentEras: Record<
-      string,
-      { percent: number; acquired: number; total: number }
-    > = helpers.computeProgressionPercentByEra(userCollection, cards);
-    const percentCategories: Record<
-      string,
-      { percent: number; acquired: number; total: number }
-    > = helpers.computeProgressionPercentByCategory(userCollection, cards);
-    expect(
-      helpers.checkAchievement(
-        achievement,
-        userAchievements,
-        cards,
-        userCollection,
-        percentEras,
-        percentCategories,
-      ),
-    ).toBeFalsy();
-  });
-  test("default triggered: False", () => {
-    const achievement: TAchievementProps = {
-      id: 1,
-      name: "Baby Once",
-      description: "Create an account.",
-      group: "creation",
-      criteria: {
-        trigger: {
-          rule: "unknown",
-          match: 1,
-        },
-        conditions: [],
-      },
-      checked: false,
-      icon: "/images/icons/no_animation/marjoram_12414327.png",
-      icon_animated: "/images/icons/animation/marjoram_12414327.gif",
-    };
-    const userAchievements: number[] = [];
-    const cards: ICardsProps[] = [
-      {
-        id: 1,
-        name: "Nayeon_TSB_1",
-        checked: false,
-        thumbnail: "",
-        categories: ["Korean Albums"],
-        members: ["Nayeon"],
-        era: "The Story Begins",
-        benefit: "Original",
-        display: false,
-      },
-      {
-        id: 2,
-        name: "Jeongyeon_TSB_1",
-        checked: false,
-        thumbnail: "",
-        categories: ["Korean Albums"],
-        members: ["Jeongyeon"],
-        era: "The Story Begins",
-        benefit: "Original",
-        display: true,
-      },
-      {
-        id: 3,
-        name: "Momo_HC_1",
-        checked: false,
-        thumbnail: "",
-        categories: ["Japanese Albums", "Solo/Subunit"],
-        members: ["Momo"],
-        era: "Haute Couture",
-        benefit: "Original",
-        display: true,
-      },
-    ];
-    const userCollection: number[] = [];
-    const percentEras: Record<
-      string,
-      { percent: number; acquired: number; total: number }
-    > = {
-      "The Story Begins": { percent: 100, acquired: 33, total: 33 },
-      "With You-th": { percent: 0, acquired: 0, total: 281 },
-    };
-    const percentCategories: Record<
-      string,
-      { percent: number; acquired: number; total: number }
-    > = {
-      "Korean Albums": { percent: 100, acquired: 2, total: 2 },
-      "Japanese Albums": { percent: 0, acquired: 0, total: 1 },
-      "Solo/Subunit": { percent: 0, acquired: 0, total: 1 },
-    };
-    expect(
-      helpers.checkAchievement(
-        achievement,
-        userAchievements,
-        cards,
-        userCollection,
-        percentEras,
-        percentCategories,
-      ),
-    ).toBeFalsy();
+      helpers.computeProgressionByMembers([1, 2, 3], cards, [
+        "MemberC",
+        "MemberA",
+      ]),
+    ).toBe(1);
   });
 });
 
 describe("getLengthSetsDisplayed", () => {
-  test("empty array: 0", () => {
-    const array: TAlbumsProps[] = [];
-    expect(helpers.getLengthSetsDisplayed(array)).toBe(0);
+  test("returns 0 for an empty array", () => {
+    expect(helpers.getLengthSetsDisplayed([])).toBe(0);
   });
 
-  test("array: 1 displayed", () => {
-    const array: TAlbumsProps[] = [
-      {
-        name: "MISAMO Masterpiece Showcase",
-        checked: false,
-        categories: ["DVDs/Blu-rays"],
-        members: ["Momo", "Sana", "Mina"],
-        benefits: ["Original"],
-        display: true,
-        code: "Masterpiece_showcase_dvd",
-        release: "2023-12-20T00:00:00.000Z",
-        image: "",
-      },
+  test("counts the sets with display=true", () => {
+    const albums = [
+      makeAlbum({ display: true }),
+      makeAlbum({ name: "Album Bravo", display: false }),
     ];
-    expect(helpers.getLengthSetsDisplayed(array)).toBe(1);
+    expect(helpers.getLengthSetsDisplayed(albums)).toBe(1);
   });
 });
 
 describe("filterAlbumsbyRadioButtonType", () => {
-  test("ALL - wrong category: 0", () => {
-    const percentEras: Record<
-      string,
-      { percent: number; acquired: number; total: number }
-    > = {
-      "The Story Begins": { percent: 100, acquired: 33, total: 33 },
-      "With You-th": { percent: 0, acquired: 0, total: 281 },
-    };
-    const array: TAlbumsProps[] = [
-      {
-        name: "MISAMO Masterpiece Showcase",
-        checked: false,
-        categories: ["DVDs/Blu-rays"],
-        members: ["Momo", "Sana", "Mina"],
-        benefits: ["Original"],
-        display: false,
-        code: "Masterpiece_showcase_dvd",
-        release: "2023-12-20T00:00:00.000Z",
-        image: "",
-      },
-    ];
+  const albumName = "Album Alpha";
 
-    const result = helpers
-      .filterAlbumsbyRadioButtonType(array, "All", percentEras, "Korean Albums")
-      .filter((album) => album.display);
-    expect(result.length).toBe(0);
-  });
-
-  test("ALL - right category: 1", () => {
-    const percentEras: Record<
-      string,
-      { percent: number; acquired: number; total: number }
-    > = {
-      "The Story Begins": { percent: 100, acquired: 33, total: 33 },
-      "With You-th": { percent: 0, acquired: 0, total: 281 },
-    };
-    const array: TAlbumsProps[] = [
-      {
-        name: "MISAMO Masterpiece Showcase",
-        checked: false,
-        categories: ["DVDs/Blu-rays"],
-        members: ["Momo", "Sana", "Mina"],
-        benefits: ["Original"],
-        display: false,
-        code: "Masterpiece_showcase_dvd",
-        release: "2023-12-20T00:00:00.000Z",
-        image: "",
-      },
-    ];
-    const result = helpers
-      .filterAlbumsbyRadioButtonType(array, "All", percentEras, "DVDs/Blu-rays")
-      .filter((album) => album.display);
-    expect(result.length).toBe(1);
-  });
-
-  test("IN PROGRESS - wrong category: 0", () => {
-    const percentEras: Record<
-      string,
-      { percent: number; acquired: number; total: number }
-    > = {
-      "MISAMO Masterpiece Showcase": { percent: 50, acquired: 10, total: 20 },
-      "With You-th": { percent: 0, acquired: 0, total: 281 },
-    };
-    const array: TAlbumsProps[] = [
-      {
-        name: "MISAMO Masterpiece Showcase",
-        checked: false,
-        categories: ["DVDs/Blu-rays"],
-        members: ["Momo", "Sana", "Mina"],
-        benefits: ["Original"],
-        display: false,
-        code: "Masterpiece_showcase_dvd",
-        release: "2023-12-20T00:00:00.000Z",
-        image: "",
-      },
-    ];
-
-    const result = helpers
-      .filterAlbumsbyRadioButtonType(
-        array,
-        "In progress",
-        percentEras,
-        "Korean Albums",
-      )
-      .filter((album) => album.display);
-    expect(result.length).toBe(0);
-  });
-
-  test("IN PROGRESS - right category: 1", () => {
-    const percentEras: Record<
-      string,
-      { percent: number; acquired: number; total: number }
-    > = {
-      "MISAMO Masterpiece Showcase": { percent: 50, acquired: 10, total: 20 },
-      "With You-th": { percent: 0, acquired: 0, total: 281 },
-    };
-    const array: TAlbumsProps[] = [
-      {
-        name: "MISAMO Masterpiece Showcase",
-        checked: false,
-        categories: ["DVDs/Blu-rays"],
-        members: ["Momo", "Sana", "Mina"],
-        benefits: ["Original"],
-        display: false,
-        code: "Masterpiece_showcase_dvd",
-        release: "2023-12-20T00:00:00.000Z",
-        image: "",
-      },
-    ];
-    const result = helpers
-      .filterAlbumsbyRadioButtonType(
-        array,
-        "In progress",
-        percentEras,
-        "DVDs/Blu-rays",
-      )
-      .filter((album) => album.display);
-    expect(result.length).toBe(1);
-  });
-
-  test("COMPLETED - wrong category: 0", () => {
-    const percentEras: Record<
-      string,
-      { percent: number; acquired: number; total: number }
-    > = {
-      "MISAMO Masterpiece Showcase": { percent: 100, acquired: 20, total: 20 },
-      "With You-th": { percent: 0, acquired: 0, total: 281 },
-    };
-    const array: TAlbumsProps[] = [
-      {
-        name: "MISAMO Masterpiece Showcase",
-        checked: false,
-        categories: ["DVDs/Blu-rays"],
-        members: ["Momo", "Sana", "Mina"],
-        benefits: ["Original"],
-        display: false,
-        code: "Masterpiece_showcase_dvd",
-        release: "2023-12-20T00:00:00.000Z",
-        image: "",
-      },
-    ];
-
-    const result = helpers
-      .filterAlbumsbyRadioButtonType(
-        array,
-        "Completed",
-        percentEras,
-        "Korean Albums",
-      )
-      .filter((album) => album.display);
-    expect(result.length).toBe(0);
-  });
-
-  test("COMPLETED - right category: 0", () => {
-    const percentEras: Record<
-      string,
-      { percent: number; acquired: number; total: number }
-    > = {
-      "MISAMO Masterpiece Showcase": { percent: 100, acquired: 20, total: 20 },
-      "With You-th": { percent: 0, acquired: 0, total: 281 },
-    };
-    const array: TAlbumsProps[] = [
-      {
-        name: "MISAMO Masterpiece Showcase",
-        checked: false,
-        categories: ["DVDs/Blu-rays"],
-        members: ["Momo", "Sana", "Mina"],
-        benefits: ["Original"],
-        display: false,
-        code: "Masterpiece_showcase_dvd",
-        release: "2023-12-20T00:00:00.000Z",
-        image: "",
-      },
-    ];
-    const result = helpers
-      .filterAlbumsbyRadioButtonType(
-        array,
-        "Completed",
-        percentEras,
-        "DVDs/Blu-rays",
-      )
-      .filter((album) => album.display);
-    expect(result.length).toBe(1);
-  });
+  test.each([
+    // [filter, percent of the album, category requested, displayed albums]
+    ["All", 50, "Cat2", 0],
+    ["All", 50, "Cat1", 1],
+    ["In progress", 50, "Cat2", 0],
+    ["In progress", 50, "Cat1", 1],
+    ["Completed", 100, "Cat2", 0],
+    ["Completed", 100, "Cat1", 1],
+  ])(
+    "%s (album at %i%%) with category %s: %i displayed",
+    (type, percent, category, expectedLength) => {
+      const albums = [
+        makeAlbum({ name: albumName, categories: ["Cat1"], display: false }),
+      ];
+      const percentEras: Record<string, Progress> = {
+        [albumName]: { percent, acquired: percent, total: 100 },
+        "Other album": { percent: 0, acquired: 0, total: 281 },
+      };
+      const result = helpers
+        .filterAlbumsbyRadioButtonType(albums, type, percentEras, category)
+        .filter((album) => album.display);
+      expect(result).toHaveLength(expectedLength);
+    },
+  );
 });
 
 describe("filterAlbumsBySearchValue", () => {
-  test("empty search text: everything returned", () => {
-    const array: TAlbumsProps[] = [
-      {
-        name: "MISAMO Masterpiece Showcase",
-        checked: false,
-        categories: ["DVDs/Blu-rays"],
-        members: ["Momo", "Sana", "Mina"],
-        benefits: ["Original"],
-        display: true,
-        code: "Masterpiece_showcase_dvd",
-        release: "2023-12-20T00:00:00.000Z",
-        image: "",
-      },
-      {
-        name: "SKI BAR Twice JYP Japan Pop Up Store 2024",
-        checked: false,
-        categories: ["Stores/Merch"],
-        members: [
-          "Nayeon",
-          "Jeongyeon",
-          "Momo",
-          "Sana",
-          "Jihyo",
-          "Mina",
-          "Dahyun",
-          "Chaeyoung",
-          "Tzuyu",
-        ],
-        benefits: ["Original"],
-        display: true,
-        code: "SKIBAR_JYP_Japan_Pop-up_Store_2024",
-        release: "2024-11-30T00:00:00.000Z",
-        image: "",
-      },
-    ];
+  const albums = [
+    makeAlbum({ name: "Album Bravo", code: "BRAVO" }),
+    makeAlbum({ name: "Album Charlie", code: "CHARLIE" }),
+  ];
+
+  test("returns everything for an empty search", () => {
     const result = helpers
-      .filterAlbumsBySearchValue(array, "")
+      .filterAlbumsBySearchValue(albums, "")
       .filter((album) => album.display);
-    expect(result.length).toBe(2);
+    expect(result).toHaveLength(2);
   });
 
-  test("MISAMO: return 1 element", () => {
-    const array: TAlbumsProps[] = [
-      {
-        name: "MISAMO Masterpiece Showcase",
-        checked: false,
-        categories: ["DVDs/Blu-rays"],
-        members: ["Momo", "Sana", "Mina"],
-        benefits: ["Original"],
-        display: true,
-        code: "Masterpiece_showcase_dvd",
-        release: "2023-12-20T00:00:00.000Z",
-        image: "",
-      },
-      {
-        name: "SKI BAR Twice JYP Japan Pop Up Store 2024",
-        checked: false,
-        categories: ["Stores/Merch"],
-        members: [
-          "Nayeon",
-          "Jeongyeon",
-          "Momo",
-          "Sana",
-          "Jihyo",
-          "Mina",
-          "Dahyun",
-          "Chaeyoung",
-          "Tzuyu",
-        ],
-        benefits: ["Original"],
-        display: true,
-        code: "SKIBAR_JYP_Japan_Pop-up_Store_2024",
-        release: "2024-11-30T00:00:00.000Z",
-        image: "",
-      },
-    ];
+  test("returns the albums whose name matches the search", () => {
     const result = helpers
-      .filterAlbumsBySearchValue(array, "MISAMO")
+      .filterAlbumsBySearchValue(albums, "Bravo")
       .filter((album) => album.display);
-    expect(
-      result.length > 0 && result[0].name === "MISAMO Masterpiece Showcase",
-    ).toBeTruthy();
+    expect(result.map((album) => album.name)).toEqual(["Album Bravo"]);
   });
 
-  test("The Story Begins: return 0 element", () => {
-    const array: TAlbumsProps[] = [
-      {
-        name: "MISAMO Masterpiece Showcase",
-        checked: false,
-        categories: ["DVDs/Blu-rays"],
-        members: ["Momo", "Sana", "Mina"],
-        benefits: ["Original"],
-        display: true,
-        code: "Masterpiece_showcase_dvd",
-        release: "2023-12-20T00:00:00.000Z",
-        image: "",
-      },
-      {
-        name: "SKI BAR Twice JYP Japan Pop Up Store 2024",
-        checked: false,
-        categories: ["Stores/Merch"],
-        members: [
-          "Nayeon",
-          "Jeongyeon",
-          "Momo",
-          "Sana",
-          "Jihyo",
-          "Mina",
-          "Dahyun",
-          "Chaeyoung",
-          "Tzuyu",
-        ],
-        benefits: ["Original"],
-        display: true,
-        code: "SKIBAR_JYP_Japan_Pop-up_Store_2024",
-        release: "2024-11-30T00:00:00.000Z",
-        image: "",
-      },
-    ];
+  test("returns nothing when no album matches", () => {
     const result = helpers
-      .filterAlbumsBySearchValue(array, "The Story Begins")
+      .filterAlbumsBySearchValue(albums, "Zulu")
       .filter((album) => album.display);
-    expect(result.length).toBe(0);
+    expect(result).toHaveLength(0);
   });
 });
 
 describe("filterAlbumsByCategory", () => {
-  test("Stores/Merch : 1 returned", () => {
-    const array: TAlbumsProps[] = [
-      {
-        name: "MISAMO Masterpiece Showcase",
-        checked: false,
-        categories: ["DVDs/Blu-rays"],
-        members: ["Momo", "Sana", "Mina"],
-        benefits: ["Original"],
-        display: true,
-        code: "Masterpiece_showcase_dvd",
-        release: "2023-12-20T00:00:00.000Z",
-        image: "",
-      },
-      {
-        name: "SKI BAR Twice JYP Japan Pop Up Store 2024",
-        checked: false,
-        categories: ["Stores/Merch"],
-        members: [
-          "Nayeon",
-          "Jeongyeon",
-          "Momo",
-          "Sana",
-          "Jihyo",
-          "Mina",
-          "Dahyun",
-          "Chaeyoung",
-          "Tzuyu",
-        ],
-        benefits: ["Original"],
-        display: true,
-        code: "SKIBAR_JYP_Japan_Pop-up_Store_2024",
-        release: "2024-11-30T00:00:00.000Z",
-        image: "",
-      },
+  test("returns only the albums of the requested category", () => {
+    const albums = [
+      makeAlbum({ name: "Album Bravo", categories: ["Cat1"] }),
+      makeAlbum({ name: "Album Charlie", categories: ["Cat2"] }),
     ];
     const result = helpers
-      .filterAlbumsByCategory(array, "Stores/Merch")
+      .filterAlbumsByCategory(albums, "Cat2")
       .filter((album) => album.display);
-    expect(result.length).toBe(1);
+    expect(result.map((album) => album.name)).toEqual(["Album Charlie"]);
   });
 });
 
 describe("computeProgressionByEraAndCategory", () => {
-  test("Japanese Albums : empty", () => {
-    const array: ICardsProps[] = [
-      {
-        id: 1,
-        name: "Nayeon_TSB_1",
-        checked: false,
-        thumbnail: "",
-        categories: ["Korean Albums"],
-        members: ["Nayeon"],
-        era: "The Story Begins",
-        benefit: "Original",
-        display: false,
-      },
-      {
-        id: 2,
-        name: "Jeongyeon_TSB_1",
-        checked: false,
-        thumbnail: "",
-        categories: ["Korean Albums"],
-        members: ["Jeongyeon"],
-        era: "The Story Begins",
-        benefit: "Original",
-        display: true,
-      },
-      {
-        id: 3,
-        name: "Momo_WY_1",
-        checked: false,
-        thumbnail: "",
-        categories: ["Korean Albums"],
-        members: ["Momo"],
-        era: "With You-th",
-        benefit: "Original",
-        display: true,
-      },
-    ];
-    const expected: Record<
-      string,
-      { percent: number; acquired: number; total: number }
-    > = {};
-    expect(
-      helpers.computeProgressionByEraAndCategory([], array, "Japanese Albums"),
-    ).toEqual(expected);
+  const cards = [
+    makeCard({ id: 1, display: false }),
+    makeCard({ id: 2 }),
+    makeCard({ id: 3, era: "Era Two", members: ["MemberC"] }),
+  ];
+
+  test("returns {} when no card belongs to the category", () => {
+    expect(helpers.computeProgressionByEraAndCategory([], cards, catB)).toEqual(
+      {},
+    );
   });
 
-  test("Korean Albums: everything returned", () => {
-    const array: ICardsProps[] = [
-      {
-        id: 1,
-        name: "Nayeon_TSB_1",
-        checked: false,
-        thumbnail: "",
-        categories: ["Korean Albums"],
-        members: ["Nayeon"],
-        era: "The Story Begins",
-        benefit: "Original",
-        display: false,
-      },
-      {
-        id: 2,
-        name: "Jeongyeon_TSB_1",
-        checked: false,
-        thumbnail: "",
-        categories: ["Korean Albums"],
-        members: ["Jeongyeon"],
-        era: "The Story Begins",
-        benefit: "Original",
-        display: true,
-      },
-      {
-        id: 3,
-        name: "Momo_WY_1",
-        checked: false,
-        thumbnail: "",
-        categories: ["Korean Albums"],
-        members: ["Momo"],
-        era: "With You-th",
-        benefit: "Original",
-        display: true,
-      },
-    ];
-
-    const expected: Record<
-      string,
-      { percent: number; acquired: number; total: number }
-    > = {
-      "The Story Begins": { percent: 100, acquired: 2, total: 2 },
-      "With You-th": { percent: 0, acquired: 0, total: 1 },
+  test("returns the progression of each era of the category", () => {
+    const expected: Record<string, Progress> = {
+      "Era One": { percent: 100, acquired: 2, total: 2 },
+      "Era Two": { percent: 0, acquired: 0, total: 1 },
     };
     expect(
-      helpers.computeProgressionByEraAndCategory(
-        [1, 2],
-        array,
-        "Korean Albums",
-      ),
+      helpers.computeProgressionByEraAndCategory([1, 2], cards, catA),
     ).toEqual(expected);
   });
 });
 
 describe("sortAlbums", () => {
-  test("Collection progress (Ascending)", () => {
-    const array: TAlbumsProps[] = [
-      {
-        name: "MISAMO Masterpiece Showcase",
-        checked: false,
-        categories: ["DVDs/Blu-rays"],
-        members: ["Momo", "Sana", "Mina"],
-        benefits: ["Original"],
-        display: true,
-        code: "Masterpiece_showcase_dvd",
-        release: "2023-12-20T00:00:00.000Z",
-        image: "",
-      },
-      {
-        name: "SKI BAR Twice JYP Japan Pop Up Store 2024",
-        checked: false,
-        categories: ["Stores/Merch"],
-        members: [
-          "Nayeon",
-          "Jeongyeon",
-          "Momo",
-          "Sana",
-          "Jihyo",
-          "Mina",
-          "Dahyun",
-          "Chaeyoung",
-          "Tzuyu",
-        ],
-        benefits: ["Original"],
-        display: true,
-        code: "SKIBAR_JYP_Japan_Pop-up_Store_2024",
-        release: "2024-11-30T00:00:00.000Z",
-        image: "",
-      },
-      {
-        name: "TWICE “STRATEGY” Pop Up In LA",
-        checked: false,
-        categories: ["Stores/Merch"],
-        members: [
-          "Nayeon",
-          "Jeongyeon",
-          "Momo",
-          "Sana",
-          "Jihyo",
-          "Mina",
-          "Dahyun",
-          "Chaeyoung",
-          "Tzuyu",
-        ],
-        benefits: ["Original"],
-        display: true,
-        code: "TWICE_STRATEGY_POP-UP_In_LA",
-        release: "2024-11-23T00:00:00.000Z",
-        image: "",
-      },
-      {
-        name: "HAUTE COUTURE Japan Dome Tour 2024",
-        checked: false,
-        categories: ["Events"],
-        members: ["Momo", "Sana", "Mina"],
-        benefits: ["Original"],
-        display: true,
-        code: "HC_DT",
-        release: "2024-11-02T00:00:00.000Z",
-        image: "",
-      },
-    ];
+  // Alphabetical order is Alpha < Bravo < Charlie < Delta.
+  // Release order is Bravo < Alpha < Delta < Charlie.
+  // Progress order is Bravo (0) < Delta (25) < Alpha (35) < Charlie (100).
+  const makeAlbums = (): TAlbumsProps[] => [
+    makeAlbum({ name: "Album Bravo", release: "2023-12-20T00:00:00.000Z" }),
+    makeAlbum({ name: "Album Charlie", release: "2024-11-30T00:00:00.000Z" }),
+    makeAlbum({ name: "Album Delta", release: "2024-11-23T00:00:00.000Z" }),
+    makeAlbum({ name: "Album Alpha", release: "2024-11-02T00:00:00.000Z" }),
+  ];
+  const progression: Record<string, Progress> = {
+    "Album Charlie": { percent: 100, acquired: 2, total: 2 },
+    "Album Bravo": { percent: 0, acquired: 0, total: 2 },
+    "Album Delta": { percent: 25, acquired: 1, total: 4 },
+    "Album Alpha": { percent: 35, acquired: 7, total: 20 },
+  };
 
-    const mockProgression: Record<
-      string,
-      { percent: number; acquired: number; total: number }
-    > = {
-      "SKI BAR Twice JYP Japan Pop Up Store 2024": {
-        percent: 100,
-        acquired: 2,
-        total: 2,
-      },
-      "MISAMO Masterpiece Showcase": { percent: 0, acquired: 2, total: 2 },
-      "TWICE “STRATEGY” Pop Up In LA": { percent: 25, acquired: 2, total: 2 },
-      "HAUTE COUTURE Japan Dome Tour 2024": {
-        percent: 35,
-        acquired: 0,
-        total: 1,
-      },
-    };
-    const result: TAlbumsProps[] = helpers.sortAlbums(
-      array,
+  test.each([
+    [
       "Collection progress (Ascending)",
-      mockProgression,
-    );
-    expect(
-      result[0].name === "MISAMO Masterpiece Showcase" &&
-        result[1].name === "TWICE “STRATEGY” Pop Up In LA" &&
-        result[2].name === "HAUTE COUTURE Japan Dome Tour 2024" &&
-        result[3].name === "SKI BAR Twice JYP Japan Pop Up Store 2024",
-    ).toBeTruthy();
-  });
-
-  test("Collection progress (Descending)", () => {
-    const array: TAlbumsProps[] = [
-      {
-        name: "MISAMO Masterpiece Showcase",
-        checked: false,
-        categories: ["DVDs/Blu-rays"],
-        members: ["Momo", "Sana", "Mina"],
-        benefits: ["Original"],
-        display: true,
-        code: "Masterpiece_showcase_dvd",
-        release: "2023-12-20T00:00:00.000Z",
-        image: "",
-      },
-      {
-        name: "SKI BAR Twice JYP Japan Pop Up Store 2024",
-        checked: false,
-        categories: ["Stores/Merch"],
-        members: [
-          "Nayeon",
-          "Jeongyeon",
-          "Momo",
-          "Sana",
-          "Jihyo",
-          "Mina",
-          "Dahyun",
-          "Chaeyoung",
-          "Tzuyu",
-        ],
-        benefits: ["Original"],
-        display: true,
-        code: "SKIBAR_JYP_Japan_Pop-up_Store_2024",
-        release: "2024-11-30T00:00:00.000Z",
-        image: "",
-      },
-      {
-        name: "TWICE “STRATEGY” Pop Up In LA",
-        checked: false,
-        categories: ["Stores/Merch"],
-        members: [
-          "Nayeon",
-          "Jeongyeon",
-          "Momo",
-          "Sana",
-          "Jihyo",
-          "Mina",
-          "Dahyun",
-          "Chaeyoung",
-          "Tzuyu",
-        ],
-        benefits: ["Original"],
-        display: true,
-        code: "TWICE_STRATEGY_POP-UP_In_LA",
-        release: "2024-11-23T00:00:00.000Z",
-        image: "",
-      },
-      {
-        name: "HAUTE COUTURE Japan Dome Tour 2024",
-        checked: false,
-        categories: ["Events"],
-        members: ["Momo", "Sana", "Mina"],
-        benefits: ["Original"],
-        display: true,
-        code: "HC_DT",
-        release: "2024-11-02T00:00:00.000Z",
-        image: "",
-      },
-    ];
-    const mockProgression: Record<
-      string,
-      { percent: number; acquired: number; total: number }
-    > = {
-      "SKI BAR Twice JYP Japan Pop Up Store 2024": {
-        percent: 100,
-        acquired: 2,
-        total: 2,
-      },
-      "MISAMO Masterpiece Showcase": { percent: 0, acquired: 2, total: 2 },
-      "TWICE “STRATEGY” Pop Up In LA": { percent: 25, acquired: 2, total: 2 },
-      "HAUTE COUTURE Japan Dome Tour 2024": {
-        percent: 35,
-        acquired: 0,
-        total: 1,
-      },
-    };
-    const result: TAlbumsProps[] = helpers.sortAlbums(
-      array,
+      ["Album Bravo", "Album Delta", "Album Alpha", "Album Charlie"],
+    ],
+    [
       "Collection progress (Descending)",
-      mockProgression,
-    );
-    expect(
-      result[0].name === "SKI BAR Twice JYP Japan Pop Up Store 2024" &&
-        result[1].name === "HAUTE COUTURE Japan Dome Tour 2024" &&
-        result[2].name === "TWICE “STRATEGY” Pop Up In LA" &&
-        result[3].name === "MISAMO Masterpiece Showcase",
-    ).toBeTruthy();
-  });
-
-  test("Name (A - Z)", () => {
-    const array: TAlbumsProps[] = [
-      {
-        name: "MISAMO Masterpiece Showcase",
-        checked: false,
-        categories: ["DVDs/Blu-rays"],
-        members: ["Momo", "Sana", "Mina"],
-        benefits: ["Original"],
-        display: true,
-        code: "Masterpiece_showcase_dvd",
-        release: "2023-12-20T00:00:00.000Z",
-        image: "",
-      },
-      {
-        name: "SKI BAR Twice JYP Japan Pop Up Store 2024",
-        checked: false,
-        categories: ["Stores/Merch"],
-        members: [
-          "Nayeon",
-          "Jeongyeon",
-          "Momo",
-          "Sana",
-          "Jihyo",
-          "Mina",
-          "Dahyun",
-          "Chaeyoung",
-          "Tzuyu",
-        ],
-        benefits: ["Original"],
-        display: true,
-        code: "SKIBAR_JYP_Japan_Pop-up_Store_2024",
-        release: "2024-11-30T00:00:00.000Z",
-        image: "",
-      },
-      {
-        name: "TWICE “STRATEGY” Pop Up In LA",
-        checked: false,
-        categories: ["Stores/Merch"],
-        members: [
-          "Nayeon",
-          "Jeongyeon",
-          "Momo",
-          "Sana",
-          "Jihyo",
-          "Mina",
-          "Dahyun",
-          "Chaeyoung",
-          "Tzuyu",
-        ],
-        benefits: ["Original"],
-        display: true,
-        code: "TWICE_STRATEGY_POP-UP_In_LA",
-        release: "2024-11-23T00:00:00.000Z",
-        image: "",
-      },
-      {
-        name: "HAUTE COUTURE Japan Dome Tour 2024",
-        checked: false,
-        categories: ["Events"],
-        members: ["Momo", "Sana", "Mina"],
-        benefits: ["Original"],
-        display: true,
-        code: "HC_DT",
-        release: "2024-11-02T00:00:00.000Z",
-        image: "",
-      },
-    ];
-    const mockProgression: Record<
-      string,
-      { percent: number; acquired: number; total: number }
-    > = {
-      "SKI BAR Twice JYP Japan Pop Up Store 2024": {
-        percent: 100,
-        acquired: 2,
-        total: 2,
-      },
-      "MISAMO Masterpiece Showcase": { percent: 0, acquired: 2, total: 2 },
-      "TWICE “STRATEGY” Pop Up In LA": { percent: 25, acquired: 2, total: 2 },
-      "HAUTE COUTURE Japan Dome Tour 2024": {
-        percent: 35,
-        acquired: 0,
-        total: 1,
-      },
-    };
-    const result: TAlbumsProps[] = helpers.sortAlbums(
-      array,
+      ["Album Charlie", "Album Alpha", "Album Delta", "Album Bravo"],
+    ],
+    [
       "Name (A - Z)",
-      mockProgression,
-    );
-    expect(
-      result[0].name === "HAUTE COUTURE Japan Dome Tour 2024" &&
-        result[1].name === "MISAMO Masterpiece Showcase" &&
-        result[2].name === "SKI BAR Twice JYP Japan Pop Up Store 2024" &&
-        result[3].name === "TWICE “STRATEGY” Pop Up In LA",
-    ).toBeTruthy();
-  });
-
-  test("Name (Z - A)", () => {
-    const array: TAlbumsProps[] = [
-      {
-        name: "MISAMO Masterpiece Showcase",
-        checked: false,
-        categories: ["DVDs/Blu-rays"],
-        members: ["Momo", "Sana", "Mina"],
-        benefits: ["Original"],
-        display: true,
-        code: "Masterpiece_showcase_dvd",
-        release: "2023-12-20T00:00:00.000Z",
-        image: "",
-      },
-      {
-        name: "SKI BAR Twice JYP Japan Pop Up Store 2024",
-        checked: false,
-        categories: ["Stores/Merch"],
-        members: [
-          "Nayeon",
-          "Jeongyeon",
-          "Momo",
-          "Sana",
-          "Jihyo",
-          "Mina",
-          "Dahyun",
-          "Chaeyoung",
-          "Tzuyu",
-        ],
-        benefits: ["Original"],
-        display: true,
-        code: "SKIBAR_JYP_Japan_Pop-up_Store_2024",
-        release: "2024-11-30T00:00:00.000Z",
-        image: "",
-      },
-      {
-        name: "TWICE “STRATEGY” Pop Up In LA",
-        checked: false,
-        categories: ["Stores/Merch"],
-        members: [
-          "Nayeon",
-          "Jeongyeon",
-          "Momo",
-          "Sana",
-          "Jihyo",
-          "Mina",
-          "Dahyun",
-          "Chaeyoung",
-          "Tzuyu",
-        ],
-        benefits: ["Original"],
-        display: true,
-        code: "TWICE_STRATEGY_POP-UP_In_LA",
-        release: "2024-11-23T00:00:00.000Z",
-        image: "",
-      },
-      {
-        name: "HAUTE COUTURE Japan Dome Tour 2024",
-        checked: false,
-        categories: ["Events"],
-        members: ["Momo", "Sana", "Mina"],
-        benefits: ["Original"],
-        display: true,
-        code: "HC_DT",
-        release: "2024-11-02T00:00:00.000Z",
-        image: "",
-      },
-    ];
-    const mockProgression: Record<
-      string,
-      { percent: number; acquired: number; total: number }
-    > = {
-      "SKI BAR Twice JYP Japan Pop Up Store 2024": {
-        percent: 100,
-        acquired: 2,
-        total: 2,
-      },
-      "MISAMO Masterpiece Showcase": { percent: 0, acquired: 2, total: 2 },
-      "TWICE “STRATEGY” Pop Up In LA": { percent: 25, acquired: 2, total: 2 },
-      "HAUTE COUTURE Japan Dome Tour 2024": {
-        percent: 35,
-        acquired: 0,
-        total: 1,
-      },
-    };
-    const result: TAlbumsProps[] = helpers.sortAlbums(
-      array,
+      ["Album Alpha", "Album Bravo", "Album Charlie", "Album Delta"],
+    ],
+    [
       "Name (Z - A)",
-      mockProgression,
-    );
-    expect(
-      result[0].name === "TWICE “STRATEGY” Pop Up In LA" &&
-        result[1].name === "SKI BAR Twice JYP Japan Pop Up Store 2024" &&
-        result[2].name === "MISAMO Masterpiece Showcase" &&
-        result[3].name === "HAUTE COUTURE Japan Dome Tour 2024",
-    ).toBeTruthy();
-  });
-  test("Release date (Old to new)", () => {
-    const array: TAlbumsProps[] = [
-      {
-        name: "MISAMO Masterpiece Showcase",
-        checked: false,
-        categories: ["DVDs/Blu-rays"],
-        members: ["Momo", "Sana", "Mina"],
-        benefits: ["Original"],
-        display: true,
-        code: "Masterpiece_showcase_dvd",
-        release: "2023-12-20T00:00:00.000Z",
-        image: "",
-      },
-      {
-        name: "SKI BAR Twice JYP Japan Pop Up Store 2024",
-        checked: false,
-        categories: ["Stores/Merch"],
-        members: [
-          "Nayeon",
-          "Jeongyeon",
-          "Momo",
-          "Sana",
-          "Jihyo",
-          "Mina",
-          "Dahyun",
-          "Chaeyoung",
-          "Tzuyu",
-        ],
-        benefits: ["Original"],
-        display: true,
-        code: "SKIBAR_JYP_Japan_Pop-up_Store_2024",
-        release: "2024-11-30T00:00:00.000Z",
-        image: "",
-      },
-      {
-        name: "TWICE “STRATEGY” Pop Up In LA",
-        checked: false,
-        categories: ["Stores/Merch"],
-        members: [
-          "Nayeon",
-          "Jeongyeon",
-          "Momo",
-          "Sana",
-          "Jihyo",
-          "Mina",
-          "Dahyun",
-          "Chaeyoung",
-          "Tzuyu",
-        ],
-        benefits: ["Original"],
-        display: true,
-        code: "TWICE_STRATEGY_POP-UP_In_LA",
-        release: "2024-11-23T00:00:00.000Z",
-        image: "",
-      },
-      {
-        name: "HAUTE COUTURE Japan Dome Tour 2024",
-        checked: false,
-        categories: ["Events"],
-        members: ["Momo", "Sana", "Mina"],
-        benefits: ["Original"],
-        display: true,
-        code: "HC_DT",
-        release: "2024-11-02T00:00:00.000Z",
-        image: "",
-      },
-    ];
-    const mockProgression: Record<
-      string,
-      { percent: number; acquired: number; total: number }
-    > = {
-      "SKI BAR Twice JYP Japan Pop Up Store 2024": {
-        percent: 100,
-        acquired: 2,
-        total: 2,
-      },
-      "MISAMO Masterpiece Showcase": { percent: 0, acquired: 2, total: 2 },
-      "TWICE “STRATEGY” Pop Up In LA": { percent: 25, acquired: 2, total: 2 },
-      "HAUTE COUTURE Japan Dome Tour 2024": {
-        percent: 35,
-        acquired: 0,
-        total: 1,
-      },
-    };
-    const result: TAlbumsProps[] = helpers.sortAlbums(
-      array,
+      ["Album Delta", "Album Charlie", "Album Bravo", "Album Alpha"],
+    ],
+    [
       "Release date (Old to new)",
-      mockProgression,
-    );
-    expect(
-      result[0].name === "MISAMO Masterpiece Showcase" &&
-        result[1].name === "HAUTE COUTURE Japan Dome Tour 2024" &&
-        result[2].name === "TWICE “STRATEGY” Pop Up In LA" &&
-        result[3].name === "SKI BAR Twice JYP Japan Pop Up Store 2024",
-    ).toBeTruthy();
-  });
-  test("Release date (New to old)", () => {
-    const array: TAlbumsProps[] = [
-      {
-        name: "MISAMO Masterpiece Showcase",
-        checked: false,
-        categories: ["DVDs/Blu-rays"],
-        members: ["Momo", "Sana", "Mina"],
-        benefits: ["Original"],
-        display: true,
-        code: "Masterpiece_showcase_dvd",
-        release: "2023-12-20T00:00:00.000Z",
-        image: "",
-      },
-      {
-        name: "SKI BAR Twice JYP Japan Pop Up Store 2024",
-        checked: false,
-        categories: ["Stores/Merch"],
-        members: [
-          "Nayeon",
-          "Jeongyeon",
-          "Momo",
-          "Sana",
-          "Jihyo",
-          "Mina",
-          "Dahyun",
-          "Chaeyoung",
-          "Tzuyu",
-        ],
-        benefits: ["Original"],
-        display: true,
-        code: "SKIBAR_JYP_Japan_Pop-up_Store_2024",
-        release: "2024-11-30T00:00:00.000Z",
-        image: "",
-      },
-      {
-        name: "TWICE “STRATEGY” Pop Up In LA",
-        checked: false,
-        categories: ["Stores/Merch"],
-        members: [
-          "Nayeon",
-          "Jeongyeon",
-          "Momo",
-          "Sana",
-          "Jihyo",
-          "Mina",
-          "Dahyun",
-          "Chaeyoung",
-          "Tzuyu",
-        ],
-        benefits: ["Original"],
-        display: true,
-        code: "TWICE_STRATEGY_POP-UP_In_LA",
-        release: "2024-11-23T00:00:00.000Z",
-        image: "",
-      },
-      {
-        name: "HAUTE COUTURE Japan Dome Tour 2024",
-        checked: false,
-        categories: ["Events"],
-        members: ["Momo", "Sana", "Mina"],
-        benefits: ["Original"],
-        display: true,
-        code: "HC_DT",
-        release: "2024-11-02T00:00:00.000Z",
-        image: "",
-      },
-    ];
-    const mockProgression: Record<
-      string,
-      { percent: number; acquired: number; total: number }
-    > = {
-      "SKI BAR Twice JYP Japan Pop Up Store 2024": {
-        percent: 100,
-        acquired: 2,
-        total: 2,
-      },
-      "MISAMO Masterpiece Showcase": { percent: 0, acquired: 2, total: 2 },
-      "TWICE “STRATEGY” Pop Up In LA": { percent: 25, acquired: 2, total: 2 },
-      "HAUTE COUTURE Japan Dome Tour 2024": {
-        percent: 35,
-        acquired: 0,
-        total: 1,
-      },
-    };
-    const result: TAlbumsProps[] = helpers.sortAlbums(
-      array,
+      ["Album Bravo", "Album Alpha", "Album Delta", "Album Charlie"],
+    ],
+    [
       "Release date (New to old)",
-      mockProgression,
-    );
-    expect(
-      result[0].name === "SKI BAR Twice JYP Japan Pop Up Store 2024" &&
-        result[1].name === "TWICE “STRATEGY” Pop Up In LA" &&
-        result[2].name === "HAUTE COUTURE Japan Dome Tour 2024" &&
-        result[3].name === "MISAMO Masterpiece Showcase",
-    ).toBeTruthy();
+      ["Album Charlie", "Album Delta", "Album Alpha", "Album Bravo"],
+    ],
+  ])("%s", (sortType, expectedNames) => {
+    const result = helpers.sortAlbums(makeAlbums(), sortType, progression);
+    expect(result.map((album) => album.name)).toEqual(expectedNames);
   });
 });
 
-describe("computeProgressionByMembersandEra", () => {
-  test("Nayeon, Jeongyeon, Momo with 0, 0, 1", () => {
-    const array: ICardsProps[] = [
-      {
-        id: 1,
-        name: "Nayeon_TSB_1",
-        checked: false,
-        thumbnail: "",
-        categories: ["Korean Albums"],
-        members: ["Nayeon"],
-        era: "The Story Begins",
-        benefit: "Original",
-        display: false,
-      },
-      {
-        id: 2,
-        name: "Jeongyeon_TSB_1",
-        checked: false,
-        thumbnail: "",
-        categories: ["Korean Albums"],
-        members: ["Jeongyeon"],
-        era: "The Story Begins",
-        benefit: "Original",
-        display: true,
-      },
-      {
-        id: 3,
-        name: "Momo_WY_1",
-        checked: false,
-        thumbnail: "",
-        categories: ["Korean Albums"],
-        members: ["Momo"],
-        era: "With You-th",
-        benefit: "Original",
-        display: true,
-      },
-    ];
-    const expected: Record<
-      string,
-      { percent: number; acquired: number; total: number }
-    > = {
-      Jeongyeon: {
-        acquired: 0,
-        percent: 0,
-        total: 1,
-      },
-      Momo: {
-        acquired: 0,
-        percent: 0,
-        total: 1,
-      },
-      Nayeon: {
-        acquired: 0,
-        percent: 0,
-        total: 1,
-      },
+describe("computeProgressionByMemberAndEra", () => {
+  const cards = [
+    makeCard({ id: 1, display: false, members: ["MemberA"] }),
+    makeCard({ id: 2, members: ["MemberB"] }),
+    makeCard({ id: 3, era: "Era Two", members: ["MemberC"] }),
+  ];
+
+  test("returns 0% for every member when nothing is owned", () => {
+    const expected: Record<string, Progress> = {
+      MemberA: { acquired: 0, percent: 0, total: 1 },
+      MemberB: { acquired: 0, percent: 0, total: 1 },
+      MemberC: { acquired: 0, percent: 0, total: 1 },
     };
-    expect(helpers.computeProgressionByMemberAndEra([], array)).toEqual(
+    expect(helpers.computeProgressionByMemberAndEra([], cards)).toEqual(
       expected,
     );
   });
 
-  test("Nayeon and Jeongyeon 1 100 1, Momo 0 0 1", () => {
-    const array: ICardsProps[] = [
-      {
-        id: 1,
-        name: "Nayeon_TSB_1",
-        checked: false,
-        thumbnail: "",
-        categories: ["Korean Albums"],
-        members: ["Nayeon"],
-        era: "The Story Begins",
-        benefit: "Original",
-        display: false,
-      },
-      {
-        id: 2,
-        name: "Jeongyeon_TSB_1",
-        checked: false,
-        thumbnail: "",
-        categories: ["Korean Albums"],
-        members: ["Jeongyeon"],
-        era: "The Story Begins",
-        benefit: "Original",
-        display: true,
-      },
-      {
-        id: 3,
-        name: "Momo_WY_1",
-        checked: false,
-        thumbnail: "",
-        categories: ["Korean Albums"],
-        members: ["Momo"],
-        era: "With You-th",
-        benefit: "Original",
-        display: true,
-      },
-    ];
-
-    const expected: Record<
-      string,
-      { percent: number; acquired: number; total: number }
-    > = {
-      Jeongyeon: {
-        acquired: 1,
-        percent: 100,
-        total: 1,
-      },
-      Momo: {
-        acquired: 0,
-        percent: 0,
-        total: 1,
-      },
-      Nayeon: {
-        acquired: 1,
-        percent: 100,
-        total: 1,
-      },
+  test("returns 100% for the members whose card is owned", () => {
+    const expected: Record<string, Progress> = {
+      MemberA: { acquired: 1, percent: 100, total: 1 },
+      MemberB: { acquired: 1, percent: 100, total: 1 },
+      MemberC: { acquired: 0, percent: 0, total: 1 },
     };
-    expect(helpers.computeProgressionByMemberAndEra([1, 2], array)).toEqual(
+    expect(helpers.computeProgressionByMemberAndEra([1, 2], cards)).toEqual(
       expected,
     );
   });
 });
 
 describe("computeProgressionByBenefitsAndEra", () => {
-  test("Original: 0 0 3", () => {
-    const array: ICardsProps[] = [
-      {
-        id: 1,
-        name: "Nayeon_TSB_1",
-        checked: false,
-        thumbnail: "",
-        categories: ["Korean Albums"],
-        members: ["Nayeon"],
-        era: "The Story Begins",
-        benefit: "Original",
-        display: false,
-      },
-      {
-        id: 2,
-        name: "Jeongyeon_TSB_1",
-        checked: false,
-        thumbnail: "",
-        categories: ["Korean Albums"],
-        members: ["Jeongyeon"],
-        era: "The Story Begins",
-        benefit: "Original",
-        display: true,
-      },
+  test("returns 0% for the benefit when nothing is owned", () => {
+    const cards = [
+      makeCard({ id: 1, display: false }),
+      makeCard({ id: 2, members: ["MemberB"] }),
     ];
-    const expected: Record<
-      string,
-      { percent: number; acquired: number; total: number }
-    > = {
-      Original: {
-        acquired: 0,
-        percent: 0,
-        total: 2,
-      },
+    const expected: Record<string, Progress> = {
+      Original: { acquired: 0, percent: 0, total: 2 },
     };
-    expect(helpers.computeProgressionByBenefitsAndEra([], array)).toEqual(
+    expect(helpers.computeProgressionByBenefitsAndEra([], cards)).toEqual(
       expected,
     );
   });
 
-  test("Original 1 50 2, POB 1 100 1", () => {
-    const array: ICardsProps[] = [
-      {
-        id: 1,
-        name: "Nayeon_TSB_1",
-        checked: false,
-        thumbnail: "",
-        categories: ["Korean Albums"],
-        members: ["Nayeon"],
-        era: "The Story Begins",
-        benefit: "Original",
-        display: false,
-      },
-      {
-        id: 2,
-        name: "Jeongyeon_TSB_1",
-        checked: false,
-        thumbnail: "",
-        categories: ["Korean Albums"],
-        members: ["Jeongyeon"],
-        era: "The Story Begins",
-        benefit: "Original",
-        display: true,
-      },
-      {
-        id: 3,
-        name: "Momo_WY_1",
-        checked: false,
-        thumbnail: "",
-        categories: ["Korean Albums"],
-        members: ["Momo"],
-        era: "The Story Begins",
-        benefit: "POB",
-        display: true,
-      },
+  test("computes the progression of each benefit", () => {
+    const cards = [
+      makeCard({ id: 1, display: false }),
+      makeCard({ id: 2, members: ["MemberB"] }),
+      makeCard({ id: 3, members: ["MemberC"], benefit: "Pre-order" }),
     ];
-
-    const expected: Record<
-      string,
-      { percent: number; acquired: number; total: number }
-    > = {
-      Original: {
-        acquired: 1,
-        percent: 50,
-        total: 2,
-      },
-      POB: {
-        acquired: 1,
-        percent: 100,
-        total: 1,
-      },
+    const expected: Record<string, Progress> = {
+      Original: { acquired: 1, percent: 50, total: 2 },
+      "Pre-order": { acquired: 1, percent: 100, total: 1 },
     };
-    expect(helpers.computeProgressionByBenefitsAndEra([1, 3], array)).toEqual(
+    expect(helpers.computeProgressionByBenefitsAndEra([1, 3], cards)).toEqual(
       expected,
     );
   });
 });
 
 describe("getInitialValue", () => {
-  test("url value exists", () => {
-    const urlValue = "urlValue";
-    const fallback = "fallback";
-    const expected: string = "urlValue";
-    expect(helpers.getInitialValue("TEST", fallback, urlValue)).toEqual(
-      expected,
+  test("returns the url value when it exists", () => {
+    expect(helpers.getInitialValue("TEST", "fallback", "urlValue")).toBe(
+      "urlValue",
     );
   });
 
-  test("None exist, return fallback", () => {
-    const urlValue = null;
-    const fallback = "fallback";
-    const expected: string = "fallback";
-    expect(helpers.getInitialValue("TEST", fallback, urlValue)).toEqual(
-      expected,
-    );
+  test("returns the fallback when neither the url nor the session has a value", () => {
+    expect(helpers.getInitialValue("TEST", "fallback", null)).toBe("fallback");
   });
 
-  test("sessionStorage value exists", () => {
-    const urlValue = null;
-    const fallback = "fallback";
-    const expected: string = "session";
+  test("returns the sessionStorage value when there is no url value", () => {
     sessionStorage.setItem("TEST", JSON.stringify("session"));
-    expect(helpers.getInitialValue("TEST", fallback, urlValue)).toEqual(
-      expected,
-    );
+    expect(helpers.getInitialValue("TEST", "fallback", null)).toBe("session");
   });
 
-  test("Both values exist, return url", () => {
-    const urlValue = "urlValue";
-    const fallback = "fallback";
-    const expected: string = "urlValue";
+  test("gives priority to the url value over sessionStorage", () => {
     sessionStorage.setItem("TEST", JSON.stringify("session"));
-    expect(helpers.getInitialValue("TEST", fallback, urlValue)).toEqual(
-      expected,
+    expect(helpers.getInitialValue("TEST", "fallback", "urlValue")).toBe(
+      "urlValue",
     );
   });
 });
 
 describe("optionToCode", () => {
-  test("Values does not exist, return default all", () => {
-    const testValue = "TEST";
-    const expected: string = "all";
-    expect(helpers.optionToCode(testValue)).toEqual(expected);
+  test("returns the default code 'all' for an unknown option", () => {
+    expect(helpers.optionToCode("TEST")).toBe("all");
   });
 
-  test("Value exists, retunr inc", () => {
-    const testValue = "In collection";
-    const expected: string = "inc";
-    expect(helpers.optionToCode(testValue)).toEqual(expected);
+  test("returns 'inc' for 'In collection'", () => {
+    expect(helpers.optionToCode("In collection")).toBe("inc");
   });
 });
 
 describe("codeToOption", () => {
-  test("Values does not exist, return default all", () => {
-    const testValue = "TEST";
-    const expected: string = "All";
-    expect(helpers.codeToOption(testValue)).toEqual(expected);
+  test("returns the default option 'All' for an unknown code", () => {
+    expect(helpers.codeToOption("TEST")).toBe("All");
   });
 
-  test("Value exists, retunr Not in collection", () => {
-    const testValue = "notin";
-    const expected: string = "Not in collection";
-    expect(helpers.codeToOption(testValue)).toEqual(expected);
+  test("returns 'Not in collection' for 'notin'", () => {
+    expect(helpers.codeToOption("notin")).toBe("Not in collection");
   });
 });

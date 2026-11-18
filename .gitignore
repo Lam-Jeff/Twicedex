@@ -42,3 +42,4 @@ client/public/images/*
 !client/public/images/thumbnail/
 client/public/images/thumbnail/*
 !client/public/images/thumbnail/Era_*.webp
+client/src/*.old.*

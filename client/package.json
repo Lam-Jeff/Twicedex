@@ -4,7 +4,6 @@
   "private": true,
   "dependencies": {
     "@testing-library/jest-dom": "^5.16.5",
-    "@testing-library/react": "^13.4.0",
     "@testing-library/user-event": "^13.5.0",
     "@types/jest": "^27.5.2",
     "@types/react": "^18.2.14",
@@ -60,6 +59,8 @@
     "@fullhuman/postcss-purgecss": "^5.0.0",
     "@jest/globals": "^29.6.4",
     "@playwright/test": "^1.40.1",
+    "@testing-library/dom": "^10.4.2",
+    "@testing-library/react": "^16.3.3",
     "@types/lodash": "^4.14.195",
     "@types/node": "^20.19.42",
     "@vitejs/plugin-react-swc": "^4.3.1",

@@ -8,12 +8,8 @@ import {
   getBestConfirmedDistance,
 } from "./confirmedHashes";
 
-// ── Constantes ────────────────────────────────────────
-
-const THRESHOLD_CERTAIN = 25; // haute confiance → résultat direct
-const THRESHOLD_UNCERTAIN = 45; // confiance faible → demande confirmation
-
-// ── Types ─────────────────────────────────────────────
+const THRESHOLD_CERTAIN = 25;
+const THRESHOLD_UNCERTAIN = 45;
 
 export type ScanStatus =
   | "idle"
@@ -30,8 +26,6 @@ export interface ScanResult {
   scannedAt: Date;
 }
 
-// ── Hook ──────────────────────────────────────────────
-
 export function useImageSearch(cards: ICardsProps[]) {
   const [status, setStatus] = useState<ScanStatus>("indexing");
   const [result, setResult] = useState<ICardsProps | null>(null);
@@ -40,16 +34,10 @@ export function useImageSearch(cards: ICardsProps[]) {
   const [cameraAvailable, setCameraAvailable] = useState(false);
   const [indexProgress, setIndexProgress] = useState(0);
 
-  // Index de référence (hashes des images ImageKit)
   const hashIndex = useRef<Map<number, Hashes>>(new Map());
-
-  // Index des hashes confirmés par l'utilisateur (PocketBase)
   const confirmedIndex = useRef<Map<number, Hashes[]>>(new Map());
-
-  // Hash de la dernière photo scannée — utilisé dans confirmResult
   const lastPhotoHashes = useRef<Hashes | null>(null);
 
-  // ── Détection caméra ───────────────────────────────
   useEffect(() => {
     navigator.mediaDevices
       ?.enumerateDevices()
@@ -59,53 +47,60 @@ export function useImageSearch(cards: ICardsProps[]) {
       .catch(() => setCameraAvailable(false));
   }, []);
 
-  // ── Construction de l'index ────────────────────────
   useEffect(() => {
     if (!cards.length) return;
+    // A new run (StrictMode, cards that change) cancels the previous one
+    let cancelled = false;
 
     async function buildIndex() {
-      // Charge en parallèle : cache IDB + hashes confirmés PocketBase
       const [cached, confirmed] = await Promise.all([
         loadHashesFromIDB(),
         loadConfirmedHashes(),
       ]);
+      if (cancelled) return;
 
       confirmedIndex.current = confirmed;
 
-      if (cached.size === cards.length) {
-        hashIndex.current = cached;
+      const missing = cards.filter((c) => !cached.has(c.id));
+      hashIndex.current = cached;
+
+      if (missing.length === 0) {
         setIndexProgress(cards.length);
         setStatus("idle");
         return;
       }
 
       setStatus("indexing");
-      const missing = cards.filter((c) => !cached.has(c.id));
-      hashIndex.current = cached;
-      setIndexProgress(cached.size);
+      // Only the cached hashes of the current cards count
+      setIndexProgress(cards.length - missing.length);
 
       const BATCH_SIZE = 10;
       for (let i = 0; i < missing.length; i += BATCH_SIZE) {
+        if (cancelled) return;
         const batch = missing.slice(i, i + BATCH_SIZE);
         await Promise.allSettled(
           batch.map(async (card) => {
             try {
               const hashes = await computeHashes(card.thumbnail);
+              if (cancelled) return;
               hashIndex.current.set(card.id, hashes);
               setIndexProgress((prev) => prev + 1);
             } catch {}
           }),
         );
       }
+      if (cancelled) return;
 
       await saveHashesToIDB(hashIndex.current);
       setStatus("idle");
     }
 
     buildIndex();
+    return () => {
+      cancelled = true;
+    };
   }, [cards.length]);
 
-  // ── Recherche ──────────────────────────────────────
   const searchByImage = async (file: File) => {
     const preview = URL.createObjectURL(file);
     setPreviewUrl(preview);
@@ -114,7 +109,7 @@ export function useImageSearch(cards: ICardsProps[]) {
 
     try {
       const photoHashes = await computeHashes(file);
-      lastPhotoHashes.current = photoHashes; // stocke pour confirmResult
+      lastPhotoHashes.current = photoHashes;
 
       let bestCard: ICardsProps | null = null;
       let bestDist = Infinity;
@@ -123,7 +118,6 @@ export function useImageSearch(cards: ICardsProps[]) {
         const stored = hashIndex.current.get(card.id);
         if (!stored) continue;
 
-        // Vérifie la cohérence des longueurs
         if (
           stored.ahash.length !== photoHashes.ahash.length ||
           stored.dhash.length !== photoHashes.dhash.length ||
@@ -131,17 +125,14 @@ export function useImageSearch(cards: ICardsProps[]) {
         )
           continue;
 
-        // Distance de référence
         const refDist = combinedDistance(photoHashes, stored);
 
-        // Distance confirmée (photos réelles confirmées par l'utilisateur)
         const confirmedDist = getBestConfirmedDistance(
           photoHashes,
           card.id,
           confirmedIndex.current,
         );
 
-        // Prend la meilleure des deux
         const dist = Math.min(refDist, confirmedDist);
 
         if (dist < bestDist) {
@@ -157,7 +148,6 @@ export function useImageSearch(cards: ICardsProps[]) {
       } else if (bestCard && bestDist < THRESHOLD_UNCERTAIN) {
         setResult(bestCard);
         setStatus("found_uncertain");
-        // Pas encore dans l'historique — attend la confirmation
       } else {
         setStatus("not_found");
       }
@@ -167,7 +157,6 @@ export function useImageSearch(cards: ICardsProps[]) {
     }
   };
 
-  // ── Helpers history ────────────────────────────────
   function addToHistory(card: ICardsProps, preview: string) {
     setHistory((prev) => {
       if (prev[0]?.card.id === card.id) return prev;
@@ -178,30 +167,31 @@ export function useImageSearch(cards: ICardsProps[]) {
     });
   }
 
-  // ── Confirmation résultat incertain ────────────────
   const confirmResult = async () => {
     if (result && previewUrl) {
       addToHistory(result, previewUrl);
 
-      // Sauvegarde le hash de la photo confirmée dans PocketBase
       if (lastPhotoHashes.current) {
-        await saveConfirmedHash(
-          result.id,
-          lastPhotoHashes.current,
-          confirmedIndex.current,
-        );
+        try {
+          await saveConfirmedHash(
+            result.id,
+            lastPhotoHashes.current,
+            confirmedIndex.current,
+          );
+        } catch (e) {
+          // The result is still valid even if the hash could not be saved
+          console.error("Erreur saveConfirmedHash:", e);
+        }
       }
     }
     setStatus("found");
   };
 
-  // ── Rejet résultat incertain ───────────────────────
   const rejectResult = () => {
     setResult(null);
     setStatus("not_found");
   };
 
-  // ── Reset ──────────────────────────────────────────
   const reset = () => {
     setResult(null);
     setPreviewUrl(null);
