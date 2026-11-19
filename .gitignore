@@ -36,6 +36,7 @@ client/src/files/global.tsx
 client/src/files/news.json
 client/src/styles/_members.scss
 client/src/files/about.json
+client/src/files/footer.json
 client/src/e2e/*-snapshots/
 
 # images réelles (on garde sample/ et 3 couvertures)
