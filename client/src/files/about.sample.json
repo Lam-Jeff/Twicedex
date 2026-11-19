@@ -1,0 +1,22 @@
+{
+  "lastUpdate": "01/01/2026",
+  "introduction": [
+    "This is a personal collection tracker. It is not affiliated with, endorsed by or sponsored by any artist, label or company.",
+    "It is a fan-made project. No profit made."
+  ],
+  "copyrights": {
+    "intro": "All names, images and trademarks that may appear belong to their respective owners. This repository only ships placeholder data: you provide your own data and images.",
+    "mainSource": {
+      "name": "Example source",
+      "url": "https://example.com"
+    },
+    "creditsIntro": "Credits whenever it is possible:",
+    "credits": [
+      "@example_user_1",
+      "@example_user_2",
+      "Example Label"
+    ],
+    "takedownIntro": "If you own some of the content shown here, you can request its removal or the addition of credits via",
+    "contactEmail": "contact@example.com"
+  }
+}

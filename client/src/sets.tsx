@@ -21,10 +21,10 @@ import { StatsInfo } from "./stats";
 import { UrlContext } from "./urlProvider";
 import { RxCross2 } from "react-icons/rx";
 import { useCollection } from "./useOwned";
+import globalValues from "./files/global";
 
 export const Sets = () => {
   const SORT_DEFAULT_VALUE = "Release date (New to old)";
-  const CATEGORY_DEFAULT_VALUE = "Korean Albums";
   const SEARCH_TYPE_DEFAULT_VALUE = "All";
   const sortSessionStorage = getInitialValue(
     "sortValue",
@@ -33,7 +33,7 @@ export const Sets = () => {
   );
   const categorySetsSessionStorage = getInitialValue(
     "categorySets",
-    CATEGORY_DEFAULT_VALUE,
+    globalValues.CATEGORY_DEFAULT_VALUE,
     null,
   );
 
@@ -44,7 +44,7 @@ export const Sets = () => {
   );
   const ALBUMS_DEFAULT_STATE = filterAlbumsByCategory(
     albumsFile,
-    CATEGORY_DEFAULT_VALUE,
+    globalValues.CATEGORY_DEFAULT_VALUE,
   );
 
   const SORT_OPTIONS = [
@@ -66,7 +66,8 @@ export const Sets = () => {
   } = useContext(UrlContext);
 
   const [category, setCategory] = useState(
-    decodeURIComponent(categorySetsSessionStorage) ?? CATEGORY_DEFAULT_VALUE,
+    decodeURIComponent(categorySetsSessionStorage) ??
+      globalValues.CATEGORY_DEFAULT_VALUE,
   );
   const [searchType, setSearchType] = useState(
     searchTypeSessionStorage ?? SEARCH_TYPE_DEFAULT_VALUE,

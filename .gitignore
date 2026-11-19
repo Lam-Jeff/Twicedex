@@ -32,8 +32,10 @@ client/src/files/albums.json
 client/src/files/members.json
 client/src/files/benefits.json
 client/src/files/categories.json
+client/src/files/global.tsx
 client/src/files/news.json
 client/src/styles/_members.scss
+client/src/files/about.json
 client/src/e2e/*-snapshots/
 
 # images réelles (on garde sample/ et 3 couvertures)
@@ -43,3 +45,4 @@ client/public/images/*
 client/public/images/thumbnail/*
 !client/public/images/thumbnail/Era_*.webp
 client/src/*.old.*
+client/src/e2e/

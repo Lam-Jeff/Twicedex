@@ -1,31 +1,28 @@
 import { Link } from "react-router-dom";
 import global from "./files/global";
+import about from "./files/about.json";
 
 export const About = () => {
-  const date = "12/06/2026";
+  const { copyrights } = about;
   return (
     <div className="about-container">
       <h2>About</h2>
       <div>
-        <p>Last update: {date}</p>
+        <p>Last update: {about.lastUpdate}</p>
       </div>
       <div className="introduction-box">
         <div>
           <h3>Introduction</h3>
-          <p>
-            Twicedex is a website based on the k-pop group Twice created by JYP
-            Entertainment.
-            <br />
-            It is a fanmade website. No profit made. <br />
-          </p>
+          {about.introduction.map((text) => (
+            <p key={text}>{text}</p>
+          ))}
         </div>
       </div>
       <div className="policy-box">
         <div>
           <h3>Copyrights</h3>
           <p>
-            Images come from various sources such as Pinterest, Twitter or
-            Google Images. This website brings together all these images.
+            {copyrights.intro}
             <br />
             Most of the images on{" "}
             <Link
@@ -36,59 +33,23 @@ export const About = () => {
             </Link>{" "}
             have been found on this{" "}
             <Link
-              to="https://www.pinterest.fr/Ariririu/"
-              aria-label="Exit website and go to Pinterest"
+              to={copyrights.mainSource.url}
+              aria-label={`Exit website and go to ${copyrights.mainSource.name}`}
             >
-              Pinterest
+              {copyrights.mainSource.name}
             </Link>{" "}
             account.
             <br />
-            Credits whenever it is possible:
+            {copyrights.creditsIntro}
           </p>
           <ul>
-            <li>@TWICE_PHOTOCARDS</li>
-            <li>@momoriii_</li>
-            <li>@winterose763</li>
-            <li>@Twice9Rai</li>
-            <li>@girlpapercollector</li>
-            <li>@Shuhua_miniverse</li>
-            <li>@rdcbbaby</li>
-            <li>@NayDub2pc</li>
-            <li>@Ariririu</li>
-            <li>@njmsjmdct2</li>
-            <li>@momosunrise</li>
-            <li>@jy_pikachu</li>
-            <li>@sweet9_venus</li>
-            <li>@twcslov</li>
-            <li>@osw8282</li>
-            <li>@tbzcardsale</li>
-            <li>@shot2natheheart</li>
-            <li>@Chesekimbap</li>
-            <li>@twicetsam</li>
-            <li>@jeongjeongieee1</li>
-            <li>@chaeyoungteamo</li>
-            <li>@mogingbest</li>
-            <li>@naybuns</li>
-            <li>@s_ana09</li>
-            <li>@miapcscans</li>
-            <li>@chio_tw</li>
-            <li>@jong7in</li>
-            <li>@Chaeoncetwice</li>
-            <li>@Minayayayaya</li>
-            <li>@Under_The_S2a_</li>
-            <li>@tradeabbey</li>
-            <li>@trodriguezredal</li>
-            <li>@IRIS__WOON</li>
-            <li>@njbily</li>
-            <li>@nixnixxq</li>
-            <li>@vvauot</li>
-            <li>@nepthysbby</li>
-            <li>JYP Entertainment</li>
+            {copyrights.credits.map((credit) => (
+              <li key={credit}>{credit}</li>
+            ))}
           </ul>
           <p>
-            Given the undetermined origin of some images, you can request the
-            removal of images or the addition of credits via{" "}
-            <Link to="mailto:twicedex.contact@gmail.com">email</Link>.
+            {copyrights.takedownIntro}{" "}
+            <Link to={`mailto:${copyrights.contactEmail}`}>email</Link>.
           </p>
         </div>
       </div>

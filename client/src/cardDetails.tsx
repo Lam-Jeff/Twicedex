@@ -5,6 +5,7 @@ import { useParams } from "react-router-dom";
 import cardsFile from "./files/cards.json";
 import albumsFile from "./files/albums.json";
 import { UrlContext } from "./urlProvider";
+import globalValues from "./files/global";
 
 export const CardDetails = () => {
   const { cardID } = useParams();
@@ -21,8 +22,8 @@ export const CardDetails = () => {
   );
   const cardsToDisplay = filterByAlbumAndCategory(
     cardsFile,
-    album?.name ?? "The Story Begins",
-    decodeURIComponent(categoryParam) ?? "Korean Albums",
+    album?.name ?? globalValues.ALBUM_DEFAULT_VALUE,
+    decodeURIComponent(categoryParam) ?? globalValues.CATEGORY_DEFAULT_VALUE,
   );
   const indexCard = cardsToDisplay.findIndex(
     (card) => card.name === decodedCardID,

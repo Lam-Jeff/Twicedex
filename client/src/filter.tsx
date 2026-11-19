@@ -242,9 +242,11 @@ export const Filter = ({
   /**
    * Update the album array.
    *
-   * @param {string} [newAlbum="The Story Begins"] - number representing the album to update in the array
+   * @param {string} [newAlbum=ALBUM_DEFAULT_VALUE] - number representing the album to update in the array
    */
-  const updateAlbums = (newAlbum: string = "The Story Begins") => {
+  const updateAlbums = (
+    newAlbum: string = globalValues.ALBUM_DEFAULT_VALUE,
+  ) => {
     const newAlbums = albums.map((object) =>
       object.name === newAlbum
         ? { ...object, checked: true }
