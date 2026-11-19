@@ -48,7 +48,7 @@ function Footer() {
               <Link
                 to={footerFile.linkToDiscord}
                 target="_blank"
-                aria-label="Go to Twice discord"
+                aria-label={`Go to ${footerFile.name} discord`}
               >
                 <FaDiscord />
               </Link>
@@ -58,7 +58,7 @@ function Footer() {
               <Link
                 to={footerFile.linkToTwitter}
                 target="_blank"
-                aria-label="Go to Twice twitter"
+                aria-label={`Go to ${footerFile.name} twitter`}
               >
                 <FaTwitter />
               </Link>
@@ -68,7 +68,7 @@ function Footer() {
               <Link
                 to={footerFile.linkToYoutube}
                 target="_blank"
-                aria-label="Go to Twice Youtube channel"
+                aria-label={`Go to ${footerFile.name} youtube channel`}
               >
                 <FaYoutube />
               </Link>
@@ -78,7 +78,7 @@ function Footer() {
               <Link
                 to={footerFile.linkToInstagram}
                 target="_blank"
-                aria-label="Go to Twice Instagram"
+                aria-label={`Go to ${footerFile.name} instagram`}
               >
                 <FaInstagram />
               </Link>
@@ -95,4 +95,3 @@ function Footer() {
 }
 
 export default Footer;
-
