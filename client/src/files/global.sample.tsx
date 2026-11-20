@@ -3,6 +3,7 @@ import albumsFile from "./albums.json";
 import categoriesFile from "./categories.json";
 import benefitsFile from "./benefits.json";
 export default {
+  GROUP_NAME: "group",
   ERA_DEFAULT_VALUE: albumsFile[0].code,
   ALBUM_DEFAULT_VALUE: albumsFile[0].name,
   CATEGORY_DEFAULT_VALUE: categoriesFile[0].name,

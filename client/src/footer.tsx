@@ -1,13 +1,14 @@
 import { Link } from "react-router-dom";
 import { FaDiscord, FaInstagram, FaTwitter, FaYoutube } from "react-icons/fa";
 import footerFile from "./files/footer.json";
+import globalValues from "./files/global";
 function Footer() {
   return (
     <footer>
       <section className="container-footer">
         <div className="container-footer__description">
-          <h1>TWICEDEX</h1>A fanmade website to keep track of your photocard
-          collection.
+          <h1>{`${globalValues.GROUP_NAME.toUpperCase()}DEX`}</h1>A fanmade
+          website to keep track of your photocard collection.
         </div>
         <div className="container-footer__overview">
           <ul className="container-footer__overview__links-list">
@@ -48,7 +49,7 @@ function Footer() {
               <Link
                 to={footerFile.linkToDiscord}
                 target="_blank"
-                aria-label={`Go to ${footerFile.name} discord`}
+                aria-label={`Go to ${globalValues.GROUP_NAME} discord`}
               >
                 <FaDiscord />
               </Link>
@@ -58,7 +59,7 @@ function Footer() {
               <Link
                 to={footerFile.linkToTwitter}
                 target="_blank"
-                aria-label={`Go to ${footerFile.name} twitter`}
+                aria-label={`Go to ${globalValues.GROUP_NAME} twitter`}
               >
                 <FaTwitter />
               </Link>
@@ -68,7 +69,7 @@ function Footer() {
               <Link
                 to={footerFile.linkToYoutube}
                 target="_blank"
-                aria-label={`Go to ${footerFile.name} youtube channel`}
+                aria-label={`Go to ${globalValues.GROUP_NAME} youtube channel`}
               >
                 <FaYoutube />
               </Link>
@@ -78,7 +79,7 @@ function Footer() {
               <Link
                 to={footerFile.linkToInstagram}
                 target="_blank"
-                aria-label={`Go to ${footerFile.name} instagram`}
+                aria-label={`Go to ${globalValues.GROUP_NAME} instagram`}
               >
                 <FaInstagram />
               </Link>
@@ -88,7 +89,7 @@ function Footer() {
       </section>
 
       <section className="copyright">
-        <span>© 2025 Twicedex </span>
+        <span>© 2026 {`${globalValues.GROUP_NAME}dex`}</span>
       </section>
     </footer>
   );

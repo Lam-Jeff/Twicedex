@@ -8,6 +8,7 @@ import {
   MdOutlineMenu,
   MdClose,
 } from "react-icons/md";
+import globalValues from "./files/global";
 
 export const Header = () => {
   const { isDarkMode, toggleTheme } = useContext(ThemeContext);
@@ -44,7 +45,7 @@ export const Header = () => {
         <div className="banner__logo">
           <h1 className="banner__logo__container">
             <Link to="/" aria-label={`Go to home page`}>
-              TWICEDEX
+              {`${globalValues.GROUP_NAME.toUpperCase()}DEX`}
             </Link>
           </h1>
         </div>
